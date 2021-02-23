@@ -4,26 +4,33 @@ import LoginModal from "../../components/LoginModal/LoginModal";
 // TODO: Import Navbar and render it on the page
 
 const Home = () => {
-  const [activeModal, setActiveModal] = useState("")
+  const [modal, setModal] = useState(false);
+
   useEffect(() => {
     document.title = "Roam";
   }, []);
 
-  const renderLoginModal = (e) => {
+  const toggleLoginModal = (e) => {
     e.preventDefault();
-    console.log("You clicked the login button");
-    return <LoginModal />
+    setModal(true);
   };
+
+  const closeLoginModal = (e) => {
+    e.preventDefault();
+    setModal(false);
+  };
+
   return (
     <>
-      {/* Container goes here */}
-      {/* <LoginModal /> */}
-      <section className="hero is-large is-info has-text-centered">
+      <div className="modal is-active">
+        <LoginModal />
+      </div>
+      <section className="hero is-large has-text-centered">
         <div className="hero-body">
           <button className="button is-primary mr-4 is-size-4">Sign Up</button>
           <button
             className="button is-light ml-4 is-size-4"
-            onClick={renderLoginModal}
+            onClick={toggleLoginModal}
           >
             Login
           </button>
@@ -33,9 +40,9 @@ const Home = () => {
       <div className="container">
         <div className="columns mt-4">
           <div className="column is-4">
-            <div class="card">
-              <div class="card-content">
-                <div class="content">
+            <div className="card">
+              <div className="card-content">
+                <div className="content">
                   Lorem ipsum dolor, sit amet consectetur adipisicing elit. Eos
                   amet quasi fuga ipsam quaerat consequuntur incidunt dolorum
                   expedita rerum, quidem tempore dolore dolores a doloribus quod
@@ -45,9 +52,9 @@ const Home = () => {
             </div>
           </div>
           <div className="column is-4">
-            <div class="card">
-              <div class="card-content">
-                <div class="content">
+            <div className="card">
+              <div className="card-content">
+                <div className="content">
                   Lorem ipsum dolor, sit amet consectetur adipisicing elit. Eos
                   amet quasi fuga ipsam quaerat consequuntur incidunt dolorum
                   expedita rerum, quidem tempore dolore dolores a doloribus quod
@@ -57,9 +64,9 @@ const Home = () => {
             </div>
           </div>
           <div className="column is-4">
-            <div class="card">
-              <div class="card-content">
-                <div class="content">
+            <div className="card">
+              <div className="card-content">
+                <div className="content">
                   Lorem ipsum dolor, sit amet consectetur adipisicing elit. Eos
                   amet quasi fuga ipsam quaerat consequuntur incidunt dolorum
                   expedita rerum, quidem tempore dolore dolores a doloribus quod

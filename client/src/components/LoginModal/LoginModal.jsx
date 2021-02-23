@@ -3,7 +3,7 @@ import "./LoginModal.css";
 
 const LoginModal = (props) => {
   return (
-    <div className="modal is-active">
+    <>
       <div className="modal-background"></div>
       <div className="modal-card">
         <header className="modal-card-head">
@@ -25,7 +25,7 @@ const LoginModal = (props) => {
           <button className="button">Cancel</button>
         </footer>
       </div>
-    </div>
+    </>
   );
 };
 
