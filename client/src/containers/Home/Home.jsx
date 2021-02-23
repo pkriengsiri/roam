@@ -1,4 +1,5 @@
 import React from "react";
+import "./Home.css"
 // TODO: Import Navbar and render it on the page
 
 const Home = () => {

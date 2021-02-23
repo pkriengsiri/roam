@@ -1,3 +1,4 @@
 .hero {
-    background-image: url("");
+    background-image: url("../../Assets/Images/hero.jpg");
+    background-size: cover;
 }
