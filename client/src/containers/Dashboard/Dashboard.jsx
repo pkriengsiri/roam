@@ -38,6 +38,7 @@ const Dashboard = () => {
           </div>
         </div>
       </div>
+      
       <button className="button is-primary mr-4 is-size-4">Create Trip</button>
     </div>
   );
