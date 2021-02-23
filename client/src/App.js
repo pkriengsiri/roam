@@ -7,6 +7,7 @@ import Dashboard from "./containers/Dashboard/Dashboard";
 import CreateTrip from "./containers/CreateTrip/CreateTrip";
 import EditTrip from "./containers/EditTrip/EditTrip";
 import SingleTrip from "./containers/SingleTrip/SingleTrip";
+import NavBar from "./components/Navbar/Navbar";
 import { BrowserRouter as Router, Route, Switch} from "react-router-dom";
 
 function App() {
@@ -23,6 +24,7 @@ function App() {
   return (
     <div className="App">
     <Router>
+      <NavBar/>
       <Switch>
         <Route exact path="/" component={Home} />
         <Route exact path="/dashboard/:id" component={Dashboard} />
