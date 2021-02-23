@@ -1,16 +1,16 @@
 // Dependencies
 const router = require("express").Router();
-const tripsController = require("../../controllers/tripsController");
+const tripController = require("../../controllers/tripController");
 
 // Routes for /api/trips
-router.route("/").get(tripsController.findAll).post(tripsController.create);
+router.route("/").get(tripController.findAll).post(tripController.create);
 
 // Routes for /api/trips/:id
 router
   .route("/:id")
-  .get(tripsController.findById)
-  .put(tripsController.update)
-  .delete(tripsController.remove);
+  .get(tripController.findById)
+  .put(tripController.update)
+  .delete(tripController.remove);
 
 // Export
 module.exports = router;
