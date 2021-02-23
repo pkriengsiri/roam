@@ -1,23 +1,15 @@
-import React, { useState } from "react";
+import React from "react";
 import "./LoginModal.css";
-import ModalContext from "../../utils/ModalContext";
 
-const LoginModal = (props) => {
-  const [modalState, setModalState] = useState(true);
-
-  const closeLoginModal = (e) => {
-    e.preventDefault();
-    setModalState(false);
-  };
+const LoginModal = ({closeLoginModal}) => {
   return (
     <>
-      <ModalContext.Provider value={modalState}>
-        <div className={`modal ${modalState === false ? "" : "is-active"}`}>
+        <div className="modal is-active">
           <div className="modal-background"></div>
           <div className="modal-card">
             <header className="modal-card-head">
               <p className="modal-card-title">Login</p>
-              <button className="delete" aria-label="close"></button>
+              <button className="delete" aria-label="close" onClick={closeLoginModal}></button>
             </header>
             <section className="modal-card-body">
               <strong>
@@ -37,7 +29,6 @@ const LoginModal = (props) => {
             </footer>
           </div>
         </div>
-      </ModalContext.Provider>
     </>
   );
 };
