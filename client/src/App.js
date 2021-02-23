@@ -5,7 +5,8 @@ import Home from "./containers/Home/Home";
 import EditUser from "./containers/EditUser/EditUser";
 import Dashboard from "./containers/Dashboard/Dashboard";
 import CreateTrip from "./containers/CreateTrip/CreateTrip";
-import EditTriip from "./containers/EditTrip/EditTrip;
+import EditTrip from "./containers/EditTrip/EditTrip";
+import { BrowserRouter as Router, Route, Switch} from "react-router-dom";
 
 function App() {
   useEffect(() => {
