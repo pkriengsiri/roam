@@ -1,11 +1,16 @@
-import React from 'react';
+import React from "react";
+// TODO: Import Navbar and render it on the page
 
 const Home = () => {
-    return (
-        <div>
-            <h1>This is the home page.</h1>
-        </div>
-    );
+  return (
+    <>
+      <h1>This is the home page.</h1>
+      {/* Container goes here */}
+      {/* Hero Image goes here */}
+      
+      {/* Text boxes about roam go here */}
+    </>
+  );
 };
 
 export default Home;
