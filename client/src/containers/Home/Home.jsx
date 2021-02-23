@@ -22,7 +22,7 @@ const Home = () => {
 
   return (
     <>
-      <div className="modal is-active">
+      <div className={`modal ${modal ? "is-active": ""}`}>
         <LoginModal />
       </div>
       <section className="hero is-large has-text-centered">
