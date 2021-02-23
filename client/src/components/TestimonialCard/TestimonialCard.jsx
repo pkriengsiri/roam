@@ -3,7 +3,7 @@ import React from 'react';
 const TestimonialCard = () => {
     return (
         <div className="column is-4">
-            <div class="card">
+            <div class="card testimonial-card">
               <div class="card-content">
                 <div class="content">
                   Lorem ipsum dolor, sit amet consectetur adipisicing elit. Eos

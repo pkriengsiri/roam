@@ -4,7 +4,8 @@ import LoginModal from "../../components/LoginModal/LoginModal";
 import TestimonialCard from "../../components/TestimonialCard/TestimonialCard";
 
 const Home = () => {
-  const [modalState, setModalState] = useState(false);
+  const [loginModalState, setLoginModalState] = useState(false);
+  const [signUpModalState, setSignUpModalState] = useState(false);
 
   useEffect(() => {
     document.title = "Roam";
@@ -12,17 +13,21 @@ const Home = () => {
 
   const toggleLoginModal = (e) => {
     e.preventDefault();
-    setModalState(true);
+    setLoginModalState(true);
   };
+
+  const toggleSignUpModal = (e) => {
+    e.preventDefault();
+  }
 
   const closeLoginModal = (e) => {
     e.preventDefault();
-    setModalState(false);
+    setLoginModalState(false);
   };
 
   return (
     <>
-      {modalState && <LoginModal closeLoginModal={closeLoginModal}/>}
+      {loginModalState && <LoginModal closeLoginModal={closeLoginModal}/>}
       <section className="hero is-large has-text-centered">
         <div className="hero-body">
           <button className="button is-primary mr-4 is-size-4">Sign Up</button>
