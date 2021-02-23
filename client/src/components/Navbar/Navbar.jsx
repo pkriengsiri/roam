@@ -2,8 +2,6 @@ import React, {useState} from "react";
 import Logo from "../../Assets/Images/roam4.svg";
 import LoginModal from "../../components/LoginModal/LoginModal";
 import SignUpModal from "../../components/SignUpModal/SignUpModal";
-import React from "react";
-import Logo from "../../Assets/Images/roam5.svg";
 import {Link} from "react-router-dom";
 
 const Navbar = () => {
