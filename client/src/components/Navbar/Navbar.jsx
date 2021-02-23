@@ -1,11 +1,12 @@
 import React from "react";
-import Logo from "../../Assets/Images/roam4.svg";
+import Logo from "../../Assets/Images/roam5.svg";
+import {Link} from "react-router-dom";
 
 const Navbar = () => {
   return (
     <nav className="navbar" role="navigation" aria-label="main navigation">
       <div className="navbar-brand">
-        <img src={Logo} width="112" height="28" />
+        <Link to="/"><img src={Logo} width="112" className="ml-4 mt-1"/></Link>
 
         <a
           role="button"
