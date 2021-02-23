@@ -1,10 +1,11 @@
 import React, { useEffect, useState } from "react";
 import "./Home.css";
 import LoginModal from "../../components/LoginModal/LoginModal";
+import TestimonialCard from "../../components/TestimonialCard/TestimonialCard";
 // TODO: Import Navbar and render it on the page
 
 const Home = () => {
-  const [activeModal, setActiveModal] = useState("")
+  const [activeModal, setActiveModal] = useState("");
   useEffect(() => {
     document.title = "Roam";
   }, []);
@@ -12,7 +13,7 @@ const Home = () => {
   const renderLoginModal = (e) => {
     e.preventDefault();
     console.log("You clicked the login button");
-    return <LoginModal />
+    return <LoginModal />;
   };
   return (
     <>
@@ -32,42 +33,9 @@ const Home = () => {
       {/* Text boxes about roam go here */}
       <div className="container">
         <div className="columns mt-4">
-          <div className="column is-4">
-            <div class="card">
-              <div class="card-content">
-                <div class="content">
-                  Lorem ipsum dolor, sit amet consectetur adipisicing elit. Eos
-                  amet quasi fuga ipsam quaerat consequuntur incidunt dolorum
-                  expedita rerum, quidem tempore dolore dolores a doloribus quod
-                  quisquam modi excepturi vitae.
-                </div>
-              </div>
-            </div>
-          </div>
-          <div className="column is-4">
-            <div class="card">
-              <div class="card-content">
-                <div class="content">
-                  Lorem ipsum dolor, sit amet consectetur adipisicing elit. Eos
-                  amet quasi fuga ipsam quaerat consequuntur incidunt dolorum
-                  expedita rerum, quidem tempore dolore dolores a doloribus quod
-                  quisquam modi excepturi vitae.
-                </div>
-              </div>
-            </div>
-          </div>
-          <div className="column is-4">
-            <div class="card">
-              <div class="card-content">
-                <div class="content">
-                  Lorem ipsum dolor, sit amet consectetur adipisicing elit. Eos
-                  amet quasi fuga ipsam quaerat consequuntur incidunt dolorum
-                  expedita rerum, quidem tempore dolore dolores a doloribus quod
-                  quisquam modi excepturi vitae.
-                </div>
-              </div>
-            </div>
-          </div>
+            <TestimonialCard/>
+            <TestimonialCard/>
+            <TestimonialCard/>
         </div>
       </div>
     </>
