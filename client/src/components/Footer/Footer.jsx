@@ -1,9 +1,10 @@
 import React from "react";
+import "./Footer.css";
 
 const Footer = () => {
   return (
     
-      <footer className="footer">
+      <footer className="footer p-2 mt-5">
         <div className="content has-text-centered">
           <p>
             <strong>Roam</strong> by{" "}
