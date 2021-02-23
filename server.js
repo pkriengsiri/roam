@@ -1,8 +1,8 @@
 //Dependencies
 const express = require("express");
 const mongoose = require("mongoose");
-
 const app = express();
+const routes = require("./routes");
 
 // Server port
 const PORT = process.env.PORT || 3001;
@@ -33,6 +33,9 @@ mongoose
     success: true,
   });
 });
+
+// API routes
+app.use(routes);
 
 // Route to build folder
 app.get("*", (req, res) => {
