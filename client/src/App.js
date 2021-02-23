@@ -1,6 +1,11 @@
 import { useEffect } from "react";
 import Axios from "axios";
 import "./sass/App.scss";
+import Home from "./containers/Home/Home";
+import EditUser from "./containers/EditUser/EditUser";
+import Dashboard from "./containers/Dashboard/Dashboard";
+import CreateTrip from "./containers/CreateTrip/CreateTrip";
+import EditTriip from "./containers/EditTrip/EditTrip;
 
 function App() {
   useEffect(() => {
