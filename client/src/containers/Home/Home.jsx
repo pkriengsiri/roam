@@ -9,11 +9,10 @@ const Home = () => {
   return (
     <>
       {/* Container goes here */}
-      {/* Hero Image goes here */}
-      <section class="hero is-large is-info has-text-centered">
-        <div class="hero-body">
-          <p class="title">Large hero</p>
-          <p class="subtitle">Large subtitle</p>
+      <section className="hero is-large is-info has-text-centered">
+        <div className="hero-body">
+        <button className="button is-primary mr-4 is-size-4">Sign Up</button>
+        <button className="button is-primary ml-4 is-size-4">Login</button>
         </div>
       </section>
       {/* Text boxes about roam go here */}
