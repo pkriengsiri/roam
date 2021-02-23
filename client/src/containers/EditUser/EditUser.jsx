@@ -1,11 +1,74 @@
-import React from 'react';
+import React from "react";
+import "./EditUser.css";
 
 const EditUser = () => {
-    return (
-        <div>
-            <h1>This is the Edit User page. </h1>
+  return (
+    <div className="container">
+      <h1 className="title has-text-centered">Edit Account</h1>
+
+      <div className="columns is-centered is-vcentered">
+        <div className="column is-3">
+          <figure className="image is-128x128">
+            <img
+              className="is-rounded"
+              src="https://bulma.io/images/placeholders/128x128.png"
+            />
+          </figure>
+          <p>Edit your picture</p>
         </div>
-    );
+        <div className="column is-5">
+          <div className="field">
+            <label className="label">First Name</label>
+            <div className="control">
+              <input
+                className="input"
+                type="text"
+                placeholder="e.g Alex Smith"
+              />
+            </div>
+          </div>
+
+          <div className="field">
+            <label className="label">Last Name</label>
+            <div className="control">
+              <input
+                className="input"
+                type="email"
+                placeholder="e.g. alexsmith@gmail.com"
+              />
+            </div>
+          </div>
+
+          <div className="field">
+            <label className="label">Email</label>
+            <div className="control">
+              <input
+                className="input"
+                type="email"
+                placeholder="e.g. alexsmith@gmail.com"
+              />
+            </div>
+          </div>
+
+          <div className="field">
+            <label className="label">Password</label>
+            <div className="control">
+              <input
+                className="input"
+                type="email"
+                placeholder="e.g. alexsmith@gmail.com"
+              />
+            </div>
+          </div>
+
+
+
+        </div>
+      </div>
+      <div className="column has-text-centered">
+      <button className="button is-primary mr-4 is-size-4">Create Trip</button></div>
+    </div>
+  );
 };
 
 export default EditUser;
