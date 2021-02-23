@@ -1,5 +1,4 @@
 import React from "react";
-// import "./SignUpModal.css";
 
 const SignUpModal = ({closeSignUpModal}) => {
   return (

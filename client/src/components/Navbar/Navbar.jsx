@@ -1,8 +1,35 @@
-import React from "react";
+import React, {useState} from "react";
 import Logo from "../../Assets/Images/roam4.svg";
+import LoginModal from "../../components/LoginModal/LoginModal";
+import SignUpModal from "../../components/SignUpModal/SignUpModal";
 
 const Navbar = () => {
+  const [loginModalState, setLoginModalState] = useState(false);
+  const [signUpModalState, setSignUpModalState] = useState(false);
+
+  const toggleLoginModal = (e) => {
+    e.preventDefault();
+    setLoginModalState(true);
+  };
+
+  const toggleSignUpModal = (e) => {
+    e.preventDefault();
+    setSignUpModalState(true);
+  };
+
+  const closeSignUpModal = (e) => {
+    e.preventDefault();
+    setSignUpModalState(false);
+  };
+
+  const closeLoginModal = (e) => {
+    e.preventDefault();
+    setLoginModalState(false);
+  };
   return (
+    <>
+    {loginModalState && <LoginModal closeLoginModal={closeLoginModal} />}
+    {signUpModalState && <SignUpModal closeSignUpModal={closeSignUpModal} />}
     <nav className="navbar" role="navigation" aria-label="main navigation">
       <div className="navbar-brand">
         <img src={Logo} width="112" height="28" />
@@ -31,14 +58,15 @@ const Navbar = () => {
       <div className="navbar-end">
         <div className="navbar-item">
           <div className="buttons">
-            <a className="button is-primary">
+            <a className="button is-primary" onClick={toggleSignUpModal}>
               <strong>Sign up</strong>
             </a>
-            <a className="button is-light">Log in</a>
+            <a className="button is-light" onClick={toggleLoginModal}>Log in</a>
           </div>
         </div>
       </div>
     </nav>
+    </>
   );
 };
 
