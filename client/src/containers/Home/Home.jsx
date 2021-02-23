@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import "./Home.css";
 import LoginModal from "../../components/LoginModal/LoginModal";
 // TODO: Import Navbar and render it on the page
