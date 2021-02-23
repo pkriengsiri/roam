@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import "./Home.css";
 import LoginModal from "../../components/LoginModal/LoginModal";
 import ModalContext from "../../utils/ModalContext";
+import TestimonialCard from "../../components/TestimonialCard/TestimonialCard";
 // TODO: Import Navbar and render it on the page
 
 const Home = () => {
@@ -16,12 +17,17 @@ const Home = () => {
     setModalState(true);
   };
 
+  const closeLoginModal = (e) => {
+    e.preventDefault();
+    setModalState(false);
+  };
+
   return (
     <>
+      <ModalContext.Provider value={modalState}></ModalContext.Provider>
       <div className={`modal ${modalState ? "is-active" : ""}`}>
         <LoginModal />
       </div>
-
       <section className="hero is-large has-text-centered">
         <div className="hero-body">
           <button className="button is-primary mr-4 is-size-4">Sign Up</button>
@@ -36,42 +42,9 @@ const Home = () => {
       {/* Text boxes about roam go here */}
       <div className="container">
         <div className="columns mt-4">
-          <div className="column is-4">
-            <div className="card">
-              <div className="card-content">
-                <div className="content">
-                  Lorem ipsum dolor, sit amet consectetur adipisicing elit. Eos
-                  amet quasi fuga ipsam quaerat consequuntur incidunt dolorum
-                  expedita rerum, quidem tempore dolore dolores a doloribus quod
-                  quisquam modi excepturi vitae.
-                </div>
-              </div>
-            </div>
-          </div>
-          <div className="column is-4">
-            <div className="card">
-              <div className="card-content">
-                <div className="content">
-                  Lorem ipsum dolor, sit amet consectetur adipisicing elit. Eos
-                  amet quasi fuga ipsam quaerat consequuntur incidunt dolorum
-                  expedita rerum, quidem tempore dolore dolores a doloribus quod
-                  quisquam modi excepturi vitae.
-                </div>
-              </div>
-            </div>
-          </div>
-          <div className="column is-4">
-            <div className="card">
-              <div className="card-content">
-                <div className="content">
-                  Lorem ipsum dolor, sit amet consectetur adipisicing elit. Eos
-                  amet quasi fuga ipsam quaerat consequuntur incidunt dolorum
-                  expedita rerum, quidem tempore dolore dolores a doloribus quod
-                  quisquam modi excepturi vitae.
-                </div>
-              </div>
-            </div>
-          </div>
+          <TestimonialCard />
+          <TestimonialCard />
+          <TestimonialCard />
         </div>
       </div>
     </>
