@@ -4,9 +4,9 @@ const Schema = mongoose.Schema;
 
 const tripSchema = new Schema({
   tripCreator: { type: String },
-  destination: { type: String, required: true },
-  travelStartDate: { type: Date, required: true, trim: true },
-  travelEndDate: { type: Date, required: true, trim: true },
+  destination: { type: String, required: "Please choose a destination." },
+  travelStartDate: { type: Date, required: "Please choose a start and end date.", trim: true },
+  travelEndDate: { type: Date, required: "Please choose a start and end date.", trim: true },
   travelers: { type: Array },
 });
 
