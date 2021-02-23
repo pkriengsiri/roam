@@ -6,6 +6,7 @@ import EditUser from "./containers/EditUser/EditUser";
 import Dashboard from "./containers/Dashboard/Dashboard";
 import CreateTrip from "./containers/CreateTrip/CreateTrip";
 import EditTrip from "./containers/EditTrip/EditTrip";
+import SingleTrip from "./containers/SingleTrip/SingleTrip";
 import { BrowserRouter as Router, Route, Switch} from "react-router-dom";
 
 function App() {
@@ -20,36 +21,18 @@ function App() {
   }, []);
 
   return (
-    <>
-      <h1 className="title">Bulma</h1>
-      <p className="subtitle">
-        Modern CSS framework based on{" "}
-        <a href="https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_Flexible_Box_Layout/Basic_Concepts_of_Flexbox">
-          Flexbox
-        </a>
-      </p>
-
-      <div className="field">
-        <div className="control">
-          <input className="input" type="text" placeholder="Input" />
-        </div>
-      </div>
-
-      <div className="field">
-        <p className="control">
-          <span className="select">
-            <select>
-              <option>Select dropdown</option>
-            </select>
-          </span>
-        </p>
-      </div>
-
-      <div className="buttons">
-        <a className="button is-primary">Primary</a>
-        <a className="button is-link">Link</a>
-      </div>
-    </>
+    <div className="App">
+    <Router>
+      <Switch>
+        <Route exact path="/" component={Home} />
+        <Route exact path="/dashboard/:id" component={Dashboard} />
+        <Route exact path="/user/:id/edit" component={EditUser} />
+        <Route exact path="/trips/new" component={CreateTrip} />
+        <Route exact path="/trip/:id" component={SingleTrip} />
+        <Route exact path="/trips/:id/edit" component={EditTrip} />
+      </Switch>
+    </Router>
+  </div>
   );
 }
 
