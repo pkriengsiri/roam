@@ -2,9 +2,12 @@ import React from "react";
 import "./Dashboard.css";
 import TripCard from "../../components/TripCard/TripCard";
 
+
 const Dashboard = () => {
   return (
+
     <div className="container has-text-centered">
+         {/* global alert for not filling out user profile */}
       <div className="columns is-centered">
         <div className="column is-4 has-text-centered">
           {/* conditional rendering for displaying name IF it is in the database */}

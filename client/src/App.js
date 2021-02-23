@@ -8,6 +8,7 @@ import CreateTrip from "./containers/CreateTrip/CreateTrip";
 import EditTrip from "./containers/EditTrip/EditTrip";
 import SingleTrip from "./containers/SingleTrip/SingleTrip";
 import NavBar from "./components/Navbar/Navbar";
+import Footer from "./components/Footer/Footer";
 import { BrowserRouter as Router, Route, Switch} from "react-router-dom";
 
 function App() {
@@ -33,6 +34,7 @@ function App() {
         <Route exact path="/trip/:id" component={SingleTrip} />
         <Route exact path="/trips/:id/edit" component={EditTrip} />
       </Switch>
+      <Footer/>
     </Router>
   </div>
   );
