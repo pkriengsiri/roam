@@ -1,0 +1,9 @@
+.hero {
+    background-image: url("../../Assets/Images/hero.jpg");
+    background-size: cover;
+}
+
+.card {
+    color: white;
+    background-color: #f48e3f;
+}
