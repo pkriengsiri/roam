@@ -4,7 +4,7 @@ import "./LoginModal.css";
 const LoginModal = ({closeLoginModal}) => {
   return (
     <>
-        <div className="modal is-active">
+        <div className="modal is-active fade-in-modal">
           <div className="modal-background"></div>
           <div className="modal-card">
             <header className="modal-card-head">
