@@ -1,5 +1,5 @@
 import React from "react";
-import "./SignUpModal.css";
+// import "./SignUpModal.css";
 
 const SignUpModal = ({closeSignUpModal}) => {
   return (
@@ -8,7 +8,7 @@ const SignUpModal = ({closeSignUpModal}) => {
           <div className="modal-background"></div>
           <div className="modal-card">
             <header className="modal-card-head">
-              <p className="modal-card-title">Login</p>
+              <p className="modal-card-title">Sign Up</p>
               <button className="delete" aria-label="close" onClick={closeSignUpModal}></button>
             </header>
             <section className="modal-card-body">
@@ -22,7 +22,7 @@ const SignUpModal = ({closeSignUpModal}) => {
               <input className="input" type="text" placeholder="Password" />
             </section>
             <footer className="modal-card-foot">
-              <button className="button is-primary">Login</button>
+              <button className="button is-primary">Sign Up</button>
               <button className="button" onClick={closeSignUpModal}>
                 Cancel
               </button>

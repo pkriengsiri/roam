@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import "./Home.css";
 import LoginModal from "../../components/LoginModal/LoginModal";
+import SignUpModal from "../../components/SignUpModal/SignUpModal";
 import TestimonialCard from "../../components/TestimonialCard/TestimonialCard";
 
 const Home = () => {
@@ -18,7 +19,13 @@ const Home = () => {
 
   const toggleSignUpModal = (e) => {
     e.preventDefault();
-  }
+    setSignUpModalState(true);
+  };
+
+  const closeSignUpModal = (e) => {
+    e.preventDefault();
+    setSignUpModalState(false);
+  };
 
   const closeLoginModal = (e) => {
     e.preventDefault();
@@ -27,10 +34,16 @@ const Home = () => {
 
   return (
     <>
-      {loginModalState && <LoginModal closeLoginModal={closeLoginModal}/>}
+      {loginModalState && <LoginModal closeLoginModal={closeLoginModal} />}
+      {signUpModalState && <SignUpModal closeSignUpModal={closeSignUpModal} />}
       <section className="hero is-large has-text-centered">
         <div className="hero-body">
-          <button className="button is-primary mr-4 is-size-4">Sign Up</button>
+          <button
+            className="button is-primary mr-4 is-size-4"
+            onClick={toggleSignUpModal}
+          >
+            Sign Up
+          </button>
           <button
             className="button is-light ml-4 is-size-4"
             onClick={toggleLoginModal}
