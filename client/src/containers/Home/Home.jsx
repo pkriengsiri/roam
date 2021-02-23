@@ -1,14 +1,16 @@
-import React from "react";
+import React, {useEffect} from "react";
 import "./Home.css"
 // TODO: Import Navbar and render it on the page
 
 const Home = () => {
+  useEffect(()=>{
+    document.title= "Roam"
+  }, [])
   return (
     <>
-      <h1>This is the home page.</h1>
       {/* Container goes here */}
       {/* Hero Image goes here */}
-      <section class="hero is-large is-info">
+      <section class="hero is-large is-info has-text-centered">
         <div class="hero-body">
           <p class="title">Large hero</p>
           <p class="subtitle">Large subtitle</p>
