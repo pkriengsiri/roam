@@ -1,4 +1,5 @@
 import React from "react";
+import "./Dashboard.css";
 
 const Dashboard = () => {
   return (
@@ -12,27 +13,32 @@ const Dashboard = () => {
       </div>
 
       <div className="columns is-centered">
-        <div className="column is-3">
+        <div className="column is-4">
           <div className="card trip-card">
-           
             <div className="card-content">
               <div className="media">
                 <div className="media-content">
-                  <p className="title is-4">Scotland</p>
+                  <p className="title is-3">Scotland</p>
                 </div>
               </div>
-
-              <div className="content">
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                Phasellus nec iaculis mauris. <a>@bulmaio</a>.
-                <a href="#">#css</a> <a href="#">#responsive</a>
-                <br />
-                <time datetime="2016-1-1">11:09 PM - 1 Jan 2016</time>
+              <div className="columns">
+                <div className="column is-10">
+                  <div className="content">
+                   
+                    <time datetime="2016-1-1">11:09 PM - 1 Jan 2016</time>
+                  </div>
+                </div>
+                <div className="column is-2">
+                  <button>
+                    <i class="far fa-edit"></i>
+                  </button>
+                </div>
               </div>
             </div>
           </div>
         </div>
       </div>
+      <button className="button is-primary mr-4 is-size-4">Create Trip</button>
     </div>
   );
 };
