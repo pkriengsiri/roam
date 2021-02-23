@@ -1,34 +1,37 @@
 @charset "utf-8";
 
 // Import a Google Font
-@import url('https://fonts.googleapis.com/css?family=Nunito:400,700');
+@import url('https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;0,700;1,300&display=swap');
 
 // Set your brand colors
-$purple: #8a4d76;
-$pink: #fa7c91;
-$brown: #757763;
-$beige-light: #d0d1cd;
-$beige-lighter: #eff0eb;
+$purple: #2E3560;
+$purple-lighter: #3C447C;
+$teal: #33C1BF;
+$teal-lighter: #8EE1E0;
+$orange: #F48E3F;
+$orange-lighter: #F6A465;
+$white: #F6F1E9;
+$blue: #011638;
 
 // Update Bulma's global variables
-$family-sans-serif: 'Nunito', sans-serif;
-$grey-dark: $brown;
-$grey-light: $beige-light;
+$family-sans-serif: 'Lato', sans-serif;
+// $grey-dark: $brown;
+// $grey-light: $beige-light;
 $primary: $purple;
 // $link: $pink;
-$widescreen-enabled: false;
-$fullhd-enabled: false;
+// $widescreen-enabled: false;
+// $fullhd-enabled: false;
 
 // Update some of Bulma's component variables
-$body-background-color: $beige-lighter;
-$control-border-width: 2px;
-$input-border-color: transparent;
-$input-shadow: none;
-$message-radius: 15px;
-$message-header-radius: 15px;
-$message-header-background-color: rgb(255, 146, 146);
-$message-background-color: rgb(251, 235, 235);
-$message-body-padding: 1rem;
+$body-background-color: $white;
+// $control-border-width: 2px;
+// $input-border-color: transparent;
+// $input-shadow: none;
+// $message-radius: 15px;
+// $message-header-radius: 15px;
+// $message-header-background-color: rgb(255, 146, 146);
+// $message-background-color: rgb(251, 235, 235);
+// $message-body-padding: 1rem;
 
 
 // Import only what you need from Bulma
