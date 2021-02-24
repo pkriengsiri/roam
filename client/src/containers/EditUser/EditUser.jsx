@@ -4,7 +4,8 @@ import axios from "axios";
 import {useParams } from "react-router-dom";
 import { useEffect } from "react";
 
-const [user, setUser] = useState({});
+const [firstName, setFirstName] = useState("");
+
 
 
 
@@ -30,8 +31,8 @@ const EditUser = () => {
               <input
                 className="input"
                 type="text"
-                placeholder="e.g Alex Smith"
-                value={name}
+                placeholder="e.g Alex"
+                value={firstName}
 
               />
             </div>
@@ -42,8 +43,9 @@ const EditUser = () => {
             <div className="control">
               <input
                 className="input"
-                type="email"
-                placeholder="e.g. alexsmith@gmail.com"
+                type="text"
+                placeholder="e.g. Smith"
+                value={lastName}
               />
             </div>
           </div>
@@ -55,6 +57,7 @@ const EditUser = () => {
                 className="input"
                 type="email"
                 placeholder="e.g. alexsmith@gmail.com"
+                value={email}
               />
             </div>
           </div>
@@ -64,8 +67,9 @@ const EditUser = () => {
             <div className="control">
               <input
                 className="input"
-                type="email"
+                type="password"
                 placeholder="e.g. alexsmith@gmail.com"
+                value={password}
               />
             </div>
           </div>
