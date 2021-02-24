@@ -6,7 +6,7 @@ import TestimonialCard from "../../components/TestimonialCard/TestimonialCard";
 import BeachVideo from "./Beach1.mp4";
 
 
-const Home = () => {
+const Home = ({setUserContext}) => {
   const [loginModalState, setLoginModalState] = useState(false);
   const [signUpModalState, setSignUpModalState] = useState(false);
 
@@ -36,8 +36,8 @@ const Home = () => {
 
   return (
     <>
-      {loginModalState && <LoginModal closeLoginModal={closeLoginModal} />}
-      {signUpModalState && <SignUpModal closeSignUpModal={closeSignUpModal} />}
+      {loginModalState && <LoginModal closeLoginModal={closeLoginModal} setUserContext={setUserContext}/>}
+      {signUpModalState && <SignUpModal closeSignUpModal={closeSignUpModal} setUserContext={setUserContext} />}
 
       <div> </div>
       <section className="hero is-large has-text-centered">
