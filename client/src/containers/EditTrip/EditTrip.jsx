@@ -26,7 +26,15 @@ const EditTrip = () => {
     <div className="container">
       <div className="columns is-centered">
         <div className="column is-half ">
-          <h1 className="title">Edit Your Trip</h1>
+          <div className="columns is-vcentered">
+            <div className="column is-5">
+              <h1 className="title">Edit Your Trip</h1>
+            </div>
+            <div className="column is-1">
+              <a><i class="far fa-trash-alt"></i></a>
+            </div>
+          </div>
+          
           <TripForm handleFormSubmit={handleFormSubmit} buttonText="Save" />
         </div>
       </div>
