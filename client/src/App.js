@@ -37,7 +37,7 @@ function App() {
             <Route exact path="/trips/:id/edit" component={EditTrip} />
           </Switch>
         </main>
-      <Footer />
+        <Footer />
       </Router>
     </div>
   );

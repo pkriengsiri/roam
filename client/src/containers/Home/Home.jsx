@@ -5,7 +5,6 @@ import SignUpModal from "../../components/SignUpModal/SignUpModal";
 import TestimonialCard from "../../components/TestimonialCard/TestimonialCard";
 import BeachVideo from "./Beach1.mp4";
 
-
 const Home = () => {
   const [loginModalState, setLoginModalState] = useState(false);
   const [signUpModalState, setSignUpModalState] = useState(false);
@@ -39,12 +38,12 @@ const Home = () => {
       {loginModalState && <LoginModal closeLoginModal={closeLoginModal} />}
       {signUpModalState && <SignUpModal closeSignUpModal={closeSignUpModal} />}
 
-      <div> </div>
-      <section className="hero is-large has-text-centered">
-        
+      {/* <div className="container"> */}
+      <section className="container-fluid mx-0 hero is-large has-text-centered">
         <div className="hero-body">
-         <video autoPlay loop muted><source src={BeachVideo} type="video/mp4"/></video>
-         
+          <video autoPlay loop muted>
+            <source src={BeachVideo} type="video/mp4" />
+          </video>
           <button
             className="button is-primary mr-4 is-size-4"
             onClick={toggleSignUpModal}
@@ -59,6 +58,8 @@ const Home = () => {
           </button>
         </div>
       </section>
+      {/* </div> */}
+
       <div className="container">
         <div className="columns mt-4">
           <TestimonialCard />

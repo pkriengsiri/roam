@@ -65,7 +65,7 @@ const Navbar = () => {
           </div>
         </div> */}
 
-        {/* TODO: Conditionally render if the user is logged in */}
+        {/* TODO: Conditionally render if the user is not logged in */}
         <div className="navbar-end">
           <div className="navbar-item">
             <div className="buttons">
