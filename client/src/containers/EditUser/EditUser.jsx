@@ -1,5 +1,10 @@
-import React from "react";
+import React, { useEffect, useState} from "react";
 import "./EditUser.css";
+import axios from "axios";
+import {useParams } from "react-router-dom";
+import { useEffect } from "react";
+
+const [user, setUser] = useState({});
 
 const EditUser = () => {
   return (
