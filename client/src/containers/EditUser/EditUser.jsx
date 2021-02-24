@@ -5,9 +5,9 @@ import {useParams } from "react-router-dom";
 import { useEffect } from "react";
 
 const [firstName, setFirstName] = useState("");
-
-
-
+const [lastName, setLastName] = useState("");
+const [email, setEmail] = useState("");
+const [password, setPassword] = useState("");
 
 const EditUser = () => {
   return (
