@@ -36,7 +36,7 @@ const EditUser = () => {
     })
       .then((response) => {
         console.log(response);
-        history.push(`/dashboard/${id}`);
+        history.push(`/dashboard/${response.data._id}`);
       })
       .catch((err) => {
         console.log(err);
