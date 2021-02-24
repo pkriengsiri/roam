@@ -15,6 +15,10 @@ const EditUser = () => {
     if (id) {
       API.getUser(id).then((response)=> {
         console.log(response);
+        setFirstName(response.data.firstName);
+        setLastName(response.data.lastName);
+        setEmail(response.data.email);
+        
       }).catch((err)=> {
         console.log(err);
       })
@@ -31,6 +35,7 @@ const EditUser = () => {
     })
       .then((response) => {
         console.log(response);
+        // history.push(`/dashboard/${id}`);
       })
       .catch((err) => {
         console.log(err);
