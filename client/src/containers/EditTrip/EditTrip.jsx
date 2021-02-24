@@ -1,8 +1,17 @@
-import React from "react";
+import React, { useEffect, useParams } from "react";
+import axios from "axios"
+import Calendar from "../../components/Calendar/Calendar";
 import "./EditTrip.css";
 
 const EditTrip = () => {
   // Make API request to prepopulate the data below
+  // useEffect(()=>{
+  //   axios.get("/api/trips/:id").then(response=>{
+  //     console.log(response.data)
+  //   }).catch(err=>{
+  //     console.log(err)
+  //   })
+  // }, [])
   return (
     <div className="container">
       <div className="columns is-centered">
@@ -11,17 +20,24 @@ const EditTrip = () => {
           {/* Destination field */}
           <div className="columns">
             <div className="column is-two-thirds">
-            <div className="field mb-5">
-            <label className="label">Destination</label>
-            <div className="control">
-              <input className="input" type="text" placeholder="Destination" />
+              <div className="field mb-2">
+                <label className="label">Destination</label>
+                <div className="control">
+                  <input
+                    className="input"
+                    type="text"
+                    placeholder="Destination"
+                  />
+                </div>
+              </div>
             </div>
           </div>
-            </div>
-          </div>
-          
 
           {/* Calendar with date range selector */}
+          <div className="mb-5">
+            <label className="label">Dates</label>
+            <Calendar />
+          </div>
 
           {/* List of travelers */}
           <div className="mb-5">
