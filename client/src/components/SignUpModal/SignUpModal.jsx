@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import API from "../../utils/API";
+import "./SignUpModal.css"
 
 const SignUpModal = ({ closeSignUpModal }) => {
   const [email, setEmail] = useState("");
