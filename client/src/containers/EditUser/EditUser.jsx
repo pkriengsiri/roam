@@ -33,6 +33,7 @@ const EditUser = () => {
                 type="text"
                 placeholder="e.g Alex"
                 value={firstName}
+                onChange={(e)=> setFirstName(e.target.value)}
 
               />
             </div>
@@ -46,6 +47,7 @@ const EditUser = () => {
                 type="text"
                 placeholder="e.g. Smith"
                 value={lastName}
+                onChange={(e)=> setLastName(e.target.value)}
               />
             </div>
           </div>
@@ -58,6 +60,7 @@ const EditUser = () => {
                 type="email"
                 placeholder="e.g. alexsmith@gmail.com"
                 value={email}
+                onChange={(e)=> setEmail(e.target.value)}
               />
             </div>
           </div>
@@ -70,6 +73,7 @@ const EditUser = () => {
                 type="password"
                 placeholder="e.g. alexsmith@gmail.com"
                 value={password}
+                onChange={(e)=> setPassword(e.target.value)}
               />
             </div>
           </div>
