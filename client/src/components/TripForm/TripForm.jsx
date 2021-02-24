@@ -38,8 +38,6 @@ const TripForm = (props) => {
         console.log(response.data);
         const responseStartDate = new Date(response.data.startDate);
         const responseEndDate = new Date(response.data.endDate);
-        console.log(responseStartDate)
-        console.log(responseEndDate)
         setDestination(response.data.destination);
         setStartDate(responseStartDate);
         setEndDate(responseEndDate);
