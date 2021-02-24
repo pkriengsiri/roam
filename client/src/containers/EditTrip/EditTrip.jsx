@@ -4,6 +4,7 @@ import "./EditTrip.css";
 import API from "../../utils/API";
 import { useHistory, useParams } from "react-router-dom";
 import TripForm from "../../components/TripForm/TripForm";
+import DeleteModal from "../../components/DeleteModal/DeleteModal";
 
 const EditTrip = () => {
   const history = useHistory();
@@ -23,12 +24,20 @@ const EditTrip = () => {
       });
   };
 
+  const closeDeleteModal = (e) => {
+    e.preventDefault();
+    setDeleteModalState(false);
+  };
+
   const togglesDeleteModal= (e) => {
     e.preventDefault();
+    console.log("You clicked the trash can");
     setDeleteModalState(true);
   };
 
   return (
+    <>
+    {deleteModalState && <DeleteModal closeDeleteModal={closeDeleteModal}/>} 
     <div className="container">
       <div className="columns is-centered">
         <div className="column is-half ">
@@ -37,7 +46,7 @@ const EditTrip = () => {
               <h1 className="title">Edit Your Trip</h1>
             </div>
             <div className="column is-1">
-              <a onClick={togglesDeleteModal}><i class="far fa-trash-alt"></i></a>
+              <a onClick={togglesDeleteModal}><i className="far fa-trash-alt fa-lg"></i></a>
             </div>
           </div>
           
@@ -45,6 +54,7 @@ const EditTrip = () => {
         </div>
       </div>
     </div>
+    </>
   );
 };
 
