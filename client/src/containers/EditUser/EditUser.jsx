@@ -6,6 +6,8 @@ import { useEffect } from "react";
 
 const [user, setUser] = useState({});
 
+
+
 const EditUser = () => {
   return (
     <div className="container">
@@ -29,6 +31,8 @@ const EditUser = () => {
                 className="input"
                 type="text"
                 placeholder="e.g Alex Smith"
+                value={name}
+
               />
             </div>
           </div>
