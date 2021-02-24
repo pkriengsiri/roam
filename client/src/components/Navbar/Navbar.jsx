@@ -41,6 +41,7 @@ const Navbar = () => {
           aria-label="menu"
           aria-expanded="false"
           data-target="navbarBasicExample"
+          onClick={()=> document.querySelector('.navbar-menu').classList.toggle('is-active')}
         >
           <span aria-hidden="true"></span>
           <span aria-hidden="true"></span>
@@ -48,13 +49,13 @@ const Navbar = () => {
         </a>
       </div>
 
-      {/* <div id="navbarBasicExample" className="navbar-menu">
+      <div id="navbarBasicExample" className="navbar-menu">
         <div className="navbar-start">
-          <a className="navbar-item">Home</a>
+          <a className="navbar-item">Dashboard</a>
 
-          <a className="navbar-item">Documentation</a>
+          <a className="navbar-item">Logout</a>
         </div>
-      </div> */}
+      </div>
 
       <div className="navbar-end">
         <div className="navbar-item">
