@@ -5,6 +5,10 @@ const SignUpModal = ({ closeSignUpModal }) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
+  const handleSubmit = (e) => {
+    e.preventDefault();
+  }
+
   return (
     <>
       <div className="modal is-active fade-in-modal">
@@ -27,6 +31,9 @@ const SignUpModal = ({ closeSignUpModal }) => {
               type="text"
               placeholder="Email"
               value={email}
+              onChange={(e) => {
+                setEmail(e.target.value);
+              }}
             />
             <strong>
               <p className="mt-4">Password</p>
@@ -35,7 +42,10 @@ const SignUpModal = ({ closeSignUpModal }) => {
               className="input"
               type="password"
               placeholder="Password"
-              value={email}
+              value={password}
+              onChange={(e) => {
+                setPassword(e.target.value);
+              }}
             />
           </section>
           <footer className="modal-card-foot">
