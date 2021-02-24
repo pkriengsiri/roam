@@ -7,11 +7,22 @@ const SingleTrip = () => {
     <div className="container">
       <h1 className="title has-text-centered">Your Trip to Scotland!</h1>
 
-      <div className="columns is-vcentered is-centered">
+      <div className="columns is-centered">
         <div className="column is-3">
-          <p>calendar goes here</p>
+          <p><div className="mb-5">
+          
+          <DatePicker
+            // selected={travelStartDate}
+            // onChange={onChange}
+            // startDate={travelStartDate}
+            // endDate={travelEndDate}
+            // selectsRange
+            inline
+          />
+        </div></p>
         </div>
         <div className="column is-2">
+        <h2 className="subtitle">Travel Companions:</h2>
           <ul>
             <li>Charlie</li>
             <li>Elsie</li>
