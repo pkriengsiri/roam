@@ -1,10 +1,12 @@
 import React, { useState } from "react";
 import API from "../../utils/API";
-import "./SignUpModal.css"
+import "./SignUpModal.css";
+import {useHistory} from "react-router-dom";
 
 const SignUpModal = ({ closeSignUpModal, setUserContext }) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const history = useHistory();
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -19,8 +21,8 @@ const SignUpModal = ({ closeSignUpModal, setUserContext }) => {
         password: password,
       })
         .then((response) => {
-          console.log(response.data);
           setUserContext({email: response.data.email, id: response.data._id});
+          history.push(`/user/${response.data._id}/edit`);
         })
         .catch((err) => {
           console.log(err);
