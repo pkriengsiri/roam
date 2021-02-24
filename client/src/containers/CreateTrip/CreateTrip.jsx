@@ -34,7 +34,7 @@ const CreateTrip = () => {
   // add trip button to send to server
   const addTrip = () => {
     API.createTrip({
-        TODO: // use context to set signed in user as tripCreator
+        //TODO: // use context to set signed in user as tripCreator
       tripCreator: "bill", //current user from context,
       destination: destination,
       travelStartDate: travelStartDate,
