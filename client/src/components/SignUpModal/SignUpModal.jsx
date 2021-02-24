@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import API from "../../utils/API";
 import "./SignUpModal.css"
 
-const SignUpModal = ({ closeSignUpModal }) => {
+const SignUpModal = ({ closeSignUpModal, setUserContext }) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
@@ -19,7 +19,8 @@ const SignUpModal = ({ closeSignUpModal }) => {
         password: password,
       })
         .then((response) => {
-          console.log(response);
+          console.log(response.data);
+          setUserContext({email: response.data.email, id: response.data._id});
         })
         .catch((err) => {
           console.log(err);
@@ -68,7 +69,7 @@ const SignUpModal = ({ closeSignUpModal }) => {
                 }}
               />
               <input type="submit" className="is-hidden" />
-              <p id="signup-error" class="mt-2 ml-2 is-hidden">Please complete both fields before submitting</p>
+              <p id="signup-error" className="mt-2 ml-2 is-hidden">Please complete both fields before submitting</p>
               
             </form>
             

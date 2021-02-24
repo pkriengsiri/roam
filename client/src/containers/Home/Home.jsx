@@ -36,7 +36,7 @@ const Home = ({setUserContext}) => {
 
   return (
     <>
-      {loginModalState && <LoginModal closeLoginModal={closeLoginModal} />}
+      {loginModalState && <LoginModal closeLoginModal={closeLoginModal} setUserContext={setUserContext}/>}
       {signUpModalState && <SignUpModal closeSignUpModal={closeSignUpModal} setUserContext={setUserContext} />}
 
       <div> </div>
