@@ -33,7 +33,7 @@ const SignUpModal = ({ closeSignUpModal }) => {
             </strong>
             <input
               className="input"
-              type="text"
+              type="password"
               placeholder="Password"
               value={email}
             />
