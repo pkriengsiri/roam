@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import axios from "axios";
 import "./EditTrip.css";
 import API from "../../utils/API";
@@ -8,6 +8,7 @@ import TripForm from "../../components/TripForm/TripForm";
 const EditTrip = () => {
   const history = useHistory();
   const { id } = useParams();
+  const [deleteModalState, setDeleteModalState] = useState(false);
 
   const handleFormSubmit = (e, formObject) => {
     e.preventDefault();
@@ -22,6 +23,11 @@ const EditTrip = () => {
       });
   };
 
+  const togglesDeleteModal= (e) => {
+    e.preventDefault();
+    setDeleteModalState(true);
+  };
+
   return (
     <div className="container">
       <div className="columns is-centered">
@@ -31,7 +37,7 @@ const EditTrip = () => {
               <h1 className="title">Edit Your Trip</h1>
             </div>
             <div className="column is-1">
-              <a><i class="far fa-trash-alt"></i></a>
+              <a onClick={togglesDeleteModal}><i class="far fa-trash-alt"></i></a>
             </div>
           </div>
           
