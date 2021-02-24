@@ -14,10 +14,10 @@ const SingleTrip = () => {
           <p><div className="mb-5">
           
           <DatePicker
-            // selected={travelStartDate}
+            // selected={startDate}
             // onChange={onChange}
-            // startDate={travelStartDate}
-            // endDate={travelEndDate}
+            // startDate={startDate}
+            // endDate={endDate}
             // selectsRange
             inline
           />
