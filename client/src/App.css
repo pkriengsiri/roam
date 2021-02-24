@@ -7,7 +7,13 @@
     min-height: 100vh;
 } */
 
+.App {
+  display: flex;
+  min-height: 100vh;
+  flex-direction: column;
+}
 
+<<<<<<< HEAD
 /*   
   .App{
     display: flex;
@@ -21,3 +27,9 @@
     width: 100%;
     }
    */
+=======
+.page {
+  flex: 1 0 auto;
+  width: 100%;
+}
+>>>>>>> eb43ed7368d3b471870240c3f0136d84cb01d9b6

@@ -9,7 +9,8 @@ const Dashboard = () => {
     <div className="container has-text-centered">
          {/* global alert for not filling out user profile */}
       <div className="columns is-centered">
-        <div className="column is-4 has-text-centered">
+        
+        <div className="column is-8 has-text-centered">
           {/* conditional rendering for displaying name IF it is in the database */}
           <h1 className="title">Welcome, FirstName!</h1>
           <h1 className="title">Your Trips:</h1>
