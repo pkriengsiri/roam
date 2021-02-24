@@ -2,6 +2,8 @@ import React from "react";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 
+// populate page with info from the database about a single trip
+
 const SingleTrip = () => {
   return (
     <div className="container">
