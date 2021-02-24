@@ -5,12 +5,7 @@ import SignUpModal from "../../components/SignUpModal/SignUpModal";
 import TestimonialCard from "../../components/TestimonialCard/TestimonialCard";
 import BeachVideo from "./Beach1.mp4";
 
-<<<<<<< HEAD
-const Home = () => {
-=======
-
 const Home = ({setUserContext}) => {
->>>>>>> aa394f372a588cb4006b81b16c75c174526533e5
   const [loginModalState, setLoginModalState] = useState(false);
   const [signUpModalState, setSignUpModalState] = useState(false);
 
