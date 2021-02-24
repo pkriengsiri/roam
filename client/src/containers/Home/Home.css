@@ -36,7 +36,6 @@ video {
   top: 50%;
 }
 
-/* TODO: Add media query for 1240px x 868px */
 /* These rules take effect when the browser's width is 868px or less */
 @media screen and (max-width: 1200px) {
     .home-signup-button {
@@ -51,6 +50,8 @@ video {
     }
 }
 
+/* These rules take effect when the browser's width is 620px or less */
+
 @media screen and (max-width: 620px) {
     .home-signup-button {
         position: absolute;
@@ -63,16 +64,3 @@ video {
         top: 50%
     }
 }
-/* 
-    These rules take effect when the browser's width 
-    is 991px or less
- */
-/* 
- @media screen and (max-width: 991px) {
-    .social-media {
-      padding-top: 1rem;
-    }
-    #last-social-media {
-      margin-right: -5px;
-    }
-  } */

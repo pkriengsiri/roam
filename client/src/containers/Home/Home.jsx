@@ -48,26 +48,6 @@ const Home = ({ setUserContext }) => {
         />
       )}
 
-      {/* <section className="container-fluid mx-0 hero is-large has-text-centered">
-        <div className="hero-body">
-          <video autoPlay loop muted>
-            <source src={BeachVideo} type="video/mp4" />
-          </video>
-          <button
-            className="button is-primary mr-4 is-size-4"
-            onClick={toggleSignUpModal}
-          >
-            Sign Up
-          </button>
-          <button
-            className="button is-light ml-4 is-size-4"
-            onClick={toggleLoginModal}
-          >
-            Login
-          </button>
-        </div>
-      </section> */}
-
       <section className="hero-section">
         <video autoPlay loop muted>
           <source src={BeachVideo} type="video/mp4" />
