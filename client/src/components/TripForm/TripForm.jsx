@@ -1,16 +1,17 @@
-import React, { useState } from "react";
-
+import React, { useState, useEffect } from "react";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
-
 import "./TripForm.css";
+import { useParams } from "react-router-dom";
+import axios from "axios";
 
 const TripForm = (props) => {
   const [destination, setDestination] = useState("");
-  const [travelStartDate, setTravelStartDate] = useState(new Date());
-  const [travelEndDate, setTravelEndDate] = useState(null);
+  const [startDate, setStartDate] = useState(new Date());
+  const [endDate, setEndDate] = useState(null);
   const [traveler, setTraveler] = useState("");
   const [travelers, setTravelers] = useState([]);
+  const { id } = useParams();
   // TODO: Do we want travel start date initiated as today?
 
   const addTraveler = (e) => {
@@ -25,9 +26,30 @@ const TripForm = (props) => {
   // set calendar dates
   const onChange = (dates) => {
     const [start, end] = dates;
-    setTravelStartDate(start);
-    setTravelEndDate(end);
+    setStartDate(start);
+    setEndDate(end);
   };
+
+  useEffect(() => {
+    if (id) {
+    axios
+      .get(`/api/trips/${id}`)
+      .then((response) => {
+        console.log(response.data);
+        const responseStartDate = new Date(response.data.startDate);
+        const responseEndDate = new Date(response.data.endDate);
+        console.log(responseStartDate)
+        console.log(responseEndDate)
+        setDestination(response.data.destination);
+        setStartDate(responseStartDate);
+        setEndDate(responseEndDate);
+        setTravelers(response.data.travelers);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+    }
+  }, [id]);
 
   return (
     <>
@@ -37,8 +59,8 @@ const TripForm = (props) => {
           props.handleFormSubmit(e, {
             tripCreator: "logged in user",
             destination,
-            travelStartDate,
-            travelEndDate,
+            startDate,
+            endDate,
             travelers,
           })
         }
@@ -66,10 +88,10 @@ const TripForm = (props) => {
         <div className="mb-5">
           <label className="label">Dates</label>
           <DatePicker
-            selected={travelStartDate}
+            selected={startDate}
             onChange={onChange}
-            startDate={travelStartDate}
-            endDate={travelEndDate}
+            startDate={startDate}
+            endDate={endDate}
             selectsRange
             inline
           />
@@ -80,10 +102,10 @@ const TripForm = (props) => {
       <div className="mb-5">
         <label className="label">Travel Companions</label>
         <ul>
-          <li>Pete</li>
-          <li>Tony</li>
-          <li>Molly</li>
-          <li>Jeana Rose</li>
+          {/* TODO: Populate travelers form travlers array and add keys */}
+          {travelers.map((traveler) => (
+            <li>{traveler}</li>
+          ))}
         </ul>
       </div>
 
@@ -112,7 +134,8 @@ const TripForm = (props) => {
             </button>
           </div>
         </div>
-
+        
+        {/* TODO: Make a PUT request on the click of the save button */}
         {/* Save button */}
         <div className="field is-grouped">
           <div className="control">
@@ -123,13 +146,13 @@ const TripForm = (props) => {
                 props.handleFormSubmit(e, {
                   tripCreator: "context logged in user",
                   destination,
-                  travelStartDate,
-                  travelEndDate,
+                  startDate,
+                  endDate,
                   travelers,
                 })
               }
             >
-              Add Trip
+              {props.buttonText}
             </button>
           </div>
         </div>
