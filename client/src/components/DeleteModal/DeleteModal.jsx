@@ -1,8 +1,27 @@
-import React from "react";
+import React,{ useEffect } from "react";
+import API from "../../utils/API";
 import "./DeleteModal.css";
+import { useParams, useHistory } from "react-router-dom";
 
 const DeleteModal = ({ closeDeleteModal }) => {
-  return (
+    const { id } = useParams();
+    const history = useHistory();
+
+
+   const handleDeleteClick = () => {
+     console.log("you clicked the delete")
+      API.deleteTrip(id).then((response)=> {
+        console.log(response.data);
+        history.push(`/dashboard/${response.data._id}`);
+        
+      }).catch((err) => {
+        console.log(err);
+      });
+   };
+
+
+    return (
+  
     
       <>
         <div className="modal is-active fade-in-modal">
@@ -17,7 +36,7 @@ const DeleteModal = ({ closeDeleteModal }) => {
               ></button>
             </header>
             <footer className="modal-card-foot">
-              <button className="button is-primary">Delete</button>
+              <button onClick={handleDeleteClick} className="button is-primary">Delete</button>
               <button className="button" onClick={closeDeleteModal}>
                 Cancel
               </button>
