@@ -52,6 +52,7 @@ const Home = ({ setUserContext }) => {
         <video autoPlay loop muted>
           <source src={BeachVideo} type="video/mp4" />
         </video>
+        {/* <h1 className="title hero-title has-text-centered is-size-1">Welcome to Roam!</h1> */}
         <button
           className="button home-signup-button is-primary mr-4 is-size-4"
           onClick={toggleSignUpModal}

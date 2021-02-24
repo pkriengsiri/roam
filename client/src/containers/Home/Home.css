@@ -18,15 +18,25 @@ video {
   display: block;
   position: relative;
   width: 100%;
+  max-height: 700px;
+  object-fit: cover;
 }
 
 .hero-section {
   position: relative;
 }
 
+.hero-title {
+  color: white;
+  position: absolute;
+  top: 40%;
+  left: 0;
+  right: 0;
+}
+
 .home-signup-button {
   position: absolute;
-  left: 40%;
+  left: 43%;
   top: 50%;
 }
 
@@ -36,31 +46,50 @@ video {
   top: 50%;
 }
 
-/* These rules take effect when the browser's width is 868px or less */
+/* These rules take effect when the browser's width is 1770px or less */
+
+@media screen and (max-width: 1770px) {
+  .home-signup-button {
+    position: absolute;
+    left: 40%;
+    top: 50%;
+  }
+  .home-login-button {
+    position: absolute;
+    left: 53%;
+    top: 50%;
+  }
+}
+
+/* These rules take effect when the browser's width is 1200px or less */
+
 @media screen and (max-width: 1200px) {
-    .home-signup-button {
-        position: absolute;
-        left: 30%;
-        top: 50%
-    }
-    .home-login-button {
-        position: absolute;
-        left: 55%;
-        top: 50%
-    }
+  .home-signup-button {
+    position: absolute;
+    left: 35%;
+    top: 50%;
+  }
+  .home-login-button {
+    position: absolute;
+    left: 55%;
+    top: 50%;
+  }
 }
 
 /* These rules take effect when the browser's width is 620px or less */
 
 @media screen and (max-width: 620px) {
-    .home-signup-button {
-        position: absolute;
-        left: 20%;
-        top: 50%
-    }
-    .home-login-button {
-        position: absolute;
-        left: 50%;
-        top: 50%
-    }
+  .hero-title {
+    top: 30%;
+  }
+  .home-signup-button {
+    position: absolute;
+    left: 20%;
+    top: 50%;
+  }
+  .home-login-button {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+  }
 }
