@@ -5,14 +5,14 @@ const API = {
   getUsers: function () {
     return axios.get("/api/users");
   },
-  createUser: function () {
-    return axios.post("/api/users");
+  createUser: function (userData) {
+    return axios.post("/api/users",userData);
   },
   getUser: function (id) {
     return axios.get(`/api/users/${id}`);
   },
-  editUser: function (id) {
-    return axios.put(`/api/users/${id}`);
+  editUser: function (id,userData) {
+    return axios.put(`/api/users/${id}`,userData);
   },
   deleteUser: function (id) {
     return axios.delete(`/api/users/${id}`);
@@ -21,14 +21,14 @@ const API = {
   getTrips: function () {
     return axios.get("/api/trips");
   },
-  createTrip: function () {
-    return axios.post("/api/trips");
+  createTrip: function (tripData) {
+    return axios.post("/api/trips",tripData);
   },
   getTrip: function (id) {
     return axios.get(`/api/trips/${id}`);
   },
-  editTrip: function (id) {
-    return axios.put(`/api/trips/${id}`);
+  editTrip: function (id,tripData) {
+    return axios.put(`/api/trips/${id}`,tripData);
   },
   deleteTrip: function (id) {
     return axios.delete(`/api/trips/${id}`);
