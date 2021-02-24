@@ -3,12 +3,23 @@ import "./EditUser.css";
 import axios from "axios";
 import {useParams } from "react-router-dom";
 
+
 const EditUser = () => {
+const { id } = useParams();
 
 const [firstName, setFirstName] = useState("");
 const [lastName, setLastName] = useState("");
 const [email, setEmail] = useState("");
 const [password, setPassword] = useState("");
+
+const handleFormSubmit = (e) => {
+  e.preventDefault();
+  axios.put(`/api/users/${id}`, {firstName, lastName, email, password}).then((response)=> {
+    console.log(response);
+  }).catch((err)=> {
+    console.log(err);
+  });
+};
 
   return (
     <div className="container">
@@ -19,7 +30,7 @@ const [password, setPassword] = useState("");
           <figure className="image is-128x128">
             <img
               className="is-rounded"
-              src="https://bulma.io/images/placeholders/128x128.png"
+              src="https://placekitten.com/128/128"
             />
           </figure>
           <p>Edit your picture</p>
@@ -83,7 +94,7 @@ const [password, setPassword] = useState("");
         </div>
       </div>
       <div className="column has-text-centered">
-      <button className="button is-primary mr-4 is-size-4">Create Trip</button></div>
+      <button className="button is-primary mr-4 is-size-4">Update</button></div>
     </div>
   );
 };
