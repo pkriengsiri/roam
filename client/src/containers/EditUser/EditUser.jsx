@@ -11,6 +11,14 @@ const EditUser = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
+  useEffect(() => {
+    if (id) {
+      API.getUser(id).then((response)=> {
+        console.log(response);
+      })
+    }
+  }, []);
+
   const handleFormSubmit = (e) => {
     e.preventDefault();
     API.editUser(id, {
@@ -26,6 +34,8 @@ const EditUser = () => {
         console.log(err);
       });
   };
+
+  
 
   return (
     <div className="container">
