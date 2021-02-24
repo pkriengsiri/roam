@@ -2,7 +2,7 @@ import React from "react";
 
 const UserContext = React.createContext({
     email: "",
-    id: ""
+    userId: ""
 });
 
 export default UserContext;

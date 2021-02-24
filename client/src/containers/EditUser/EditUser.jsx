@@ -1,10 +1,13 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useContext } from "react";
 import "./EditUser.css";
 import API from "../../utils/API";
 import { useParams, useHistory } from "react-router-dom";
+import UserContext from "../../contexts/UserContext";
 
 const EditUser = () => {
+  const {userId} = useContext(UserContext);
   const { id } = useParams();
+
 
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");

@@ -4,6 +4,16 @@ import TripCard from "../../components/TripCard/TripCard";
 
 
 const Dashboard = () => {
+
+  const {userId} = useParams();
+  const {id} = useContext(UserContext);
+
+  useEffect(() => {
+    if(userId === id){
+      axios.get(`/api/trips/?userId=${userId}`)
+    }
+     
+  }, [])
   return (
 
     <div className="container has-text-centered">
