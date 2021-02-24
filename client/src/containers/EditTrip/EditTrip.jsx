@@ -1,7 +1,7 @@
 import React, { useEffect, useParams } from "react";
-import axios from "axios"
 import Calendar from "../../components/Calendar/Calendar";
 import "./EditTrip.css";
+import API from "../../utils/API";
 
 const EditTrip = () => {
   // Make API request to prepopulate the data below
@@ -12,6 +12,7 @@ const EditTrip = () => {
   //     console.log(err)
   //   })
   // }, [])
+
   return (
     <div className="container">
       <div className="columns is-centered">
@@ -74,7 +75,9 @@ const EditTrip = () => {
           {/* Save button */}
           <div className="field is-grouped">
             <div className="control">
-              <button className="button is-primary">Save</button>
+              <button className="button is-primary">
+                Save
+              </button>
             </div>
           </div>
         </div>
