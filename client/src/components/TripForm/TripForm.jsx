@@ -74,34 +74,44 @@ const TripForm = (props) => {
             inline
           />
         </div>
-        </form>
-        {/* invite travelers section  */}
+      </form>
 
-        <form className="invite" onSubmit={addTraveler}>
-          <label className="label">Invite Others!</label>
-          <div className="columns is-vcentered">
-            <div className="column is-two-thirds">
-              <div className="field">
-                <div className="control">
-                  <input
-                    className="input"
-                    type="text"
-                    placeholder="User email"
-                    name="traveler"
-                    value={traveler}
-                    onChange={(e) => setTraveler(e.target.value)}
-                  />
-                </div>
+      {/* List of travelers */}
+      <div className="mb-5">
+        <label className="label">Travel Companions</label>
+        <ul>
+          <li>Pete</li>
+          <li>Tony</li>
+          <li>Molly</li>
+          <li>Jeana Rose</li>
+        </ul>
+      </div>
+
+      {/* invite travelers section  */}
+
+      <form className="invite" onSubmit={addTraveler}>
+        <label className="label">Invite Others!</label>
+        <div className="columns is-vcentered">
+          <div className="column is-two-thirds">
+            <div className="field">
+              <div className="control">
+                <input
+                  className="input"
+                  type="text"
+                  placeholder="User email"
+                  name="traveler"
+                  value={traveler}
+                  onChange={(e) => setTraveler(e.target.value)}
+                />
               </div>
             </div>
-            <div className="column is-one-third pl-0">
-              <button type="submit" className="">
-                <i className="fas fa-plus fa-lg"></i>
-              </button>
-            </div>
           </div>
-
-
+          <div className="column is-one-third pl-0">
+            <button type="submit" className="">
+              <i className="fas fa-plus fa-lg"></i>
+            </button>
+          </div>
+        </div>
 
         {/* Save button */}
         <div className="field is-grouped">
@@ -116,7 +126,8 @@ const TripForm = (props) => {
                   travelStartDate,
                   travelEndDate,
                   travelers,
-                })}
+                })
+              }
             >
               Add Trip
             </button>
