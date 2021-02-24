@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import "./EditUser.css";
 import API from "../../utils/API";
-import { useParams } from "react-router-dom";
+import { useParams, useHistory } from "react-router-dom";
 
 const EditUser = () => {
   const { id } = useParams();
@@ -15,6 +15,8 @@ const EditUser = () => {
     if (id) {
       API.getUser(id).then((response)=> {
         console.log(response);
+      }).catch((err)=> {
+        console.log(err);
       })
     }
   }, []);
