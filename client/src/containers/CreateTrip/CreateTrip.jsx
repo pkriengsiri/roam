@@ -1,6 +1,6 @@
 import React from "react";
 
-import "react-datepicker/dist/react-datepicker.css";
+
 import API from "../../utils/API";
 import "./CreateTrip.css";
 import TripForm from "../../components/TripForm/TripForm";

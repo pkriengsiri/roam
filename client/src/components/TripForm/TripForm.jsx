@@ -2,7 +2,7 @@ import React, { useState } from "react";
 
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
-import API from "../../utils/API";
+
 import "./TripForm.css";
 
 const TripForm = (props) => {
@@ -111,7 +111,7 @@ const TripForm = (props) => {
               type="submit"
               onClick={(e) =>
                 props.handleFormSubmit(e, {
-                  tripCreator: "logged in user",
+                  tripCreator: "context logged in user",
                   destination,
                   travelStartDate,
                   travelEndDate,
