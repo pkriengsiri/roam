@@ -2,14 +2,14 @@ import React, { useEffect, useState} from "react";
 import "./EditUser.css";
 import axios from "axios";
 import {useParams } from "react-router-dom";
-import { useEffect } from "react";
+
+const EditUser = () => {
 
 const [firstName, setFirstName] = useState("");
 const [lastName, setLastName] = useState("");
 const [email, setEmail] = useState("");
 const [password, setPassword] = useState("");
 
-const EditUser = () => {
   return (
     <div className="container">
       <h1 className="title has-text-centered">Edit Account</h1>
@@ -71,7 +71,7 @@ const EditUser = () => {
               <input
                 className="input"
                 type="password"
-                placeholder="e.g. alexsmith@gmail.com"
+                placeholder="123"
                 value={password}
                 onChange={(e)=> setPassword(e.target.value)}
               />
