@@ -10,7 +10,9 @@ const SignUpModal = ({ closeSignUpModal }) => {
     if (!email || !password) {
       // TODO: add alert component
       console.log("error");
+      document.getElementById("signup-error").classList.remove("is-hidden");
     } else {
+      document.getElementById("signup-error").classList.add("is-hidden");
       API.createUser({
         email: email,
         password: password,
@@ -64,10 +66,15 @@ const SignUpModal = ({ closeSignUpModal }) => {
                   setPassword(e.target.value);
                 }}
               />
-              <footer className="modal-card-foot">
+              <input type="submit" className="is-hidden" />
+              <p id="signup-error" class="mt-2 ml-2 is-hidden">Please complete both fields before submitting</p>
+              
+            </form>
+            
+          </section>
+          <footer className="modal-card-foot">
                 <button
                   className="button is-primary"
-                  type="submit"
                   onClick={handleSubmit}
                 >
                   Sign Up
@@ -76,8 +83,6 @@ const SignUpModal = ({ closeSignUpModal }) => {
                   Cancel
                 </button>
               </footer>
-            </form>
-          </section>
         </div>
       </div>
     </>
