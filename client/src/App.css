@@ -7,17 +7,13 @@
     min-height: 100vh;
 } */
 
+.App {
+  display: flex;
+  min-height: 100vh;
+  flex-direction: column;
+}
 
-  
-  .App{
-    display: flex;
-    min-height: 100vh;
-    flex-direction: column;
-  }
-  
-  
-  .page{
-    flex: 1 0 auto;
-    width: 100%;
-    }
-  
+.page {
+  flex: 1 0 auto;
+  width: 100%;
+}
