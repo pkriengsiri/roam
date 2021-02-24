@@ -3,12 +3,76 @@
     background-size: cover;
 } */
 
- video {
-     position: absolute;
-     width: 100%;
-     left: 50%;
-     height: 100%;
-     object-fit: cover;
+/* video { */
+/* position: absolute; */
+/* width: 100%; */
+/* left: 50%;
+     height: 100%; */
+/* object-fit: cover;
      transform: translate(-50%, -50%);
-     z-index: -1;
- }
+     z-index: -1; */
+/* height: 100%; */
+/* } */
+
+video {
+  display: block;
+  position: relative;
+  width: 100%;
+}
+
+.hero-section {
+  position: relative;
+}
+
+.home-signup-button {
+  position: absolute;
+  left: 40%;
+  top: 50%;
+}
+
+.home-login-button {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+}
+
+/* TODO: Add media query for 1240px x 868px */
+/* These rules take effect when the browser's width is 868px or less */
+@media screen and (max-width: 1200px) {
+    .home-signup-button {
+        position: absolute;
+        left: 30%;
+        top: 50%
+    }
+    .home-login-button {
+        position: absolute;
+        left: 55%;
+        top: 50%
+    }
+}
+
+@media screen and (max-width: 620px) {
+    .home-signup-button {
+        position: absolute;
+        left: 20%;
+        top: 50%
+    }
+    .home-login-button {
+        position: absolute;
+        left: 50%;
+        top: 50%
+    }
+}
+/* 
+    These rules take effect when the browser's width 
+    is 991px or less
+ */
+/* 
+ @media screen and (max-width: 991px) {
+    .social-media {
+      padding-top: 1rem;
+    }
+    #last-social-media {
+      margin-right: -5px;
+    }
+  } */

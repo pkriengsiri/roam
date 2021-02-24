@@ -5,7 +5,7 @@ import SignUpModal from "../../components/SignUpModal/SignUpModal";
 import TestimonialCard from "../../components/TestimonialCard/TestimonialCard";
 import BeachVideo from "./Beach1.mp4";
 
-const Home = ({setUserContext}) => {
+const Home = ({ setUserContext }) => {
   const [loginModalState, setLoginModalState] = useState(false);
   const [signUpModalState, setSignUpModalState] = useState(false);
 
@@ -35,11 +35,20 @@ const Home = ({setUserContext}) => {
 
   return (
     <>
-      {loginModalState && <LoginModal closeLoginModal={closeLoginModal} setUserContext={setUserContext}/>}
-      {signUpModalState && <SignUpModal closeSignUpModal={closeSignUpModal} setUserContext={setUserContext} />}
+      {loginModalState && (
+        <LoginModal
+          closeLoginModal={closeLoginModal}
+          setUserContext={setUserContext}
+        />
+      )}
+      {signUpModalState && (
+        <SignUpModal
+          closeSignUpModal={closeSignUpModal}
+          setUserContext={setUserContext}
+        />
+      )}
 
-      {/* <div className="container"> */}
-      <section className="container-fluid mx-0 hero is-large has-text-centered">
+      {/* <section className="container-fluid mx-0 hero is-large has-text-centered">
         <div className="hero-body">
           <video autoPlay loop muted>
             <source src={BeachVideo} type="video/mp4" />
@@ -57,8 +66,25 @@ const Home = ({setUserContext}) => {
             Login
           </button>
         </div>
+      </section> */}
+
+      <section className="hero-section">
+        <video autoPlay loop muted>
+          <source src={BeachVideo} type="video/mp4" />
+        </video>
+        <button
+          className="button home-signup-button is-primary mr-4 is-size-4"
+          onClick={toggleSignUpModal}
+        >
+          Sign Up
+        </button>
+        <button
+          className="button home-login-button is-light ml-4 is-size-4"
+          onClick={toggleLoginModal}
+        >
+          Login
+        </button>
       </section>
-      {/* </div> */}
 
       <div className="container">
         <div className="columns mt-4">
