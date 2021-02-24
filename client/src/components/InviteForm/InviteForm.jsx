@@ -1,7 +1,7 @@
 import React from "react";
 import "./InviteForm.css";
 
-const InviteForm = () => {
+const InviteForm = ({travelers,handleInputChange}) => {
   return (
     <>
       <label className="label">Invite Others!</label>
