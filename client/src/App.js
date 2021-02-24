@@ -14,25 +14,33 @@ import "./App.css";
 import UserContext from "./contexts/UserContext";
 
 function App() {
-
+  const [userContext, setUserContext] = useState({
+    email: "",
+    id: "",
+  });
 
   return (
+    <UserContext.Provider value={userContext}>
     <div className="App">
       <Router>
         <NavBar />
         <main className="page">
-          <Switch>
-            <Route exact path="/" component={Home} />
-            <Route exact path="/dashboard/:id" component={Dashboard} />
-            <Route exact path="/user/:id/edit" component={EditUser} />
-            <Route exact path="/trips/new" component={CreateTrip} />
-            <Route exact path="/trip/:id" component={SingleTrip} />
-            <Route exact path="/trips/:id/edit" component={EditTrip} />
-          </Switch>
+
+            <Switch>
+              <Route exact path="/">
+                <Home setUserContext={setUserContext} />
+              </Route>
+              <Route exact path="/dashboard/:id" component={Dashboard} />
+              <Route exact path="/user/:id/edit" component={EditUser} />
+              <Route exact path="/trips/new" component={CreateTrip} />
+              <Route exact path="/trip/:id" component={SingleTrip} />
+              <Route exact path="/trips/:id/edit" component={EditTrip} />
+            </Switch>
         </main>
-      <Footer />
+        <Footer />
       </Router>
     </div>
+    </UserContext.Provider>
   );
 }
 
