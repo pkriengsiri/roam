@@ -5,33 +5,15 @@ import InviteForm from "../../components/InviteForm/InviteForm";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import API from "../../utils/API";
-import "./CreateTrip.css"
+import "./CreateTrip.css";
 
 const CreateTrip = () => {
-  //   const [tripFormInput, setTripFormInput] = useState({
-  //     destination: "",
-  //     startDate: "",
-  //     endDate: "",
-  //     travelers: [],
-  //   });
-
   const [destination, setDestination] = useState("");
   const [travelers, setTravelers] = useState([]);
   const [traveler, setTraveler] = useState("");
-  const [startDate, setStartDate] = useState(new Date());
-  const [endDate, setEndDate] = useState(null);
-
-  //   const handleInputChange = (e) => {
-  //     const { name, value } = e.target;
-  //     setTripFormInput({...tripFormInput,[name]:value});
-  //     console.log(tripFormInput.destination)
-  //   };
-
-  //   const handleInputChange = (e) => {
-  //     const { name, value } = e.target;
-  //     setTripFormInput({...tripFormInput,[name]:value});
-  //     console.log(tripFormInput.destination)
-  //   };
+  // TODO: Do we want travel start date initiated as today?
+  const [travelStartDate, setTravelStartDate] = useState(new Date());
+  const [travelEndDate, setTravelEndDate] = useState(null);
 
   const addTraveler = (e) => {
     e.preventDefault();
@@ -42,10 +24,27 @@ const CreateTrip = () => {
     // TODO: "Invite Sent" alert or message
   };
 
+  // set calendar dates
   const onChange = (dates) => {
     const [start, end] = dates;
-    setStartDate(start);
-    setEndDate(end);
+    setTravelStartDate(start);
+    setTravelEndDate(end);
+  };
+
+  // add trip button to send to server
+  const addTrip = () => {
+    API.createTrip({
+        TODO: // use context to set signed in user as tripCreator
+      tripCreator: "bill", //current user from context,
+      destination: destination,
+      travelStartDate: travelStartDate,
+      travelEndDate: travelEndDate,
+      travelers: travelers,
+    })
+      .then((res) => console.log(res.data))
+      // TODO: route back to user dashboard
+      .catch((err) => console.log(err));
+
   };
 
   return (
@@ -61,10 +60,10 @@ const CreateTrip = () => {
           <div className="mb-5">
             <label className="label">Dates</label>
             <DatePicker
-              selected={startDate}
+              selected={travelStartDate}
               onChange={onChange}
-              startDate={startDate}
-              endDate={endDate}
+              startDate={travelStartDate}
+              endDate={travelEndDate}
               selectsRange
               inline
             />
@@ -77,7 +76,9 @@ const CreateTrip = () => {
           {/* Save button */}
           <div className="field is-grouped">
             <div className="control">
-              <button className="button is-primary">Add Trip</button>
+              <button className="button is-primary" onClick={addTrip}>
+                Add Trip
+              </button>
             </div>
           </div>
         </div>
