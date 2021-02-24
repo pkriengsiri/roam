@@ -1,6 +1,6 @@
-// @use "../../sass/App.scss";
+/* // @use "../../sass/App.scss"; */
 
-// inherit font family from App.scss
+/* // inherit font family from App.scss */
 .react-datepicker {
   font-family: 'Lato', sans-serif;
 }
@@ -10,7 +10,7 @@
   background-color: #2E3560;
 }
 
-// inherit date picker colors from App.scss
+/* // inherit date picker colors from App.scss */
 .react-datepicker__day--selected,
 .react-datepicker__quarter-text--selected,
 .react-datepicker__quarter-text--selected,
@@ -21,7 +21,7 @@
   background-color: #2E3560;
 }
 
-// inherit date picker colors from App.scss
+/* // inherit date picker colors from App.scss */
 .react-datepicker__day--in-selecting-range,
 .react-datepicker__day--in-range,
 .react-datepicker__day--in-range,
@@ -42,4 +42,12 @@
 .react-datepicker__quarter-text--in-range:hover,
 .react-datepicker__year-text--in-range:hover {
   background-color: #2E3560;
+}
+
+
+.input{
+  background-color: white;
+}
+.fa-plus{
+  color: #33c1bf;
 }

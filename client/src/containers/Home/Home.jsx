@@ -5,7 +5,12 @@ import SignUpModal from "../../components/SignUpModal/SignUpModal";
 import TestimonialCard from "../../components/TestimonialCard/TestimonialCard";
 import BeachVideo from "./Beach1.mp4";
 
+<<<<<<< HEAD
 const Home = () => {
+=======
+
+const Home = ({setUserContext}) => {
+>>>>>>> aa394f372a588cb4006b81b16c75c174526533e5
   const [loginModalState, setLoginModalState] = useState(false);
   const [signUpModalState, setSignUpModalState] = useState(false);
 
@@ -35,8 +40,8 @@ const Home = () => {
 
   return (
     <>
-      {loginModalState && <LoginModal closeLoginModal={closeLoginModal} />}
-      {signUpModalState && <SignUpModal closeSignUpModal={closeSignUpModal} />}
+      {loginModalState && <LoginModal closeLoginModal={closeLoginModal} setUserContext={setUserContext}/>}
+      {signUpModalState && <SignUpModal closeSignUpModal={closeSignUpModal} setUserContext={setUserContext} />}
 
       {/* <div className="container"> */}
       <section className="container-fluid mx-0 hero is-large has-text-centered">

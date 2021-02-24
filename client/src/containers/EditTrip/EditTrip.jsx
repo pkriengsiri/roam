@@ -1,9 +1,8 @@
 import React, { useEffect, useParams } from "react";
-import Calendar from "../../components/Calendar/Calendar";
+
 import "./EditTrip.css";
 import API from "../../utils/API";
-import DestinationForm from "../../components/DestinationForm/DestinationForm";
-import InviteForm from "../../components/InviteForm/InviteForm";
+import TripForm from "../../components/TripForm/TripForm";
 
 const EditTrip = () => {
   // Make API request to prepopulate the data below
@@ -21,13 +20,7 @@ const EditTrip = () => {
         <div className="column is-half ">
           <h1 className="title">Edit Your Trip</h1>
 
-          <DestinationForm />
-
-          {/* Calendar with date range selector */}
-          <div className="mb-5">
-            <label className="label">Dates</label>
-            <Calendar />
-          </div>
+          <TripForm />
 
           {/* List of travelers */}
           <div className="mb-5">
@@ -38,15 +31,6 @@ const EditTrip = () => {
               <li>Molly</li>
               <li>Jeana Rose</li>
             </ul>
-          </div>
-
-          <InviteForm />
-
-          {/* Save button */}
-          <div className="field is-grouped">
-            <div className="control">
-              <button className="button is-primary">Save</button>
-            </div>
           </div>
         </div>
       </div>

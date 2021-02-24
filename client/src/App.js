@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import Axios from "axios";
 import "./sass/App.scss";
 import Home from "./containers/Home/Home";
@@ -11,35 +11,36 @@ import NavBar from "./components/Navbar/Navbar";
 import Footer from "./components/Footer/Footer";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import "./App.css";
+import UserContext from "./contexts/UserContext";
 
 function App() {
-  useEffect(() => {
-    Axios.get("/api/config")
-      .then((response) => {
-        console.log(response.data);
-      })
-      .catch((error) => {
-        console.log(error);
-      });
-  }, []);
+  const [userContext, setUserContext] = useState({
+    email: "",
+    id: "",
+  });
 
   return (
+    <UserContext.Provider value={userContext}>
     <div className="App">
       <Router>
         <NavBar />
         <main className="page">
-          <Switch>
-            <Route exact path="/" component={Home} />
-            <Route exact path="/dashboard/:id" component={Dashboard} />
-            <Route exact path="/user/:id/edit" component={EditUser} />
-            <Route exact path="/trips/new" component={CreateTrip} />
-            <Route exact path="/trip/:id" component={SingleTrip} />
-            <Route exact path="/trips/:id/edit" component={EditTrip} />
-          </Switch>
+
+            <Switch>
+              <Route exact path="/">
+                <Home setUserContext={setUserContext} />
+              </Route>
+              <Route exact path="/dashboard/:id" component={Dashboard} />
+              <Route exact path="/user/:id/edit" component={EditUser} />
+              <Route exact path="/trips/new" component={CreateTrip} />
+              <Route exact path="/trip/:id" component={SingleTrip} />
+              <Route exact path="/trips/:id/edit" component={EditTrip} />
+            </Switch>
         </main>
         <Footer />
       </Router>
     </div>
+    </UserContext.Provider>
   );
 }
 
