@@ -7,7 +7,22 @@ const SignUpModal = ({ closeSignUpModal }) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-  }
+    if (!email || !password) {
+      // TODO: add alert component
+      console.log("error");
+    } else {
+      API.createUser({
+        email: email,
+        password: password,
+      })
+        .then((response) => {
+          console.log(response);
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    }
+  };
 
   return (
     <>
@@ -22,38 +37,47 @@ const SignUpModal = ({ closeSignUpModal }) => {
               onClick={closeSignUpModal}
             ></button>
           </header>
+
           <section className="modal-card-body">
-            <strong>
-              <p>Email</p>
-            </strong>
-            <input
-              className="input"
-              type="text"
-              placeholder="Email"
-              value={email}
-              onChange={(e) => {
-                setEmail(e.target.value);
-              }}
-            />
-            <strong>
-              <p className="mt-4">Password</p>
-            </strong>
-            <input
-              className="input"
-              type="password"
-              placeholder="Password"
-              value={password}
-              onChange={(e) => {
-                setPassword(e.target.value);
-              }}
-            />
+            <form className="control">
+              <strong>
+                <p>Email</p>
+              </strong>
+              <input
+                className="control input"
+                type="text"
+                placeholder="Email"
+                value={email}
+                onChange={(e) => {
+                  setEmail(e.target.value);
+                }}
+              />
+              <strong>
+                <p className="mt-4">Password</p>
+              </strong>
+              <input
+                className="input"
+                type="password"
+                placeholder="Password"
+                value={password}
+                onChange={(e) => {
+                  setPassword(e.target.value);
+                }}
+              />
+              <footer className="modal-card-foot">
+                <button
+                  className="button is-primary"
+                  type="submit"
+                  onClick={handleSubmit}
+                >
+                  Sign Up
+                </button>
+                <button className="button" onClick={closeSignUpModal}>
+                  Cancel
+                </button>
+              </footer>
+            </form>
           </section>
-          <footer className="modal-card-foot">
-            <button className="button is-primary">Sign Up</button>
-            <button className="button" onClick={closeSignUpModal}>
-              Cancel
-            </button>
-          </footer>
         </div>
       </div>
     </>
