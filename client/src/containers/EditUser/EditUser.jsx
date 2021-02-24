@@ -44,7 +44,7 @@ const EditUser = () => {
   };
 
   
-
+// NEED TO UPDATE THE IMAGE WITH EDIT FUNCTIONALITY 
   return (
     <div className="container">
       <h1 className="title has-text-centered">Edit Account</h1>
