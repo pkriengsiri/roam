@@ -5,6 +5,7 @@ import { useParams, useHistory } from "react-router-dom";
 
 const EditUser = () => {
   const { id } = useParams();
+  const history = useHistory();
 
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
@@ -35,7 +36,7 @@ const EditUser = () => {
     })
       .then((response) => {
         console.log(response);
-        // history.push(`/dashboard/${id}`);
+        history.push(`/dashboard/${id}`);
       })
       .catch((err) => {
         console.log(err);
