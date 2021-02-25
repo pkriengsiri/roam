@@ -21,23 +21,12 @@ module.exports = {
   //     .catch((err) => res.status(422).json(err));
   // },
   create: async function (req, res) {
-     const requestObject = await addTravelerIdByEmail(req.body)
+    const requestObject = await addTravelerIdByEmail(req.body);
 
     // create trip id
     db.Trip.create(requestObject)
       .then((dbTrip) => {
-        dbTrip.travelers
-          // filter to only travelers with a trip id
-          .filter((traveler) => traveler.travelerId !== "")
-          // update each traveler's trips
-          .forEach((traveler) => {
-   
-            db.User.findByIdAndUpdate(traveler.travelerId, {
-              $push: { trips: dbTrip._id },
-            })
-              .then((res) => console.log(traveler.travelerId))
-              .catch((err) => console.log(err));
-          });
+        addTripToTravelers(dbTrip);
       })
       .then((dbTrip) => {
         res.json(dbTrip);
@@ -61,32 +50,45 @@ module.exports = {
   },
 };
 
+const addTravelerIdByEmail = async (requestObject) => {
+  //   // tripCreator from req.body is validated by database with the schema type?
+  //   // make new object to hold request
 
-const addTravelerIdByEmail = async (requestObject) =>{
-    //   // tripCreator from req.body is validated by database with the schema type?
-    //   // make new object to hold request
-    let requestObject = requestObject;
-    let updatedArray = [];
-    //   // // loop over travelers to check if they have an account
-    for (let i = 0; i < requestObject.travelers.length; i++) {
-      requestObject.travelers[i].travelerEmail.toLowerCase();
-      await db.User.findOne({ email: requestObject.travelers[i].travelerEmail })
-        .then((dbTraveler) => {
-          // if user found add to updated Travelers array
+  let updatedArray = [];
+  //   // // loop over travelers to check if they have an account
+  for (let i = 0; i < requestObject.travelers.length; i++) {
+    requestObject.travelers[i].travelerEmail.toLowerCase();
+    await db.User.findOne({ email: requestObject.travelers[i].travelerEmail })
+      .then((dbTraveler) => {
+        // if user found add to updated Travelers array
 
-          if (dbTraveler) {
-            updatedArray.push({
-              travelerEmail: dbTraveler.email,
-              travelerId: dbTraveler._id,
-              status: "Going",
-            });
-          } else {
-            updatedArray.push(requestObject.travelers[i]);
-          }
-        })
-        .catch((err) => console.log(err));
-    }
-    // update request object with array with user id's
-    requestObject.travelers = updatedArray;
+        if (dbTraveler) {
+          updatedArray.push({
+            travelerEmail: dbTraveler.email,
+            travelerId: dbTraveler._id,
+            status: "Going",
+          });
+        } else {
+          updatedArray.push(requestObject.travelers[i]);
+        }
+      })
+      .catch((err) => console.log(err));
+  }
+  // update request object with array with user id's
+  requestObject.travelers = updatedArray;
   return requestObject;
-}
+};
+
+const addTripToTravelers = async (dbObject) => {
+  await dbObject.travelers
+    // filter to only travelers with a trip id
+    .filter((traveler) => traveler.travelerId !== "")
+    // update each traveler's trips
+    .forEach((traveler) => {
+      db.User.findByIdAndUpdate(traveler.travelerId, {
+        $push: { trips: dbObject._id },
+      })
+        .then((res) => console.log(res))
+        .catch((err) => console.log(err));
+    });
+};
