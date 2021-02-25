@@ -1,8 +1,17 @@
-import React from "react";
+import React, { useContext} from "react";
 import { Link } from "react-router-dom";
 import "./TripCard.css";
+import UserContext from "../../contexts/UserContext";
 
 const TripCard = ({ destination, startDate, endDate, travelers, _id }) => {
+
+
+
+  const {id} = useContext(UserContext);
+
+
+
+
   return (
     <div className="columns is-centered">
       <div className="column is-5">
@@ -12,15 +21,15 @@ const TripCard = ({ destination, startDate, endDate, travelers, _id }) => {
               <div className="media-content">
                 <div className="columns">
                   <div className="column is-9">
-                    <Link to={`/trip/${_id}`}>
+                    <Link to={`/user/${id}/trips/${_id}`}>
                       <p className="destination title">{destination} </p>
                     </Link>
                   </div>
                   <div className="column is-3 has-text-right">
-                    <Link to={`/trip/${_id}`}>
+                    <Link to={`/user/${id}/trips/${_id}`}>
                       <i className="icon fas fa-eye"></i>
                     </Link>
-                    <Link to={`/trips/${_id}/edit`}>
+                    <Link to={`/user/${id}/trips/${_id}/edit`}>
                       <i className="icon far fa-edit m-1"></i>
                     </Link>
                   </div>
