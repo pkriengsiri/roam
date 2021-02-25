@@ -14,6 +14,7 @@ const CreateTrip = () => {
   const handleFormSubmit = (e, formObject) => {
     e.preventDefault();
     console.log("submit form");
+    console.log(formObject);
     API.createTrip(formObject)
       //TODO: // use context to set signed in user as tripCreator
 
@@ -31,8 +32,7 @@ const CreateTrip = () => {
       <div className="columns is-centered">
         <div className="column is-half ">
           <h1 className="title">Create a Trip</h1>
-
-          <TripForm tripCreator={email} buttonText="Add Trip" handleFormSubmit={handleFormSubmit} />
+          <TripForm tripCreatorId={_id} tripCreatorEmail={email} buttonText="Add Trip" handleFormSubmit={handleFormSubmit} />
         </div>
       </div>
     </div>

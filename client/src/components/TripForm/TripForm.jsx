@@ -7,12 +7,18 @@ import axios from "axios";
 
 const TripForm = (props) => {
   // state for form object
-  const [tripCreator, setTripCreator] = useState(props.tripCreator);
+  const [tripCreator, setTripCreator] = useState(props.tripCreatorId);
   const [destination, setDestination] = useState("");
   // TODO: Do we want travel start date initiated as today?
   const [startDate, setStartDate] = useState(new Date());
   const [endDate, setEndDate] = useState(null);
-  const [travelers, setTravelers] = useState([props.tripCreator]);
+  const [travelers, setTravelers] = useState([
+    {
+      travelerId: props.tripCreator,
+      travelerEmail: props.tripCreatorEmail,
+      status: "Going",
+    },
+  ]);
 
   // state to add traveler to travelers list state
   const [traveler, setTraveler] = useState("");
@@ -20,6 +26,7 @@ const TripForm = (props) => {
 
   // browser params
   const { tripId } = useParams();
+  const { userId } = useParams();
 
   useEffect(() => {
     if (tripId) {
@@ -46,7 +53,7 @@ const TripForm = (props) => {
     if (validateEmail(e.target.traveler.value)) {
       setValidEmailPromptState(false);
       const newInvite = e.target.traveler.value;
-      setTravelers([...travelers, newInvite]);
+      setTravelers([...travelers, {travelerEmail:newInvite,travelerId:"",status:"pending"}]);
       setTraveler("");
     } else {
       setValidEmailPromptState(true);
@@ -64,7 +71,6 @@ const TripForm = (props) => {
   // validates an email address
   const validateEmail = (email) => {
     const re = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-    console.log(re.test(email));
     return re.test(email);
   };
 
@@ -119,9 +125,8 @@ const TripForm = (props) => {
       <div className="mb-5">
         <label className="label">Travel Companions</label>
         <ul>
-          {/* TODO: Populate travelers form travlers array and add keys */}
           {travelers.map((traveler, index) => (
-            <li key={index}>{traveler}</li>
+            <li key={index}>{`${traveler.travelerEmail} (${traveler.status})`}</li>
           ))}
         </ul>
       </div>
@@ -166,7 +171,7 @@ const TripForm = (props) => {
               type="submit"
               onClick={(e) =>
                 props.handleFormSubmit(e, {
-                  tripCreator: props.tripCreator,
+                  tripCreator,
                   destination,
                   startDate,
                   endDate,
