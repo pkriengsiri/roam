@@ -68,6 +68,9 @@ const Navbar = ({ setUserContext }) => {
           <div id="navbarBasicExample" className="navbar-menu">
             <div className="navbar-end">
               <div className="navbar-item">
+                {/* <Link to={`/user/${userId}/edit`}>
+                  <i className="fas fa-user-circle fa-2x"></i>
+                </Link> */}
                 <Link to={`/user/${userId}/trips`} className="navbar-item">
                   Dashboard
                 </Link>
@@ -78,8 +81,22 @@ const Navbar = ({ setUserContext }) => {
                   Logout
                 </a>
               </div>
+
+              {/* <div className="navbar-item has-dropdown is-hoverable">
+                <a className="navbar-link">More</a>
+
+                <div className="navbar-dropdown">
+                  <a className="navbar-item">About</a>
+                  <a className="navbar-item">Jobs</a>
+                  <a className="navbar-item">Contact</a>
+                  <hr className="navbar-divider"/>
+                  <a className="navbar-item">Report an issue</a>
+                    
+                  </div>
+                </div> */}
+              </div>
             </div>
-          </div>
+          
         )}
         {!userId && (
           <div className="navbar-end">
