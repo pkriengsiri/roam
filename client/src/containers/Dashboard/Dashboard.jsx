@@ -5,7 +5,7 @@ import API from "../../utils/API";
 import { Link, useParams } from "react-router-dom";
 
 const Dashboard = () => {
-  const { id } = useParams();
+  const { userId } = useParams();
   const [trips, setTrips] = useState([]);
   const [currentUser, setCurrentUser] = useState("");
 
@@ -18,7 +18,7 @@ const Dashboard = () => {
         console.log(err);
       });
 
-    API.getUser(id)
+    API.getUser(userId)
       .then((response) => {
         if (!response.data.firstName) {
           setCurrentUser(`Welcome!`);
@@ -45,7 +45,7 @@ const Dashboard = () => {
         <TripCard {...trip} key={trip._id} />
       ))}
 
-      <Link to={`/trips/new`} className="button is-primary mr-4 is-size-4">
+      <Link to={`/user/${userId}/trips/new`} className="button is-primary mr-4 is-size-4">
         Create Trip
       </Link>
     </div>

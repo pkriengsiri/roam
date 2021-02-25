@@ -15,8 +15,13 @@ const TripForm = (props) => {
 
   // state to add traveler to travelers list state
   const [traveler, setTraveler] = useState("");
+<<<<<<< HEAD
   const [validEmailPromptState, setValidEmailPromptState] = useState(false);
   const { id } = useParams();
+=======
+  const [travelers, setTravelers] = useState([]);
+  const { tripId } = useParams();
+>>>>>>> 61a6d2241b44380057abcc568604798eb3b3deda
   // TODO: Do we want travel start date initiated as today?
 
   useEffect(() => {
@@ -59,12 +64,33 @@ const TripForm = (props) => {
     setEndDate(end);
   };
 
+<<<<<<< HEAD
   // validates an email address
   const validateEmail = (email) => {
     const re = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
     console.log(re.test(email));
     return re.test(email);
   };
+=======
+  useEffect(() => {
+    if (tripId) {
+    axios
+      .get(`/api/trips/${tripId}`)
+      .then((response) => {
+        console.log(response.data);
+        const responseStartDate = new Date(response.data.startDate);
+        const responseEndDate = new Date(response.data.endDate);
+        setDestination(response.data.destination);
+        setStartDate(responseStartDate);
+        setEndDate(responseEndDate);
+        setTravelers(response.data.travelers);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+    }
+  }, [tripId]);
+>>>>>>> 61a6d2241b44380057abcc568604798eb3b3deda
 
   return (
     <>
