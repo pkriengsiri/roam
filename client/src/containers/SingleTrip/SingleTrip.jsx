@@ -20,7 +20,7 @@ const SingleTrip = () => {
     if (tripId) {
       API.getTrip(tripId)
         .then((response) => {
-          console.log(response.data);
+          // console.log(response.data);
           setDestination(response.data.destination);
           const responseStartDate = new Date(response.data.startDate);
           const responseEndDate = new Date(response.data.endDate);

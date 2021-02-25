@@ -7,10 +7,10 @@ const DeleteModal = ({ closeDeleteModal, userId, tripId }) => {
   const history = useHistory();
 
   const handleDeleteClick = () => {
-    console.log("you clicked the delete");
+
     API.deleteTrip(tripId)
       .then((response) => {
-        console.log(response.data);
+
         history.push(`/user/${userId}/trips`);
       })
       .catch((err) => {
