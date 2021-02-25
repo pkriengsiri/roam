@@ -33,7 +33,7 @@ const TripForm = (props) => {
       axios
         .get(`/api/trips/${tripId}`)
         .then((response) => {
-          console.log(response.data);
+
           const responseStartDate = new Date(response.data.startDate);
           const responseEndDate = new Date(response.data.endDate);
           setDestination(response.data.destination);

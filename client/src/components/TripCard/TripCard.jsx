@@ -3,14 +3,14 @@ import { Link,useParams } from "react-router-dom";
 import "./TripCard.css";
 import UserContext from "../../contexts/UserContext";
 
-const TripCard = ({ destination, startDate, endDate, travelers, _id }) => {
+const TripCard = ({ destination, startDate, endDate, travelers, tripId }) => {
 
 
 
   const {id} = useContext(UserContext);
 
     // browser params
-    const { tripId } = useParams();
+    // const { tripId } = useParams();
     const { userId } = useParams();
 
 
@@ -25,15 +25,15 @@ const TripCard = ({ destination, startDate, endDate, travelers, _id }) => {
               <div className="media-content">
                 <div className="columns">
                   <div className="column is-9">
-                    <Link to={`/user/${id}/trips/${_id}`}>
+                    <Link to={`/user/${userId}/trips/${tripId}`}>
                       <p className="destination title">{destination} </p>
                     </Link>
                   </div>
                   <div className="column is-3 has-text-right">
-                    <Link to={`/user/${userId}/trips/${_id}`}>
+                    <Link to={`/user/${userId}/trips/${tripId}`}>
                       <i className="icon fas fa-eye"></i>
                     </Link>
-                    <Link to={`/user/${userId}/trips/${_id}/edit`}>
+                    <Link to={`/user/${userId}/trips/${tripId}/edit`}>
                       <i className="icon far fa-edit m-1"></i>
                     </Link>
                   </div>
