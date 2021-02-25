@@ -125,8 +125,8 @@ const EditUser = () => {
                 </button>
               </div>
               <div className="column is-3">
-                <Link to={`/user/${userId}/trips`}>
-                  <a className="skip-link">Skip this Step</a>
+                <Link to={`/user/${userId}/trips`} className="skip-link">
+                 Skip this Step
                 </Link>
               </div>
             </div>
