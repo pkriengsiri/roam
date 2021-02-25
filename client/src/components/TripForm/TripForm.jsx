@@ -142,7 +142,7 @@ const TripForm = (props) => {
               type="submit"
               onClick={(e) =>
                 props.handleFormSubmit(e, {
-                  tripCreator: "context logged in user",
+                  tripCreator: props.tripCreator,
                   destination,
                   startDate,
                   endDate,
