@@ -35,7 +35,7 @@ const LoginModal = ({ closeLoginModal, setUserContext }) => {
               } else {
                 console.log(data);
                 setUserContext({ userId: data._id });
-                history.push(`/user/${data._id}/edit`);
+                history.push(`/user/${data._id}/trips`);
               }
             }
           );
