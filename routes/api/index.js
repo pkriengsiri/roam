@@ -7,7 +7,7 @@ const authRoutes = require("./auth");
 // Use routes
 router.use("/trips", tripRoutes);
 router.use("/users", userRoutes);
-route.use("/auth", authRoutes);
+router.use("/auth", authRoutes);
 
 // Export
 module.exports = router;
