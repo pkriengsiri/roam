@@ -18,7 +18,7 @@ const tripSchema = new Schema({
   },
   travelers: [
     {
-      travelerEmail: { type: String, required: true,trim:true },
+      travelerEmail: { type: String,trim:true },
       status: { type: String ,trim:true},
       // travelerId: { type: Schema.Types.ObjectId, ref: "User" },
       travelerId: { type: String,trim:true },

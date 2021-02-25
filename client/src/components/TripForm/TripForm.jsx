@@ -14,9 +14,9 @@ const TripForm = (props) => {
   const [endDate, setEndDate] = useState(null);
   const [travelers, setTravelers] = useState([
     {
-      travelerId: props.tripCreator,
+      travelerId: props.tripCreatorId,
       travelerEmail: props.tripCreatorEmail,
-      status: "Going",
+      status: "Creator",
     },
   ]);
 
