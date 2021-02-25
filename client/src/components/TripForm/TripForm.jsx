@@ -49,7 +49,7 @@ const TripForm = (props) => {
   // add traveler to the travelers list
   const addTraveler = (e) => {
     e.preventDefault();
-    console.log(travelers)
+    console.log(travelers);
     if (validateEmail(e.target.traveler.value)) {
       setValidEmailPromptState(false);
       const newInvite = e.target.traveler.value.toLowerCase();
@@ -159,18 +159,12 @@ const TripForm = (props) => {
             <p className="travelers" key={index}>
               <span className="travelers-tag p-2 mr-2">
                 {`${traveler.travelerEmail} `}
-                {traveler.status === "You" && (
-                  <span className="">
-                    {traveler.status}
-                  </span>
-                )}
+                {traveler.status === "You" && <span>{traveler.status}</span>}
                 {traveler.status !== "You" && (
-                  <span className="">
+                  <span>
                     <em>{traveler.status}</em>
                   </span>
                 )}
-
-                {/* {travelers.status !== "You" && <em>{traveler.status}</em>} */}
               </span>
             </p>
           ))}
