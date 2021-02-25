@@ -21,25 +21,45 @@ function App() {
 
   return (
     <UserContext.Provider value={userContext}>
-    <div className="App">
-      <Router>
-        <NavBar />
-        <main className="page">
-
+      <div className="App">
+        <Router>
+          <NavBar />
+          <main className="page">
             <Switch>
-              <Route exact path="/">
+              {/* <Route exact path="/">
                 <Home setUserContext={setUserContext} />
               </Route>
               <Route exact path="/dashboard/:id" component={Dashboard} />
               <Route exact path="/user/:id/edit" component={EditUser} />
               <Route exact path="/trips/new" component={CreateTrip} />
               <Route exact path="/trip/:id" component={SingleTrip} />
-              <Route exact path="/trips/:id/edit" component={EditTrip} />
+              <Route exact path="/trips/:id/edit" component={EditTrip} /> */}
+              <Route exact path="/">
+                <Home setUserContext={setUserContext} />
+              </Route>
+              {/* <Route exact path="/user/:userId" component={Dashboard} /> */} 
+              <Route exact path="/user/:userId/trips" component={Dashboard} />
+              <Route exact path="/user/:userId/edit" component={EditUser} />
+              <Route
+                exact
+                path="/user/:userId/trips/new"
+                component={CreateTrip}
+              />
+              <Route
+                exact
+                path="/user/:userId/trips/:tripId"
+                component={SingleTrip}
+              />
+              <Route
+                exact
+                path="/user/:userId/trips/:tripId/edit"
+                component={EditTrip}
+              />
             </Switch>
-        </main>
-        <Footer />
-      </Router>
-    </div>
+          </main>
+          <Footer />
+        </Router>
+      </div>
     </UserContext.Provider>
   );
 }
