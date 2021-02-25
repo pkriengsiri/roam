@@ -21,11 +21,10 @@ function App() {
 
   return (
     <UserContext.Provider value={userContext}>
-    <div className="App">
-      <Router>
-        <NavBar />
-        <main className="page">
-
+      <div className="App">
+        <Router>
+          <NavBar setUserContext={setUserContext} userContext={userContext}/>
+          <main className="page">
             <Switch>
               <Route exact path="/">
                 <Home setUserContext={setUserContext} />
@@ -36,10 +35,10 @@ function App() {
               <Route exact path="/trip/:id" component={SingleTrip} />
               <Route exact path="/trips/:id/edit" component={EditTrip} />
             </Switch>
-        </main>
-        <Footer />
-      </Router>
-    </div>
+          </main>
+          <Footer />
+        </Router>
+      </div>
     </UserContext.Provider>
   );
 }
