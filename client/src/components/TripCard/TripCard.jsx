@@ -1,4 +1,4 @@
-import React, { useContext , useParams} from "react";
+import React, { useContext} from "react";
 import { Link } from "react-router-dom";
 import UserContext from "../../contexts/UserContext";
 
@@ -13,6 +13,7 @@ const TripCard = ({
 
 
 
+
   return (
     <div className="columns is-centered">
       <div className="column is-5">
@@ -22,7 +23,7 @@ const TripCard = ({
               <div className="media-content">
                 <div className="columns">
                   <div className="column is-10">
-                    <p className="title">{destination} </p>
+                    <Link to={`/user/${id}/trips/${_id}`}><p className="title">{destination}</p></Link>
                   </div>
                   <div className="column is-2">
                     <Link to={`/user/${id}/trips/${_id}/edit`}>
