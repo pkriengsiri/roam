@@ -1,10 +1,21 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
+import { useParams } from "react-router-dom";
 
 // populate page with info from the database about a single trip
 
+
+
 const SingleTrip = () => {
+  const { id } = useParams();
+  const [destination, setDestination] = useState("");
+  const [startDate, setStartDate] = useState(new Date());
+  const [endDate, setEndDate] = useState(null);
+  const [traveler, setTraveler] = useState("");
+  const [travelers, setTravelers] = useState([]);
+
+
   return (
     <div className="container">
       <h1 className="title has-text-centered">Your Trip to Scotland!</h1>
