@@ -124,7 +124,7 @@ const TripForm = (props) => {
       </form>
 
       {/* List of travelers */}
-      <div className="mb-5">
+      {/* <div className="mb-5">
         <label className="label">Travel Companions</label>
         <ul>
           {travelers.map((traveler, index) => (
@@ -133,7 +133,7 @@ const TripForm = (props) => {
             >{`${traveler.travelerEmail} (${traveler.status})`}</li>
           ))}
         </ul>
-      </div>
+      </div> */}
 
       {/* invite travelers section  */}
 
@@ -165,6 +165,13 @@ const TripForm = (props) => {
             </button>
           </div>
         </div>
+        <div className="mb-5">
+          {travelers.map((traveler, index) => (
+            <p className="travelers" key={index}>
+              <span className="travelers-tag p-2 mr-2">{`${traveler.travelerEmail} (${traveler.status})`}</span>
+            </p>
+          ))}
+        </div>
 
         {/* Save button */}
         <div className="field is-grouped">
@@ -186,9 +193,7 @@ const TripForm = (props) => {
             </button>
 
             <Link to={`/user/${userId}/trips`}>
-              <button className="button  ml-4 cancel-button">
-                Cancel
-              </button>
+              <button className="button  ml-4 cancel-button">Cancel</button>
             </Link>
           </div>
         </div>
