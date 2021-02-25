@@ -14,12 +14,33 @@ const TripForm = (props) => {
   const { id } = useParams();
   // TODO: Do we want travel start date initiated as today?
 
+  useEffect(() => {
+    if (id) {
+      axios
+        .get(`/api/trips/${id}`)
+        .then((response) => {
+          console.log(response.data);
+          const responseStartDate = new Date(response.data.startDate);
+          const responseEndDate = new Date(response.data.endDate);
+          setDestination(response.data.destination);
+          setStartDate(responseStartDate);
+          setEndDate(responseEndDate);
+          setTravelers(response.data.travelers);
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    }
+  }, [id]);
+
+  // add traveler to the travelers list
   const addTraveler = (e) => {
     e.preventDefault();
-
-    const newInvite = e.target.traveler.value;
-    setTravelers([...travelers, newInvite]);
-    setTraveler("");
+    if (validateEmail(e.target.traveler.value)) {
+      const newInvite = e.target.traveler.value;
+      setTravelers([...travelers, newInvite]);
+      setTraveler("");
+    }
     // TODO: "Invite Sent" alert or message
   };
 
@@ -30,27 +51,17 @@ const TripForm = (props) => {
     setEndDate(end);
   };
 
-  useEffect(() => {
-    if (id) {
-    axios
-      .get(`/api/trips/${id}`)
-      .then((response) => {
-        console.log(response.data);
-        const responseStartDate = new Date(response.data.startDate);
-        const responseEndDate = new Date(response.data.endDate);
-        setDestination(response.data.destination);
-        setStartDate(responseStartDate);
-        setEndDate(responseEndDate);
-        setTravelers(response.data.travelers);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-    }
-  }, [id]);
+  // validates an email address
+  const validateEmail = (email) => {
+    const re = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+    console.log(re.test(email));
+    return re.test(email);
+  };
 
   return (
     <>
+      {/* {!validateEmail(email) && (<h1>Please Enter a valid Email address</h1>} */}
+
       <form
         className="trip-form"
         onSubmit={(e) =>
@@ -132,7 +143,7 @@ const TripForm = (props) => {
             </button>
           </div>
         </div>
-        
+
         {/* TODO: Make a PUT request on the click of the save button */}
         {/* Save button */}
         <div className="field is-grouped">
