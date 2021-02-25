@@ -83,7 +83,7 @@ const addTravelerIdByEmail = async (requestObject) => {
 
         if (dbTraveler) {
           updatedArray.push({
-            travelerEmail: dbTraveler.email,
+            travelerEmail: dbTraveler.email.toLowerCase(),
             travelerId: dbTraveler._id,
             status: "Going",
           });
@@ -108,7 +108,7 @@ const addTripToTravelers = async (dbObject) => {
       db.User.findByIdAndUpdate(traveler.travelerId, {
         $push: { trips: dbObject._id },
       })
-        .then((res) => console.log(res))
+        // .then((res) => console.log(res))
         .catch((err) => console.log(err));
     });
 };

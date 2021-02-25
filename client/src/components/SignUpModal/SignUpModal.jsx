@@ -18,8 +18,9 @@ const SignUpModal = ({ closeSignUpModal, setUserContext }) => {
       document.getElementById("signup-error").classList.remove("is-hidden");
     } else {
       document.getElementById("signup-error").classList.add("is-hidden");
+      let preStoreEmail = email;
       API.createUser({
-        email: email,
+        email: preStoreEmail.toLowerCase(),
         password: password,
       })
         .then((response) => {
@@ -64,8 +65,8 @@ const SignUpModal = ({ closeSignUpModal, setUserContext }) => {
               <strong>
                 <p>Email</p>
               </strong>
-              <div class="field">
-                <div class="control has-icons-left">
+              <div className="field">
+                <div className="control has-icons-left">
                   <input
                     className="input"
                     type="text"
@@ -83,8 +84,8 @@ const SignUpModal = ({ closeSignUpModal, setUserContext }) => {
               <strong>
                 <p className="mt-4">Password</p>
               </strong>
-              <div class="field">
-                <div class="control has-icons-left">
+              <div className="field">
+                <div className="control has-icons-left">
                   <input
                     className="input"
                     type="password"
@@ -95,7 +96,7 @@ const SignUpModal = ({ closeSignUpModal, setUserContext }) => {
                     }}
                   />
                   <span className="icon is-small is-left">
-                    <i class="fas fa-key"></i>
+                    <i className="fas fa-key"></i>
                   </span>
                 </div>
               </div>

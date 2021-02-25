@@ -29,10 +29,11 @@ const EditUser = () => {
 
   const handleFormSubmit = (e) => {
     e.preventDefault();
+    let preStoreEmail = email;
     API.editUser(userId, {
       firstName: firstName,
       lastName: lastName,
-      email: email,
+      email: preStoreEmail.toLowerCase(),
       password: password,
     })
       .then((response) => {
@@ -126,7 +127,7 @@ const EditUser = () => {
               </div>
               <div className="column is-3">
                 <Link to={`/user/${userId}/trips`} className="skip-link">
-                 Skip this Step
+                  Skip this Step
                 </Link>
               </div>
             </div>
