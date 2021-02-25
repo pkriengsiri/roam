@@ -19,7 +19,7 @@ const LoginModal = ({ closeLoginModal, setUserContext }) => {
       document.getElementById("login-error").classList.remove("is-hidden");
     } else {
       document.getElementById("login-error").classList.add("is-hidden");
-      API.createUser({
+      API.loginUser({
         email: email,
         password: password,
       })
