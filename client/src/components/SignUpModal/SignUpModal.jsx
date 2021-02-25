@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import API from "../../utils/API";
 import "./SignUpModal.css";
-import {useHistory} from "react-router-dom";
+import { useHistory } from "react-router-dom";
 import jwt from "jsonwebtoken";
 
 const SignUpModal = ({ closeSignUpModal, setUserContext }) => {
@@ -24,17 +24,20 @@ const SignUpModal = ({ closeSignUpModal, setUserContext }) => {
       })
         .then((response) => {
           console.log(response.data);
-          jwt.verify(response.data.token, process.env.REACT_APP_SECRET, (err, data)=> {
-            if (err){
-              // TODO:  display an error message to the user stating that the sign-up failed (use global alert)
-              console.log(err);
-            } else {
-              console.log(data);
-              //set on global user state
+          jwt.verify(
+            response.data.token,
+            process.env.REACT_APP_SECRET,
+            (err, data) => {
+              if (err) {
+                // TODO:  display an error message to the user stating that the sign-up failed (use global alert)
+                console.log(err);
+              } else {
+                console.log(data);
+                setUserContext({ id: data._id });
+                history.push(`/user/${data._id}/edit`);
+              }
             }
-          })
-          // setUserContext({email: response.data.email, id: response.data._id});
-          // history.push(`/user/${response.data._id}/edit`);
+          );
         })
         .catch((err) => {
           console.log(err);
@@ -61,44 +64,55 @@ const SignUpModal = ({ closeSignUpModal, setUserContext }) => {
               <strong>
                 <p>Email</p>
               </strong>
-              <input
-                className="control input"
-                type="text"
-                placeholder="Email"
-                value={email}
-                onChange={(e) => {
-                  setEmail(e.target.value);
-                }}
-              />
+              <div class="field">
+                <div class="control has-icons-left">
+                  <input
+                    className="input"
+                    type="text"
+                    placeholder="Email"
+                    value={email}
+                    onChange={(e) => {
+                      setEmail(e.target.value);
+                    }}
+                  />
+                  <span className="icon is-small is-left">
+                    <i className="fas fa-envelope"></i>
+                  </span>
+                </div>
+              </div>
               <strong>
                 <p className="mt-4">Password</p>
               </strong>
-              <input
-                className="input"
-                type="password"
-                placeholder="Password"
-                value={password}
-                onChange={(e) => {
-                  setPassword(e.target.value);
-                }}
-              />
+              <div class="field">
+                <div class="control has-icons-left">
+                  <input
+                    className="input"
+                    type="password"
+                    placeholder="Password"
+                    value={password}
+                    onChange={(e) => {
+                      setPassword(e.target.value);
+                    }}
+                  />
+                  <span className="icon is-small is-left">
+                    <i class="fas fa-key"></i>
+                  </span>
+                </div>
+              </div>
               <input type="submit" className="is-hidden" />
-              <p id="signup-error" className="mt-2 ml-2 is-hidden">Please complete both fields before submitting</p>
-              
+              <p id="signup-error" className="mt-2 ml-2 is-hidden">
+                Please complete both fields before submitting
+              </p>
             </form>
-            
           </section>
           <footer className="modal-card-foot">
-                <button
-                  className="button is-primary"
-                  onClick={handleSubmit}
-                >
-                  Sign Up
-                </button>
-                <button className="button" onClick={closeSignUpModal}>
-                  Cancel
-                </button>
-              </footer>
+            <button className="button is-primary" onClick={handleSubmit}>
+              Sign Up
+            </button>
+            <button className="button" onClick={closeSignUpModal}>
+              Cancel
+            </button>
+          </footer>
         </div>
       </div>
     </>
