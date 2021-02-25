@@ -3,7 +3,6 @@ import Logo from "../../Assets/Images/roam5.svg";
 import LoginModal from "../../components/LoginModal/LoginModal";
 import SignUpModal from "../../components/SignUpModal/SignUpModal";
 import { Link, useHistory } from "react-router-dom";
-import UserContext from "../../contexts/UserContext";
 
 const Navbar = ({ userContext, setUserContext }) => {
   const [loginModalState, setLoginModalState] = useState(false);
@@ -32,8 +31,6 @@ const Navbar = ({ userContext, setUserContext }) => {
 
   const handleLogout = (e) => {
     e.preventDefault();
-    // console.log("you clicked the logout button");
-    // console.log(userContext)
     setUserContext({ email: "", id: "" });
     history.push("/");
   };
@@ -65,7 +62,6 @@ const Navbar = ({ userContext, setUserContext }) => {
           </a> */}
         </div>
 
-        {/* TODO: Conditionally render if the user is logged in */}
         {userContext.email !== "" && (
           <div id="navbarBasicExample" className="navbar-menu">
             <div className="navbar-end">
@@ -95,8 +91,6 @@ const Navbar = ({ userContext, setUserContext }) => {
             </div>
           </div>
         )}
-
-        {/* TODO: Conditionally render if the user is not logged in */}
       </nav>
     </>
   );
