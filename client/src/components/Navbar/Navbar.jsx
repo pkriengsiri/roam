@@ -47,7 +47,7 @@ const Navbar = ({ userContext, setUserContext }) => {
             <img src={Logo} width="112" className="ml-4 mt-1" />
           </Link>
 
-          <a
+          {/* <a
             role="button"
             className="navbar-burger"
             aria-label="menu"
@@ -62,7 +62,7 @@ const Navbar = ({ userContext, setUserContext }) => {
             <span aria-hidden="true"></span>
             <span aria-hidden="true"></span>
             <span aria-hidden="true"></span>
-          </a>
+          </a> */}
         </div>
 
         {/* TODO: Conditionally render if the user is logged in */}
