@@ -22,7 +22,7 @@ const SignUpModal = ({ closeSignUpModal, setUserContext }) => {
       })
         .then((response) => {
           setUserContext({email: response.data.email, id: response.data._id});
-          history.push(`/user/${response.data._id}/edit`);
+          history.push(`/userId/${response.data._id}/edit`);
         })
         .catch((err) => {
           console.log(err);
