@@ -4,7 +4,7 @@ import API from "../../utils/API";
 import { useParams, useHistory } from "react-router-dom";
 
 const EditUser = () => {
-  const { id } = useParams();
+  const { userId } = useParams();
   const history = useHistory();
 
   const [firstName, setFirstName] = useState("");
@@ -13,8 +13,8 @@ const EditUser = () => {
   const [password, setPassword] = useState("");
 
   useEffect(() => {
-    if (id) {
-      API.getUser(id).then((response)=> {
+    if (userId) {
+      API.getUser(userId).then((response)=> {
         console.log(response);
         setFirstName(response.data.firstName);
         setLastName(response.data.lastName);
@@ -28,7 +28,7 @@ const EditUser = () => {
 
   const handleFormSubmit = (e) => {
     e.preventDefault();
-    API.editUser(id, {
+    API.editUser(userId, {
       firstName: firstName,
       lastName: lastName,
       email: email,
