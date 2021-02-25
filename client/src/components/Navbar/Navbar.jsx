@@ -1,13 +1,15 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import Logo from "../../Assets/Images/roam5.svg";
 import LoginModal from "../../components/LoginModal/LoginModal";
 import SignUpModal from "../../components/SignUpModal/SignUpModal";
 import { Link, useHistory } from "react-router-dom";
+import UserContext from "../../contexts/UserContext";
 
-const Navbar = ({ userContext, setUserContext }) => {
+const Navbar = ({ setUserContext }) => {
   const [loginModalState, setLoginModalState] = useState(false);
   const [signUpModalState, setSignUpModalState] = useState(false);
   const history = useHistory();
+  const { userId } = useContext(UserContext);
 
   const toggleLoginModal = (e) => {
     e.preventDefault();
@@ -62,11 +64,13 @@ const Navbar = ({ userContext, setUserContext }) => {
           </a> */}
         </div>
 
-        {userContext.email !== "" && (
+        {userId && (
           <div id="navbarBasicExample" className="navbar-menu">
             <div className="navbar-end">
               <div className="navbar-item">
-                <a className="navbar-item">Dashboard</a>
+                <Link to={`/user/${userId}/trips`} className="navbar-item">
+                  Dashboard
+                </Link>
                 <a
                   className="navbar-item button is-primary ml-4"
                   onClick={handleLogout}
@@ -77,7 +81,7 @@ const Navbar = ({ userContext, setUserContext }) => {
             </div>
           </div>
         )}
-        {userContext.email === "" && (
+        {!userId && (
           <div className="navbar-end">
             <div className="navbar-item">
               <div className="buttons">

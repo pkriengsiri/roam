@@ -33,7 +33,7 @@ const SignUpModal = ({ closeSignUpModal, setUserContext }) => {
                 console.log(err);
               } else {
                 console.log(data);
-                setUserContext({ id: data._id });
+                setUserContext({ userId: data._id });
                 history.push(`/user/${data._id}/edit`);
               }
             }
