@@ -13,9 +13,8 @@ module.exports = {
       userToCreate.password = hashedPassword;
       db.User.create(userToCreate)
         .then((newUser) => {
-
-          const token = jwt.sign({ _id: newUser._id}, process.env.SECRET);
-          res.json({token: token});
+          const token = jwt.sign({ _id: newUser._id }, process.env.SECRET);
+          res.json({ token: token });
         })
         .catch((err) => {
           console.log(err);
@@ -25,10 +24,18 @@ module.exports = {
   },
 
   loginUser: function (req, res) {
-    db.User.findOne({ email: req.body.email }).then((foundUser) => {
+    db.User.findOne({ email: req.body.email.toLowerCase() }).then((foundUser) => {
       bcrypt.compare(req.body.password, foundUser.password, (err, result) => {
-        // console.log(result);
+        if (result) {
+          const token = jwt.sign({ _id: foundUser._id }, process.env.SECRET);
+          res.json({ token: token });
+        } else {
+          res.status(401).end();
+        }
       });
-    });
+    }).catch((err) => {
+      console.log(err);
+      res.status(500).end();
+    })
   },
 };
