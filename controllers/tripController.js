@@ -15,7 +15,9 @@ module.exports = {
       .catch((err) => res.status(422).json(err));
   },
   create: function (req, res) {
+    console.log(req)
     db.Trip.create(req.body)
+      
       .then((dbTrip) => res.json(dbTrip))
       .catch((err) => res.status(422).json(err));
   },
