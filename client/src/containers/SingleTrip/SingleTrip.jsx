@@ -11,7 +11,6 @@ const SingleTrip = () => {
   const [destination, setDestination] = useState("");
   const [startDate, setStartDate] = useState(new Date());
   const [endDate, setEndDate] = useState(null);
-  const [traveler, setTraveler] = useState("");
   const [travelers, setTravelers] = useState([]);
 
   useEffect(() => {
@@ -54,7 +53,7 @@ const SingleTrip = () => {
           <h2 className="subtitle">Travel Companions:</h2>
           <ul>
           {travelers.map((traveler) => (
-            <li>{traveler}</li>
+            <li key={index}>{`${traveler.travelerEmail} (${traveler.status})`}</li>
           ))}
           </ul>
         </div>

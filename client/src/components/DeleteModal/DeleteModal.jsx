@@ -12,7 +12,7 @@ const DeleteModal = ({ closeDeleteModal }) => {
      console.log("you clicked the delete")
       API.deleteTrip(id).then((response)=> {
         console.log(response.data);
-        history.push(`/dashboard/${response.data._id}`);
+        history.push(`/users/${response.data._id}`);
         
       }).catch((err) => {
         console.log(err);
