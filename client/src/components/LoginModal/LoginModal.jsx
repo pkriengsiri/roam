@@ -35,7 +35,7 @@ const LoginModal = ({ closeLoginModal, setUserContext }) => {
               } else {
                 console.log(data);
                 setUserContext({ userId: data._id });
-                history.push(`/user/${data._id}/edit`);
+                history.push(`/user/${data._id}/trips`);
               }
             }
           );
@@ -59,9 +59,8 @@ const LoginModal = ({ closeLoginModal, setUserContext }) => {
               onClick={closeLoginModal}
             ></button>
           </header>
-
           <section className="modal-card-body">
-            <form className="control">
+            <form className="control" onSubmit={handleSubmit}>
               <strong>
                 <p>Email</p>
               </strong>
