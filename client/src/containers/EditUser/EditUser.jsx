@@ -43,8 +43,7 @@ const EditUser = () => {
       });
   };
 
-  
-// NEED TO UPDATE THE IMAGE WITH EDIT FUNCTIONALITY 
+  // NEED TO UPDATE THE IMAGE WITH EDIT FUNCTIONALITY
   return (
     <div className="container">
       <h1 className="title has-text-centered">Edit Account</h1>
@@ -64,6 +63,7 @@ const EditUser = () => {
               <label className="label">First Name</label>
               <div className="control">
                 <input
+                  name="firstName"
                   className="input"
                   type="text"
                   placeholder="e.g Alex"
@@ -77,6 +77,7 @@ const EditUser = () => {
               <label className="label">Last Name</label>
               <div className="control">
                 <input
+                  name="lastName"
                   className="input"
                   type="text"
                   placeholder="e.g. Smith"
@@ -90,6 +91,7 @@ const EditUser = () => {
               <label className="label">Email</label>
               <div className="control">
                 <input
+                  name="email"
                   className="input"
                   type="email"
                   placeholder="e.g. alexsmith@gmail.com"
@@ -104,6 +106,7 @@ const EditUser = () => {
               <div className="control">
                 <input
                   className="input"
+                  name="password"
                   type="password"
                   placeholder="Password"
                   value={password}

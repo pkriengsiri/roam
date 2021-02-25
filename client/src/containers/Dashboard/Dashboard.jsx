@@ -12,7 +12,6 @@ const Dashboard = () => {
   useEffect(() => {
     API.getTrips()
       .then((response) => {
-        console.log(response.data);
         setTrips(response.data);
       })
       .catch((err) => {
@@ -21,8 +20,7 @@ const Dashboard = () => {
 
     API.getUser(userId)
       .then((response) => {
-        console.log(response.data);
-        if (response.data.firstName === "") {
+        if (!response.data.firstName) {
           setCurrentUser(`Welcome!`);
         } else {
           setCurrentUser(`Welcome, ${response.data.firstName}!`);

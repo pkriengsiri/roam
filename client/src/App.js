@@ -23,7 +23,7 @@ function App() {
     <UserContext.Provider value={userContext}>
       <div className="App">
         <Router>
-          <NavBar />
+          <NavBar setUserContext={setUserContext} userContext={userContext}/>
           <main className="page">
             <Switch>
               <Route exact path="/">

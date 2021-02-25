@@ -41,7 +41,7 @@ const EditTrip = () => {
     <div className="container">
       <div className="columns is-centered">
         <div className="column is-half ">
-          <div className="columns is-vcentered">
+          <div className="columns is-vcentered ">
             <div className="column is-5">
               <h1 className="title">Edit Your Trip</h1>
             </div>
