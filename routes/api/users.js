@@ -14,5 +14,9 @@ router
   .put(userController.update)
   .delete(userController.remove);
 
+router
+.route("/:userId/trips")
+.get(userController.findByIdWithTrips)
+
 // Export
   module.exports = router;

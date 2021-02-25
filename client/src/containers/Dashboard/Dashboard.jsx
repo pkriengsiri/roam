@@ -10,21 +10,23 @@ const Dashboard = () => {
   const [currentUser, setCurrentUser] = useState("");
 
   useEffect(() => {
-    API.getTrips()
-      .then((response) => {
-        setTrips(response.data);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
+    // API.getTrips()
+    //   .then((response) => {
+    //     setTrips(response.data);
+    //   })
+    //   .catch((err) => {
+    //     console.log(err);
+    //   });
 
-    API.getUser(userId)
+    API.getUserWithTrips(userId)
       .then((response) => {
+        setTrips(response.data.trips)
         if (!response.data.firstName) {
           setCurrentUser(`Welcome!`);
         } else {
           setCurrentUser(`Welcome, ${response.data.firstName}!`);
         }
+
       })
       .catch((err) => {
         console.log(err);
