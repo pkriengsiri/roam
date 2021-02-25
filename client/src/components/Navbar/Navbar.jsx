@@ -4,6 +4,7 @@ import LoginModal from "../../components/LoginModal/LoginModal";
 import SignUpModal from "../../components/SignUpModal/SignUpModal";
 import { Link, useHistory } from "react-router-dom";
 import UserContext from "../../contexts/UserContext";
+import "./Navbar.css";
 
 const Navbar = ({ setUserContext }) => {
   const [loginModalState, setLoginModalState] = useState(false);
@@ -67,36 +68,39 @@ const Navbar = ({ setUserContext }) => {
         {userId && (
           <div id="navbarBasicExample" className="navbar-menu">
             <div className="navbar-end">
-              <div className="navbar-item">
-                {/* <Link to={`/user/${userId}/edit`}>
-                  <i className="fas fa-user-circle fa-2x"></i>
-                </Link> */}
-                <Link to={`/user/${userId}/trips`} className="navbar-item">
-                  Dashboard
-                </Link>
-                <a
-                  className="navbar-item button is-primary ml-4"
-                  onClick={handleLogout}
-                >
-                  Logout
+              {/* <Link to={`/user/${userId}/edit`}>
+                <i className="fas fa-user-circle fa-2x"></i>
+              </Link>
+              <Link to={`/user/${userId}/trips`} className="navbar-item">
+                Dashboard
+              </Link>
+              <a
+                className="navbar-item button is-primary ml-4"
+                onClick={handleLogout}
+              >
+                Logout
+              </a> */}
+
+              <div className="navbar-item has-dropdown is-hoverable">
+                <a className="navbar-link">
+                  <i className="nav-icon fas fa-user-circle fa-2x"></i>
                 </a>
-              </div>
 
-              {/* <div className="navbar-item has-dropdown is-hoverable">
-                <a className="navbar-link">More</a>
-
-                <div className="navbar-dropdown">
-                  <a className="navbar-item">About</a>
-                  <a className="navbar-item">Jobs</a>
-                  <a className="navbar-item">Contact</a>
-                  <hr className="navbar-divider"/>
-                  <a className="navbar-item">Report an issue</a>
-                    
-                  </div>
-                </div> */}
+                <div className="navbar-dropdown is-right is-active">
+                  <Link to={`/user/${userId}/trips`} className="navbar-item">
+                    Dashboard
+                  </Link>
+                  <Link to={`/user/${userId}/edit`} className="navbar-item">
+                    Edit Profile
+                  </Link>
+                  <hr className="navbar-divider" />
+                  <a className="navbar-item" onClick={handleLogout}>
+                    Logout
+                  </a>
+                </div>
               </div>
             </div>
-          
+          </div>
         )}
         {!userId && (
           <div className="navbar-end">

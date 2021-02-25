@@ -15,8 +15,8 @@ const TripForm = (props) => {
   const [travelers, setTravelers] = useState([
     {
       travelerId: props.tripCreatorId,
-      travelerEmail: props.tripCreatorEmail,
-      status: "Creator",
+      travelerEmail: "",
+      status: "You",
     },
   ]);
 
@@ -51,7 +51,7 @@ const TripForm = (props) => {
     e.preventDefault();
     if (validateEmail(e.target.traveler.value)) {
       setValidEmailPromptState(false);
-      const newInvite = e.target.traveler.value;
+      const newInvite = e.target.traveler.value.toLowerCase();
       setTravelers([
         ...travelers,
         { travelerEmail: newInvite, travelerId: "", status: "pending" },
@@ -122,18 +122,6 @@ const TripForm = (props) => {
           />
         </div>
       </form>
-
-      {/* List of travelers */}
-      {/* <div className="mb-5">
-        <label className="label">Travel Companions</label>
-        <ul>
-          {travelers.map((traveler, index) => (
-            <li
-              key={index}
-            >{`${traveler.travelerEmail} (${traveler.status})`}</li>
-          ))}
-        </ul>
-      </div> */}
 
       {/* invite travelers section  */}
 

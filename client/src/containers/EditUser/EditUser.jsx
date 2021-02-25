@@ -29,10 +29,11 @@ const EditUser = () => {
 
   const handleFormSubmit = (e) => {
     e.preventDefault();
+    let preStoreEmail = email;
     API.editUser(userId, {
       firstName: firstName,
       lastName: lastName,
-      email: email,
+      email: preStoreEmail.toLowerCase(),
       password: password,
     })
       .then((response) => {
@@ -101,20 +102,6 @@ const EditUser = () => {
                 />
               </div>
             </div>
-
-            <div className="field">
-              <label className="label">Password</label>
-              <div className="control">
-                <input
-                  className="input"
-                  name="password"
-                  type="password"
-                  placeholder="Password"
-                  value={password}
-                  onChange={(e) => setPassword(e.target.value)}
-                />
-              </div>
-            </div>
             <div className="columns is-vcentered">
               <div className="column is-narrow">
                 <button
@@ -126,7 +113,7 @@ const EditUser = () => {
               </div>
               <div className="column is-3">
                 <Link to={`/user/${userId}/trips`} className="skip-link">
-                 Skip this Step
+                  Skip this Step
                 </Link>
               </div>
             </div>
