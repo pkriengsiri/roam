@@ -9,6 +9,7 @@ import DeleteModal from "../../components/DeleteModal/DeleteModal";
 const EditTrip = () => {
   const history = useHistory();
   const { userId } = useParams();
+  const { tripId } = useParams();
   const [deleteModalState, setDeleteModalState] = useState(false);
 
   const handleFormSubmit = (e, formObject) => {
@@ -37,7 +38,7 @@ const EditTrip = () => {
 
   return (
     <>
-    {deleteModalState && <DeleteModal closeDeleteModal={closeDeleteModal}/>} 
+    {deleteModalState && <DeleteModal closeDeleteModal={closeDeleteModal} userId={userId} tripId={tripId}/>} 
     <div className="container">
       <div className="columns is-centered">
         <div className="column is-half ">

@@ -1,22 +1,24 @@
 import React, { useState, useEffect } from "react";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
-import { useParams } from "react-router-dom";
+import { useParams, Link } from "react-router-dom";
 import API from "../../utils/API";
-import "./SingleTrip.css"
+import "./SingleTrip.css";
 // populate page with info from the database about a single trip
 
 const SingleTrip = () => {
-  const { id } = useParams();
   const [destination, setDestination] = useState("");
   const [startDate, setStartDate] = useState(new Date());
   const [endDate, setEndDate] = useState(null);
-  const [traveler, setTraveler] = useState("");
   const [travelers, setTravelers] = useState([]);
 
+  // browser params
+  const { tripId } = useParams();
+  const { userId } = useParams();
+
   useEffect(() => {
-    if (id) {
-      API.getTrip(id)
+    if (tripId) {
+      API.getTrip(tripId)
         .then((response) => {
           console.log(response.data);
           setDestination(response.data.destination);
@@ -44,7 +46,6 @@ const SingleTrip = () => {
                 selected={startDate}
                 startDate={startDate}
                 endDate={endDate}
-                
                 inline
               />
             </div>
@@ -53,17 +54,26 @@ const SingleTrip = () => {
         <div className="column is-2">
           <h2 className="subtitle">Travel Companions:</h2>
           <ul>
-          {travelers.map((traveler) => (
-            <li>{traveler}</li>
-          ))}
+            {travelers.map((traveler, index) => (
+              <li
+                key={index}
+              >{`${traveler.travelerEmail} (${traveler.status})`}</li>
+            ))}
           </ul>
         </div>
       </div>
       <div className="columns is-centered">
         <div className="column is-1">
-          <button className="button is-primary mr-4 is-size-5">
+          {/* <button className="button is-primary mr-4 is-size-5">
             Dashboard
-          </button>
+          </button> */}
+
+          <Link
+            to={`/user/${userId}/trips`}
+            className="button is-primary mr-4 is-size-4"
+          >
+            Dashboard
+          </Link>
         </div>
       </div>
     </div>

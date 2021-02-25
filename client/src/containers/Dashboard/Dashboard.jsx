@@ -42,7 +42,7 @@ const Dashboard = () => {
         </div>
       </div>
       {trips.map((trip) => (
-        <TripCard {...trip} key={trip._id} />
+        <TripCard {...trip} tripId={trip._id} key={trip._id} />
       ))}
 
       <Link to={`/user/${userId}/trips/new`} className="button is-primary mr-4 is-size-4">

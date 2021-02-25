@@ -2,24 +2,64 @@ import React, { useState, useEffect } from "react";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import "./TripForm.css";
-import { useParams } from "react-router-dom";
+import { useParams, Link } from "react-router-dom";
 import axios from "axios";
 
 const TripForm = (props) => {
+  // state for form object
+  const [tripCreator, setTripCreator] = useState(props.tripCreatorId);
   const [destination, setDestination] = useState("");
+  // TODO: Do we want travel start date initiated as today?
   const [startDate, setStartDate] = useState(new Date());
   const [endDate, setEndDate] = useState(null);
-  const [traveler, setTraveler] = useState("");
-  const [travelers, setTravelers] = useState([]);
-  const { tripId } = useParams();
-  // TODO: Do we want travel start date initiated as today?
+  const [travelers, setTravelers] = useState([
+    {
+      travelerId: props.tripCreatorId,
+      travelerEmail: props.tripCreatorEmail,
+      status: "Creator",
+    },
+  ]);
 
+  // state to add traveler to travelers list state
+  const [traveler, setTraveler] = useState("");
+  const [validEmailPromptState, setValidEmailPromptState] = useState(false);
+
+  // browser params
+  const { tripId } = useParams();
+  const { userId } = useParams();
+
+  useEffect(() => {
+    if (tripId) {
+      axios
+        .get(`/api/trips/${tripId}`)
+        .then((response) => {
+          const responseStartDate = new Date(response.data.startDate);
+          const responseEndDate = new Date(response.data.endDate);
+          setDestination(response.data.destination);
+          setStartDate(responseStartDate);
+          setEndDate(responseEndDate);
+          setTravelers(response.data.travelers);
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    }
+  }, [tripId]);
+
+  // add traveler to the travelers list
   const addTraveler = (e) => {
     e.preventDefault();
-
-    const newInvite = e.target.traveler.value;
-    setTravelers([...travelers, newInvite]);
-    setTraveler("");
+    if (validateEmail(e.target.traveler.value)) {
+      setValidEmailPromptState(false);
+      const newInvite = e.target.traveler.value;
+      setTravelers([
+        ...travelers,
+        { travelerEmail: newInvite, travelerId: "", status: "pending" },
+      ]);
+      setTraveler("");
+    } else {
+      setValidEmailPromptState(true);
+    }
     // TODO: "Invite Sent" alert or message
   };
 
@@ -30,24 +70,11 @@ const TripForm = (props) => {
     setEndDate(end);
   };
 
-  useEffect(() => {
-    if (tripId) {
-    axios
-      .get(`/api/trips/${tripId}`)
-      .then((response) => {
-        console.log(response.data);
-        const responseStartDate = new Date(response.data.startDate);
-        const responseEndDate = new Date(response.data.endDate);
-        setDestination(response.data.destination);
-        setStartDate(responseStartDate);
-        setEndDate(responseEndDate);
-        setTravelers(response.data.travelers);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-    }
-  }, [tripId]);
+  // validates an email address
+  const validateEmail = (email) => {
+    const re = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+    return re.test(email);
+  };
 
   return (
     <>
@@ -55,7 +82,7 @@ const TripForm = (props) => {
         className="trip-form"
         onSubmit={(e) =>
           props.handleFormSubmit(e, {
-            tripCreator: "logged in user",
+            tripCreator: userId,
             destination,
             startDate,
             endDate,
@@ -100,9 +127,10 @@ const TripForm = (props) => {
       <div className="mb-5">
         <label className="label">Travel Companions</label>
         <ul>
-          {/* TODO: Populate travelers form travlers array and add keys */}
-          {travelers.map((traveler) => (
-            <li>{traveler}</li>
+          {travelers.map((traveler, index) => (
+            <li
+              key={index}
+            >{`${traveler.travelerEmail} (${traveler.status})`}</li>
           ))}
         </ul>
       </div>
@@ -123,17 +151,21 @@ const TripForm = (props) => {
                   value={traveler}
                   onChange={(e) => setTraveler(e.target.value)}
                 />
+                {validEmailPromptState && (
+                  <p className="email-validation">
+                    Please enter a valid email address
+                  </p>
+                )}
               </div>
             </div>
           </div>
           <div className="column is-one-third pl-0">
-            <button type="submit" className="">
+            <button type="submit" className="add-traveler-button">
               <i className="fas fa-plus fa-lg"></i>
             </button>
           </div>
         </div>
-        
-        {/* TODO: Make a PUT request on the click of the save button */}
+
         {/* Save button */}
         <div className="field is-grouped">
           <div className="control">
@@ -142,7 +174,7 @@ const TripForm = (props) => {
               type="submit"
               onClick={(e) =>
                 props.handleFormSubmit(e, {
-                  tripCreator: "context logged in user",
+                  tripCreator: userId,
                   destination,
                   startDate,
                   endDate,
@@ -152,6 +184,12 @@ const TripForm = (props) => {
             >
               {props.buttonText}
             </button>
+
+            <Link to={`/user/${userId}/trips`}>
+              <button className="button  ml-4 cancel-button">
+                Cancel
+              </button>
+            </Link>
           </div>
         </div>
       </form>
