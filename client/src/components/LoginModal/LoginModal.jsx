@@ -5,12 +5,47 @@ import UserContext from "../../contexts/UserContext";
 import { useHistory } from "react-router-dom";
 import jwt from "jsonwebtoken";
 
-const LoginModal = ({ closeLoginModal }) => {
+const LoginModal = ({ closeLoginModal, setUserContext }) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const history = useHistory();
 
-  const { email } = useContext(UserContext);
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    if (!email || !password) {
+      // TODO: display an error message that the user need to complete both fields (use global alert)
+      //avoid getElementbyId -- React conditional rendering
+      console.log("error");
+      document.getElementById("signup-error").classList.remove("is-hidden");
+    } else {
+      document.getElementById("signup-error").classList.add("is-hidden");
+      API.createUser({
+        email: email,
+        password: password,
+      })
+        .then((response) => {
+          console.log(response.data);
+          jwt.verify(
+            response.data.token,
+            process.env.REACT_APP_SECRET,
+            (err, data) => {
+              if (err) {
+                // TODO:  display an error message to the user stating that the sign-up failed (use global alert)
+                console.log(err);
+              } else {
+                console.log(data);
+                setUserContext({ userId: data._id });
+                history.push(`/user/${data._id}/edit`);
+              }
+            }
+          );
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    }
+  };
+
   return (
     <>
       <div className="modal is-active fade-in-modal">
