@@ -102,20 +102,6 @@ const EditUser = () => {
                 />
               </div>
             </div>
-
-            <div className="field">
-              <label className="label">Password</label>
-              <div className="control">
-                <input
-                  className="input"
-                  name="password"
-                  type="password"
-                  placeholder="Password"
-                  value={password}
-                  onChange={(e) => setPassword(e.target.value)}
-                />
-              </div>
-            </div>
             <div className="columns is-vcentered">
               <div className="column is-narrow">
                 <button
