@@ -76,8 +76,11 @@ const addTravelerIdByEmail = async (requestObject) => {
   let updatedArray = [];
   //   // // loop over travelers to check if they have an account
   for (let i = 0; i < requestObject.travelers.length; i++) {
-    requestObject.travelers[i].travelerEmail.toLowerCase();
-    await db.User.findOne({ email: requestObject.travelers[i].travelerEmail })
+    // if email provided, set to lowercase
+    if (requestObject?.travelers[i].travelerEmail) {
+      requestObject.travelers[i].travelerEmail.toLowerCase();
+    }
+    await db.User.findOne({ email: requestObject?.travelers[i]?.travelerEmail })
       .then((dbTraveler) => {
         // if user found add to updated Travelers array
 
