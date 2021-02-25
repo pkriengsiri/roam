@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext , useParams} from "react";
 import { Link } from "react-router-dom";
 import UserContext from "../../contexts/UserContext";
 
@@ -10,6 +10,8 @@ const TripCard = ({
   _id,
 }) => {
   const {id} = useContext(UserContext);
+
+
 
   return (
     <div className="columns is-centered">

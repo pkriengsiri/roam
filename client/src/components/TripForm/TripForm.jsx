@@ -11,7 +11,7 @@ const TripForm = (props) => {
   const [endDate, setEndDate] = useState(null);
   const [traveler, setTraveler] = useState("");
   const [travelers, setTravelers] = useState([]);
-  const { id } = useParams();
+  const { tripId } = useParams();
   // TODO: Do we want travel start date initiated as today?
 
   const addTraveler = (e) => {
@@ -31,9 +31,9 @@ const TripForm = (props) => {
   };
 
   useEffect(() => {
-    if (id) {
+    if (tripId) {
     axios
-      .get(`/api/trips/${id}`)
+      .get(`/api/trips/${tripId}`)
       .then((response) => {
         console.log(response.data);
         const responseStartDate = new Date(response.data.startDate);
@@ -47,7 +47,7 @@ const TripForm = (props) => {
         console.log(err);
       });
     }
-  }, [id]);
+  }, [tripId]);
 
   return (
     <>

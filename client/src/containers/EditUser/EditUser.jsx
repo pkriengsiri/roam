@@ -36,7 +36,7 @@ const EditUser = () => {
     })
       .then((response) => {
         console.log(response);
-        history.push(`/user/${response.data._id}`);
+        history.push(`/user/${response.data._id}/trips`);
       })
       .catch((err) => {
         console.log(err);
