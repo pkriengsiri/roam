@@ -15,7 +15,7 @@ const EditTrip = () => {
   const handleFormSubmit = (e, formObject) => {
     e.preventDefault();
     axios
-      .put(`/api/trips/${userId}`, formObject)
+      .put(`/api/trips/${tripId}`, formObject)
       .then((response) => {
         console.log(response.data);
         history.push(`/user/${userId}/trips`);
