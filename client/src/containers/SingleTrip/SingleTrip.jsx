@@ -23,6 +23,7 @@ const SingleTrip = () => {
           const responseEndDate = new Date(response.data.endDate);
           setStartDate(responseStartDate);
           setEndDate(responseEndDate);
+          setTravelers(response.data.travelers);
         })
         .catch((err) => {
           console.log(err);
@@ -51,13 +52,9 @@ const SingleTrip = () => {
         <div className="column is-2">
           <h2 className="subtitle">Travel Companions:</h2>
           <ul>
-            <li>Charlie</li>
-            <li>Elsie</li>
-            <li>Kip</li>
-            <li>Moose</li>
-            <li>Penny</li>
-            <li>Taz</li>
-            <li>Wilbur</li>
+          {travelers.map((traveler) => (
+            <li>{traveler}</li>
+          ))}
           </ul>
         </div>
       </div>

@@ -1,0 +1,53 @@
+/* // @use "../../sass/App.scss"; */
+
+/* // inherit font family from App.scss */
+.react-datepicker {
+    font-family: 'Lato', sans-serif;
+  }
+  
+  .react-datepicker__day--in-selecting-range:hover,
+  .react-datepicker__day--selected:hover{
+    background-color: #2E3560;
+  }
+  
+  /* // inherit date picker colors from App.scss */
+  .react-datepicker__day--selected,
+  .react-datepicker__quarter-text--selected,
+  .react-datepicker__quarter-text--selected,
+  .react-datepicker__quarter-text--selected,
+  .react-datepicker__month-text--selected,
+  .react-datepicker__year-text--selected,
+  .react-datepicker__year-text--in-selecting-range {
+    background-color: #2E3560;
+  }
+  
+  /* // inherit date picker colors from App.scss */
+  .react-datepicker__day--in-selecting-range,
+  .react-datepicker__day--in-range,
+  .react-datepicker__day--in-range,
+  .react-datepicker__month-text--in-selecting-range,
+  .react-datepicker__month-text--in-range,
+  .react-datepicker__quarter-text--in-selecting-range,
+  .react-datepicker__quarter-text--in-range,
+  .react-datepicker__year-text--in-range {
+    background-color: #938DB9;
+  }
+  
+  .react-datepicker__day--in-selecting-range:hover,
+  .react-datepicker__day--in-range:hover,
+  .react-datepicker__day--in-range:hover,
+  .react-datepicker__month-text--in-selecting-range:hover,
+  .react-datepicker__month-text--in-range:hover,
+  .react-datepicker__quarter-text--in-selecting-range:hover,
+  .react-datepicker__quarter-text--in-range:hover,
+  .react-datepicker__year-text--in-range:hover {
+    background-color: #2E3560;
+  }
+  
+  
+  .input{
+    background-color: white;
+  }
+  .fa-plus{
+    color: #33c1bf;
+  }
