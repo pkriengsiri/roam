@@ -65,8 +65,8 @@ const LoginModal = ({ closeLoginModal, setUserContext }) => {
               <strong>
                 <p>Email</p>
               </strong>
-              <div class="field">
-                <div class="control has-icons-left">
+              <div className="field">
+                <div className="control has-icons-left">
                   <input
                     className="input"
                     type="text"
@@ -84,8 +84,8 @@ const LoginModal = ({ closeLoginModal, setUserContext }) => {
               <strong>
                 <p className="mt-4">Password</p>
               </strong>
-              <div class="field">
-                <div class="control has-icons-left">
+              <div className="field">
+                <div className="control has-icons-left">
                   <input
                     className="input"
                     type="password"
@@ -96,7 +96,7 @@ const LoginModal = ({ closeLoginModal, setUserContext }) => {
                     }}
                   />
                   <span className="icon is-small is-left">
-                    <i class="fas fa-key"></i>
+                    <i className="fas fa-key"></i>
                   </span>
                 </div>
               </div>
