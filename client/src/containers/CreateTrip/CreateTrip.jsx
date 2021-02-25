@@ -31,7 +31,7 @@ const CreateTrip = () => {
         <div className="column is-half ">
           <h1 className="title">Create a Trip</h1>
 
-          <TripForm tripCreator={_id} buttonText="Add Trip" handleFormSubmit={handleFormSubmit} />
+          <TripForm tripCreator={email} buttonText="Add Trip" handleFormSubmit={handleFormSubmit} />
         </div>
       </div>
     </div>

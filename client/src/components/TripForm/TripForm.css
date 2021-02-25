@@ -45,9 +45,16 @@
 }
 
 
+
+/* invite other travelers form  */
 .input{
   background-color: white;
 }
 .fa-plus{
   color: #33c1bf;
+}
+
+.email-validation{
+  color:red;
+  /* font-style: italic; */
 }

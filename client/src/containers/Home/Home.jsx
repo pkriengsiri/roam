@@ -13,6 +13,14 @@ const Home = ({ setUserContext }) => {
     document.title = "Roam";
   }, []);
 
+  const closeLoginModal = (e) => {
+    e.preventDefault();
+    setLoginModalState(false);
+  };
+  const closeSignUpModal = (e) => {
+    e.preventDefault();
+    setSignUpModalState(false);
+  };
   const toggleLoginModal = (e) => {
     e.preventDefault();
     setLoginModalState(true);
@@ -21,16 +29,6 @@ const Home = ({ setUserContext }) => {
   const toggleSignUpModal = (e) => {
     e.preventDefault();
     setSignUpModalState(true);
-  };
-
-  const closeSignUpModal = (e) => {
-    e.preventDefault();
-    setSignUpModalState(false);
-  };
-
-  const closeLoginModal = (e) => {
-    e.preventDefault();
-    setLoginModalState(false);
   };
 
   return (

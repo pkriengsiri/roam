@@ -6,11 +6,16 @@ import { useParams } from "react-router-dom";
 import axios from "axios";
 
 const TripForm = (props) => {
+  // state for form object
+  const [tripCreator, setTripCreator] = useState(props.tripCreator);
   const [destination, setDestination] = useState("");
   const [startDate, setStartDate] = useState(new Date());
   const [endDate, setEndDate] = useState(null);
+  const [travelers, setTravelers] = useState([props.tripCreator]);
+
+  // state to add traveler to travelers list state
   const [traveler, setTraveler] = useState("");
-  const [travelers, setTravelers] = useState([]);
+  const [validEmailPromptState, setValidEmailPromptState] = useState(false);
   const { id } = useParams();
   // TODO: Do we want travel start date initiated as today?
 
@@ -37,9 +42,12 @@ const TripForm = (props) => {
   const addTraveler = (e) => {
     e.preventDefault();
     if (validateEmail(e.target.traveler.value)) {
+      setValidEmailPromptState(false);
       const newInvite = e.target.traveler.value;
       setTravelers([...travelers, newInvite]);
       setTraveler("");
+    } else {
+      setValidEmailPromptState(true);
     }
     // TODO: "Invite Sent" alert or message
   };
@@ -60,13 +68,11 @@ const TripForm = (props) => {
 
   return (
     <>
-      {/* {!validateEmail(email) && (<h1>Please Enter a valid Email address</h1>} */}
-
       <form
         className="trip-form"
         onSubmit={(e) =>
           props.handleFormSubmit(e, {
-            tripCreator: "logged in user",
+            tripCreator,
             destination,
             startDate,
             endDate,
@@ -112,8 +118,8 @@ const TripForm = (props) => {
         <label className="label">Travel Companions</label>
         <ul>
           {/* TODO: Populate travelers form travlers array and add keys */}
-          {travelers.map((traveler) => (
-            <li>{traveler}</li>
+          {travelers.map((traveler, index) => (
+            <li key={index}>{traveler}</li>
           ))}
         </ul>
       </div>
@@ -134,6 +140,9 @@ const TripForm = (props) => {
                   value={traveler}
                   onChange={(e) => setTraveler(e.target.value)}
                 />
+                {validEmailPromptState && (
+                  <p class="email-validation">Please enter a valid email address</p>
+                )}
               </div>
             </div>
           </div>
