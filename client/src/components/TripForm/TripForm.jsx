@@ -141,7 +141,7 @@ const TripForm = (props) => {
                   onChange={(e) => setTraveler(e.target.value)}
                 />
                 {validEmailPromptState && (
-                  <p class="email-validation">Please enter a valid email address</p>
+                  <p className="email-validation">Please enter a valid email address</p>
                 )}
               </div>
             </div>
