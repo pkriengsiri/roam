@@ -59,9 +59,8 @@ const LoginModal = ({ closeLoginModal, setUserContext }) => {
               onClick={closeLoginModal}
             ></button>
           </header>
-
           <section className="modal-card-body">
-            <form className="control">
+            <form className="control" onSubmit={handleSubmit}>
               <strong>
                 <p>Email</p>
               </strong>
