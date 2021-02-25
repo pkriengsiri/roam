@@ -33,7 +33,6 @@ const TripForm = (props) => {
       axios
         .get(`/api/trips/${tripId}`)
         .then((response) => {
-
           const responseStartDate = new Date(response.data.startDate);
           const responseEndDate = new Date(response.data.endDate);
           setDestination(response.data.destination);
@@ -53,7 +52,10 @@ const TripForm = (props) => {
     if (validateEmail(e.target.traveler.value)) {
       setValidEmailPromptState(false);
       const newInvite = e.target.traveler.value;
-      setTravelers([...travelers, {travelerEmail:newInvite,travelerId:"",status:"pending"}]);
+      setTravelers([
+        ...travelers,
+        { travelerEmail: newInvite, travelerId: "", status: "pending" },
+      ]);
       setTraveler("");
     } else {
       setValidEmailPromptState(true);
@@ -80,7 +82,7 @@ const TripForm = (props) => {
         className="trip-form"
         onSubmit={(e) =>
           props.handleFormSubmit(e, {
-            tripCreator:userId,
+            tripCreator: userId,
             destination,
             startDate,
             endDate,
@@ -126,7 +128,9 @@ const TripForm = (props) => {
         <label className="label">Travel Companions</label>
         <ul>
           {travelers.map((traveler, index) => (
-            <li key={index}>{`${traveler.travelerEmail} (${traveler.status})`}</li>
+            <li
+              key={index}
+            >{`${traveler.travelerEmail} (${traveler.status})`}</li>
           ))}
         </ul>
       </div>
@@ -156,13 +160,12 @@ const TripForm = (props) => {
             </div>
           </div>
           <div className="column is-one-third pl-0">
-            <button type="submit" className="">
+            <button type="submit" className="add-traveler-button">
               <i className="fas fa-plus fa-lg"></i>
             </button>
           </div>
         </div>
 
- 
         {/* Save button */}
         <div className="field is-grouped">
           <div className="control">
@@ -171,7 +174,7 @@ const TripForm = (props) => {
               type="submit"
               onClick={(e) =>
                 props.handleFormSubmit(e, {
-                  tripCreator:userId,
+                  tripCreator: userId,
                   destination,
                   startDate,
                   endDate,
@@ -182,17 +185,14 @@ const TripForm = (props) => {
               {props.buttonText}
             </button>
 
-            <Link
-            to={`/user/${userId}/trips`}
-            className="button is-primary mr-4 is-size-4 cancel-button"
-          >
-            Cancel
-          </Link>
+            <Link to={`/user/${userId}/trips`}>
+              <button className="button  ml-4 cancel-button">
+                Cancel
+              </button>
+            </Link>
           </div>
         </div>
-    
       </form>
-
     </>
   );
 };
