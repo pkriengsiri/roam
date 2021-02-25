@@ -21,31 +21,8 @@ module.exports = {
   //     .catch((err) => res.status(422).json(err));
   // },
   create: async function (req, res) {
-    //   // tripCreator from req.body is validated by database with the schema type?
-    //   // make new object to hold request
-    let requestObject = req.body;
-    let updatedArray = [];
-    //   // // loop over travelers to check if they have an account
-    for (let i = 0; i < requestObject.travelers.length; i++) {
-      requestObject.travelers[i].travelerEmail.toLowerCase();
-      await db.User.findOne({ email: requestObject.travelers[i].travelerEmail })
-        .then((dbTraveler) => {
-          // if user found add to updated Travelers array
+     const requestObject = await addTravelerIdByEmail(req.body)
 
-          if (dbTraveler) {
-            updatedArray.push({
-              travelerEmail: dbTraveler.email,
-              travelerId: dbTraveler._id,
-              status: "Going",
-            });
-          } else {
-            updatedArray.push(requestObject.travelers[i]);
-          }
-        })
-        .catch((err) => console.log(err));
-    }
-    // update request object with array with user id's
-    requestObject.travelers = updatedArray;
     // create trip id
     db.Trip.create(requestObject)
       .then((dbTrip) => {
@@ -83,3 +60,33 @@ module.exports = {
       .catch((err) => res.status(422).json(err));
   },
 };
+
+
+const addTravelerIdByEmail = async (requestObject) =>{
+    //   // tripCreator from req.body is validated by database with the schema type?
+    //   // make new object to hold request
+    let requestObject = requestObject;
+    let updatedArray = [];
+    //   // // loop over travelers to check if they have an account
+    for (let i = 0; i < requestObject.travelers.length; i++) {
+      requestObject.travelers[i].travelerEmail.toLowerCase();
+      await db.User.findOne({ email: requestObject.travelers[i].travelerEmail })
+        .then((dbTraveler) => {
+          // if user found add to updated Travelers array
+
+          if (dbTraveler) {
+            updatedArray.push({
+              travelerEmail: dbTraveler.email,
+              travelerId: dbTraveler._id,
+              status: "Going",
+            });
+          } else {
+            updatedArray.push(requestObject.travelers[i]);
+          }
+        })
+        .catch((err) => console.log(err));
+    }
+    // update request object with array with user id's
+    requestObject.travelers = updatedArray;
+  return requestObject;
+}
