@@ -13,14 +13,12 @@ const CreateTrip = () => {
 
   const handleFormSubmit = (e, formObject) => {
     e.preventDefault();
-    console.log("submit form");
-    console.log(formObject);
     API.createTrip(formObject)
       //TODO: // use context to set signed in user as tripCreator
 
       .then((response) => {
-        console.log(response.data)
-      // TODO: route back to user dashboard
+
+
       history.push(`/user/${userId}/trips`);
         
       })

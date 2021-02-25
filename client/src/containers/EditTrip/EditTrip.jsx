@@ -17,7 +17,7 @@ const EditTrip = () => {
     axios
       .put(`/api/trips/${tripId}`, formObject)
       .then((response) => {
-        console.log(response.data);
+
         history.push(`/user/${userId}/trips`);
       })
       .catch((err) => {
@@ -32,7 +32,7 @@ const EditTrip = () => {
 
   const togglesDeleteModal= (e) => {
     e.preventDefault();
-    console.log("You clicked the trash can");
+
     setDeleteModalState(true);
   };
 

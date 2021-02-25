@@ -32,8 +32,8 @@ const Navbar = ({ userContext, setUserContext }) => {
 
   const handleLogout = (e) => {
     e.preventDefault();
-    console.log("you clicked the logout button");
-    console.log(userContext)
+    // console.log("you clicked the logout button");
+    // console.log(userContext)
     setUserContext({ email: "", id: "" });
     history.push("/");
   };

@@ -9,11 +9,11 @@ module.exports = {
     };
     bcrypt.hash(req.body.password, 8, (err, hashedPassword) => {
       if (err) throw new Error(err);
-      console.log(hashedPassword);
+
       userToCreate.password = hashedPassword;
       db.User.create(userToCreate)
         .then((newUser) => {
-          console.log(newUser);
+
           const token = jwt.sign({ _id: newUser._id}, process.env.SECRET);
           res.json({token: token});
         })
@@ -27,7 +27,7 @@ module.exports = {
   loginUser: function (req, res) {
     db.User.findOne({ email: req.body.email }).then((foundUser) => {
       bcrypt.compare(req.body.password, foundUser.password, (err, result) => {
-        console.log(result);
+        // console.log(result);
       });
     });
   },
