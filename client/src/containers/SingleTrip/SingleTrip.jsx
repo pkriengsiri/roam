@@ -6,16 +6,21 @@ import API from "../../utils/API";
 import "./SingleTrip.css"
 // populate page with info from the database about a single trip
 
+
 const SingleTrip = () => {
-  const { id } = useParams();
+
   const [destination, setDestination] = useState("");
   const [startDate, setStartDate] = useState(new Date());
   const [endDate, setEndDate] = useState(null);
   const [travelers, setTravelers] = useState([]);
 
+    // browser params
+    const { tripId } = useParams();
+    const { userId } = useParams();
+
   useEffect(() => {
-    if (id) {
-      API.getTrip(id)
+    if (tripId) {
+      API.getTrip(tripId)
         .then((response) => {
           console.log(response.data);
           setDestination(response.data.destination);
@@ -52,7 +57,7 @@ const SingleTrip = () => {
         <div className="column is-2">
           <h2 className="subtitle">Travel Companions:</h2>
           <ul>
-          {travelers.map((traveler) => (
+          {travelers.map((traveler,index) => (
             <li key={index}>{`${traveler.travelerEmail} (${traveler.status})`}</li>
           ))}
           </ul>
