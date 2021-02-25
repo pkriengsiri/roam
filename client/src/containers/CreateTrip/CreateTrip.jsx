@@ -9,10 +9,7 @@ const CreateTrip = () => {
   // add trip button to send to server
   const history = useHistory();
   const { userId } = useParams();
-<<<<<<< HEAD
   const { email,_id } = useContext(UserContext);
-=======
->>>>>>> 61a6d2241b44380057abcc568604798eb3b3deda
 
   const handleFormSubmit = (e, formObject) => {
     e.preventDefault();
@@ -21,16 +18,10 @@ const CreateTrip = () => {
       //TODO: // use context to set signed in user as tripCreator
 
       .then((response) => {
-<<<<<<< HEAD
-        console.log(response.data);
-        // TODO: route back to user dashboard
-        history.push(`/dashboard/${response.data._id}`);
-=======
         console.log(response.data)
       // TODO: route back to user dashboard
       history.push(`/user/${userId}/trips`);
         
->>>>>>> 61a6d2241b44380057abcc568604798eb3b3deda
       })
       .catch((err) => console.log(err));
   };

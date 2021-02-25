@@ -9,25 +9,22 @@ const TripForm = (props) => {
   // state for form object
   const [tripCreator, setTripCreator] = useState(props.tripCreator);
   const [destination, setDestination] = useState("");
+  // TODO: Do we want travel start date initiated as today?
   const [startDate, setStartDate] = useState(new Date());
   const [endDate, setEndDate] = useState(null);
   const [travelers, setTravelers] = useState([props.tripCreator]);
 
   // state to add traveler to travelers list state
   const [traveler, setTraveler] = useState("");
-<<<<<<< HEAD
   const [validEmailPromptState, setValidEmailPromptState] = useState(false);
-  const { id } = useParams();
-=======
-  const [travelers, setTravelers] = useState([]);
+
+  // browser params
   const { tripId } = useParams();
->>>>>>> 61a6d2241b44380057abcc568604798eb3b3deda
-  // TODO: Do we want travel start date initiated as today?
 
   useEffect(() => {
-    if (id) {
+    if (tripId) {
       axios
-        .get(`/api/trips/${id}`)
+        .get(`/api/trips/${tripId}`)
         .then((response) => {
           console.log(response.data);
           const responseStartDate = new Date(response.data.startDate);
@@ -41,7 +38,7 @@ const TripForm = (props) => {
           console.log(err);
         });
     }
-  }, [id]);
+  }, [tripId]);
 
   // add traveler to the travelers list
   const addTraveler = (e) => {
@@ -64,33 +61,12 @@ const TripForm = (props) => {
     setEndDate(end);
   };
 
-<<<<<<< HEAD
   // validates an email address
   const validateEmail = (email) => {
     const re = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
     console.log(re.test(email));
     return re.test(email);
   };
-=======
-  useEffect(() => {
-    if (tripId) {
-    axios
-      .get(`/api/trips/${tripId}`)
-      .then((response) => {
-        console.log(response.data);
-        const responseStartDate = new Date(response.data.startDate);
-        const responseEndDate = new Date(response.data.endDate);
-        setDestination(response.data.destination);
-        setStartDate(responseStartDate);
-        setEndDate(responseEndDate);
-        setTravelers(response.data.travelers);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-    }
-  }, [tripId]);
->>>>>>> 61a6d2241b44380057abcc568604798eb3b3deda
 
   return (
     <>
@@ -167,7 +143,9 @@ const TripForm = (props) => {
                   onChange={(e) => setTraveler(e.target.value)}
                 />
                 {validEmailPromptState && (
-                  <p className="email-validation">Please enter a valid email address</p>
+                  <p className="email-validation">
+                    Please enter a valid email address
+                  </p>
                 )}
               </div>
             </div>
