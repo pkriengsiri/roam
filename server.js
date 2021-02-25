@@ -1,8 +1,11 @@
 //Dependencies
+require('dotenv').config();
 const express = require("express");
 const mongoose = require("mongoose");
 const app = express();
 const routes = require("./routes");
+
+
 
 // Server port
 const PORT = process.env.PORT || 3001;
@@ -41,7 +44,7 @@ app.use(routes);
 app.get("*", (req, res) => {
     res.sendFile(path.join(__dirname, "client/build/index.html"));
   });
-
+console.log(process.env);
 // Listen to port
   app.listen(PORT, () => {
   console.log(`Server running on http://localhost:${PORT}`);
