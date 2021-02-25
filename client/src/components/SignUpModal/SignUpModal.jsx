@@ -12,7 +12,7 @@ const SignUpModal = ({ closeSignUpModal, setUserContext }) => {
   const handleSubmit = (e) => {
     e.preventDefault();
     if (!email || !password) {
-      // TODO: add alert component
+      // TODO: display an error message that the user need to complete both fields (use global alert)
       //avoid getElementbyId -- React conditional rendering
       console.log("error");
       document.getElementById("signup-error").classList.remove("is-hidden");
@@ -26,8 +26,8 @@ const SignUpModal = ({ closeSignUpModal, setUserContext }) => {
           console.log(response.data);
           jwt.verify(response.data.token, process.env.REACT_APP_SECRET, (err, data)=> {
             if (err){
+              // TODO:  display an error message to the user stating that the sign-up failed (use global alert)
               console.log(err);
-              //display error message
             } else {
               console.log(data);
               //set on global user state
