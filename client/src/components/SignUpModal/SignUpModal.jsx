@@ -61,7 +61,7 @@ const SignUpModal = ({ closeSignUpModal, setUserContext }) => {
           </header>
 
           <section className="modal-card-body">
-            <form className="control">
+            <form className="control"  onSubmit={handleSubmit}>
               <strong>
                 <p>Email</p>
               </strong>
@@ -107,7 +107,7 @@ const SignUpModal = ({ closeSignUpModal, setUserContext }) => {
             </form>
           </section>
           <footer className="modal-card-foot">
-            <button className="button is-primary" onClick={handleSubmit}>
+            <button className="button is-primary"  onClick={handleSubmit}>
               Sign Up
             </button>
             <button className="button" onClick={closeSignUpModal}>
