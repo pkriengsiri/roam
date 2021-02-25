@@ -51,8 +51,8 @@ const SingleTrip = () => {
             </div>
           </p>
         </div>
-        <div className="column is-2">
-          <h2 className="subtitle">Travel Companions:</h2>
+        <div className="column is-3">
+          <h2 className="subtitle">Travelers:</h2>
           <ul>
             {travelers.map((traveler, index) => (
               <li
@@ -63,7 +63,7 @@ const SingleTrip = () => {
         </div>
       </div>
       <div className="columns is-centered">
-        <div className="column is-1">
+        <div className="column is-2">
           {/* <button className="button is-primary mr-4 is-size-5">
             Dashboard
           </button> */}
