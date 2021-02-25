@@ -32,7 +32,7 @@ const CreateTrip = () => {
       <div className="columns is-centered">
         <div className="column is-half ">
           <h1 className="title">Create a Trip</h1>
-          <TripForm tripCreatorId={_id} tripCreatorEmail={email} buttonText="Add Trip" handleFormSubmit={handleFormSubmit} />
+          <TripForm tripCreatorId={userId} tripCreatorEmail={email} buttonText="Add Trip" handleFormSubmit={handleFormSubmit} />
 
         </div>
       </div>

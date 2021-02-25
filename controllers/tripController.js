@@ -15,8 +15,15 @@ module.exports = {
       .catch((err) => res.status(422).json(err));
   },
   create: function (req, res) {
-    console.log(req)
+    console.log(req.body)
+    // tripCreator from req.body is validated by database with the schema type?
+    // 
+
+
+
     db.Trip.create(req.body)
+
+    
       
       .then((dbTrip) => res.json(dbTrip))
       .catch((err) => res.status(422).json(err));

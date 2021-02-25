@@ -80,7 +80,7 @@ const TripForm = (props) => {
         className="trip-form"
         onSubmit={(e) =>
           props.handleFormSubmit(e, {
-            tripCreator,
+            tripCreator:userId,
             destination,
             startDate,
             endDate,
@@ -162,7 +162,7 @@ const TripForm = (props) => {
           </div>
         </div>
 
-        {/* TODO: Make a PUT request on the click of the save button */}
+ 
         {/* Save button */}
         <div className="field is-grouped">
           <div className="control">
@@ -171,7 +171,7 @@ const TripForm = (props) => {
               type="submit"
               onClick={(e) =>
                 props.handleFormSubmit(e, {
-                  tripCreator,
+                  tripCreator:userId,
                   destination,
                   startDate,
                   endDate,
