@@ -8,7 +8,7 @@ import { useHistory,useParams } from "react-router-dom";
 const CreateTrip = () => {
   // add trip button to send to server
   const history = useHistory();
-  const { id } = useParams();
+  const { userId } = useParams();
 
   const handleFormSubmit = (e, formObject) => {
     e.preventDefault();
@@ -19,7 +19,7 @@ const CreateTrip = () => {
       .then((response) => {
         console.log(response.data)
       // TODO: route back to user dashboard
-      history.push(`/dashboard/${response.data._id}`);
+      history.push(`/user/${userId}/trips`);
         
       })
       .catch((err) => console.log(err));

@@ -8,16 +8,16 @@ import DeleteModal from "../../components/DeleteModal/DeleteModal";
 
 const EditTrip = () => {
   const history = useHistory();
-  const { id } = useParams();
+  const { userId } = useParams();
   const [deleteModalState, setDeleteModalState] = useState(false);
 
   const handleFormSubmit = (e, formObject) => {
     e.preventDefault();
     axios
-      .put(`/api/trips/${id}`, formObject)
+      .put(`/api/trips/${userId}`, formObject)
       .then((response) => {
         console.log(response.data);
-        history.push(`/dashboard/${response.data._id}`);
+        history.push(`/user/${userId}/trips`);
       })
       .catch((err) => {
         console.log(err);
