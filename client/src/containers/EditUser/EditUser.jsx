@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import "./EditUser.css";
 import API from "../../utils/API";
-import { useParams, useHistory } from "react-router-dom";
+import { useParams, useHistory, Link } from "react-router-dom";
 
 const EditUser = () => {
   const { userId } = useParams();
@@ -14,15 +14,16 @@ const EditUser = () => {
 
   useEffect(() => {
     if (userId) {
-      API.getUser(userId).then((response)=> {
-        console.log(response);
-        setFirstName(response.data.firstName);
-        setLastName(response.data.lastName);
-        setEmail(response.data.email);
-        
-      }).catch((err)=> {
-        console.log(err);
-      })
+      API.getUser(userId)
+        .then((response) => {
+          console.log(response);
+          setFirstName(response.data.firstName);
+          setLastName(response.data.lastName);
+          setEmail(response.data.email);
+        })
+        .catch((err) => {
+          console.log(err);
+        });
     }
   }, []);
 
@@ -114,12 +115,22 @@ const EditUser = () => {
                 />
               </div>
             </div>
+            <div className="columns is-vcentered">
+              <div className="column is-narrow">
+                <button
+                  type="submit"
+                  className="button is-primary mr-4 is-size-5"
+                >
+                  Update
+                </button>
+              </div>
+              <div className="column is-3">
+                <Link to={`/user/${userId}/trips`}>
+                  <a className="skip-link">Skip this Step</a>
+                </Link>
+              </div>
+            </div>
           </div>
-        </div>
-        <div className="column has-text-centered">
-          <button type="submit" className="button is-primary mr-4 is-size-4">
-            Update
-          </button>
         </div>
       </form>
     </div>
