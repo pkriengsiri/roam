@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import "./TripForm.css";
-import { useParams } from "react-router-dom";
+import { useParams, Link } from "react-router-dom";
 import axios from "axios";
 
 const TripForm = (props) => {
@@ -181,9 +181,18 @@ const TripForm = (props) => {
             >
               {props.buttonText}
             </button>
+
+            <Link
+            to={`/user/${userId}/trips`}
+            className="button is-primary mr-4 is-size-4 cancel-button"
+          >
+            Cancel
+          </Link>
           </div>
         </div>
+    
       </form>
+
     </>
   );
 };

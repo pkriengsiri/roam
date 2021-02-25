@@ -1,5 +1,5 @@
 import React, { useContext} from "react";
-import { Link } from "react-router-dom";
+import { Link,useParams } from "react-router-dom";
 import "./TripCard.css";
 import UserContext from "../../contexts/UserContext";
 
@@ -8,6 +8,10 @@ const TripCard = ({ destination, startDate, endDate, travelers, _id }) => {
 
 
   const {id} = useContext(UserContext);
+
+    // browser params
+    const { tripId } = useParams();
+    const { userId } = useParams();
 
 
 
@@ -26,10 +30,10 @@ const TripCard = ({ destination, startDate, endDate, travelers, _id }) => {
                     </Link>
                   </div>
                   <div className="column is-3 has-text-right">
-                    <Link to={`/user/${id}/trips/${_id}`}>
+                    <Link to={`/user/${userId}/trips/${_id}`}>
                       <i className="icon fas fa-eye"></i>
                     </Link>
-                    <Link to={`/user/${id}/trips/${_id}/edit`}>
+                    <Link to={`/user/${userId}/trips/${_id}/edit`}>
                       <i className="icon far fa-edit m-1"></i>
                     </Link>
                   </div>
