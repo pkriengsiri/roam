@@ -3,6 +3,7 @@ import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import { useParams } from "react-router-dom";
 import API from "../../utils/API";
+import "./SingleTrip.css"
 // populate page with info from the database about a single trip
 
 const SingleTrip = () => {
@@ -43,7 +44,7 @@ const SingleTrip = () => {
                 selected={startDate}
                 startDate={startDate}
                 endDate={endDate}
-                selectsRange
+                
                 inline
               />
             </div>

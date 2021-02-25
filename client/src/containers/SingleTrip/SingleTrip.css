@@ -44,6 +44,11 @@
     background-color: #2E3560;
   }
   
+  .react-datepicker__day--keyboard-selected, .react-datepicker__day--keyboard-selected:hover {
+      background: none;
+      color: black;
+      border-color:#2E3560;
+  }
   
   .input{
     background-color: white;
