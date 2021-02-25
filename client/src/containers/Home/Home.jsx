@@ -31,6 +31,8 @@ const Home = ({ setUserContext }) => {
     setSignUpModalState(true);
   };
 
+ 
+
   return (
     <>
       {loginModalState && (
