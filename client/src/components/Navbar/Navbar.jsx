@@ -2,11 +2,13 @@ import React, { useState } from "react";
 import Logo from "../../Assets/Images/roam5.svg";
 import LoginModal from "../../components/LoginModal/LoginModal";
 import SignUpModal from "../../components/SignUpModal/SignUpModal";
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
+import UserContext from "../../contexts/UserContext";
 
-const Navbar = () => {
+const Navbar = ({ userContext, setUserContext }) => {
   const [loginModalState, setLoginModalState] = useState(false);
   const [signUpModalState, setSignUpModalState] = useState(false);
+  const history = useHistory();
 
   const toggleLoginModal = (e) => {
     e.preventDefault();
@@ -26,6 +28,14 @@ const Navbar = () => {
   const closeLoginModal = (e) => {
     e.preventDefault();
     setLoginModalState(false);
+  };
+
+  const handleLogout = (e) => {
+    e.preventDefault();
+    console.log("you clicked the logout button");
+    console.log(userContext)
+    setUserContext({ email: "", id: "" });
+    history.push("/");
   };
   return (
     <>
@@ -56,28 +66,37 @@ const Navbar = () => {
         </div>
 
         {/* TODO: Conditionally render if the user is logged in */}
-        {/* <div id="navbarBasicExample" className="navbar-menu">
+        {userContext.email !== "" && (
+          <div id="navbarBasicExample" className="navbar-menu">
+            <div className="navbar-end">
+              <div className="navbar-item">
+                <a className="navbar-item">Dashboard</a>
+                <a
+                  className="navbar-item button is-primary ml-4"
+                  onClick={handleLogout}
+                >
+                  Logout
+                </a>
+              </div>
+            </div>
+          </div>
+        )}
+        {userContext.email === "" && (
           <div className="navbar-end">
             <div className="navbar-item">
-              <a className="navbar-item">Dashboard</a>
-              <a className="navbar-item button is-primary ml-4">Logout</a>
+              <div className="buttons">
+                <a className="button is-primary" onClick={toggleSignUpModal}>
+                  <strong>Sign up</strong>
+                </a>
+                <a className="button is-light" onClick={toggleLoginModal}>
+                  Log in
+                </a>
+              </div>
             </div>
           </div>
-        </div> */}
+        )}
 
         {/* TODO: Conditionally render if the user is not logged in */}
-        <div className="navbar-end">
-          <div className="navbar-item">
-            <div className="buttons">
-              <a className="button is-primary" onClick={toggleSignUpModal}>
-                <strong>Sign up</strong>
-              </a>
-              <a className="button is-light" onClick={toggleLoginModal}>
-                Log in
-              </a>
-            </div>
-          </div>
-        </div>
       </nav>
     </>
   );
