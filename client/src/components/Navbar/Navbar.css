@@ -3,6 +3,6 @@
     
 }
 
-navbar-link:hover {
-   color: #F6F1E9;
+a.navbar-link:hover, a.navbar-link:active {
+   background-color: #F6F1E9 !important;
 }

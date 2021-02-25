@@ -95,7 +95,7 @@ const Navbar = ({ setUserContext }) => {
                   </Link>
                   <hr className="navbar-divider" />
                   <a className="navbar-item" onClick={handleLogout}>
-                    Logout
+                    <strong>Logout</strong>
                   </a>
                 </div>
               </div>
