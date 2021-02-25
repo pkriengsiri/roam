@@ -2,12 +2,12 @@
 
 /* // inherit font family from App.scss */
 .react-datepicker {
-  font-family: 'Lato', sans-serif;
+  font-family: "Lato", sans-serif;
 }
 
 .react-datepicker__day--in-selecting-range:hover,
-.react-datepicker__day--selected:hover{
-  background-color: #2E3560;
+.react-datepicker__day--selected:hover {
+  background-color: #2e3560;
 }
 
 /* // inherit date picker colors from App.scss */
@@ -18,7 +18,7 @@
 .react-datepicker__month-text--selected,
 .react-datepicker__year-text--selected,
 .react-datepicker__year-text--in-selecting-range {
-  background-color: #2E3560;
+  background-color: #2e3560;
 }
 
 /* // inherit date picker colors from App.scss */
@@ -30,7 +30,7 @@
 .react-datepicker__quarter-text--in-selecting-range,
 .react-datepicker__quarter-text--in-range,
 .react-datepicker__year-text--in-range {
-  background-color: #938DB9;
+  background-color: #938db9;
 }
 
 .react-datepicker__day--in-selecting-range:hover,
@@ -41,25 +41,35 @@
 .react-datepicker__quarter-text--in-selecting-range:hover,
 .react-datepicker__quarter-text--in-range:hover,
 .react-datepicker__year-text--in-range:hover {
-  background-color: #2E3560;
+  background-color: #2e3560;
 }
-
-
 
 /* invite other travelers form  */
-.input{
+.input {
   background-color: white;
 }
-.fa-plus{
+.fa-plus {
   color: #33c1bf;
 }
 
-.email-validation{
-  color:red;
+.email-validation {
+  color: red;
   /* font-style: italic; */
 }
 
+.travelers {
+  display: inline-block;
+}
+.travelers-tag {
+  border-radius: 15px;
+  border: 1px solid #33c1bf;
+  background-color: #33c1bf;
+  color: white;
+  line-height: 45px;
+}
 
-/* .add-traveler-button{
-border:none
-} */
+.add-traveler-button,
+.add-travler-button:focus {
+  border: none;
+  outline: none;
+}

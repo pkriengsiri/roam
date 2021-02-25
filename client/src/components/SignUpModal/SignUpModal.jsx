@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import API from "../../utils/API";
 import "./SignUpModal.css";
 import {useHistory} from "react-router-dom";
+import jwt from "jsonwebtoken";
 
 const SignUpModal = ({ closeSignUpModal, setUserContext }) => {
   const [email, setEmail] = useState("");
@@ -12,6 +13,7 @@ const SignUpModal = ({ closeSignUpModal, setUserContext }) => {
     e.preventDefault();
     if (!email || !password) {
       // TODO: add alert component
+      //avoid getElementbyId -- React conditional rendering
       console.log("error");
       document.getElementById("signup-error").classList.remove("is-hidden");
     } else {
@@ -21,8 +23,18 @@ const SignUpModal = ({ closeSignUpModal, setUserContext }) => {
         password: password,
       })
         .then((response) => {
-          setUserContext({email: response.data.email, id: response.data._id});
-          history.push(`/user/${response.data._id}/edit`);
+          console.log(response.data);
+          jwt.verify(response.data.token, process.env.REACT_APP_SECRET, (err, data)=> {
+            if (err){
+              console.log(err);
+              //display error message
+            } else {
+              console.log(data);
+              //set on global user state
+            }
+          })
+          // setUserContext({email: response.data.email, id: response.data._id});
+          // history.push(`/user/${response.data._id}/edit`);
         })
         .catch((err) => {
           console.log(err);
