@@ -8,6 +8,9 @@ const API = {
   createUser: function (userData) {
     return axios.post("/api/auth/signup",userData);
   },
+  loginUser: function(userData) {
+    return axios.post("/api/auth/signup",userData);
+  },
   getUser: function (id) {
     return axios.get(`/api/users/${id}`);
   },
