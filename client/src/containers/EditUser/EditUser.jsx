@@ -14,15 +14,15 @@ const EditUser = () => {
 
   useEffect(() => {
     if (id) {
-      API.getUser(id).then((response)=> {
-        console.log(response);
-        setFirstName(response.data.firstName);
-        setLastName(response.data.lastName);
-        setEmail(response.data.email);
-        
-      }).catch((err)=> {
-        console.log(err);
-      })
+      API.getUser(id)
+        .then((response) => {
+          setFirstName(response.data.firstName);
+          setLastName(response.data.lastName);
+          setEmail(response.data.email);
+        })
+        .catch((err) => {
+          console.log(err);
+        });
     }
   }, []);
 
@@ -35,7 +35,6 @@ const EditUser = () => {
       password: password,
     })
       .then((response) => {
-        console.log(response);
         history.push(`/dashboard/${response.data._id}`);
       })
       .catch((err) => {
@@ -43,8 +42,7 @@ const EditUser = () => {
       });
   };
 
-  
-// NEED TO UPDATE THE IMAGE WITH EDIT FUNCTIONALITY 
+  // NEED TO UPDATE THE IMAGE WITH EDIT FUNCTIONALITY
   return (
     <div className="container">
       <h1 className="title has-text-centered">Edit Account</h1>
@@ -64,6 +62,7 @@ const EditUser = () => {
               <label className="label">First Name</label>
               <div className="control">
                 <input
+                  name="firstName"
                   className="input"
                   type="text"
                   placeholder="e.g Alex"
@@ -77,6 +76,7 @@ const EditUser = () => {
               <label className="label">Last Name</label>
               <div className="control">
                 <input
+                  name="lastName"
                   className="input"
                   type="text"
                   placeholder="e.g. Smith"
@@ -90,6 +90,7 @@ const EditUser = () => {
               <label className="label">Email</label>
               <div className="control">
                 <input
+                  name="email"
                   className="input"
                   type="email"
                   placeholder="e.g. alexsmith@gmail.com"
@@ -104,6 +105,7 @@ const EditUser = () => {
               <div className="control">
                 <input
                   className="input"
+                  name="password"
                   type="password"
                   placeholder="Password"
                   value={password}
