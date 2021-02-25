@@ -6,7 +6,7 @@ const API = {
     return axios.get("/api/users");
   },
   createUser: function (userData) {
-    return axios.post("/api/users",userData);
+    return axios.post("/api/auth/signup",userData);
   },
   getUser: function (id) {
     return axios.get(`/api/users/${id}`);

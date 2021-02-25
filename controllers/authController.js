@@ -14,7 +14,7 @@ module.exports = {
       db.User.create(userToCreate)
         .then((newUser) => {
           console.log(newUser);
-          const token = jwt.sign({ _id: newUser._id}, "teammoose");
+          const token = jwt.sign({ _id: newUser._id}, process.env.SECRET);
           res.json({token: token});
         })
         .catch((err) => {
