@@ -14,6 +14,9 @@ const API = {
   getUser: function (id) {
     return axios.get(`/api/users/${id}`);
   },
+  getUserWithTrips: function (id) {
+    return axios.get(`/api/users/${id}/trips`);
+  },
   editUser: function (id,userData) {
     return axios.put(`/api/users/${id}`,userData);
   },
