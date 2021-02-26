@@ -71,6 +71,12 @@ const TripForm = (props) => {
     }
   };
 
+  // remove traveler
+  const removeTraveler = ()=>{
+    console.log("clicked remove")
+  }
+  
+
   // set calendar dates
   const onChange = (dates) => {
     const [start, end] = dates;
@@ -184,6 +190,7 @@ const TripForm = (props) => {
                     <em>{traveler.status}</em>
                   </span>
                 )}
+                <span onClick={removeTraveler}> x </span>
               </span>
             </p>
           ))}
