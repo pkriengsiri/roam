@@ -6,11 +6,13 @@ import jwt from "jsonwebtoken";
 import AlertContext from "../../contexts/AlertContext";
 import UserContext from "../../contexts/UserContext"
 import Alert from "../Alert/Alert";
+import useEmail from "../../hooks/useEmail";
 
 const SignUpModal = ({ closeSignUpModal}) => {
-  const [email, setEmail] = useState("");
+  // const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const history = useHistory();
+  const [email,handleEmailChange,emailStatus] = useEmail("");
 
   const { onDisplay, display, theme } = useContext(AlertContext);
   const {setUserContext} = useContext(UserContext)
@@ -77,7 +79,7 @@ const SignUpModal = ({ closeSignUpModal}) => {
                     placeholder="Email"
                     value={email}
                     onChange={(e) => {
-                      setEmail(e.target.value);
+                      handleEmailChange(e.target.value);
                     }}
                   />
                   <span className="icon is-small is-left">
