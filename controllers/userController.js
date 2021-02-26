@@ -18,9 +18,8 @@ module.exports = {
   },
 
   findByIdWithTrips: function (req, res) {
-    // console.log(req)
     db.User.findById(req.params.userId)
-    .populate("trips")
+    .populate({path:"trips",options:{sort:{"startDate":1}}})
       .then((dbUser) => res.json(dbUser))
       .catch((err) => res.status(422).json(err));
   },

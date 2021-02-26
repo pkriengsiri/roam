@@ -17,6 +17,7 @@ const TripForm = (props) => {
       travelerId: props.tripCreatorId,
       travelerEmail: "",
       status: "You",
+      // TODO: We want it to be creator as You will show up on the non-creators trips as well
     },
   ]);
 
