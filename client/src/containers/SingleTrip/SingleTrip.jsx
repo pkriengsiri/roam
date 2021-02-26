@@ -23,11 +23,8 @@ const SingleTrip = () => {
           setDestination(response.data.destination);
           const responseStartDate = new Date(response.data.startDate);
           const responseEndDate = new Date(response.data.endDate);
-
-          
           setStartDate(responseStartDate);
           setEndDate(responseEndDate);
-          
           setTravelers(response.data.travelers);
         })
         .catch((err) => {
@@ -39,7 +36,7 @@ const SingleTrip = () => {
   return (
     <div className="container">
       <h1 className="title has-text-centered">Your Trip to {destination}!</h1>
-      <h1 className="subtitle has-text-centered">{startDate.toLocaleDateString()} - {endDate.toLocaleDateString()}</h1>
+      <h1 className="subtitle has-text-centered">{startDate?.toLocaleDateString()} - {endDate?.toLocaleDateString()}</h1>
 
       <div className="columns is-centered">
         <div className="column is-3">
