@@ -8,11 +8,23 @@ module.exports = {
       .then((dbUser) => res.json(dbUser))
       .catch((err) => res.status(422).json(err));
   },
+
+
+
   findById: function (req, res) {
     db.User.findById(req.params.id)
       .then((dbUser) => res.json(dbUser))
       .catch((err) => res.status(422).json(err));
   },
+
+  findByIdWithTrips: function (req, res) {
+    // console.log(req)
+    db.User.findById(req.params.userId)
+    .populate("trips")
+      .then((dbUser) => res.json(dbUser))
+      .catch((err) => res.status(422).json(err));
+  },
+
   create: function (req, res) {
     db.User.create({ ...req.body, email: req.body.email.toLowerCase() })
       .then((dbUser) => res.json(dbUser))
