@@ -1,11 +1,14 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import { useParams, Link } from "react-router-dom";
 import API from "../../utils/API";
 import "./SingleTrip.css";
+import UserContext from "../../contexts/UserContext";
 
 const SingleTrip = () => {
+  const { userContext } = useContext(UserContext);
+
   const [destination, setDestination] = useState("");
   const [startDate, setStartDate] = useState(new Date());
   const [endDate, setEndDate] = useState(null);
@@ -19,7 +22,7 @@ const SingleTrip = () => {
     if (tripId) {
       API.getTrip(tripId)
         .then((response) => {
-          console.log(response.data);
+          // console.log(response.data);
           setDestination(response.data.destination);
           const responseStartDate = new Date(response.data.startDate);
           const responseEndDate = new Date(response.data.endDate);
@@ -36,7 +39,9 @@ const SingleTrip = () => {
   return (
     <div className="container">
       <h1 className="title has-text-centered">Your Trip to {destination}!</h1>
-      <h1 className="subtitle has-text-centered">{startDate?.toLocaleDateString()} - {endDate?.toLocaleDateString()}</h1>
+      <h1 className="subtitle has-text-centered">
+        {startDate?.toLocaleDateString()} - {endDate?.toLocaleDateString()}
+      </h1>
 
       <div className="columns is-centered">
         <div className="column is-3">
@@ -48,24 +53,21 @@ const SingleTrip = () => {
         <div className="column is-3">
           <h2 className="subtitle">Travelers:</h2>
           <ul>
-            {travelers.map((traveler, index) => (
-              <>
-                {traveler.status === "You" && (
-                  <li key={index}>
-                    {`${traveler.travelerEmail} `}
-                    <span>{traveler.status}</span>
-                  </li>
-                )}
-                {traveler.status !== "You" && (
-                  <li key={index}>
-                    {`${traveler.travelerEmail}   `}
-                    <span className="pl-1">
-                      <em>{traveler.status}</em>
-                    </span>
-                  </li>
-                )}
-              </>
-            ))}
+            {travelers.map((traveler, index) => {
+              console.log(traveler.travelerEmail)
+              console.log(userContext.email)
+              return (
+                <li key={index}>
+                  {traveler.travelerEmail === userContext.email && (
+                    <span>YOU - </span>
+                  )}
+                  {`${traveler.travelerEmail} - `}
+                  <span>
+                    <em>{traveler.status}</em>
+                  </span>
+                </li>
+              );
+            })}
           </ul>
         </div>
       </div>

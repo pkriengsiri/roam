@@ -34,9 +34,9 @@ const LoginModal = ({ closeLoginModal, setUserContext }) => {
                 // TODO:  display an error message to the user stating that the sign-up failed (use global alert)
                 console.log(err);
               } else {
-                console.log(data);
-                setUserContext({ userId: data._id, email: email });
+                // console.log(data);
                 history.push(`/user/${data._id}/trips`);
+                setUserContext({ userId: data._id, email: email });
               }
             }
           );
