@@ -55,9 +55,22 @@ const SingleTrip = () => {
           <h2 className="subtitle">Travelers:</h2>
           <ul>
             {travelers.map((traveler, index) => (
-              <li
-                key={index}
-              >{`${traveler.travelerEmail} (${traveler.status})`}</li>
+              <>
+                {traveler.status === "You" && (
+                  <li key={index}>
+                    {`${traveler.travelerEmail} `}
+                    <span>{traveler.status}</span>
+                  </li>
+                )}
+                {traveler.status !== "You" && (
+                  <li key={index}>
+                    {`${traveler.travelerEmail}   `}
+                    <span className="pl-1">
+                      <em>{traveler.status}</em>
+                    </span>
+                  </li>
+                )}
+              </>
             ))}
           </ul>
         </div>

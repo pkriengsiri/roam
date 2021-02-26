@@ -67,9 +67,3 @@
   color: white;
   line-height: 45px;
 }
-
-.add-traveler-button,
-.add-travler-button:focus {
-  border: none;
-  outline: none;
-}
