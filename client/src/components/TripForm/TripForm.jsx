@@ -19,6 +19,7 @@ const TripForm = (props) => {
       status: "Going-Creator",
     },
   ]);
+  const [removedTravelers, setRemovedTravelers] = useState([]);
 
   // state to add traveler to travelers list state
   const [traveler, setTraveler] = useState("");
@@ -76,7 +77,7 @@ const TripForm = (props) => {
     let filteredTravelers = travelers.filter(
       (traveler) => traveler.travelerEmail !== targetEmail
     );
-
+    setRemovedTravelers([...removedTravelers, targetEmail]);
     setTravelers(filteredTravelers);
   };
 
