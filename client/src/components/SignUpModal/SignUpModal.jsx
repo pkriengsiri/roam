@@ -12,7 +12,7 @@ const SignUpModal = ({ closeSignUpModal}) => {
   // const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const history = useHistory();
-  const [email,handleEmailChange,emailStatus] = useEmail("");
+  const [email,handleEmailChange,emailStatus,emailStatusMessage] = useEmail("");
 
   const { onDisplay, display, theme } = useContext(AlertContext);
   const {setUserContext} = useContext(UserContext)
@@ -20,7 +20,6 @@ const SignUpModal = ({ closeSignUpModal}) => {
   const handleSubmit = (e) => {
     e.preventDefault();
     if (!email || !password) {
-      
       onDisplay(true, "error");
     } else {
       onDisplay(false);
@@ -87,6 +86,14 @@ const SignUpModal = ({ closeSignUpModal}) => {
                   </span>
                 </div>
               </div>
+
+              {!emailStatus && (
+                <Alert
+                  color={theme}
+                >
+                  {emailStatusMessage}
+                </Alert>
+              )}
               <strong>
                 <p className="mt-4">Password</p>
               </strong>
