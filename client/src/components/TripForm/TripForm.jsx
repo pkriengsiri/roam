@@ -49,19 +49,26 @@ const TripForm = (props) => {
   // add traveler to the travelers list
   const addTraveler = (e) => {
     e.preventDefault();
-    console.log(travelers);
-    if (validateEmail(e.target.traveler.value)) {
-      setValidEmailPromptState(false);
-      const newInvite = e.target.traveler.value.toLowerCase();
-      setTravelers([
-        ...travelers,
-        { travelerEmail: newInvite, travelerId: "", status: "pending" },
-      ]);
-      setTraveler("");
+    const newTraveler = travelers.find((traveler) => {
+      return traveler.travelerEmail === e.target.traveler.value.toLowerCase();
+    });
+    if (newTraveler) {
+      //Todo: add alert
+      console.log("user already exists");
     } else {
-      setValidEmailPromptState(true);
+      if (validateEmail(e.target.traveler.value)) {
+        setValidEmailPromptState(false);
+        const newInvite = e.target.traveler.value.toLowerCase();
+        setTravelers([
+          ...travelers,
+          { travelerEmail: newInvite, travelerId: "", status: "pending" },
+        ]);
+        setTraveler("");
+      } else {
+        setValidEmailPromptState(true);
+      }
+      // TODO: "Invite Sent" alert or message
     }
-    // TODO: "Invite Sent" alert or message
   };
 
   // set calendar dates
@@ -148,6 +155,13 @@ const TripForm = (props) => {
                     Please enter a valid email address
                   </p>
                 )}
+                <span>
+                  <i
+                    type="submit"
+                    className="fas fa-plus fa-lg add-traveler-button"
+                    className=""
+                  ></i>
+                </span>
               </div>
               <div class="control">
                 <button type="submit" className="button">
