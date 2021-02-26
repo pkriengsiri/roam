@@ -1,26 +1,33 @@
-import React, { useContext} from "react";
-import { Link,useParams } from "react-router-dom";
+import React, { useContext } from "react";
+import { Link, useParams } from "react-router-dom";
 import "./TripCard.css";
 import UserContext from "../../contexts/UserContext";
 
-const TripCard = ({ destination, startDate, endDate, travelers, tripId,tripCreator }) => {
+const TripCard = ({
+  destination,
+  startDate,
+  endDate,
+  travelers,
+  tripId,
+  tripCreator,
+  imageUrl,
+}) => {
+  const { id } = useContext(UserContext);
 
+  // browser params
+  // const { tripId } = useParams();
+  const { userId } = useParams();
 
-
-  const {id} = useContext(UserContext);
-
-    // browser params
-    // const { tripId } = useParams();
-    const { userId } = useParams();
-
-// TODO: Add image to trip card
-
+  // TODO: Add image to trip card
 
   return (
     <div className="columns is-centered">
       <div className="column is-5">
         <div className="card trip-card">
           <div className="card-content has-text-left">
+            <div className="column is-12">
+              <img src={imageUrl} />
+            </div>
             <div className="media">
               <div className="media-content">
                 <div className="columns">
@@ -33,11 +40,11 @@ const TripCard = ({ destination, startDate, endDate, travelers, tripId,tripCreat
                     <Link to={`/user/${userId}/trips/${tripId}`}>
                       <i className="icon fas fa-eye"></i>
                     </Link>
-                    {userId===tripCreator && (
-                      
+                    {userId === tripCreator && (
                       <Link to={`/user/${userId}/trips/${tripId}/edit`}>
-                      <i className="icon far fa-edit m-1"></i>
-                    </Link>)}
+                        <i className="icon far fa-edit m-1"></i>
+                      </Link>
+                    )}
                   </div>
                 </div>
               </div>

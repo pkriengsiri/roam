@@ -33,7 +33,9 @@ module.exports = {
         const placesImageUrl = `https://maps.googleapis.com/maps/api/place/photo?photoreference=${photoReference}&key=${process.env.PLACES_API_KEY}&maxwidth=400&maxheight=400`;
         // Upload the image to cloudinary
         cloudinary.uploader.upload(placesImageUrl, function (error, result) {
-          requestObject.imageUrl = response.url;
+          requestObject.imageUrl = result.url;
+          console.log(result);
+          console.log(requestObject);
           db.Trip.create(requestObject)
             .then((dbTrip) => {
               // ad the trip id to each travel
