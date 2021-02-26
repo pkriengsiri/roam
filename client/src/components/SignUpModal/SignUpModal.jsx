@@ -9,7 +9,6 @@ import Alert from "../Alert/Alert";
 import useEmail from "../../hooks/useEmail";
 
 const SignUpModal = ({ closeSignUpModal}) => {
-  // const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const history = useHistory();
   const [email,handleEmailChange,emailStatus,emailStatusMessage] = useEmail("");
@@ -19,17 +18,21 @@ const SignUpModal = ({ closeSignUpModal}) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    // Check to see if email or password are valid
     if (!emailStatus || !password) {
+      // Display error message if email or password are note valid
       onDisplay(true, "error");
     } else {
+      // Clear error message
       onDisplay(false);
+      // Make API call
       let preStoreEmail = email;
       API.createUser({
         email: preStoreEmail.toLowerCase(),
         password: password,
       })
         .then((response) => {
-          console.log(response.data);
+          // Validate response then redirect
           jwt.verify(
             response.data.token,
             process.env.REACT_APP_SECRET,
@@ -38,7 +41,6 @@ const SignUpModal = ({ closeSignUpModal}) => {
                 // TODO:  display an error message to the user stating that the sign-up failed (use global alert)
                 console.log(err);
               } else {
-                console.log(data);
                 setUserContext({ userId: data._id });
                 history.push(`/user/${data._id}/edit`);
               }
