@@ -17,8 +17,6 @@ const SignUpModal = ({ closeSignUpModal, setUserContext }) => {
     e.preventDefault();
     if (!email || !password) {
       
-      console.log("error");
-      
       onDisplay(true, "error");
     } else {
       onDisplay(false);
