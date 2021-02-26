@@ -28,7 +28,7 @@ function App() {
   });
 
   return (
-    <UserContext.Provider value={userContext}>
+    <UserContext.Provider value={{userContext, setUserContext}}>
       <AlertContext.Provider value={alertContext}>
       <div className="App">
         <Router>
