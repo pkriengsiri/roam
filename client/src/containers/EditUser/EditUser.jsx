@@ -10,7 +10,7 @@ const EditUser = () => {
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
   const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+
 
   useEffect(() => {
     if (userId) {
@@ -34,7 +34,6 @@ const EditUser = () => {
       firstName: firstName,
       lastName: lastName,
       email: preStoreEmail.toLowerCase(),
-      password: password,
     })
       .then((response) => {
         console.log(response);
