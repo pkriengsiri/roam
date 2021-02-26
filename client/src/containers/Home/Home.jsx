@@ -60,7 +60,7 @@ const Home = ({ setUserContext }) => {
           <source src={BeachVideo} type="video/mp4" />
         </video>
         {/* <h1 className="slogan">Vacation planning made easy. </h1> */}
-        <div className="homepage-container">
+        {/* <div className="homepage-container"> */}
         <h1 className="has-text-centered title slogan">Go further <em>together</em>.</h1>
         <button
           className="button home-signup-button is-primary mr-4 is-size-4"
@@ -74,7 +74,7 @@ const Home = ({ setUserContext }) => {
         >
           Login
         </button>
-        </div>
+        {/* </div> */}
       </section>
 
       <div className="container">
