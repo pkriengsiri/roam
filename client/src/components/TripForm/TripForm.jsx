@@ -16,7 +16,7 @@ const TripForm = (props) => {
     {
       travelerId: props.tripCreatorId,
       travelerEmail: "",
-      status: "Going-Creator",
+      status: "You",
     },
   ]);
 
