@@ -1,13 +1,14 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import "./TripForm.css";
 import { useParams, Link } from "react-router-dom";
 import axios from "axios";
+import UserContext from "../../contexts/UserContext";
 
 const TripForm = (props) => {
+  const { userContext } = useContext(UserContext);
   // state for form object
-  const [tripCreator, setTripCreator] = useState(props.tripCreatorId);
   const [destination, setDestination] = useState("");
   // TODO: Do we want travel start date initiated as today?
   const [startDate, setStartDate] = useState(new Date());
@@ -15,7 +16,7 @@ const TripForm = (props) => {
   const [travelers, setTravelers] = useState([
     {
       travelerId: props.tripCreatorId,
-      travelerEmail: "",
+      travelerEmail: userContext.email,
       status: "You",
       // TODO: We want it to be creator as You will show up on the non-creators trips as well
     },
@@ -23,7 +24,8 @@ const TripForm = (props) => {
 
   // state to add traveler to travelers list state
   const [traveler, setTraveler] = useState("");
-  const [validEmailPromptState, setValidEmailPromptState] = useState(false);
+  const [validEmailPromptState, setValidEmailPromptState] = useState(true);
+  const [validRemoveState, setValidRemoveState] = useState(true);
 
   // browser params
   const { tripId } = useParams();
@@ -58,7 +60,7 @@ const TripForm = (props) => {
       console.log("user already exists");
     } else {
       if (validateEmail(e.target.traveler.value)) {
-        setValidEmailPromptState(false);
+        setValidEmailPromptState(true);
         const newInvite = e.target.traveler.value.toLowerCase();
         setTravelers([
           ...travelers,
@@ -66,7 +68,7 @@ const TripForm = (props) => {
         ]);
         setTraveler("");
       } else {
-        setValidEmailPromptState(true);
+        setValidEmailPromptState(false);
       }
       // TODO: "Invite Sent" alert or message
     }
@@ -74,10 +76,19 @@ const TripForm = (props) => {
 
   // remove traveler
   const removeTraveler = (targetEmail) => {
-    let filteredTravelers = travelers.filter(
-      (traveler) => traveler.travelerEmail !== targetEmail
-    );
-    setTravelers(filteredTravelers);
+    if (targetEmail === userContext.email) {
+      console.log(targetEmail)
+      console.log(traveler.travelerEmail)
+      setValidRemoveState(false)
+    } else{
+      let filteredTravelers = travelers.filter(
+        (traveler) => traveler.travelerEmail !== targetEmail
+      );
+      setTravelers(filteredTravelers);
+      setValidRemoveState(true)
+      
+
+    }
   };
 
   // set calendar dates
@@ -159,11 +170,12 @@ const TripForm = (props) => {
                 <span className="icon is-medium is-left">
                   <i className="fas fa-users"></i>
                 </span>
-                {validEmailPromptState && (
-                  <p className="email-validation">
+                {!validEmailPromptState && (
+                  <p className="validation">
                     Please enter a valid email address
                   </p>
                 )}
+
                 <span>
                   <i
                     type="submit"
@@ -183,6 +195,11 @@ const TripForm = (props) => {
 
         {/* Traveler bubbles */}
         <div className="mb-5">
+        {!validRemoveState && (
+            <p className="validation">
+              Cannot remove trip creator. Cancel or delete trip.
+            </p>
+          )}
           {travelers.map((traveler, index) => (
             <p className="travelers" key={index}>
               <span className="travelers-tag p-2 mr-2">
@@ -204,6 +221,7 @@ const TripForm = (props) => {
               </span>
             </p>
           ))}
+ 
         </div>
 
         {/* Save button */}
