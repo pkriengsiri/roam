@@ -54,10 +54,14 @@ const Home = ({ setUserContext }) => {
       )}
 
       <section className="hero-section">
+        
         <video autoPlay loop muted>
+        
           <source src={BeachVideo} type="video/mp4" />
         </video>
-        {/* <h1 className="title hero-title has-text-centered is-size-1">Welcome to Roam!</h1> */}
+        {/* <h1 className="slogan">Vacation planning made easy. </h1> */}
+        <div className="homepage-container">
+        <h1 className="has-text-centered title slogan">Go further <em>together</em>.</h1>
         <button
           className="button home-signup-button is-primary mr-4 is-size-4"
           onClick={toggleSignUpModal}
@@ -70,6 +74,7 @@ const Home = ({ setUserContext }) => {
         >
           Login
         </button>
+        </div>
       </section>
 
       <div className="container">

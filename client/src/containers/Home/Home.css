@@ -46,6 +46,26 @@ video {
   top: 50%;
 }
 
+.slogan {
+  position: absolute;
+  z-index: 0;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  color: white;
+  font-size: 70px;
+  margin: 90px;
+}
+
+.homepage-container {
+  display: inline-block;
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+  width: 50%;
+}
+
 /* These rules take effect when the browser's width is 1770px or less */
 
 @media screen and (max-width: 1770px) {
@@ -74,6 +94,11 @@ video {
     left: 55%;
     top: 50%;
   }
+
+  .slogan {
+    font-size: 55px;
+    margin: 60px;
+  }
 }
 
 /* These rules take effect when the browser's width is 620px or less */
@@ -91,5 +116,9 @@ video {
     position: absolute;
     left: 50%;
     top: 50%;
+  }
+  .slogan {
+    font-size: 40px;
+    margin: 60px;
   }
 }
