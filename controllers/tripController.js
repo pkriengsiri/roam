@@ -14,7 +14,6 @@ module.exports = {
       .catch((err) => res.status(422).json(err));
   },
 
-
   create: async function (req, res) {
     // add user ids for by email
     const requestObject = await addTravelerIdByEmail(req.body);
@@ -30,8 +29,6 @@ module.exports = {
       .catch((err) => res.status(422).json(err));
   },
 
-
-
   update: async function (req, res) {
     // add user ids for by email
     const requestObject = await addTravelerIdByEmail(req.body);
@@ -46,13 +43,27 @@ module.exports = {
       .catch((err) => res.status(422).json(err));
   },
 
-  remove: function (req, res) {
+  remove: async function (req, res) {
     // TODO: have request include user id. make sure userId === tripCreator before deleting
-
-    db.Trip.findById({ _id: req.params.id })
-      .then((dbTrip) => dbTrip.remove())
-      .then((dbTrip) => res.json(dbTrip))
-      .catch((err) => res.status(422).json(err));
+    const tripToDelete = req.params.id;
+    // find users who were on the trip to be deleted
+    await db.User.find({ trips: tripToDelete })
+      .then((dbTripUsers) => {
+        // for each user on the trip, update their trips array
+        dbTripUsers
+          .forEach((traveler) => {
+            removeTripFromUser(tripToDelete, traveler);
+          })
+          .then((res) => {
+            //  deleted the trip from the trip collection in db
+            db.Trip.findById({ _id: tripToDelete })
+              .then((dbTrip) => dbTrip.remove())
+              .then((dbTrip) => res.json(dbTrip))
+              .catch((err) => res.status(422).json(err));
+          })
+          .catch((err) => res.json(err));
+      })
+      .catch((err) => res.json(err));
   },
 };
 
@@ -102,4 +113,22 @@ const addTripToTravelers = async (dbObject) => {
         // .then((res) => console.log(res))
         .catch((err) => console.log(err));
     });
+};
+
+// users with the trip
+const getUsersByTrip = async (tripId) => {};
+
+// update remove trip from user
+const removeTripFromUser = async (tripToDelete, user) => {
+  let filteredTrips = user.trips.filter((trip) => {
+    // trip is an object as it is set as a reference in the model
+    return trip != tripToDelete;
+  });
+
+  // send filtered trips array to database to update user
+  await db.User.findByIdAndUpdate(
+    user._id,
+    { $set: { trips: filteredTrips } },
+    { new: true }
+  );
 };
