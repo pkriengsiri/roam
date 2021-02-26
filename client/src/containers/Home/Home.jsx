@@ -1,13 +1,16 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useContext } from "react";
 import "./Home.css";
 import LoginModal from "../../components/LoginModal/LoginModal";
 import SignUpModal from "../../components/SignUpModal/SignUpModal";
 import TestimonialCard from "../../components/TestimonialCard/TestimonialCard";
 import BeachVideo from "./Beach1.mp4";
+import AlertContext from "../../contexts/AlertContext";
 
 const Home = ({ setUserContext }) => {
   const [loginModalState, setLoginModalState] = useState(false);
   const [signUpModalState, setSignUpModalState] = useState(false);
+
+  const { onDisplay, display, theme } = useContext(AlertContext);
 
   useEffect(() => {
     document.title = "Roam";
@@ -16,10 +19,12 @@ const Home = ({ setUserContext }) => {
   const closeLoginModal = (e) => {
     e.preventDefault();
     setLoginModalState(false);
+    onDisplay(false);
   };
   const closeSignUpModal = (e) => {
     e.preventDefault();
     setSignUpModalState(false);
+    onDisplay(false);
   };
   const toggleLoginModal = (e) => {
     e.preventDefault();
