@@ -129,9 +129,9 @@ const TripForm = (props) => {
       <form className="invite" onSubmit={addTraveler}>
         <label className="label">Invite Others!</label>
         <div className="columns is-vcentered">
-          <div className="column is-two-thirds">
-            <div className="field">
-              <div className="control">
+          <div className="column">
+            <div className="field has-addons has-addons-fullwidth">
+              <div className="control has-icons-left">
                 <input
                   className="input"
                   type="text"
@@ -140,20 +140,25 @@ const TripForm = (props) => {
                   value={traveler}
                   onChange={(e) => setTraveler(e.target.value)}
                 />
+                <span class="icon is-medium is-left">
+                  <i class="fas fa-users"></i>
+                </span>
                 {validEmailPromptState && (
                   <p className="email-validation">
                     Please enter a valid email address
                   </p>
                 )}
               </div>
+              <div class="control">
+                <button type="submit" className="button">
+                  <i className="fas fa-plus fa-lg"></i>
+                </button>
+              </div>
             </div>
           </div>
-          <div className="column is-one-third pl-0">
-            <button type="submit" className="add-traveler-button">
-              <i className="fas fa-plus fa-lg"></i>
-            </button>
-          </div>
         </div>
+
+        {/* Traveler bubbles */}
         <div className="mb-5">
           {travelers.map((traveler, index) => (
             <p className="travelers" key={index}>
