@@ -3,7 +3,7 @@ import { Link,useParams } from "react-router-dom";
 import "./TripCard.css";
 import UserContext from "../../contexts/UserContext";
 
-const TripCard = ({ destination, startDate, endDate, travelers, tripId }) => {
+const TripCard = ({ destination, startDate, endDate, travelers, tripId,tripCreator }) => {
 
 
 
@@ -33,9 +33,11 @@ const TripCard = ({ destination, startDate, endDate, travelers, tripId }) => {
                     <Link to={`/user/${userId}/trips/${tripId}`}>
                       <i className="icon fas fa-eye"></i>
                     </Link>
-                    <Link to={`/user/${userId}/trips/${tripId}/edit`}>
+                    {userId===tripCreator && (
+                      
+                      <Link to={`/user/${userId}/trips/${tripId}/edit`}>
                       <i className="icon far fa-edit m-1"></i>
-                    </Link>
+                    </Link>)}
                   </div>
                 </div>
               </div>
