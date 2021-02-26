@@ -11,17 +11,17 @@ const SignUpModal = ({ closeSignUpModal, setUserContext }) => {
   const [password, setPassword] = useState("");
   const history = useHistory();
 
-  const {onDisplay, display, theme} = useContext(AlertContext);
+  const { onDisplay, display, theme } = useContext(AlertContext);
 
   const handleSubmit = (e) => {
     e.preventDefault();
     if (!email || !password) {
-      // TODO: display an error message that the user need to complete both fields (use global alert)
-      //avoid getElementbyId -- React conditional rendering
+      
       console.log("error");
-      document.getElementById("signup-error").classList.remove("is-hidden");
+      
+      onDisplay(true, "error");
     } else {
-      document.getElementById("signup-error").classList.add("is-hidden");
+      onDisplay(false);
       let preStoreEmail = email;
       API.createUser({
         email: preStoreEmail.toLowerCase(),
@@ -65,7 +65,7 @@ const SignUpModal = ({ closeSignUpModal, setUserContext }) => {
           </header>
 
           <section className="modal-card-body">
-            <form className="control"  onSubmit={handleSubmit}>
+            <form className="control" onSubmit={handleSubmit}>
               <strong>
                 <p>Email</p>
               </strong>
@@ -105,14 +105,18 @@ const SignUpModal = ({ closeSignUpModal, setUserContext }) => {
                 </div>
               </div>
               <input type="submit" className="is-hidden" />
-              {/* <p id="signup-error" className="mt-2 ml-2 is-hidden">
-                Please complete both fields before submitting
-              </p> */}
-              <Alert>Hello</Alert>
+
+              {display && (
+                <Alert
+                  color={theme}
+                >
+                  Please complete both fields before submitting
+                </Alert>
+              )}
             </form>
           </section>
           <footer className="modal-card-foot">
-            <button className="button is-primary"  onClick={handleSubmit}>
+            <button className="button is-primary" onClick={handleSubmit}>
               Sign Up
             </button>
             <button className="button" onClick={closeSignUpModal}>

@@ -1,11 +1,11 @@
 import React from "react";
+import "./Alert.css";
 
 const Alert = (props) => {
   return (
-    <div className={`notification is-danger`}>
-      <button className="delete"></button>
+    <p className={`${props.color}`}>
       {props.children}
-    </div>
+    </p>
   );
 };
 
