@@ -1,13 +1,17 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import API from "../../utils/API";
 import "./SignUpModal.css";
 import { useHistory } from "react-router-dom";
 import jwt from "jsonwebtoken";
+import AlertContext from "../../contexts/AlertContext";
+import Alert from "../Alert/Alert";
 
 const SignUpModal = ({ closeSignUpModal, setUserContext }) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const history = useHistory();
+
+  const {onDisplay, display, theme} = useContext(AlertContext);
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -101,9 +105,10 @@ const SignUpModal = ({ closeSignUpModal, setUserContext }) => {
                 </div>
               </div>
               <input type="submit" className="is-hidden" />
-              <p id="signup-error" className="mt-2 ml-2 is-hidden">
+              {/* <p id="signup-error" className="mt-2 ml-2 is-hidden">
                 Please complete both fields before submitting
-              </p>
+              </p> */}
+              <Alert>Hello</Alert>
             </form>
           </section>
           <footer className="modal-card-foot">

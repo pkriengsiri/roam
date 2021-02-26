@@ -12,6 +12,7 @@ import Footer from "./components/Footer/Footer";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import "./App.css";
 import UserContext from "./contexts/UserContext";
+import AlertContext from "./contexts/AlertContext";
 
 function App() {
   const [userContext, setUserContext] = useState({
@@ -19,17 +20,25 @@ function App() {
     id: "",
   });
 
+  const [alertContext, setAlertContext] = useState({
+    display: false,
+    theme: "",
+    onDisplay: (display, theme) =>
+      setAlertContext({ ...alertContext, display, theme }),
+  });
+
   return (
     <UserContext.Provider value={userContext}>
+      <AlertContext.Provider value={alertContext}>
       <div className="App">
         <Router>
-          <NavBar setUserContext={setUserContext} userContext={userContext}/>
+          <NavBar setUserContext={setUserContext} userContext={userContext} />
           <main className="page">
             <Switch>
               <Route exact path="/">
                 <Home setUserContext={setUserContext} />
               </Route>
-              {/* <Route exact path="/user/:userId" component={Dashboard} /> */} 
+              {/* <Route exact path="/user/:userId" component={Dashboard} /> */}
               <Route exact path="/user/:userId/trips" component={Dashboard} />
               <Route exact path="/user/:userId/edit" component={EditUser} />
               <Route
@@ -52,6 +61,7 @@ function App() {
           <Footer />
         </Router>
       </div>
+      </AlertContext.Provider>
     </UserContext.Provider>
   );
 }
