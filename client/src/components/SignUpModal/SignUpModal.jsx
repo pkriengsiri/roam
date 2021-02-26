@@ -4,14 +4,16 @@ import "./SignUpModal.css";
 import { useHistory } from "react-router-dom";
 import jwt from "jsonwebtoken";
 import AlertContext from "../../contexts/AlertContext";
+import UserContext from "../../contexts/UserContext"
 import Alert from "../Alert/Alert";
 
-const SignUpModal = ({ closeSignUpModal, setUserContext }) => {
+const SignUpModal = ({ closeSignUpModal}) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const history = useHistory();
 
   const { onDisplay, display, theme } = useContext(AlertContext);
+  const {setUserContext} = useContext(UserContext)
 
   const handleSubmit = (e) => {
     e.preventDefault();
