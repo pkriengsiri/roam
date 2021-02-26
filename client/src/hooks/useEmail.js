@@ -10,19 +10,14 @@ const useEmail = (initialValue) => {
   const handleEmailChange = (value) => {
     const emailRegex = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
     if (value === "") {
+      setEmailStatus(false);
       setEmailStatusMessage("An email address is required");
     } else if (!emailRegex.test(value)) {
+      setEmailStatus(false);
       setEmailStatusMessage("Please enter a valid email");
+    } else {
+      setEmailStatus(true);
     }
-
-    // if (value.length > 4) {
-    //   const regex = new RegExp(/^[0-9]{5}(?:-[0-9]{4})?$/);
-    //   if (regex.test(value)) {
-    //     setZipCode(value);
-    //   }
-    // } else {
-    //   setZipCode(value);
-    // }
     setEmail(value);
   };
 
