@@ -17,7 +17,7 @@ const TripForm = (props) => {
     {
       travelerId: props.tripCreatorId,
       travelerEmail: userContext.email,
-      status: "You",
+      status: "Trip Creator",
       // TODO: We want it to be creator as You will show up on the non-creators trips as well
     },
   ]);
@@ -77,17 +77,15 @@ const TripForm = (props) => {
   // remove traveler
   const removeTraveler = (targetEmail) => {
     if (targetEmail === userContext.email) {
-      console.log(targetEmail)
-      console.log(traveler.travelerEmail)
-      setValidRemoveState(false)
-    } else{
+      console.log(targetEmail);
+      console.log(traveler.travelerEmail);
+      setValidRemoveState(false);
+    } else {
       let filteredTravelers = travelers.filter(
         (traveler) => traveler.travelerEmail !== targetEmail
       );
       setTravelers(filteredTravelers);
-      setValidRemoveState(true)
-      
-
+      setValidRemoveState(true);
     }
   };
 
@@ -195,7 +193,7 @@ const TripForm = (props) => {
 
         {/* Traveler bubbles */}
         <div className="mb-5">
-        {!validRemoveState && (
+          {!validRemoveState && (
             <p className="validation">
               Cannot remove trip creator. Cancel or delete trip.
             </p>
@@ -203,13 +201,13 @@ const TripForm = (props) => {
           {travelers.map((traveler, index) => (
             <p className="travelers" key={index}>
               <span className="travelers-tag p-2 mr-2">
-                {`${traveler.travelerEmail} `}
-                {traveler.status === "You" && <span>{traveler.status}</span>}
-                {traveler.status !== "You" && (
-                  <span>
-                    <em>{traveler.status}</em>
-                  </span>
+                {traveler.travelerEmail === userContext.email && (
+                  <span>YOU - </span>
                 )}
+                {`${traveler.travelerEmail} - `}
+                <span>
+                  <em>{traveler.status}</em>
+                </span>
                 <span
                   // data-email={traveler.email}
                   onClick={() => removeTraveler(traveler.travelerEmail)}
@@ -221,7 +219,6 @@ const TripForm = (props) => {
               </span>
             </p>
           ))}
- 
         </div>
 
         {/* Save button */}
