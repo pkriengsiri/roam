@@ -6,9 +6,11 @@ import { useHistory } from "react-router-dom";
 import jwt from "jsonwebtoken";
 import AlertContext from "../../contexts/AlertContext";
 import Alert from "../Alert/Alert";
+import useEmail from "../../hooks/useEmail";
+
 
 const LoginModal = ({ closeLoginModal, setUserContext }) => {
-  const [email, setEmail] = useState("");
+  const [email,handleEmailChange,emailStatus,emailStatusMessage] = useEmail("");
   const [password, setPassword] = useState("");
   const history = useHistory();
 
@@ -16,9 +18,7 @@ const LoginModal = ({ closeLoginModal, setUserContext }) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    if (!email || !password) {
-      
-      
+    if (!emailStatus || !password) {
       onDisplay(true, "error");
     } else {
       onDisplay(false);
@@ -75,7 +75,7 @@ const LoginModal = ({ closeLoginModal, setUserContext }) => {
                     placeholder="Email"
                     value={email}
                     onChange={(e) => {
-                      setEmail(e.target.value);
+                      handleEmailChange(e.target.value);
                     }}
                   />
                   <span className="icon is-small is-left">
@@ -83,6 +83,13 @@ const LoginModal = ({ closeLoginModal, setUserContext }) => {
                   </span>
                 </div>
               </div>
+              {!emailStatus && (
+                <Alert
+                  color={"error"}
+                >
+                  {emailStatusMessage}
+                </Alert>
+              )}
               <strong>
                 <p className="mt-4">Password</p>
               </strong>
@@ -107,7 +114,7 @@ const LoginModal = ({ closeLoginModal, setUserContext }) => {
                 <Alert
                   color={theme}
                 >
-                  Please complete both fields before submitting
+                  Please enter a valid email and password before submitting
                 </Alert>
               )}
             </form>
