@@ -30,6 +30,23 @@ module.exports = {
   },
 
   update: async function (req, res) {
+    const tripToUpdate = req.params.id;
+    // find users who were on the trip to be deleted
+    await db.User.find({ trips: tripToUpdate })
+      .then((dbTripUsers) => {
+        // for each user on the trip, check if they are on the updated trips travelers array
+        dbTripUsers.forEach((traveler) => {
+          // if user email is not in the updated trip
+          if (req.body.travelers.indexOf(dbTripUsers.email) === -1) {
+            // remove the trip from the user
+            removeTripFromUser(tripToUpdate, traveler).catch((err) =>
+              console.log(err)
+            );
+          } // else do nothing for to user
+        });
+      })
+      .catch((err) => console.log(err));
+
     // add user ids for by email
     const requestObject = await addTravelerIdByEmail(req.body);
     db.Trip.findOneAndUpdate({ _id: req.params.id }, requestObject, {
