@@ -4,7 +4,6 @@ import "react-datepicker/dist/react-datepicker.css";
 import { useParams, Link } from "react-router-dom";
 import API from "../../utils/API";
 import "./SingleTrip.css";
-// populate page with info from the database about a single trip
 
 const SingleTrip = () => {
   const [destination, setDestination] = useState("");
@@ -20,12 +19,15 @@ const SingleTrip = () => {
     if (tripId) {
       API.getTrip(tripId)
         .then((response) => {
-          // console.log(response.data);
+          console.log(response.data);
           setDestination(response.data.destination);
           const responseStartDate = new Date(response.data.startDate);
           const responseEndDate = new Date(response.data.endDate);
+
+          
           setStartDate(responseStartDate);
           setEndDate(responseEndDate);
+          
           setTravelers(response.data.travelers);
         })
         .catch((err) => {
@@ -37,19 +39,14 @@ const SingleTrip = () => {
   return (
     <div className="container">
       <h1 className="title has-text-centered">Your Trip to {destination}!</h1>
+      <h1 className="subtitle has-text-centered">{startDate.toLocaleDateString()} - {endDate.toLocaleDateString()}</h1>
 
       <div className="columns is-centered">
         <div className="column is-3">
-          <p>
-            <div className="mb-5">
-              <DatePicker
-                selected={startDate}
-                startDate={startDate}
-                endDate={endDate}
-                inline
-              />
-            </div>
-          </p>
+          <figure class="image is-128x128">
+            <img src="https://bulma.io/images/placeholders/256x256.png" />
+            <p>Picture of the location from API</p>
+          </figure>
         </div>
         <div className="column is-3">
           <h2 className="subtitle">Travelers:</h2>
