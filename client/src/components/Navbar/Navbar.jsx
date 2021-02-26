@@ -10,7 +10,7 @@ const Navbar = ({ setUserContext }) => {
   const [loginModalState, setLoginModalState] = useState(false);
   const [signUpModalState, setSignUpModalState] = useState(false);
   const history = useHistory();
-  const { userId } = useContext(UserContext);
+  const { userContext } = useContext(UserContext);
 
   const toggleLoginModal = (e) => {
     e.preventDefault();
@@ -65,7 +65,7 @@ const Navbar = ({ setUserContext }) => {
           </a> */}
         </div>
 
-        {userId && (
+        {userContext.userId && (
           <div id="navbarBasicExample" className="navbar-menu">
             <div className="navbar-end">
               {/* <Link to={`/user/${userId}/edit`}>
@@ -87,10 +87,10 @@ const Navbar = ({ setUserContext }) => {
                 </a>
 
                 <div className="navbar-dropdown is-right is-active">
-                  <Link to={`/user/${userId}/trips`} className="navbar-item">
+                  <Link to={`/user/${userContext.userId}/trips`} className="navbar-item">
                     Dashboard
                   </Link>
-                  <Link to={`/user/${userId}/edit`} className="navbar-item">
+                  <Link to={`/user/${userContext.userId}/edit`} className="navbar-item">
                     Edit Profile
                   </Link>
                   <hr className="navbar-divider" />
@@ -102,7 +102,7 @@ const Navbar = ({ setUserContext }) => {
             </div>
           </div>
         )}
-        {!userId && (
+        {!userContext.userId && (
           <div className="navbar-end">
             <div className="navbar-item">
               <div className="buttons">
