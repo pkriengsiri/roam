@@ -28,12 +28,7 @@ const API = {
     return axios.get("/api/trips");
   },
   createTrip: function (tripData) {
-    // return axios.post({"/api/trips", tripData, responseType:"blob"});
-    return axios({
-      method: "POST",
-      url: "/api/trips",
-      data: tripData,
-    });
+    return axios.post("/api/trips", tripData);
   },
   getTrip: function (id) {
     return axios.get(`/api/trips/${id}`);

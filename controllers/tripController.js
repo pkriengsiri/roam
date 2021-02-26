@@ -1,6 +1,7 @@
 const db = require("../models");
 const axios = require("axios");
 const fetch = require("node-fetch");
+var cloudinary = require("cloudinary").v2;
 
 // Defining methods for the userController
 module.exports = {
@@ -28,19 +29,21 @@ module.exports = {
       .then((response) => {
         const photoReference =
           response.data.candidates[0].photos[0].photo_reference;
-        // Store image URL when we're saving the trip to the database
+        // Store get the image URL
         const placesImageUrl = `https://maps.googleapis.com/maps/api/place/photo?photoreference=${photoReference}&key=${process.env.PLACES_API_KEY}&maxwidth=400&maxheight=400`;
-        var xhr = new XMLHttpRequest();
-        xhr.open('GET', url, true);
-        xhr.onload = () => {
-          this.setState({imageUrl: xhr.responseURL});
-        };
-        xhr.send(null);
-        // console.log(placesImageUrl);
-        // axios.get(placesImageUrl).then((response) => {
-        //   console.log(response.data);
-        //   res.json(response.data);
-        // });
+        // Upload the image to cloudinary
+        cloudinary.uploader.upload(placesImageUrl, function (error, result) {
+          requestObject.imageUrl = response.url;
+          db.Trip.create(requestObject)
+            .then((dbTrip) => {
+              // ad the trip id to each travel
+              addTripToTravelers(dbTrip);
+            })
+            .then((dbTrip) => {
+              res.json(dbTrip);
+            })
+            .catch((err) => res.status(422).json(err));
+        });
       })
       .catch((err) => {
         console.log(err);
