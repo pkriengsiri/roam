@@ -8,12 +8,13 @@ import AlertContext from "../../contexts/AlertContext";
 import Alert from "../Alert/Alert";
 import useEmail from "../../hooks/useEmail";
 
-
 const LoginModal = ({ closeLoginModal, setUserContext }) => {
-  const [email,handleEmailChange,emailStatus,emailStatusMessage] = useEmail("");
+  const [email, handleEmailChange, emailStatus, emailStatusMessage] = useEmail(
+    ""
+  );
   const [password, setPassword] = useState("");
   const history = useHistory();
-  const [loginFailureMessage,setLoginFailureMessage] = useState("");
+  const [loginFailureMessage, setLoginFailureMessage] = useState("");
 
   const { onDisplay, display, theme } = useContext(AlertContext);
 
@@ -28,16 +29,14 @@ const LoginModal = ({ closeLoginModal, setUserContext }) => {
         password: password,
       })
         .then((response) => {
-          console.log(response.data);
           jwt.verify(
             response.data.token,
             process.env.REACT_APP_SECRET,
             (err, data) => {
               if (err) {
-                // TODO:  display an error message to the user stating that the sign-up failed (use global alert)
+                console.log(err);
                 setLoginFailureMessage("Login attempt failed");
               } else {
-                console.log(data);
                 setUserContext({ userId: data._id });
                 history.push(`/user/${data._id}/trips`);
               }
@@ -86,11 +85,7 @@ const LoginModal = ({ closeLoginModal, setUserContext }) => {
                 </div>
               </div>
               {!emailStatus && (
-                <Alert
-                  color={"error"}
-                >
-                  {emailStatusMessage}
-                </Alert>
+                <Alert color={"error"}>{emailStatusMessage}</Alert>
               )}
               <strong>
                 <p className="mt-4">Password</p>
@@ -113,18 +108,12 @@ const LoginModal = ({ closeLoginModal, setUserContext }) => {
               </div>
               <input type="submit" className="is-hidden" />
               {display && (
-                <Alert
-                  color={theme}
-                >
+                <Alert color={theme}>
                   Please enter a valid email and password before submitting
                 </Alert>
               )}
               {loginFailureMessage && (
-                <Alert
-                  color={"error"}
-                >
-                  {loginFailureMessage}
-                </Alert>
+                <Alert color={"error"}>{loginFailureMessage}</Alert>
               )}
             </form>
           </section>
