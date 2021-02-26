@@ -1,5 +1,6 @@
 const db = require("../models");
 const axios = require("axios");
+const fetch = require("node-fetch");
 
 // Defining methods for the userController
 module.exports = {
@@ -18,26 +19,44 @@ module.exports = {
   create: async function (req, res) {
     // add user ids for by email
     const requestObject = await addTravelerIdByEmail(req.body);
+    console.log(requestObject.destination);
     // Query places route
     axios
-      .post("/api/placeImages", { destination: requestObject.destination })
+      .get(
+        `https://maps.googleapis.com/maps/api/place/findplacefromtext/json?input=${requestObject.destination}&inputtype=textquery&fields=name,photos&key=${process.env.PLACES_API_KEY}`
+      )
       .then((response) => {
-        // requestObject.imageUrl = response.data
-        console.log(response.data);
-        // create trip id
-        db.Trip.create(requestObject)
-          .then((dbTrip) => {
-            // ad the trip id to each travel
-            addTripToTravelers(dbTrip);
-          })
-          .then((dbTrip) => {
-            res.json(dbTrip);
-          })
-          .catch((err) => res.status(422).json(err));
+        const photoReference =
+          response.data.candidates[0].photos[0].photo_reference;
+        // Store image URL when we're saving the trip to the database
+        const placesImageUrl = `https://maps.googleapis.com/maps/api/place/photo?photoreference=${photoReference}&key=${process.env.PLACES_API_KEY}&maxwidth=400&maxheight=400`;
+        console.log(placesImageUrl);
+        axios.get(placesImageUrl).then(response=> {
+          console.log(response);
+        })
       })
       .catch((err) => {
         console.log(err);
       });
+    // axios
+    //   .post("/api/placeImages", { destination: requestObject.destination })
+    //   .then((response) => {
+    //     // requestObject.imageUrl = response.data
+    //     console.log(response.data);
+    //     // create trip id
+    //     // db.Trip.create(requestObject)
+    //     //   .then((dbTrip) => {
+    //     //     // ad the trip id to each travel
+    //     //     addTripToTravelers(dbTrip);
+    //     //   })
+    //     //   .then((dbTrip) => {
+    //     //     res.json(dbTrip);
+    //     //   })
+    //     //   .catch((err) => res.status(422).json(err));
+    //   })
+    //   .catch((err) => {
+    //     console.log(err);
+    //   });
   },
 
   update: async function (req, res) {
