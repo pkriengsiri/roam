@@ -147,8 +147,8 @@ const TripForm = (props) => {
                   value={traveler}
                   onChange={(e) => setTraveler(e.target.value)}
                 />
-                <span class="icon is-medium is-left">
-                  <i class="fas fa-users"></i>
+                <span className="icon is-medium is-left">
+                  <i className="fas fa-users"></i>
                 </span>
                 {validEmailPromptState && (
                   <p className="email-validation">
@@ -163,7 +163,7 @@ const TripForm = (props) => {
                   ></i>
                 </span>
               </div>
-              <div class="control">
+              <div className="control">
                 <button type="submit" className="button">
                   <i className="fas fa-plus fa-lg"></i>
                 </button>
