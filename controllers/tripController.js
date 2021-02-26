@@ -1,4 +1,5 @@
 const db = require("../models");
+const axios = require("axios");
 
 // Defining methods for the userController
 module.exports = {
@@ -17,16 +18,26 @@ module.exports = {
   create: async function (req, res) {
     // add user ids for by email
     const requestObject = await addTravelerIdByEmail(req.body);
-    // create trip id
-    db.Trip.create(requestObject)
-      .then((dbTrip) => {
-        // ad the trip id to each travel
-        addTripToTravelers(dbTrip);
+    // Query places route
+    axios
+      .post("/api/placeImages", { destination: requestObject.destination })
+      .then((response) => {
+        // requestObject.imageUrl = response.data
+        console.log(response.data);
+        // create trip id
+        db.Trip.create(requestObject)
+          .then((dbTrip) => {
+            // ad the trip id to each travel
+            addTripToTravelers(dbTrip);
+          })
+          .then((dbTrip) => {
+            res.json(dbTrip);
+          })
+          .catch((err) => res.status(422).json(err));
       })
-      .then((dbTrip) => {
-        res.json(dbTrip);
-      })
-      .catch((err) => res.status(422).json(err));
+      .catch((err) => {
+        console.log(err);
+      });
   },
 
   update: async function (req, res) {

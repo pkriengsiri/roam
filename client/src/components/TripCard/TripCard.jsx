@@ -13,7 +13,7 @@ const TripCard = ({ destination, startDate, endDate, travelers, tripId,tripCreat
     // const { tripId } = useParams();
     const { userId } = useParams();
 
-
+// TODO: Add image to trip card
 
 
   return (
