@@ -17,8 +17,6 @@ const LoginModal = ({ closeLoginModal, setUserContext }) => {
   const handleSubmit = (e) => {
     e.preventDefault();
     if (!email || !password) {
-      
-      
       onDisplay(true, "error");
     } else {
       onDisplay(false);
@@ -37,7 +35,7 @@ const LoginModal = ({ closeLoginModal, setUserContext }) => {
                 console.log(err);
               } else {
                 console.log(data);
-                setUserContext({ userId: data._id,email:email });
+                setUserContext({ userId: data._id, email: email });
                 history.push(`/user/${data._id}/trips`);
               }
             }
@@ -104,9 +102,7 @@ const LoginModal = ({ closeLoginModal, setUserContext }) => {
               </div>
               <input type="submit" className="is-hidden" />
               {display && (
-                <Alert
-                  color={theme}
-                >
+                <Alert color={theme}>
                   Please complete both fields before submitting
                 </Alert>
               )}
