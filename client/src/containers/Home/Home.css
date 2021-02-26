@@ -35,16 +35,39 @@ video {
 }
 
 .home-signup-button {
-  position: absolute;
-  left: 43%;
-  top: 50%;
-}
-
-.home-login-button {
+  
   position: absolute;
   left: 50%;
   top: 50%;
+  
 }
+
+.home-login-button {
+  
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  
+}
+.slogan {
+  position: absolute;
+  z-index: 0;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  color: white;
+  font-size: 70px;
+  margin: 90px;
+}
+
+/* .homepage-container {
+  display: inline-block;
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+  width: 50%;
+} */
 
 /* These rules take effect when the browser's width is 1770px or less */
 
@@ -68,11 +91,18 @@ video {
     position: absolute;
     left: 35%;
     top: 50%;
+    
   }
   .home-login-button {
     position: absolute;
     left: 55%;
     top: 50%;
+    
+  }
+
+  .slogan {
+    font-size: 55px;
+    margin: 60px;
   }
 }
 
@@ -86,10 +116,44 @@ video {
     position: absolute;
     left: 20%;
     top: 50%;
+    
   }
   .home-login-button {
     position: absolute;
     left: 50%;
     top: 50%;
+    
+  }
+  .slogan {
+    font-size: 40px;
+    margin: 60px;
+  }
+}
+/* for most mobile devices */
+@media screen and (max-width: 375px) {
+  .hero-title {
+    top: 30%;
+  }
+  .home-signup-button {
+    position: absolute;
+    left: 20%;
+    top: 50%;
+    height: 50px;
+    width: 100px;
+    margin: 2px;
+    
+  }
+  .home-login-button {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    height: 50px;
+    width: 100px;
+    margin: 2px;
+    
+  }
+  .slogan {
+    font-size: 40px;
+    margin: 10px;
   }
 }
