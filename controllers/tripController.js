@@ -30,10 +30,17 @@ module.exports = {
           response.data.candidates[0].photos[0].photo_reference;
         // Store image URL when we're saving the trip to the database
         const placesImageUrl = `https://maps.googleapis.com/maps/api/place/photo?photoreference=${photoReference}&key=${process.env.PLACES_API_KEY}&maxwidth=400&maxheight=400`;
-        console.log(placesImageUrl);
-        axios.get(placesImageUrl).then(response=> {
-          console.log(response);
-        })
+        var xhr = new XMLHttpRequest();
+        xhr.open('GET', url, true);
+        xhr.onload = () => {
+          this.setState({imageUrl: xhr.responseURL});
+        };
+        xhr.send(null);
+        // console.log(placesImageUrl);
+        // axios.get(placesImageUrl).then((response) => {
+        //   console.log(response.data);
+        //   res.json(response.data);
+        // });
       })
       .catch((err) => {
         console.log(err);
