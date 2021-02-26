@@ -2,6 +2,6 @@ const router = require("express").Router();
 
 const { getImage } = require("../../controllers/placeImagesController");
 
-router.route("/").post(getImage);
+router.route("/").get(getImage);
 
 module.exports = router;
