@@ -19,7 +19,7 @@ const SignUpModal = ({ closeSignUpModal}) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    if (!email || !password) {
+    if (!emailStatus || !password) {
       onDisplay(true, "error");
     } else {
       onDisplay(false);
@@ -89,7 +89,7 @@ const SignUpModal = ({ closeSignUpModal}) => {
 
               {!emailStatus && (
                 <Alert
-                  color={theme}
+                  color={"error"}
                 >
                   {emailStatusMessage}
                 </Alert>
@@ -119,7 +119,7 @@ const SignUpModal = ({ closeSignUpModal}) => {
                 <Alert
                   color={theme}
                 >
-                  Please complete both fields before submitting
+                  Please enter a valid email and password before submitting
                 </Alert>
               )}
             </form>
