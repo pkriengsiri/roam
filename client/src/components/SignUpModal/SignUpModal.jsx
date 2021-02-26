@@ -8,12 +8,7 @@ import UserContext from "../../contexts/UserContext";
 import Alert from "../Alert/Alert";
 import useEmail from "../../hooks/useEmail";
 
-<<<<<<< HEAD
-const SignUpModal = ({ closeSignUpModal }) => {
-  const [email, setEmail] = useState("");
-=======
 const SignUpModal = ({ closeSignUpModal}) => {
->>>>>>> f868a9cce3ebec40e0d5e12ae55e3c905f07d38e
   const [password, setPassword] = useState("");
   const history = useHistory();
   const [email,handleEmailChange,emailStatus,emailStatusMessage] = useEmail("");
@@ -23,13 +18,9 @@ const SignUpModal = ({ closeSignUpModal}) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-<<<<<<< HEAD
-    if (!email || !password) {
-=======
     // Check to see if email or password are valid
     if (!emailStatus || !password) {
       // Display error message if email or password are note valid
->>>>>>> f868a9cce3ebec40e0d5e12ae55e3c905f07d38e
       onDisplay(true, "error");
     } else {
       // Clear error message
@@ -50,11 +41,7 @@ const SignUpModal = ({ closeSignUpModal}) => {
                 // TODO:  display an error message to the user stating that the sign-up failed (use global alert)
                 console.log(err);
               } else {
-<<<<<<< HEAD
-                // console.log(data);
-=======
                 setUserContext({ userId: data._id });
->>>>>>> f868a9cce3ebec40e0d5e12ae55e3c905f07d38e
                 history.push(`/user/${data._id}/edit`);
                 setUserContext({ userId: data._id, email: email });
               }
@@ -132,15 +119,10 @@ const SignUpModal = ({ closeSignUpModal}) => {
               <input type="submit" className="is-hidden" />
 
               {display && (
-<<<<<<< HEAD
-                <Alert color={theme}>
-                  Please complete both fields before submitting
-=======
                 <Alert
                   color={theme}
                 >
                   Please enter a valid email and password before submitting
->>>>>>> f868a9cce3ebec40e0d5e12ae55e3c905f07d38e
                 </Alert>
               )}
             </form>

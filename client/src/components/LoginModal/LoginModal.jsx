@@ -20,11 +20,7 @@ const LoginModal = ({ closeLoginModal, setUserContext }) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-<<<<<<< HEAD
-    if (!email || !password) {
-=======
     if (!emailStatus || !password) {
->>>>>>> f868a9cce3ebec40e0d5e12ae55e3c905f07d38e
       onDisplay(true, "error");
     } else {
       onDisplay(false);
@@ -41,11 +37,7 @@ const LoginModal = ({ closeLoginModal, setUserContext }) => {
                 console.log(err);
                 setLoginFailureMessage("Login attempt failed");
               } else {
-<<<<<<< HEAD
-                // console.log(data);
-=======
                 setUserContext({ userId: data._id });
->>>>>>> f868a9cce3ebec40e0d5e12ae55e3c905f07d38e
                 history.push(`/user/${data._id}/trips`);
                 setUserContext({ userId: data._id, email: email });
               }
@@ -118,11 +110,7 @@ const LoginModal = ({ closeLoginModal, setUserContext }) => {
               <input type="submit" className="is-hidden" />
               {display && (
                 <Alert color={theme}>
-<<<<<<< HEAD
-                  Please complete both fields before submitting
-=======
                   Please enter a valid email and password before submitting
->>>>>>> f868a9cce3ebec40e0d5e12ae55e3c905f07d38e
                 </Alert>
               )}
               {loginFailureMessage && (
