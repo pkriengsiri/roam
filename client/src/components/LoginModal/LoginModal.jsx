@@ -13,6 +13,7 @@ const LoginModal = ({ closeLoginModal, setUserContext }) => {
   const [email,handleEmailChange,emailStatus,emailStatusMessage] = useEmail("");
   const [password, setPassword] = useState("");
   const history = useHistory();
+  const [loginFailureMessage,setLoginFailureMessage] = useState("");
 
   const { onDisplay, display, theme } = useContext(AlertContext);
 
@@ -34,7 +35,7 @@ const LoginModal = ({ closeLoginModal, setUserContext }) => {
             (err, data) => {
               if (err) {
                 // TODO:  display an error message to the user stating that the sign-up failed (use global alert)
-                console.log(err);
+                setLoginFailureMessage("Login attempt failed");
               } else {
                 console.log(data);
                 setUserContext({ userId: data._id });
@@ -44,6 +45,7 @@ const LoginModal = ({ closeLoginModal, setUserContext }) => {
           );
         })
         .catch((err) => {
+          setLoginFailureMessage("Login attempt failed");
           console.log(err);
         });
     }
@@ -115,6 +117,13 @@ const LoginModal = ({ closeLoginModal, setUserContext }) => {
                   color={theme}
                 >
                   Please enter a valid email and password before submitting
+                </Alert>
+              )}
+              {loginFailureMessage && (
+                <Alert
+                  color={"error"}
+                >
+                  {loginFailureMessage}
                 </Alert>
               )}
             </form>
