@@ -71,6 +71,14 @@ const TripForm = (props) => {
     }
   };
 
+  // remove traveler
+  const removeTraveler = (targetEmail) => {
+    let filteredTravelers = travelers.filter(
+      (traveler) => traveler.travelerEmail !== targetEmail
+    );
+    setTravelers(filteredTravelers);
+  };
+
   // set calendar dates
   const onChange = (dates) => {
     const [start, end] = dates;
@@ -184,6 +192,14 @@ const TripForm = (props) => {
                     <em>{traveler.status}</em>
                   </span>
                 )}
+                <span
+                  // data-email={traveler.email}
+                  onClick={() => removeTraveler(traveler.travelerEmail)}
+                  // onClick={(e) => removeTraveler(e)}
+                >
+                  {" "}
+                  x{" "}
+                </span>
               </span>
             </p>
           ))}
