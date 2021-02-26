@@ -1,24 +1,27 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import API from "../../utils/API";
 import "./LoginModal.css";
 import UserContext from "../../contexts/UserContext";
 import { useHistory } from "react-router-dom";
 import jwt from "jsonwebtoken";
+import AlertContext from "../../contexts/AlertContext";
+import Alert from "../Alert/Alert";
 
 const LoginModal = ({ closeLoginModal, setUserContext }) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const history = useHistory();
 
+  const { onDisplay, display, theme } = useContext(AlertContext);
+
   const handleSubmit = (e) => {
     e.preventDefault();
     if (!email || !password) {
-      // TODO: display an error message that the user need to complete both fields (use global alert)
-      //avoid getElementbyId -- React conditional rendering
-      console.log("error");
-      document.getElementById("login-error").classList.remove("is-hidden");
+      
+      
+      onDisplay(true, "error");
     } else {
-      document.getElementById("login-error").classList.add("is-hidden");
+      onDisplay(false);
       API.loginUser({
         email: email,
         password: password,
@@ -100,9 +103,13 @@ const LoginModal = ({ closeLoginModal, setUserContext }) => {
                 </div>
               </div>
               <input type="submit" className="is-hidden" />
-              <p id="login-error" className="mt-2 ml-2 is-hidden">
-                Please complete both fields before submitting
-              </p>
+              {display && (
+                <Alert
+                  color={theme}
+                >
+                  Please complete both fields before submitting
+                </Alert>
+              )}
             </form>
           </section>
           <footer className="modal-card-foot">
