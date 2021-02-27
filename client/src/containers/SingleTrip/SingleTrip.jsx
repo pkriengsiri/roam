@@ -101,6 +101,12 @@ const SingleTrip = () => {
           >
             Dashboard
           </Link>
+          <Link
+            to={`/user/${userId}/trips/${tripId}/expense`}
+            className="button is-primary mr-4 is-size-4"
+          >
+            Create Expense
+          </Link>
         </div>
       </div>
     </div>

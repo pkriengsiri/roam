@@ -1,95 +1,70 @@
+import { useState } from "react";
 import React from "react";
 
 const CreateExpense = () => {
+  const [totalExpenseAmount, setTotalExpenseAmount] = useState("");
+  const [description, setDescription] = useState("");
   return (
     <div className="container">
-      <div className="columns">
-        <div className="column">
+      <h1 className="title has-text-centered">Create an Expense:</h1>
+      <div className="columns is-centered">
+        <div className="column is-4">
           <div className="field">
-            <label className="label">Name</label>
-            <div className="control">
-              <input className="input" type="text" placeholder="Text input" />
-            </div>
-          </div>
-
-          <div className="field">
-            <label className="label">Username</label>
+            <label className="label">Amount</label>
             <div className="control has-icons-left has-icons-right">
               <input
-                className="input is-success"
+                className="input"
                 type="text"
                 placeholder="Text input"
-                value="bulma"
+                value={totalExpenseAmount}
+                name="totalExpenseAmount"
+                onChange={(e) => setTotalExpenseAmount(e.target.value)}
               />
               <span className="icon is-small is-left">
-                <i className="fas fa-user"></i>
-              </span>
-              <span className="icon is-small is-right">
-                <i className="fas fa-check"></i>
+                <i className="fas fa-dollar-sign"></i>
               </span>
             </div>
-            <p className="help is-success">This username is available</p>
           </div>
 
           <div className="field">
-            <label className="label">Email</label>
-            <div className="control has-icons-left has-icons-right">
-              <input
-                className="input is-danger"
-                type="email"
-                placeholder="Email input"
-                value="hello@"
-              />
-              <span className="icon is-small is-left">
-                <i className="fas fa-envelope"></i>
-              </span>
-              <span className="icon is-small is-right">
-                <i className="fas fa-exclamation-triangle"></i>
-              </span>
-            </div>
-            <p className="help is-danger">This email is invalid</p>
-          </div>
-
-          <div className="field">
-            <label className="label">Subject</label>
+            <label className="label">Category</label>
             <div className="control">
               <div className="select">
                 <select>
-                  <option>Select dropdown</option>
-                  <option>With options</option>
+                  <option>Activities</option>
+                  <option>Airfare</option>
+                  <option>Car & Gas</option>
+                  <option>Food & Dining</option>
+                  <option>Entertainment</option>
+                  <option>Lodging</option>
+                  <option>Other</option>
                 </select>
               </div>
             </div>
           </div>
 
           <div className="field">
-            <label className="label">Message</label>
+            <label className="label">Description</label>
             <div className="control">
-              <textarea className="textarea" placeholder="Textarea"></textarea>
+              <textarea
+                className="textarea"
+                placeholder="Description of the expense"
+                type="text"
+                name="description"
+                value={description}
+                onChange={(e) => setDescription(e.target.value)}
+              ></textarea>
             </div>
           </div>
 
-          <div className="field">
+          {/* <div className="field">
             <div className="control">
               <label className="checkbox">
                 <input type="checkbox" />I agree to the{" "}
                 <a href="#">terms and conditions</a>
               </label>
             </div>
-          </div>
-
-          <div className="field">
-            <div className="control">
-              <label className="radio">
-                <input type="radio" name="question" />
-                Yes
-              </label>
-              <label className="radio">
-                <input type="radio" name="question" />
-                No
-              </label>
-            </div>
-          </div>
+          </div> */}
 
           <div className="field is-grouped">
             <div className="control">
