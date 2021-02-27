@@ -42,7 +42,7 @@ const Dashboard = () => {
         Start planning your trips today!
       </h1>
       <section>
-        <img className="animate fadeInLeft one" src={TripsHero} alt="" />
+        <img className="animate fadeInLeft one trips-hero" src={TripsHero} alt="" />
       </section>
 
       <div className="container has-text-centered mt-6 pl-6 pr-6">
