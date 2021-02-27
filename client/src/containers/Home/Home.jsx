@@ -59,12 +59,14 @@ const Home = ({ setUserContext }) => {
         <video autoPlay loop muted>
           <source src={BeachVideo} type="video/mp4" />
         </video>
-        {/* <h1 className="slogan">Vacation planning made easy. </h1> */}
-        {/* <div className="homepage-container"> */}
-        {userContext.id !=="" && (
-          <h1 className="has-text-centered title logged-in-slogan">
-            Go further <em>together</em>.
-          </h1>
+
+        {userContext.id !== "" && (
+          <>
+            <AnimatedLogo />
+            <h1 className="has-text-centered title logged-in-slogan">
+              Go further <em>together</em>.
+            </h1>
+          </>
         )}
         {userContext.id === "" && (
           <>
@@ -86,8 +88,6 @@ const Home = ({ setUserContext }) => {
             </button>
           </>
         )}
-
-        {/* </div> */}
       </section>
 
       <div className="container">
@@ -97,7 +97,6 @@ const Home = ({ setUserContext }) => {
           <TestimonialCard />
         </div>
       </div>
-      
     </>
   );
 };
