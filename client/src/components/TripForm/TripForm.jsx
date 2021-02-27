@@ -199,7 +199,7 @@ const TripForm = (props) => {
                       onChange={(e) => setTraveler(e.target.value)}
                     />
                     <span className="icon is-medium is-left">
-                      <i className="fas fa-users"></i>
+                      <i className={focusedInput?"is-hidden":"fas fa-users"}></i>
                     </span>
                     {!validEmailPromptState && (
                       <p className="validation">
