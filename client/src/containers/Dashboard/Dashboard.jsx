@@ -34,17 +34,11 @@ const Dashboard = () => {
 
   return (
     <>
-      <h1 className="title is-size-1 has-text-centered mt-6">{currentUser}</h1>
-      {/* <section class="hero trips-hero is-large">
-        <div class="hero-body trips-hero-body"></div>
-      </section> */}
-      {/* <div className="columns">
-        <div className="column is-full"> */}
+      <h1 className="title is-size-1 has-text-centered mt-6 pl-6 pr-6">{currentUser}</h1>
           <section>
             <img src="/trips-hero.png" alt="" />
           </section>
-        {/* </div>
-      </div> */}
+       
 
       <div className="container has-text-centered mt-6 pl-6 pr-6">
         {/* global alert for not filling out user profile */}
