@@ -41,7 +41,11 @@ const Navbar = ({ setUserContext }) => {
     <>
       {loginModalState && <LoginModal closeLoginModal={closeLoginModal} />}
       {signUpModalState && <SignUpModal closeSignUpModal={closeSignUpModal} />}
-      <nav className="navbar pl-6 pr-6" role="navigation" aria-label="main navigation">
+      <nav
+        className="navbar pl-6 pr-6"
+        role="navigation"
+        aria-label="main navigation"
+      >
         <div className="navbar-brand">
           <Link to="/">
             <img src={Logo} width="112" className="ml-4 mt-1" />
@@ -87,10 +91,16 @@ const Navbar = ({ setUserContext }) => {
                 </a>
 
                 <div className="navbar-dropdown is-right is-active">
-                  <Link to={`/user/${userContext.userId}/trips`} className="navbar-item">
+                  <Link
+                    to={`/user/${userContext.userId}/trips`}
+                    className="navbar-item"
+                  >
                     Dashboard
                   </Link>
-                  <Link to={`/user/${userContext.userId}/edit`} className="navbar-item">
+                  <Link
+                    to={`/user/${userContext.userId}/edit`}
+                    className="navbar-item"
+                  >
                     Edit Profile
                   </Link>
                   <hr className="navbar-divider" />
