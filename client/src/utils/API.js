@@ -39,6 +39,12 @@ const API = {
   deleteTrip: function (id) {
     return axios.delete(`/api/trips/${id}`);
   },
+
+  // API methods for expenses
+
+  createExpense: function (expenseData) {
+    return axios.post(`/api/expense`, expenseData);
+  }
 };
 
 export default API;

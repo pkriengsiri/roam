@@ -6,11 +6,18 @@ const CreateExpense = () => {
   const [description, setDescription] = useState("");
   const [expenseCategory, setExpenseCategory] = useState("");
 
+  const handleFormSubmit = (e) => {
+      e.preventDefault();
+      console.log("you submitted the form")
+  }
+
   return (
-    <div className="container">
+    <div className="container mt-6">
       <h1 className="title has-text-centered">Create an Expense:</h1>
       <div className="columns is-centered">
-        <div className="column is-4">
+         
+        <div className="column is-4"> 
+        <form onSubmit={handleFormSubmit}>
           <div className="field">
             <label className="label">Amount</label>
             <div className="control has-icons-left has-icons-right">
@@ -18,6 +25,8 @@ const CreateExpense = () => {
                 className="input"
                 type="number"
                 min="0"
+                step=".01"
+                // pattern="^\d*(\.\d{0,2})?$"
                 placeholder="100,000"
                 value={totalExpenseAmount}
                 name="totalExpenseAmount"
@@ -64,14 +73,6 @@ const CreateExpense = () => {
             </div>
           </div>
 
-          {/* <div className="field">
-            <div className="control">
-              <label className="checkbox">
-                <input type="checkbox" />I agree to the{" "}
-                <a href="#">terms and conditions</a>
-              </label>
-            </div>
-          </div> */}
 
           <div className="field is-grouped">
             <div className="control">
@@ -81,7 +82,9 @@ const CreateExpense = () => {
               <button className="button is-link is-light">Cancel</button>
             </div>
           </div>
+          </form>
         </div>
+    
       </div>
     </div>
   );
