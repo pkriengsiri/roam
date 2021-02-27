@@ -40,6 +40,7 @@ const Dashboard = () => {
         <div className="column is-8 has-text-centered">
           {/* conditional rendering for displaying name IF it is in the database */}
           <h1 className="title is-size-1">{currentUser}</h1>
+          {/* Conditional rendering for if the user has trips or not */}
           {trips.length !== 0 && <h1 className="title">Your Trips:</h1>}
           {trips.length === 0 && <h1 className="title">You don't have any trips planned yet!</h1>}
         </div>

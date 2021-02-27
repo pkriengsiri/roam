@@ -26,7 +26,7 @@ const CreateTrip = () => {
   };
 
   return (
-    <div className="container">
+    <div className="container mt-6">
       <div className="columns is-centered">
         <div className="column is-half ">
           <h1 className="title">Create a Trip</h1>
