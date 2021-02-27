@@ -64,6 +64,10 @@ const TripCard = ({
                     {startDate?.toLocaleDateString()} -{" "}
                     {endDate?.toLocaleDateString()}
                   </span>
+                 
+                  <p><i className="fas fa-users fa-xs mr-2"></i>
+                    {travelers.length}
+                  </p>
                 </div>
               </div>
             </div>
