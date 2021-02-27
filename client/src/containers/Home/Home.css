@@ -35,20 +35,17 @@ video {
 }
 
 .home-signup-button {
-  
   position: absolute;
-  left: 50%;
+  left: 40%;
   top: 50%;
-  
 }
 
 .home-login-button {
-  
   position: absolute;
-  left: 50%;
+  left: 55%;
   top: 50%;
-  
 }
+
 .slogan {
   position: absolute;
   z-index: 0;
@@ -91,13 +88,11 @@ video {
     position: absolute;
     left: 35%;
     top: 50%;
-    
   }
   .home-login-button {
     position: absolute;
     left: 55%;
     top: 50%;
-    
   }
 
   .slogan {
@@ -116,13 +111,11 @@ video {
     position: absolute;
     left: 20%;
     top: 50%;
-    
   }
   .home-login-button {
     position: absolute;
     left: 50%;
     top: 50%;
-    
   }
   .slogan {
     font-size: 40px;
@@ -141,7 +134,6 @@ video {
     height: 50px;
     width: 100px;
     margin: 2px;
-    
   }
   .home-login-button {
     position: absolute;
@@ -150,7 +142,6 @@ video {
     height: 50px;
     width: 100px;
     margin: 2px;
-    
   }
   .slogan {
     font-size: 40px;

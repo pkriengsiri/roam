@@ -8,7 +8,8 @@ $teal: #33C1BF;
 $teal-lighter: #8EE1E0;
 $orange: #F48E3F;
 $orange-lighter: #F6A465;
-$white: #F6F1E9;
+// $white: #F6F1E9;
+$white: whitesmoke;
 $blue: #011638;
 
 // Update Bulma's global variables
@@ -21,7 +22,7 @@ $primary: $purple;
 // $fullhd-enabled: false;
 
 // Update some of Bulma's component variables
-$body-background-color: $white;
+// $body-background-color: $white;
 // $control-border-width: 2px;
 // $input-border-color: transparent;
 // $input-shadow: none;

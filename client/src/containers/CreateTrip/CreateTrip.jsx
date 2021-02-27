@@ -25,19 +25,19 @@ const CreateTrip = () => {
   };
 
   return (
-    <div className="container">
+    <div className="container mt-6 pl-6 pr-6">
       <div className="columns is-centered">
         <div className="column is-half ">
           <h1 className="title">Create a Trip</h1>
-          <TripForm
-            tripCreatorId={userId}
-            tripCreatorEmail={email}
-            buttonText="Add Trip"
-            handleFormSubmit={handleFormSubmit}
-            loadingState={loadingState}
-          />
         </div>
       </div>
+      <TripForm
+        tripCreatorId={userId}
+        tripCreatorEmail={email}
+        buttonText="Add Trip"
+        handleFormSubmit={handleFormSubmit}
+        loadingState={loadingState}
+      />
     </div>
   );
 };
