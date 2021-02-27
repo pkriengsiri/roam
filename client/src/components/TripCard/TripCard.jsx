@@ -22,7 +22,7 @@ const TripCard = ({
   // TODO: Add image to trip card
 
   return (
-      <div className="column is-4">
+      <div className="column is-4 is-one-third-fullhd is-half-desktop">
         <div className="card trip-card">
           <div class="card-image">
             <figure class="image is-4by3">
