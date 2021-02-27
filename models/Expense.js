@@ -11,16 +11,19 @@ const ExpenseSchema = new Schema({
   }, // Ex: $100
 
   category: {
-    type: [
-      "Dining",
-      "Groceries",
-      "Airfare",
-      "Lodging",
-      "Activities",
-      "Entertainment",
-      "Car/Gas",
-      "Other",
-    ],
+    type: String,
+    default:"Other"
+    // choices:
+    // [
+    //   "Activities",
+    //   "Airfare",
+    //   "Car/Gas",
+    //   "Dining",
+    //   "Entertainment",
+    //   "Groceries",
+    //   "Lodging",
+    //   "Other",
+    // ],
   },
   description: { type: String },
   expenseShare: [
@@ -31,7 +34,7 @@ const ExpenseSchema = new Schema({
     },
     
   ], //array of userIds
-  expenseBalanced: { type: Boolean }, // MUST BE TRUE Can mongo calculate or be dynamic?
+  expenseBalanced: { type: Boolean, required:"Transaction must be balanced. (true)" }, // MUST BE TRUE Can mongo calculate or be dynamic?
 });
 
 const Expense = mongoose.model("Expense", ExpenseSchema);
