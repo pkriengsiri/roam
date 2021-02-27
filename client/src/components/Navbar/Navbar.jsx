@@ -51,7 +51,7 @@ const Navbar = ({ setUserContext }) => {
           setSignupModalState={setSignUpModalState}
         />
       )}
-      <nav className="navbar" role="navigation" aria-label="main navigation">
+      <nav className="navbar pl-6 pr-6" role="navigation" aria-label="main navigation">
         <div className="navbar-brand">
           <Link to="/">
             <img src={Logo} width="112" className="ml-4 mt-1" />

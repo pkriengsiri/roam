@@ -21,11 +21,13 @@ video {
   max-height: 700px;
   object-fit: cover;
   animation: fadevideo 3s forwards;
-} @keyframes fadevideo {
+}
+@keyframes fadevideo {
   from {
-    opacity:0;
-  } to {
-    opacity:1;
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
   }
 }
 
@@ -71,7 +73,6 @@ video {
   margin: 90px;
 }
 
-
 /* .homepage-container {
   display: inline-block;
   box-sizing: border-box;
@@ -98,6 +99,9 @@ video {
 /* These rules take effect when the browser's width is 1200px or less */
 
 @media screen and (max-width: 1200px) {
+  .dashboard-button {
+    left: 42%;
+  }
   .home-signup-button {
     position: absolute;
     left: 35%;
@@ -118,6 +122,9 @@ video {
 /* These rules take effect when the browser's width is 810px or less */
 
 @media screen and (max-width: 810px) {
+  .dashboard-button {
+    left: 40%;
+  }
   .home-signup-button {
     position: absolute;
     left: 25%;
@@ -139,6 +146,10 @@ video {
 @media screen and (max-width: 620px) {
   .hero-title {
     top: 30%;
+  }
+  .dashboard-button {
+    left: 35%;
+    top: 65%;
   }
   .home-signup-button {
     position: absolute;
