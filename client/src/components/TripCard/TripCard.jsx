@@ -22,8 +22,7 @@ const TripCard = ({
   // TODO: Add image to trip card
 
   return (
-    <div className="columns is-centered">
-      <div className="column is-5">
+      <div className="column is-4">
         <div className="card trip-card">
           <div class="card-image">
             <figure class="image is-4by3">
@@ -77,7 +76,6 @@ const TripCard = ({
           </div>
         </div>
       </div>
-    </div>
   );
 };
 
