@@ -49,3 +49,12 @@ const addExpenseToTrip = async (dbExpenseObject) => {
 };
 
 
+// after expense is created, add the expense id to the user who created
+const addExpenseToUser = async (dbExpenseObject) => {
+  await db.User.findByIdAndUpdate(dbExpenseObject.expenseCreator, {
+    $push: { expenses: dbExpenseObject._id },
+  })
+
+    // .then((res) => console.log(res))
+    .catch((err) => console.log(err));
+};
