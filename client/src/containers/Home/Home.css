@@ -109,7 +109,7 @@ video {
     top: 60%;
   }
 
-  .logged-in-slogan, .logged-out-slogan {
+  .slogan {
     font-size: 55px;
     margin: 60px;
   }
@@ -129,7 +129,7 @@ video {
     top: 60%;
   }
 
-  .logged-in-slogan, .logged-out-slogan {
+  .slogan {
     font-size: 55px;
     margin: 30px;
   }
@@ -150,7 +150,7 @@ video {
     left: 50%;
     top: 65%;
   }
-  .logged-in-slogan, .logged-out-slogan {
+  .slogan {
     font-size: 40px;
     margin: 40px;
   }
@@ -176,7 +176,7 @@ video {
     width: 100px;
     margin: 2px;
   }
-  .logged-in-slogan, .logged-out-slogan {
+  .slogan {
     font-size: 40px;
     margin: 10px;
   }
