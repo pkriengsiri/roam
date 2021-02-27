@@ -20,7 +20,7 @@ module.exports = {
   create: async function (req, res) {
     // add user ids for by email
     const requestObject = await addTravelerIdByEmail(req.body);
-    console.log(requestObject.destination);
+
     // Query places route
     axios
       .get(
@@ -33,42 +33,43 @@ module.exports = {
         const placesImageUrl = `https://maps.googleapis.com/maps/api/place/photo?photoreference=${photoReference}&key=${process.env.PLACES_API_KEY}&maxwidth=400&maxheight=400`;
         // Upload the image to cloudinary
         cloudinary.uploader.upload(placesImageUrl, function (error, result) {
-          requestObject.imageUrl = result.url;
-          console.log(result);
-          console.log(requestObject);
-          db.Trip.create(requestObject)
-            .then((dbTrip) => {
-              // ad the trip id to each travel
-              addTripToTravelers(dbTrip);
-            })
-            .then((dbTrip) => {
-              res.json(dbTrip);
-            })
-            .catch((err) => res.status(422).json(err));
+          if (error) {
+            console.log(error);
+            db.Trip.create(requestObject)
+              .then((dbTrip) => {
+                // ad the trip id to each travel
+                addTripToTravelers(dbTrip);
+              })
+              .then((dbTrip) => {
+                res.json(dbTrip);
+              })
+              .catch((err) => res.status(422).json(err));
+          } else {
+            requestObject.imageUrl = result.url;
+            db.Trip.create(requestObject)
+              .then((dbTrip) => {
+                // ad the trip id to each travel
+                addTripToTravelers(dbTrip);
+              })
+              .then((dbTrip) => {
+                res.json(dbTrip);
+              })
+              .catch((err) => res.status(422).json(err));
+          }
         });
       })
       .catch((err) => {
         console.log(err);
+        db.Trip.create(requestObject)
+          .then((dbTrip) => {
+            // ad the trip id to each travel
+            addTripToTravelers(dbTrip);
+          })
+          .then((dbTrip) => {
+            res.json(dbTrip);
+          })
+          .catch((err) => res.status(422).json(err));
       });
-    // axios
-    //   .post("/api/placeImages", { destination: requestObject.destination })
-    //   .then((response) => {
-    //     // requestObject.imageUrl = response.data
-    //     console.log(response.data);
-    //     // create trip id
-    //     // db.Trip.create(requestObject)
-    //     //   .then((dbTrip) => {
-    //     //     // ad the trip id to each travel
-    //     //     addTripToTravelers(dbTrip);
-    //     //   })
-    //     //   .then((dbTrip) => {
-    //     //     res.json(dbTrip);
-    //     //   })
-    //     //   .catch((err) => res.status(422).json(err));
-    //   })
-    //   .catch((err) => {
-    //     console.log(err);
-    //   });
   },
 
   update: async function (req, res) {
