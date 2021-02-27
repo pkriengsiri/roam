@@ -9,8 +9,6 @@ module.exports = {
       .catch((err) => res.status(422).json(err));
   },
 
-
-
   findById: function (req, res) {
     db.User.findById(req.params.id)
       .then((dbUser) => res.json(dbUser))
@@ -21,6 +19,20 @@ module.exports = {
     db.User.findById(req.params.userId)
     .populate({path:"trips",options:{sort:{"startDate":1}}})
       .then((dbUser) => res.json(dbUser))
+      .catch((err) => res.status(422).json(err));
+  },
+
+  findByIdWithExpenses: function (req, res) {
+    db.User.findById(req.params.id)
+      .populate("expenses")
+      .then((dbTrip) => res.json(dbTrip))
+      .catch((err) => res.status(422).json(err));
+  },
+  findByIdWithExpensesAndTrips: function (req, res) {
+    db.User.findById(req.params.id)
+      .populate("expenses")
+      .populate("trips")
+      .then((dbTrip) => res.json(dbTrip))
       .catch((err) => res.status(422).json(err));
   },
 

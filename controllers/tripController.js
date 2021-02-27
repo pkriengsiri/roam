@@ -16,6 +16,13 @@ module.exports = {
       .catch((err) => res.status(422).json(err));
   },
 
+  findByIdWithExpenses: function (req, res) {
+    db.Trip.findById(req.params.id)
+      .populate("expenses")
+      .then((dbTrip) => res.json(dbTrip))
+      .catch((err) => res.status(422).json(err));
+  },
+
   create: async function (req, res) {
     // add user ids for by email
     const requestObject = await addTravelerIdByEmail(req.body);
