@@ -1,11 +1,11 @@
 //Dependencies
-require('dotenv').config();
+require("dotenv").config();
 const express = require("express");
 const mongoose = require("mongoose");
 const app = express();
 const routes = require("./routes");
-
-
+const cookieParser = require("cookie-parser");
+const jwt = require("jsonwebtoken");
 
 // Server port
 const PORT = process.env.PORT || 3001;
@@ -14,6 +14,13 @@ const PORT = process.env.PORT || 3001;
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 app.use(express.static("client/build"));
+app.use(cookieParser());
+app.use(
+  jwt({
+    secret: process.env.SECRET,
+    getToken: (req) => req.cookies.token,
+  })
+);
 
 // Mongoose connection
 mongoose
@@ -31,7 +38,7 @@ mongoose
   });
 
 // Test route
-  app.get("/api/config", (req, res) => {
+app.get("/api/config", (req, res) => {
   res.json({
     success: true,
   });
@@ -42,10 +49,10 @@ app.use(routes);
 
 // Route to build folder
 app.get("*", (req, res) => {
-    res.sendFile(path.join(__dirname, "client/build/index.html"));
-  });
+  res.sendFile(path.join(__dirname, "client/build/index.html"));
+});
 
 // Listen to port
-  app.listen(PORT, () => {
+app.listen(PORT, () => {
   console.log(`Server running on http://localhost:${PORT}`);
 });

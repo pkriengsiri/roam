@@ -68,7 +68,7 @@ const Home = ({ setUserContext }) => {
         )}
         {userContext.id === "" && (
           <>
-            {/* <AnimatedLogo /> */}
+            <AnimatedLogo />
             <h1 className="has-text-centered title logged-out-slogan">
               Go further <em>together</em>.
             </h1>
