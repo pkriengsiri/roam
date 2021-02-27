@@ -37,6 +37,7 @@ const Dashboard = () => {
       <h1 className="title is-size-1 has-text-centered mt-6 pl-6 pr-6">
         {currentUser}
       </h1>
+      <h1 className="subtitle is-size-4 has-text-centered mt-3">Start planning your trips today!</h1>
       <section>
         <img src="/trips-hero.png" alt="" />
       </section>
