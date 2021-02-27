@@ -2,3 +2,14 @@
     background-color: #2E3560;
     color: white;
 }
+.footer-logo {
+    background-color: white;
+}
+
+a {
+    color: white;
+}
+
+a:hover {
+    color: orange;
+}
