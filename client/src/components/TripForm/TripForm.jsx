@@ -13,7 +13,7 @@ import {
 } from "react-dates/constants";
 import Alert from "../Alert/Alert";
 import AlertContext from "../../contexts/AlertContext";
-import "./react_dates_overrides.css"
+import "./react_dates_overrides.css";
 
 const TripForm = (props) => {
   const { userContext } = useContext(UserContext);
@@ -25,7 +25,7 @@ const TripForm = (props) => {
   const [startDate, setStartDate] = useState(null);
   const [endDate, setEndDate] = useState(null);
   const [focusedInput, setFocusedInput] = useState(null);
-  const [calendarStack, setCalendarStack] = useState("HORIZONTAL_ORIENTATION");
+  const [calendarStack, setCalendarStack] = useState("horizontal");
 
   const [travelers, setTravelers] = useState([
     {
@@ -67,9 +67,9 @@ const TripForm = (props) => {
   // check window viewport to set orientation of calendar so it is responsive in mobile
   useEffect(() => {
     if (window.innerWidth <= 768) {
-      setCalendarStack(VERTICAL_ORIENTATION);
+      setCalendarStack("vertical");
     } else {
-      setCalendarStack(HORIZONTAL_ORIENTATION);
+      setCalendarStack("horizontal");
     }
   }, []);
 
@@ -160,7 +160,6 @@ const TripForm = (props) => {
               <label className="label">Dates</label>
 
               <DateRangePicker
-                className="date-range-picker"
                 startDate={startDate}
                 startDateId="trip-start-date"
                 endDate={endDate}
@@ -277,7 +276,10 @@ const TripForm = (props) => {
                   {props.buttonText}
                 </button>
 
-                <Link onClick={()=>props.closeTripForm()}to={`/user/${userId}/trips`}>
+                <Link
+                  onClick={() => props.closeTripForm()}
+                  to={`/user/${userId}/trips`}
+                >
                   <button className="button  ml-4 cancel-button">Cancel</button>
                 </Link>
               </div>
