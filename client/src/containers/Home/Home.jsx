@@ -1,5 +1,6 @@
 import React, { useEffect, useState, useContext } from "react";
 import "./Home.css";
+import { Link } from "react-router-dom";
 import LoginModal from "../../components/LoginModal/LoginModal";
 import SignUpModal from "../../components/SignUpModal/SignUpModal";
 import TestimonialCard from "../../components/TestimonialCard/TestimonialCard";
@@ -63,15 +64,21 @@ const Home = ({ setUserContext }) => {
         {userContext.id !== "" && (
           <>
             <AnimatedLogo />
-            <h1 className="has-text-centered title logged-in-slogan">
+            <h1 className="has-text-centered title slogan">
               Go further <em>together</em>.
             </h1>
+            <Link
+              to={`/user/${userContext.userId}/trips`}
+              className="button is-primary is-size-4 dashboard-button"
+            >
+              Dashboard
+            </Link>
           </>
         )}
         {userContext.id === "" && (
           <>
             <AnimatedLogo />
-            <h1 className="has-text-centered title logged-out-slogan">
+            <h1 className="has-text-centered title slogan">
               Go further <em>together</em>.
             </h1>
             <button

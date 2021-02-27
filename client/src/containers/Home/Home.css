@@ -41,6 +41,12 @@ video {
   right: 0;
 }
 
+.dashboard-button {
+  position: absolute;
+  left: 45%;
+  top: 60%;
+}
+
 .home-signup-button {
   position: absolute;
   left: 40%;
@@ -53,7 +59,7 @@ video {
   top: 60%;
 }
 
-.logged-out-slogan {
+.slogan {
   position: absolute;
   z-index: 0;
   top: 30%;
@@ -65,17 +71,6 @@ video {
   margin: 90px;
 }
 
-.logged-in-slogan {
-  position: absolute;
-  z-index: 0;
-  top: 30%;
-  left: 0;
-  bottom: 0;
-  right: 0;
-  color: white;
-  font-size: 70px;
-  margin: 90px;
-}
 
 /* .homepage-container {
   display: inline-block;
