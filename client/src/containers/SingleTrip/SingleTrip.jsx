@@ -3,6 +3,7 @@ import { useParams, Link } from "react-router-dom";
 import API from "../../utils/API";
 import "./SingleTrip.css";
 import UserContext from "../../contexts/UserContext";
+import DoughnutChart from "../../components/DoughnutChart/DoughnutChart";
 
 const SingleTrip = () => {
   const { userContext } = useContext(UserContext);
@@ -109,6 +110,7 @@ const SingleTrip = () => {
           </Link>
         </div>
       </div>
+      <DoughnutChart />
     </div>
   );
 };
