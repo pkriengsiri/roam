@@ -46,10 +46,22 @@ video {
   top: 50%;
 }
 
-.slogan {
+.logged-out-slogan {
   position: absolute;
   z-index: 0;
-  top: 0;
+  top: 15%;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  color: white;
+  font-size: 70px;
+  margin: 90px;
+}
+
+.logged-in-slogan {
+  position: absolute;
+  z-index: 0;
+  top: 30%;
   left: 0;
   bottom: 0;
   right: 0;
@@ -95,7 +107,7 @@ video {
     top: 50%;
   }
 
-  .slogan {
+  .logged-in-slogan, .logged-out-slogan {
     font-size: 55px;
     margin: 60px;
   }
@@ -117,9 +129,9 @@ video {
     left: 50%;
     top: 50%;
   }
-  .slogan {
+  .logged-in-slogan, .logged-out-slogan {
     font-size: 40px;
-    margin: 60px;
+    margin: 40px;
   }
 }
 /* for most mobile devices */
@@ -143,7 +155,7 @@ video {
     width: 100px;
     margin: 2px;
   }
-  .slogan {
+  .logged-in-slogan, .logged-out-slogan {
     font-size: 40px;
     margin: 10px;
   }
