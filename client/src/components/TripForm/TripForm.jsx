@@ -18,8 +18,9 @@ const TripForm = (props) => {
   // state for form object
   const [destination, setDestination] = useState("");
   // TODO: Do we want travel start date initiated as today?
-  const [startDate, setStartDate] = useState(new Date());
+  const [startDate, setStartDate] = useState(null);
   const [endDate, setEndDate] = useState(null);
+  const [focusedInput, setFocusedInput] = useState(null);
   const [travelers, setTravelers] = useState([
     {
       travelerId: props.tripCreatorId,
@@ -152,16 +153,17 @@ const TripForm = (props) => {
               /> */}
 
               <DateRangePicker
-                startDate={this.state.startDate} // momentPropTypes.momentObj or null,
-                startDateId="your_unique_start_date_id" // PropTypes.string.isRequired,
-                endDate={this.state.endDate} // momentPropTypes.momentObj or null,
-                endDateId="your_unique_end_date_id" // PropTypes.string.isRequired,
-                onDatesChange={({ startDate, endDate }) =>
-                  this.setState({ startDate, endDate })
-                } // PropTypes.func.isRequired,
-                focusedInput={this.state.focusedInput} // PropTypes.oneOf([START_DATE, END_DATE]) or null,
+                startDate={startDate} // momentPropTypes.momentObj or null,
+                startDateId={props.startDateId} // PropTypes.string.isRequired,
+                endDate={endDate} // momentPropTypes.momentObj or null,
+                endDateId={props.endDateId} // PropTypes.string.isRequired,
+                onDatesChange={({ startDate, endDate }) => {
+                  setStartDate({ startDate });
+                  setEndDate({ endDate });
+                }} // PropTypes.func.isRequired,
+                focusedInput={focusedInput} // PropTypes.oneOf([START_DATE, END_DATE]) or null,
                 onFocusChange={(focusedInput) =>
-                  this.setState({ focusedInput })
+                  setFocusedInput({ focusedInput })
                 } // PropTypes.func.isRequired,
               />
             </div>

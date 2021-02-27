@@ -37,6 +37,8 @@ const CreateTrip = () => {
         buttonText="Add Trip"
         handleFormSubmit={handleFormSubmit}
         loadingState={loadingState}
+        startDateId="createTripStartDate"
+        endDateId="createTripEndDate"
       />
     </div>
   );
