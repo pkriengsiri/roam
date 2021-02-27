@@ -39,8 +39,8 @@ const Navbar = ({ setUserContext }) => {
   };
   return (
     <>
-      {loginModalState && <LoginModal closeLoginModal={closeLoginModal} />}
-      {signUpModalState && <SignUpModal closeSignUpModal={closeSignUpModal} />}
+      {loginModalState && <LoginModal closeLoginModal={closeLoginModal} setLoginModalState={setLoginModalState} />}
+      {signUpModalState && <SignUpModal closeSignUpModal={closeSignUpModal} setSignupModalState={setSignUpModalState}/>}
       <nav className="navbar" role="navigation" aria-label="main navigation">
         <div className="navbar-brand">
           <Link to="/">

@@ -8,7 +8,7 @@ import UserContext from "../../contexts/UserContext";
 import Alert from "../Alert/Alert";
 import useEmail from "../../hooks/useEmail";
 
-const SignUpModal = ({ closeSignUpModal}) => {
+const SignUpModal = ({ closeSignUpModal, setSignupModalState}) => {
   const [password, setPassword] = useState("");
   const history = useHistory();
   const [email,handleEmailChange,emailStatus,emailStatusMessage] = useEmail("");
@@ -43,7 +43,7 @@ const SignUpModal = ({ closeSignUpModal}) => {
               } else {
                 setUserContext({ userId: data._id });
                 history.push(`/user/${data._id}/edit`);
-                setUserContext({ userId: data._id, email: email });
+                setSignupModalState(false);
               }
             }
           );

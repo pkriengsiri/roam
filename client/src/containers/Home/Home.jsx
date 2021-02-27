@@ -44,12 +44,14 @@ const Home = ({ setUserContext }) => {
         <LoginModal
           closeLoginModal={closeLoginModal}
           setUserContext={setUserContext}
+          setLoginModalState={setLoginModalState}
         />
       )}
       {signUpModalState && (
         <SignUpModal
           closeSignUpModal={closeSignUpModal}
           setUserContext={setUserContext}
+          setSignUpModalState={setSignUpModalState}
         />
       )}
 
