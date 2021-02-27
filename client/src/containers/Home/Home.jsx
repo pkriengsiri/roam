@@ -6,6 +6,7 @@ import TestimonialCard from "../../components/TestimonialCard/TestimonialCard";
 import BeachVideo from "./Beach1.mp4";
 import AlertContext from "../../contexts/AlertContext";
 import UserContext from "../../contexts/UserContext";
+import AnimatedLogo from "../../components/AnimatedLogo/AnimatedLogo";
 
 const Home = ({ setUserContext }) => {
   const [loginModalState, setLoginModalState] = useState(false);
@@ -67,6 +68,7 @@ const Home = ({ setUserContext }) => {
         )}
         {userContext.id === "" && (
           <>
+            <AnimatedLogo />
             <h1 className="has-text-centered title logged-out-slogan">
               Go further <em>together</em>.
             </h1>
@@ -95,6 +97,7 @@ const Home = ({ setUserContext }) => {
           <TestimonialCard />
         </div>
       </div>
+      
     </>
   );
 };
