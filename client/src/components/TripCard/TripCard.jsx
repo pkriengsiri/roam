@@ -25,10 +25,12 @@ const TripCard = ({
     <div className="columns is-centered">
       <div className="column is-5">
         <div className="card trip-card">
-          <div className="card-content has-text-left">
-            <div className="column is-12">
+          <div class="card-image">
+            <figure class="image is-4by3">
               <img src={imageUrl} />
-            </div>
+            </figure>
+          </div>
+          <div className="card-content has-text-left">
             <div className="media">
               <div className="media-content">
                 <div className="columns">
@@ -64,8 +66,9 @@ const TripCard = ({
                     {startDate?.toLocaleDateString()} -{" "}
                     {endDate?.toLocaleDateString()}
                   </span>
-                 
-                  <p><i className="fas fa-users fa-xs mr-2"></i>
+
+                  <p>
+                    <i className="fas fa-users fa-xs mr-2"></i>
                     {travelers.length}
                   </p>
                 </div>
