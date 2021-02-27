@@ -8,15 +8,15 @@ import AlertContext from "../../contexts/AlertContext";
 import Alert from "../Alert/Alert";
 import useEmail from "../../hooks/useEmail";
 
-const LoginModal = ({ closeLoginModal, setUserContext }) => {
+const LoginModal = ({ closeLoginModal}) => {
   const [email, handleEmailChange, emailStatus, emailStatusMessage] = useEmail(
     ""
   );
   const [password, setPassword] = useState("");
   const history = useHistory();
   const [loginFailureMessage, setLoginFailureMessage] = useState("");
-
   const { onDisplay, display, theme } = useContext(AlertContext);
+  const {setUserContext} = useContext(UserContext);
 
   const handleSubmit = (e) => {
     e.preventDefault();

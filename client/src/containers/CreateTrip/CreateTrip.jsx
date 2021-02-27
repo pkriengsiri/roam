@@ -10,7 +10,7 @@ const CreateTrip = () => {
   const history = useHistory();
   const { userId } = useParams();
   const { email, _id } = useContext(UserContext);
-  const [image, setImage] = useState();
+  const [loadingState, setLoadingState] = useState("");
 
   const handleFormSubmit = (e, formObject) => {
     e.preventDefault();
@@ -36,10 +36,10 @@ const CreateTrip = () => {
             tripCreatorEmail={email}
             buttonText="Add Trip"
             handleFormSubmit={handleFormSubmit}
+            loadingState={loadingState}
           />
         </div>
       </div>
-      <img src={image} />
     </div>
   );
 };

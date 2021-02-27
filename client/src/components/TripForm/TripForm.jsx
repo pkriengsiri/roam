@@ -225,7 +225,7 @@ const TripForm = (props) => {
         <div className="field is-grouped">
           <div className="control">
             <button
-              className="button is-primary"
+              className={`button is-primary ${props.loadingState}`}
               type="submit"
               onClick={(e) =>
                 props.handleFormSubmit(e, {
