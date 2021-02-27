@@ -11,6 +11,7 @@ const SingleTrip = () => {
   const [startDate, setStartDate] = useState(new Date());
   const [endDate, setEndDate] = useState(null);
   const [travelers, setTravelers] = useState([]);
+  const [imageUrl, setImageUrl] = useState("");
 
   // browser params
   const { tripId } = useParams();
@@ -27,6 +28,7 @@ const SingleTrip = () => {
           setStartDate(responseStartDate);
           setEndDate(responseEndDate);
           setTravelers(response.data.travelers);
+          setImageUrl(response.data.imageUrl);
         })
         .catch((err) => {
           console.log(err);
@@ -50,42 +52,40 @@ const SingleTrip = () => {
         </span>
       </h1>
       <div className="columns is-centered">
-        <div className="column is-3">
-          <figure className="image is-128x128">
-            <img src="" />
-            <p>Picture of the location from API</p>
+        <div className="column is-6 trip-container">
+          <figure>
+            <img className="trip-image" src={imageUrl} />
           </figure>
-        </div>
-        <div className="column is-3">
-          <h2 className="subtitle">Travelers:</h2>
-          <ul>
-            {travelers.map((traveler, index) => {
-              console.log(traveler.travelerEmail);
-              console.log(userContext.email);
-              return (
-                <li key={index}>
-                  {traveler.travelerEmail === userContext.email && (
-                    <span>YOU - </span>
-                  )}
-                  {/* if no traveler email, do not render  */}
-                  {traveler.travelerEmail && (
-                    <span> {`${traveler.travelerEmail} - `}</span>
-                  )}
-                  <span>
-                    <em>{traveler.status}</em>
-                  </span>
-                </li>
-              );
-            })}
-          </ul>
+          {/* </div>
+        <div className="column is-3"> */}
+          <div class="card single-trip-card">
+            <div class="card-content">
+              <div class="content">
+                <h2 className="subtitle">Travelers:</h2>
+                <ul>
+                  {travelers.map((traveler, index) => {
+                    console.log(traveler.travelerEmail);
+                    console.log(userContext.email);
+                    return (
+                      <li key={index}>
+                        {traveler.travelerEmail === userContext.email && (
+                          <span>YOU - </span>
+                        )}
+                        {`${traveler.travelerEmail} - `}
+                        <span>
+                          <em>{traveler.status}</em>
+                        </span>
+                      </li>
+                    );
+                  })}
+                </ul>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
       <div className="columns is-centered">
         <div className="column is-2">
-          {/* <button className="button is-primary mr-4 is-size-5">
-            Dashboard
-          </button> */}
-
           <Link
             to={`/user/${userId}/trips`}
             className="button is-primary mr-4 is-size-4"
