@@ -79,7 +79,7 @@ const SingleTrip = () => {
       </div>
       <div className="columns is-centered">
         <div className="column is-2">
-         /
+         
           <Link
             to={`/user/${userId}/trips`}
             className="button is-primary mr-4 is-size-4"
