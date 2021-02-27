@@ -10,10 +10,22 @@
   color: black;
   position: absolute;
   top: 20%;
- left: 43%;
+ left: 60%;
 }
 
 
 .trip-container {
   position: relative;
+}
+
+.edit-trip-icon {
+  font-size: small;
+}
+
+.edit-trip-icon:hover {
+  color: #F48E3F;
+}
+
+.edit-trip {
+  font-size: medium;
 }
