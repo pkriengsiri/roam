@@ -6,11 +6,7 @@ import { useParams, Link } from "react-router-dom";
 import axios from "axios";
 import UserContext from "../../contexts/UserContext";
 import "react-dates/initialize";
-import {
-  DateRangePicker,
-  SingleDatePicker,
-  DayPickerRangeController,
-} from "react-dates";
+import { DateRangePicker } from "react-dates";
 import "react-dates/lib/css/_datepicker.css";
 import moment from "moment";
 
@@ -46,11 +42,13 @@ const TripForm = (props) => {
       axios
         .get(`/api/trips/${tripId}`)
         .then((response) => {
-          const responseStartDate = new Date(response.data.startDate);
-          const responseEndDate = new Date(response.data.endDate);
+
+          const responseStartDate = moment(response.data.startDate);
+          const responseEndDate = moment(response.data.endDate);
           setDestination(response.data.destination);
           setStartDate(responseStartDate);
           setEndDate(responseEndDate);
+
           setTravelers(response.data.travelers);
         })
         .catch((err) => {
@@ -161,9 +159,9 @@ const TripForm = (props) => {
 
               <DateRangePicker
                 startDate={startDate}
-                startDateId="tata-start-date"
+                startDateId="trip-start-date"
                 endDate={endDate}
-                endDateId="tata-end-date"
+                endDateId="trip-end-date"
                 onDatesChange={handleDatesChange}
                 focusedInput={focusedInput}
                 onFocusChange={(focusedInput) => setFocusedInput(focusedInput)}
