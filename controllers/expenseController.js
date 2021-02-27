@@ -37,3 +37,20 @@ module.exports = {
   edit: function (req, res) {},
   delete: function (req, res) {},
 };
+
+
+
+// after expense is created, add the expense id to the trip
+const addExpenseToTrip = async (dbObject) => {
+  await dbObject.travelers
+    // filter to only travelers with a trip id
+    .filter((traveler) => traveler.travelerId !== "")
+    // update each traveler's trips
+    .forEach((traveler) => {
+      db.Trip.findByIdAndUpdate(traveler.travelerId, {
+        $push: { trips: dbObject._id },
+      })
+        // .then((res) => console.log(res))
+        .catch((err) => console.log(err));
+    });
+};

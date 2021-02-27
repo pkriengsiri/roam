@@ -9,17 +9,16 @@ router.route("/")
 
 // Route for /api/expenses/:id
 router.route("/:id")
-.get(expenseController.findById)
+.get(expenseController.findById);
 
 // Routes for /api/expenses/user/:id
-router
-  .route("/user/:id")
-  .get(expenseController.findByUserId)
-  .put(expenseController.edit)
-  .delete(expenseController.delete);
+// router.route("/user/:id")
+//   .get(expenseController.findByUserId)
+//   .put(expenseController.edit)
+//   .delete(expenseController.delete);
 
-// Routes for /api/expenses/trip/:id
-router.route("/trip/:id").get(expenseController.findByTripId);
+// // Routes for /api/expenses/trip/:id
+// router.route("/trip/:id").get(expenseController.findByTripId);
 
 // Exports
 module.exports = router;
