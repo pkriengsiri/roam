@@ -76,13 +76,13 @@ const Navbar = ({ setUserContext }) => {
         </div>
 
         <div id="navbarBasicExample" class="navbar-menu">
+          {/* Logged in navbar */}
           {userContext.userId && (
             <div class="navbar-end ">
               <div class="navbar-item has-dropdown is-hoverable">
                 <a class="navbar-link">
                   <i className="nav-icon fas fa-user-circle fa-2x"></i>
                 </a>
-                {/* Logged in navbar */}
                 <div class="navbar-dropdown is-right">
                   <Link
                     to={`/user/${userContext.userId}/trips`}
@@ -101,13 +101,10 @@ const Navbar = ({ setUserContext }) => {
                     <strong>Logout</strong>
                   </a>
                 </div>
-
-                {/* Logged out navbar */}
               </div>
             </div>
           )}
-
-          {/* Conditionally render these */}
+          {/* Logged out navbar */}
           {!userContext.userId && (
             <div class="navbar-end">
               <div class="navbar-item">
