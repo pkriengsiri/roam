@@ -70,13 +70,13 @@ const Dashboard = () => {
             key={trip._id}
           />
         ))}
+        <Link
+          to={`/user/${userId}/trips/new`}
+          className="button is-primary mr-4 is-size-4 "
+        >
+          Create Trip
+        </Link>
       </div>
-      <Link
-        to={`/user/${userId}/trips/new`}
-        className="button is-primary mr-4 is-size-4"
-      >
-        Create Trip
-      </Link>
     </>
   );
 };
