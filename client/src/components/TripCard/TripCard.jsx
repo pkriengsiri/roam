@@ -25,13 +25,16 @@ const TripCard = ({
       <div className="column is-5">
         <div className="card trip-card">
           <div className="card-content has-text-left">
-            <div className="column is-12">
+            {/* <div className="column is-12">
               <img className="dashboard-image"src={imageUrl} />
-            </div>
+            </div> */}
             <div className="media">
               <div className="media-content">
-                <div className="columns">
-                  <div className="column is-9">
+                <div className="columns is-gapless">
+                  <div className="column is-2">
+                    <img className="dashboard-image" src={imageUrl} />
+                  </div>
+                  <div className="column is-7">
                     <Link to={`/user/${userId}/trips/${tripId}`}>
                       <p className="destination title">{destination} </p>
                     </Link>
