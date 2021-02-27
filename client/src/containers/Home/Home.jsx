@@ -1,5 +1,6 @@
 import React, { useEffect, useState, useContext } from "react";
 import "./Home.css";
+import { Link } from "react-router-dom";
 import LoginModal from "../../components/LoginModal/LoginModal";
 import SignUpModal from "../../components/SignUpModal/SignUpModal";
 import TestimonialCard from "../../components/TestimonialCard/TestimonialCard";
@@ -59,17 +60,25 @@ const Home = ({ setUserContext }) => {
         <video autoPlay loop muted>
           <source src={BeachVideo} type="video/mp4" />
         </video>
-        {/* <h1 className="slogan">Vacation planning made easy. </h1> */}
-        {/* <div className="homepage-container"> */}
-        {userContext.id !=="" && (
-          <h1 className="has-text-centered title logged-in-slogan">
-            Go further <em>together</em>.
-          </h1>
+
+        {userContext.id !== "" && (
+          <>
+            <AnimatedLogo />
+            <h1 className="has-text-centered title slogan">
+              Go further <em>together</em>.
+            </h1>
+            <Link
+              to={`/user/${userContext.userId}/trips`}
+              className="button is-primary is-size-4 dashboard-button"
+            >
+              Dashboard
+            </Link>
+          </>
         )}
         {userContext.id === "" && (
           <>
             <AnimatedLogo />
-            <h1 className="has-text-centered title logged-out-slogan">
+            <h1 className="has-text-centered title slogan">
               Go further <em>together</em>.
             </h1>
             <button
@@ -86,8 +95,6 @@ const Home = ({ setUserContext }) => {
             </button>
           </>
         )}
-
-        {/* </div> */}
       </section>
 
       <div className="container">
@@ -97,7 +104,6 @@ const Home = ({ setUserContext }) => {
           <TestimonialCard />
         </div>
       </div>
-      
     </>
   );
 };

@@ -41,31 +41,25 @@ video {
   right: 0;
 }
 
+.dashboard-button {
+  position: absolute;
+  left: 45%;
+  top: 60%;
+}
+
 .home-signup-button {
   position: absolute;
   left: 40%;
-  top: 50%;
+  top: 60%;
 }
 
 .home-login-button {
   position: absolute;
   left: 55%;
-  top: 50%;
+  top: 60%;
 }
 
-.logged-out-slogan {
-  position: absolute;
-  z-index: 0;
-  top: 15%;
-  left: 0;
-  bottom: 0;
-  right: 0;
-  color: white;
-  font-size: 70px;
-  margin: 90px;
-}
-
-.logged-in-slogan {
+.slogan {
   position: absolute;
   z-index: 0;
   top: 30%;
@@ -76,6 +70,7 @@ video {
   font-size: 70px;
   margin: 90px;
 }
+
 
 /* .homepage-container {
   display: inline-block;
@@ -91,12 +86,12 @@ video {
   .home-signup-button {
     position: absolute;
     left: 40%;
-    top: 50%;
+    top: 60%;
   }
   .home-login-button {
     position: absolute;
     left: 53%;
-    top: 50%;
+    top: 60%;
   }
 }
 
@@ -106,12 +101,12 @@ video {
   .home-signup-button {
     position: absolute;
     left: 35%;
-    top: 50%;
+    top: 60%;
   }
   .home-login-button {
     position: absolute;
     left: 55%;
-    top: 50%;
+    top: 60%;
   }
 
   .logged-in-slogan, .logged-out-slogan {
@@ -120,6 +115,25 @@ video {
   }
 }
 
+/* These rules take effect when the browser's width is 810px or less */
+
+@media screen and (max-width: 810px) {
+  .home-signup-button {
+    position: absolute;
+    left: 25%;
+    top: 60%;
+  }
+  .home-login-button {
+    position: absolute;
+    left: 55%;
+    top: 60%;
+  }
+
+  .logged-in-slogan, .logged-out-slogan {
+    font-size: 55px;
+    margin: 30px;
+  }
+}
 /* These rules take effect when the browser's width is 620px or less */
 
 @media screen and (max-width: 620px) {
@@ -129,12 +143,12 @@ video {
   .home-signup-button {
     position: absolute;
     left: 20%;
-    top: 50%;
+    top: 65%;
   }
   .home-login-button {
     position: absolute;
     left: 50%;
-    top: 50%;
+    top: 65%;
   }
   .logged-in-slogan, .logged-out-slogan {
     font-size: 40px;
@@ -149,7 +163,7 @@ video {
   .home-signup-button {
     position: absolute;
     left: 20%;
-    top: 50%;
+    top: 60%;
     height: 50px;
     width: 100px;
     margin: 2px;
@@ -157,7 +171,7 @@ video {
   .home-login-button {
     position: absolute;
     left: 50%;
-    top: 50%;
+    top: 60%;
     height: 50px;
     width: 100px;
     margin: 2px;
