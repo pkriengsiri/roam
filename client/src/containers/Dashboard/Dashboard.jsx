@@ -57,7 +57,7 @@ const Dashboard = () => {
             )}
           </div>
         </div>
-        
+        <div className="columns is-centered">
           {trips.map((trip) => (
             <TripCard
               {...trip}
@@ -67,7 +67,7 @@ const Dashboard = () => {
               key={trip._id}
             />
           ))}
-        
+        </div>
         <Link
           to={`/user/${userId}/trips/new`}
           className="button is-primary mr-4 is-size-4"
