@@ -13,6 +13,7 @@ import {
 } from "react-dates/constants";
 import Alert from "../Alert/Alert";
 import AlertContext from "../../contexts/AlertContext";
+import "./react_dates_overrides.css"
 
 const TripForm = (props) => {
   const { userContext } = useContext(UserContext);
