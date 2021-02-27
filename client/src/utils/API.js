@@ -6,10 +6,10 @@ const API = {
     return axios.get("/api/users");
   },
   createUser: function (userData) {
-    return axios.post("/api/auth/signup",userData);
+    return axios.post("/api/auth/signup", userData);
   },
-  loginUser: function(userData) {
-    return axios.post("/api/auth/login",userData);
+  loginUser: function (userData) {
+    return axios.post("/api/auth/login", userData);
   },
   getUser: function (id) {
     return axios.get(`/api/users/${id}`);
@@ -17,8 +17,8 @@ const API = {
   getUserWithTrips: function (id) {
     return axios.get(`/api/users/${id}/trips`);
   },
-  editUser: function (id,userData) {
-    return axios.put(`/api/users/${id}`,userData);
+  editUser: function (id, userData) {
+    return axios.put(`/api/users/${id}`, userData);
   },
   deleteUser: function (id) {
     return axios.delete(`/api/users/${id}`);
@@ -28,13 +28,13 @@ const API = {
     return axios.get("/api/trips");
   },
   createTrip: function (tripData) {
-    return axios.post("/api/trips",tripData);
+    return axios.post("/api/trips", tripData);
   },
   getTrip: function (id) {
     return axios.get(`/api/trips/${id}`);
   },
-  editTrip: function (id,tripData) {
-    return axios.put(`/api/trips/${id}`,tripData);
+  editTrip: function (id, tripData) {
+    return axios.put(`/api/trips/${id}`, tripData);
   },
   deleteTrip: function (id) {
     return axios.delete(`/api/trips/${id}`);

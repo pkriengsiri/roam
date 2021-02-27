@@ -10,6 +10,11 @@ const tripSchema = new Schema({
     trim: true,
     required: "Please choose a destination.",
   },
+  imageUrl: {
+    type: String,
+    trim: true,
+    default: "",
+  },
   startDate: {
     type: Date,
     required: "Please choose a start and end date.",

@@ -36,6 +36,8 @@ const SingleTrip = () => {
     }
   }, []);
 
+
+
   return (
     <div className="container">
       <h1 className="title has-text-centered">Your Trip to {destination}!</h1>
@@ -46,7 +48,7 @@ const SingleTrip = () => {
       <div className="columns is-centered">
         <div className="column is-3">
           <figure className="image is-128x128">
-            <img src="https://bulma.io/images/placeholders/256x256.png" />
+            <img src="" />
             <p>Picture of the location from API</p>
           </figure>
         </div>
