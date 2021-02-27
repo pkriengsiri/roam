@@ -34,11 +34,15 @@ const Dashboard = () => {
 
   return (
     <>
-      <h1 className="title is-size-1 has-text-centered mt-6 pl-6 pr-6">{currentUser}</h1>
-          <section>
-            <img className="animate fadeInLeft one "src="/trips-hero.png" alt="" />
-          </section>
-       
+      <h1 className="title is-size-1 has-text-centered mt-6 pl-6 pr-6">
+        {currentUser}
+      </h1>
+      <h1 className="subtitle is-size-4 has-text-centered mt-3">
+        Start planning your trips today!
+      </h1>
+      <section>
+        <img className="animate fadeInLeft one" src="/trips-hero.png" alt="" />
+      </section>
 
       <div className="container has-text-centered mt-6 pl-6 pr-6">
         {/* global alert for not filling out user profile */}
@@ -52,16 +56,17 @@ const Dashboard = () => {
             )}
           </div>
         </div>
-        {trips.map((trip) => (
-          <TripCard
-            {...trip}
-            startDate={new Date(trip.startDate)}
-            endDate={new Date(trip.endDate)}
-            tripId={trip._id}
-            key={trip._id}
-          />
-        ))}
-
+        
+          {trips.map((trip) => (
+            <TripCard
+              {...trip}
+              startDate={new Date(trip.startDate)}
+              endDate={new Date(trip.endDate)}
+              tripId={trip._id}
+              key={trip._id}
+            />
+          ))}
+        
         <Link
           to={`/user/${userId}/trips/new`}
           className="button is-primary mr-4 is-size-4"

@@ -19,8 +19,6 @@ const TripCard = ({
   // const { tripId } = useParams();
   const { userId } = useParams();
 
-  // TODO: Add image to trip card
-
   return (
     <div className="columns is-centered">
       <div className="column is-5">
@@ -43,13 +41,14 @@ const TripCard = ({
                       <i className="icon fas fa-eye"></i>
                     </Link>
                     {userId === tripCreator && (
-                      <Link to={`/user/${userId}/trips/${tripId}/edit`}>
-                        <i className="icon far fa-edit m-1"></i>
-                      </Link>
-                    )}
-                  </div>
+                    <Link to={`/user/${userId}/trips/${tripId}/edit`}>
+                      <i className="icon far fa-edit m-1"></i>
+                    </Link>
+                  )}
                 </div>
+                
               </div>
+            </div>
             </div>
             <div className="columns">
               <div className="column is-10">
@@ -70,12 +69,13 @@ const TripCard = ({
                     {travelers.length}
                   </p>
                 </div>
+                
               </div>
             </div>
           </div>
         </div>
       </div>
-    </div>
+      </div>
   );
 };
 
