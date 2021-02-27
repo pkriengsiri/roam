@@ -1,6 +1,5 @@
 const db = require("../models");
 const axios = require("axios");
-const fetch = require("node-fetch");
 var cloudinary = require("cloudinary").v2;
 
 // Defining methods for the userController
