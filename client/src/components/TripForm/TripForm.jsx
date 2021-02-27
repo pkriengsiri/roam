@@ -11,9 +11,13 @@ import {
   VERTICAL_ORIENTATION,
   HORIZONTAL_ORIENTATION,
 } from "react-dates/constants";
+import Alert from "../Alert/Alert";
+import AlertContext from "../../contexts/AlertContext";
 
 const TripForm = (props) => {
   const { userContext } = useContext(UserContext);
+  const { onDisplay, display, theme } = useContext(AlertContext);
+
   // state for form object
   const [destination, setDestination] = useState("");
   // TODO: Do we want travel start date initiated as today?
@@ -272,11 +276,14 @@ const TripForm = (props) => {
                   {props.buttonText}
                 </button>
 
-                <Link to={`/user/${userId}/trips`}>
+                <Link onClick={()=>props.closeTripForm()}to={`/user/${userId}/trips`}>
                   <button className="button  ml-4 cancel-button">Cancel</button>
                 </Link>
               </div>
             </div>
+            {display && (
+              <Alert color={theme}>Please complete all fields.</Alert>
+            )}
           </form>
         </div>
       </div>
