@@ -1,6 +1,4 @@
 import React, { useState, useEffect, useContext } from "react";
-import DatePicker from "react-datepicker";
-import "react-datepicker/dist/react-datepicker.css";
 import "./TripForm.css";
 import { useParams, Link } from "react-router-dom";
 import axios from "axios";
@@ -163,7 +161,7 @@ const TripForm = (props) => {
               <label className="label">Dates</label>
 
 
-              <DateRangePicker
+              <DateRangePicker className="date-range-picker"
                 startDate={startDate}
                 startDateId="trip-start-date"
                 endDate={endDate}
