@@ -14,6 +14,7 @@ module.exports = {
       db.User.create(userToCreate)
         .then((newUser) => {
           const token = jwt.sign({ _id: newUser._id }, process.env.SECRET);
+          res.cookie('token', token, { httpOnly: true });
           res.json({ token: token });
         })
         .catch((err) => {
@@ -29,6 +30,7 @@ module.exports = {
         bcrypt.compare(req.body.password, foundUser.password, (err, result) => {
           if (result) {
             const token = jwt.sign({ _id: foundUser._id }, process.env.SECRET);
+            res.cookie('token', token, { httpOnly: true });
             res.json({ token: token });
           } else {
             res.status(401).end();
