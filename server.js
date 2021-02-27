@@ -5,7 +5,8 @@ const mongoose = require("mongoose");
 const app = express();
 const routes = require("./routes");
 const cookieParser = require("cookie-parser");
-const jwt = require("jsonwebtoken");
+const jwt = require('express-jwt');
+const jsonwebtoken = require('jsonwebtoken');
 
 // Server port
 const PORT = process.env.PORT || 3001;
@@ -15,12 +16,6 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 app.use(express.static("client/build"));
 app.use(cookieParser());
-app.use(
-  jwt({
-    secret: process.env.SECRET,
-    getToken: (req) => req.cookies.token,
-  })
-);
 
 // Mongoose connection
 mongoose

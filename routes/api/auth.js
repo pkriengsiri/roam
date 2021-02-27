@@ -1,5 +1,15 @@
 const router = require("express").Router();
 
+// app.use(cookieParser());
+// app.use(
+//   jwt({
+//     secret: process.env.SECRET,
+//     getToken: (req) => req.cookies.token,
+//     algorithms: ['RS256']
+//   })
+// );
+
+
 const {
     createNewUser, 
     loginUser,

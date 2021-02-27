@@ -15,6 +15,7 @@ const Home = ({ setUserContext }) => {
   const { userContext } = useContext(UserContext);
 
   useEffect(() => {
+    console.log("cookie"+document.cookie);
     document.title = "Roam";
   }, []);
 
