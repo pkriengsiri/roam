@@ -4,6 +4,8 @@ import React from "react";
 const CreateExpense = () => {
   const [totalExpenseAmount, setTotalExpenseAmount] = useState("");
   const [description, setDescription] = useState("");
+  const [expenseCategory, setExpenseCategory] = useState("");
+
   return (
     <div className="container">
       <h1 className="title has-text-centered">Create an Expense:</h1>
@@ -30,7 +32,7 @@ const CreateExpense = () => {
             <label className="label">Category</label>
             <div className="control">
               <div className="select">
-                <select>
+                <select name="category" value={expenseCategory} onChange={(e) => setExpenseCategory(e.target.value)}>
                   <option>Activities</option>
                   <option>Airfare</option>
                   <option>Car & Gas</option>
