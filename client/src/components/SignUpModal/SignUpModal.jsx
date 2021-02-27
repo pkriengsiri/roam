@@ -90,13 +90,13 @@ const SignUpModal = ({ closeSignUpModal, setSignupModalState}) => {
                 </div>
               </div>
 
-              {!emailStatus && (
+              {/* {!emailStatus && (
                 <Alert
                   color={"error"}
                 >
                   {emailStatusMessage}
                 </Alert>
-              )}
+              )} */}
               <strong>
                 <p className="mt-4">Password</p>
               </strong>

@@ -34,11 +34,12 @@ const Dashboard = () => {
 
   return (
     <>
-      <h1 className="title is-size-1 has-text-centered mt-6 pl-6 pr-6">{currentUser}</h1>
-          <section>
-            <img src="/trips-hero.png" alt="" />
-          </section>
-       
+      <h1 className="title is-size-1 has-text-centered mt-6 pl-6 pr-6">
+        {currentUser}
+      </h1>
+      <section>
+        <img src="/trips-hero.png" alt="" />
+      </section>
 
       <div className="container has-text-centered mt-6 pl-6 pr-6">
         {/* global alert for not filling out user profile */}
@@ -53,7 +54,13 @@ const Dashboard = () => {
           </div>
         </div>
         {trips.map((trip) => (
-          <TripCard {...trip} tripId={trip._id} key={trip._id} />
+          <TripCard
+            {...trip}
+            startDate={new Date(trip.startDate)}
+            endDate={new Date(trip.endDate)}
+            tripId={trip._id}
+            key={trip._id}
+          />
         ))}
 
         <Link

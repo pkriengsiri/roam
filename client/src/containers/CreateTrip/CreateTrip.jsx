@@ -4,8 +4,12 @@ import "./CreateTrip.css";
 import TripForm from "../../components/TripForm/TripForm";
 import { useHistory, useParams } from "react-router-dom";
 import UserContext from "../../contexts/UserContext";
+import AlertContext from "../../contexts/AlertContext";
+
 
 const CreateTrip = () => {
+  const { onDisplay, display, theme } = useContext(AlertContext);
+
   // add trip button to send to server
   const history = useHistory();
   const { userId } = useParams();
@@ -14,15 +18,30 @@ const CreateTrip = () => {
 
   const handleFormSubmit = (e, formObject) => {
     e.preventDefault();
-    setLoadingState("is-loading");
-    API.createTrip(formObject)
-      //TODO: // use context to set signed in user as tripCreator
+    if (
+      !formObject.tripCreator ||
+      !formObject.destination ||
+      !formObject.startDate ||
+      !formObject.endDate ||
+      !formObject.travelers
+    ) {
+      onDisplay(true, "error");
+    } else {
+      onDisplay(false);
+      setLoadingState("is-loading");
+      API.createTrip(formObject)
+        //TODO: // use context to set signed in user as tripCreator
 
-      .then((response) => {
-        history.push(`/user/${userId}/trips`);
-      })
-      .catch((err) => console.log(err));
+        .then((response) => {
+          history.push(`/user/${userId}/trips`);
+        })
+        .catch((err) => console.log(err));
+    }
   };
+
+  const closeTripForm =() =>{
+    onDisplay(false);
+  }
 
   return (
     <div className="container mt-6 pl-6 pr-6">
@@ -36,8 +55,10 @@ const CreateTrip = () => {
         tripCreatorEmail={email}
         buttonText="Add Trip"
         handleFormSubmit={handleFormSubmit}
+        closeTripForm={closeTripForm}
         loadingState={loadingState}
       />
+
     </div>
   );
 };
