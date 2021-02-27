@@ -62,11 +62,12 @@ const CreateExpense = () => {
               <div className="control">
                 <div className="select">
                   <select
+                  
                     name="category"
                     value={expenseCategory}
                     onChange={(e) => setExpenseCategory(e.target.value)}
                   >
-                    <option disabled="disabled" selected="selected">Select One</option>
+                    <option disabled="disabled" defaultValue="Select One">Select One</option>
                     <option>Activities</option>
                     <option>Airfare</option>
                     <option>Car & Gas</option>
