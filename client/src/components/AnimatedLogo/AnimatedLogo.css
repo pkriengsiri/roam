@@ -21,7 +21,7 @@
   }
 }
 
-.contrail {
+.animated-logo-contrail {
   fill: #ebdfcf;
   animation: changecolor 2s forwards;
   animation-delay: 1s;
@@ -35,10 +35,10 @@
   }
 }
 
-.plane {
+.animated-logo-plane {
   fill: #b1b3be;
   animation: changecolorPlane 2s forwards;
-  animation-delay: 1.5s;
+  animation-delay: 2s;
 }
 @keyframes changecolorPlane {
   from {
@@ -48,3 +48,17 @@
     fill: #2e3560;
   }
 }
+
+.animated-globe-top, .animated-globe-bottom {
+    fill: #b1b3be;
+    animation: changecolorglobe 2s forwards;
+    animation-delay: 3s;
+  }
+  @keyframes changecolorglobe {
+    from {
+      fill: #b1b3be;
+    }
+    to {
+      fill: #2e3560;
+    }
+  }
