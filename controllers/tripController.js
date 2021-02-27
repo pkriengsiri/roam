@@ -16,7 +16,7 @@ module.exports = {
       .catch((err) => res.status(422).json(err));
   },
 
-  findByIdwithExpenses: function (req, res) {
+  findByIdWithExpenses: function (req, res) {
     db.Trip.findById(req.params.id)
       .populate("expenses")
       .then((dbTrip) => res.json(dbTrip))

@@ -18,5 +18,10 @@ router
 .route("/:userId/trips")
 .get(userController.findByIdWithTrips)
 
+// Routes for /api/users/:id/expenses
+router
+  .route("/:id/expenses")
+  .get(userController.findByIdWithExpenses)
+
 // Export
   module.exports = router;

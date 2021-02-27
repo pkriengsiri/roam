@@ -9,7 +9,7 @@ router.route("/").get(tripController.findAll).post(tripController.create);
 router
   .route("/:id")
   // .get(tripController.findById)
-  .get(tripController.findByIdwithExpenses) // return the trip with the expenses
+  .get(tripController.findByIdWithExpenses) // return the trip with the expenses
   .put(tripController.update)
   .delete(tripController.remove);
 
