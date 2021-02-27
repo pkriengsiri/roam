@@ -5,12 +5,13 @@ import SignUpModal from "../../components/SignUpModal/SignUpModal";
 import TestimonialCard from "../../components/TestimonialCard/TestimonialCard";
 import BeachVideo from "./Beach1.mp4";
 import AlertContext from "../../contexts/AlertContext";
+import UserContext from "../../contexts/UserContext";
 
 const Home = ({ setUserContext }) => {
   const [loginModalState, setLoginModalState] = useState(false);
   const [signUpModalState, setSignUpModalState] = useState(false);
-
   const { onDisplay, display, theme } = useContext(AlertContext);
+  const { userContext } = useContext(UserContext);
 
   useEffect(() => {
     document.title = "Roam";
@@ -36,8 +37,6 @@ const Home = ({ setUserContext }) => {
     setSignUpModalState(true);
   };
 
- 
-
   return (
     <>
       {loginModalState && (
@@ -56,26 +55,36 @@ const Home = ({ setUserContext }) => {
       )}
 
       <section className="hero-section">
-        
         <video autoPlay loop muted>
-        
           <source src={BeachVideo} type="video/mp4" />
         </video>
         {/* <h1 className="slogan">Vacation planning made easy. </h1> */}
         {/* <div className="homepage-container"> */}
-        <h1 className="has-text-centered title slogan">Go further <em>together</em>.</h1>
-        <button
-          className="button home-signup-button is-primary mr-4 is-size-4"
-          onClick={toggleSignUpModal}
-        >
-          Sign Up
-        </button>
-        <button
-          className="button home-login-button is-light ml-4 is-size-4"
-          onClick={toggleLoginModal}
-        >
-          Login
-        </button>
+        {userContext.id !=="" && (
+          <h1 className="has-text-centered title logged-in-slogan">
+            Go further <em>together</em>.
+          </h1>
+        )}
+        {userContext.id === "" && (
+          <>
+            <h1 className="has-text-centered title logged-out-slogan">
+              Go further <em>together</em>.
+            </h1>
+            <button
+              className="button home-signup-button is-primary mr-4 is-size-4"
+              onClick={toggleSignUpModal}
+            >
+              Sign Up
+            </button>
+            <button
+              className="button home-login-button is-light ml-4 is-size-4"
+              onClick={toggleLoginModal}
+            >
+              Login
+            </button>
+          </>
+        )}
+
         {/* </div> */}
       </section>
 
