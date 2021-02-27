@@ -1,9 +1,19 @@
-/* // @use "../../sass/App.scss"; */
+.trip-image {
+ border-radius: 10px;
+ /* position: absolute; */
+ top: 0;
+ left: 0;
+}
 
-  
-  .input{
-    background-color: white;
-  }
-  .fa-plus{
-    color: #33c1bf;
-  }
+.single-trip-card {
+  background-color: white;
+  color: black;
+  position: absolute;
+  top: 20%;
+ left: 43%;
+}
+
+
+.trip-container {
+  position: relative;
+}
