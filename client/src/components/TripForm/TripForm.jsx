@@ -9,6 +9,10 @@ import "react-dates/initialize";
 import { DateRangePicker } from "react-dates";
 import "react-dates/lib/css/_datepicker.css";
 import moment from "moment";
+import {
+  VERTICAL_ORIENTATION,
+  HORIZONTAL_ORIENTATION,
+} from "react-dates/constants";
 
 const TripForm = (props) => {
   const { userContext } = useContext(UserContext);
@@ -18,6 +22,7 @@ const TripForm = (props) => {
   const [startDate, setStartDate] = useState(null);
   const [endDate, setEndDate] = useState(null);
   const [focusedInput, setFocusedInput] = useState(null);
+  const [calendarStack, setCalendarStack] = useState("HORIZONTAL_ORIENTATION");
 
   const [travelers, setTravelers] = useState([
     {
@@ -42,7 +47,6 @@ const TripForm = (props) => {
       axios
         .get(`/api/trips/${tripId}`)
         .then((response) => {
-
           const responseStartDate = moment(response.data.startDate);
           const responseEndDate = moment(response.data.endDate);
           setDestination(response.data.destination);
@@ -56,6 +60,15 @@ const TripForm = (props) => {
         });
     }
   }, [tripId]);
+
+  // check window viewport to set orientation of calendar so it is responsive in mobile
+  useEffect(() => {
+    if (window.innerWidth <= 768) {
+      setCalendarStack(VERTICAL_ORIENTATION);
+    } else {
+      setCalendarStack(HORIZONTAL_ORIENTATION);
+    }
+  }, []);
 
   // add traveler to the travelers list
   const addTraveler = (e) => {
@@ -165,6 +178,18 @@ const TripForm = (props) => {
                 onDatesChange={handleDatesChange}
                 focusedInput={focusedInput}
                 onFocusChange={(focusedInput) => setFocusedInput(focusedInput)}
+                // optional props
+                showDefaultInputIcon={true} // calendar icon
+                showClearDates={true} // clear dates with x button
+                isOutsideRange={() => false} // allow past dates
+                //  // for mobile view: https://github.com/airbnb/react-dates/issues/262
+                // orientation={react-dates/constants.VERTICAL_ORIENTATION} does wonders combined with withPortal={true} or with withFullScreenPortal={true}
+                orientation={calendarStack}
+                // withPortal={true}
+
+                //  // if we want to use date range picker on single trip view
+                // disabled={true}
+                // showClearDates={false}
               />
             </div>
           </form>
