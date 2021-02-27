@@ -24,7 +24,11 @@ module.exports = {
       // ensure expenseBalanced key is set to true
       req.body.expenseBalanced = true;
       db.Expense.create({ ...req.body })
-        .then((dbExpense) => res.json(dbExpense))
+        .then((dbExpense) => {
+          addExpenseToTrip(dbExpense);
+          addExpenseToUser(dbExpense);
+          res.json(dbExpense);
+        })
         .catch((err) => res.status(422).json(err));
     } else {
       req.body.expenseBalanced = false;
@@ -35,7 +39,11 @@ module.exports = {
   findByUserId: function (req, res) {},
   findByTripId: function (req, res) {},
   edit: function (req, res) {},
-  delete: function (req, res) {},
+  delete: function (req, res) {
+    db.Expense.findByIdAndDelete(req.params.id)
+    .then((dbExpense)=>res.json(dbTrip))
+    .catch((err)=>res.json(err))
+  },
 };
 
 // after expense is created, add the expense id to the trip
@@ -47,7 +55,6 @@ const addExpenseToTrip = async (dbExpenseObject) => {
     // .then((res) => console.log(res))
     .catch((err) => console.log(err));
 };
-
 
 // after expense is created, add the expense id to the user who created
 const addExpenseToUser = async (dbExpenseObject) => {
