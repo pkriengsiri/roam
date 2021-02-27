@@ -26,7 +26,7 @@ const TripCard = ({
         <div className="card trip-card">
           <div className="card-content has-text-left">
             <div className="column is-12">
-              <img src={imageUrl} />
+              <img className="dashboard-image"src={imageUrl} />
             </div>
             <div className="media">
               <div className="media-content">
