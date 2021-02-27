@@ -20,13 +20,12 @@ const Dashboard = () => {
 
     API.getUserWithTrips(userId)
       .then((response) => {
-        setTrips(response.data.trips)
+        setTrips(response.data.trips);
         if (!response.data.firstName) {
           setCurrentUser(`Welcome!`);
         } else {
           setCurrentUser(`Welcome, ${response.data.firstName}!`);
         }
-
       })
       .catch((err) => {
         console.log(err);
@@ -34,23 +33,37 @@ const Dashboard = () => {
   }, []);
 
   return (
-    <div className="container has-text-centered">
-      {/* global alert for not filling out user profile */}
-      <div className="columns is-centered">
-        <div className="column is-8 has-text-centered">
-          {/* conditional rendering for displaying name IF it is in the database */}
-          <h1 className="title">{currentUser}</h1>
-          <h1 className="title">Your Trips:</h1>
-        </div>
-      </div>
-      {trips.map((trip) => (
-        <TripCard {...trip} tripId={trip._id} key={trip._id} />
-      ))}
+    <>
+      <h1 className="title is-size-1 has-text-centered mt-6 pl-6 pr-6">{currentUser}</h1>
+          <section>
+            <img src="/trips-hero.png" alt="" />
+          </section>
+       
 
-      <Link to={`/user/${userId}/trips/new`} className="button is-primary mr-4 is-size-4">
-        Create Trip
-      </Link>
-    </div>
+      <div className="container has-text-centered mt-6 pl-6 pr-6">
+        {/* global alert for not filling out user profile */}
+        <div className="columns is-centered">
+          <div className="column is-8 has-text-centered">
+            {/* conditional rendering for displaying name IF it is in the database */}
+            {/* Conditional rendering for if the user has trips or not */}
+            {trips.length !== 0 && <h1 className="title">Your Trips</h1>}
+            {trips.length === 0 && (
+              <h1 className="title">You don't have any trips planned yet!</h1>
+            )}
+          </div>
+        </div>
+        {trips.map((trip) => (
+          <TripCard {...trip} tripId={trip._id} key={trip._id} />
+        ))}
+
+        <Link
+          to={`/user/${userId}/trips/new`}
+          className="button is-primary mr-4 is-size-4"
+        >
+          Create Trip
+        </Link>
+      </div>
+    </>
   );
 };
 

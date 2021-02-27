@@ -1,4 +1,7 @@
+.skip-link {
+  color: #f48e3f;
+}
 .skip-link:hover {
-    color: orange;
-    text-decoration: underline;
+  color: #f6a465;
+  text-decoration: underline;
 }

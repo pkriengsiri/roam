@@ -17,7 +17,6 @@ const EditTrip = () => {
     axios
       .put(`/api/trips/${tripId}`, formObject)
       .then((response) => {
-
         history.push(`/user/${userId}/trips`);
       })
       .catch((err) => {
@@ -30,7 +29,7 @@ const EditTrip = () => {
     setDeleteModalState(false);
   };
 
-  const togglesDeleteModal= (e) => {
+  const togglesDeleteModal = (e) => {
     e.preventDefault();
 
     setDeleteModalState(true);
@@ -38,23 +37,30 @@ const EditTrip = () => {
 
   return (
     <>
-    {deleteModalState && <DeleteModal closeDeleteModal={closeDeleteModal} userId={userId} tripId={tripId}/>} 
-    <div className="container">
-      <div className="columns is-centered">
-        <div className="column is-half ">
-          <div className="columns is-vcentered ">
-            <div className="column is-5">
-              <h1 className="title">Edit Your Trip</h1>
-            </div>
-            <div className="column is-1">
-              <a onClick={togglesDeleteModal}><i className="far fa-trash-alt fa-lg"></i></a>
+      {deleteModalState && (
+        <DeleteModal
+          closeDeleteModal={closeDeleteModal}
+          userId={userId}
+          tripId={tripId}
+        />
+      )}
+      <div className="container mt-6 pl-6 pr-6">
+        <div className="columns is-centered">
+          <div className="column is-half ">
+            <div className="columns is-vcentered ">
+              <div className="column is-5">
+                <h1 className="title">Edit Your Trip</h1>
+              </div>
+              <div className="column is-1">
+                <a onClick={togglesDeleteModal}>
+                  <i className="far fa-trash-alt fa-lg"></i>
+                </a>
+              </div>
             </div>
           </div>
-          
-          <TripForm handleFormSubmit={handleFormSubmit} buttonText="Save" />
         </div>
+        <TripForm handleFormSubmit={handleFormSubmit} buttonText="Save" />
       </div>
-    </div>
     </>
   );
 };
