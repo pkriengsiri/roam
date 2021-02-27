@@ -1,27 +1,45 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useContext } from "react";
 import axios from "axios";
 import "./EditTrip.css";
 import API from "../../utils/API";
 import { useHistory, useParams } from "react-router-dom";
 import TripForm from "../../components/TripForm/TripForm";
 import DeleteModal from "../../components/DeleteModal/DeleteModal";
+import AlertContext from "../../contexts/AlertContext";
 
 const EditTrip = () => {
+  const { onDisplay, display, theme } = useContext(AlertContext);
+
   const history = useHistory();
   const { userId } = useParams();
   const { tripId } = useParams();
   const [deleteModalState, setDeleteModalState] = useState(false);
 
   const handleFormSubmit = (e, formObject) => {
-    e.preventDefault();
-    axios
-      .put(`/api/trips/${tripId}`, formObject)
-      .then((response) => {
-        history.push(`/user/${userId}/trips`);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
+    if (
+      !formObject.tripCreator ||
+      !formObject.destination ||
+      !formObject.startDate ||
+      !formObject.endDate ||
+      !formObject.travelers
+    ) {
+      onDisplay(true, "error");
+    } else {
+      onDisplay(false);
+      e.preventDefault();
+      axios
+        .put(`/api/trips/${tripId}`, formObject)
+        .then((response) => {
+          history.push(`/user/${userId}/trips`);
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    }
+  };
+
+  const closeTripForm = () => {
+    onDisplay(false);
   };
 
   const closeDeleteModal = (e) => {
@@ -59,7 +77,11 @@ const EditTrip = () => {
             </div>
           </div>
         </div>
-        <TripForm handleFormSubmit={handleFormSubmit} buttonText="Save" />
+        <TripForm
+          handleFormSubmit={handleFormSubmit}
+          buttonText="Save"
+          closeTripForm={closeTripForm}
+        />
       </div>
     </>
   );
