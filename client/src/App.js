@@ -7,7 +7,7 @@ import Dashboard from "./containers/Dashboard/Dashboard";
 import CreateTrip from "./containers/CreateTrip/CreateTrip";
 import EditTrip from "./containers/EditTrip/EditTrip";
 import SingleTrip from "./containers/SingleTrip/SingleTrip";
-import NavBar from "./components/Navbar/Navbar";
+import Navbar from "./components/Navbar/Navbar";
 import Footer from "./components/Footer/Footer";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import "./App.css";
@@ -32,7 +32,7 @@ function App() {
       <AlertContext.Provider value={alertContext}>
       <div className="App">
         <Router>
-          <NavBar setUserContext={setUserContext} userContext={userContext} />
+          <Navbar setUserContext={setUserContext} userContext={userContext} />
           <main className="page">
             <Switch>
               <Route exact path="/">

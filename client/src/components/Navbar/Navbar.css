@@ -1,4 +1,4 @@
-.navbar-dropdown {
+/* .navbar-dropdown {
     position: absolute;
 }
 
@@ -8,4 +8,8 @@ a.navbar-link:hover, a.navbar-link:active {
 
 .navbar {
     border-bottom: 4px solid #2E3560;
+} */
+
+.navbar-divider {
+    background-color: #2e356095;
 }
