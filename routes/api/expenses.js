@@ -1,9 +1,7 @@
 // Dependencies
 const router = require("express").Router();
-const 
+const expenseController = require("../../controllers/expenseController");
 
-// Routes for /api/expenses
-const 
 
 // Routes for /api/expenses/:id
 
