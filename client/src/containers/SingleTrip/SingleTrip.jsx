@@ -13,6 +13,7 @@ const SingleTrip = () => {
   const [startDate, setStartDate] = useState(new Date());
   const [endDate, setEndDate] = useState(null);
   const [travelers, setTravelers] = useState([]);
+  const [imageUrl, setImageUrl] = useState("");
 
   // browser params
   const { tripId } = useParams();
@@ -29,6 +30,7 @@ const SingleTrip = () => {
           setStartDate(responseStartDate);
           setEndDate(responseEndDate);
           setTravelers(response.data.travelers);
+          setImageUrl(response.data.imageUrl);
         })
         .catch((err) => {
           console.log(err);
@@ -47,8 +49,8 @@ const SingleTrip = () => {
 
       <div className="columns is-centered">
         <div className="column is-3">
-          <figure className="image is-128x128">
-            <img src="" />
+          <figure className="image">
+            <img src={imageUrl} />
             <p>Picture of the location from API</p>
           </figure>
         </div>
