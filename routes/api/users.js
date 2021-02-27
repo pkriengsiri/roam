@@ -26,8 +26,8 @@ router.get(
         return req.cookies.token;
       },
       algorithms: ["HS256"],
-    }).
-  userController.findByIdWithTrips
+    })
+  ,userController.findByIdWithTrips
 );
 
 // Export
