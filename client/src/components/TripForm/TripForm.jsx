@@ -104,21 +104,21 @@ const TripForm = (props) => {
 
   return (
     <>
-      <form
-        className="trip-form"
-        onSubmit={(e) =>
-          props.handleFormSubmit(e, {
-            tripCreator: userId,
-            destination,
-            startDate,
-            endDate,
-            travelers,
-          })
-        }
-      >
-        {/* destination section  */}
-        <div className="columns">
-          <div className="column is-two-thirds">
+      <div className="columns is-centered">
+        <div className="column is-half">
+          <form
+            className="trip-form"
+            onSubmit={(e) =>
+              props.handleFormSubmit(e, {
+                tripCreator: userId,
+                destination,
+                startDate,
+                endDate,
+                travelers,
+              })
+            }
+          >
+            {/* destination section  */}
             <div className="field mb-2">
               <label className="label">Destination</label>
               <div className="control">
@@ -132,120 +132,118 @@ const TripForm = (props) => {
                 />
               </div>
             </div>
-          </div>
-        </div>
+            {/* date picker section  */}
+            <div className="mb-5">
+              <label className="label">Dates</label>
+              <DatePicker
+                selected={startDate}
+                onChange={onChange}
+                startDate={startDate}
+                endDate={endDate}
+                selectsRange
+                inline
+              />
+            </div>
+          </form>
+          {/* invite travelers section  */}
 
-        {/* date picker section  */}
-        <div className="mb-5">
-          <label className="label">Dates</label>
-          <DatePicker
-            selected={startDate}
-            onChange={onChange}
-            startDate={startDate}
-            endDate={endDate}
-            selectsRange
-            inline
-          />
-        </div>
-      </form>
+          <form className="invite" onSubmit={addTraveler}>
+            <label className="label">Invite Others!</label>
+            <div className="columns is-vcentered">
+              <div className="column">
+                <div className="field has-addons has-addons-fullwidth">
+                  <div className="control has-icons-left">
+                    <input
+                      className="input"
+                      type="text"
+                      placeholder="User email"
+                      name="traveler"
+                      value={traveler}
+                      onChange={(e) => setTraveler(e.target.value)}
+                    />
+                    <span className="icon is-medium is-left">
+                      <i className="fas fa-users"></i>
+                    </span>
+                    {!validEmailPromptState && (
+                      <p className="validation">
+                        Please enter a valid email address
+                      </p>
+                    )}
 
-      {/* invite travelers section  */}
-
-      <form className="invite" onSubmit={addTraveler}>
-        <label className="label">Invite Others!</label>
-        <div className="columns is-vcentered">
-          <div className="column">
-            <div className="field has-addons has-addons-fullwidth">
-              <div className="control has-icons-left">
-                <input
-                  className="input"
-                  type="text"
-                  placeholder="User email"
-                  name="traveler"
-                  value={traveler}
-                  onChange={(e) => setTraveler(e.target.value)}
-                />
-                <span className="icon is-medium is-left">
-                  <i className="fas fa-users"></i>
-                </span>
-                {!validEmailPromptState && (
-                  <p className="validation">
-                    Please enter a valid email address
-                  </p>
-                )}
-
-                <span>
-                  <i
-                    type="submit"
-                    className="fas fa-plus fa-lg add-traveler-button"
-                    className=""
-                  ></i>
-                </span>
-              </div>
-              <div className="control">
-                <button type="submit" className="button">
-                  <i className="fas fa-plus fa-lg"></i>
-                </button>
+                    <span>
+                      <i
+                        type="submit"
+                        className="fas fa-plus fa-lg add-traveler-button"
+                        className=""
+                      ></i>
+                    </span>
+                  </div>
+                  <div className="control">
+                    <button type="submit" className="button">
+                      <i className="fas fa-plus fa-lg"></i>
+                    </button>
+                  </div>
+                </div>
               </div>
             </div>
-          </div>
-        </div>
 
-        {/* Traveler bubbles */}
-        <div className="mb-5">
-          {!validRemoveState && (
-            <p className="validation">
-              Cannot remove trip creator. Cancel or delete trip.
-            </p>
-          )}
-          {travelers.map((traveler, index) => (
-            <p className="travelers" key={index}>
-              <span className="travelers-tag p-2 mr-2">
-                {traveler.travelerEmail === userContext.email && (
-                  <span>YOU - </span>
-                )}
-                {`${traveler.travelerEmail} - `}
-                <span>
-                  <em>{traveler.status}</em>
-                </span>
-                <span
-                  // data-email={traveler.email}
-                  onClick={() => removeTraveler(traveler.travelerEmail)}
-                  // onClick={(e) => removeTraveler(e)}
+            {/* Traveler bubbles */}
+            <div className="mb-5">
+              {!validRemoveState && (
+                <p className="validation">
+                  Cannot remove trip creator. Cancel or delete trip.
+                </p>
+              )}
+              {travelers.map((traveler, index) => (
+                <p className="travelers" key={index}>
+                  <span className="travelers-tag p-2 mr-2">
+                    {traveler.travelerEmail === userContext.email && (
+                      <span>YOU - </span>
+                    )}
+                    {`${traveler.travelerEmail} - `}
+                    <span>
+                      <em>{traveler.status}</em>
+                    </span>
+                    <span
+                      // data-email={traveler.email}
+                      onClick={() => removeTraveler(traveler.travelerEmail)}
+                      // onClick={(e) => removeTraveler(e)}
+                    >
+                      {" "}
+                      x{" "}
+                    </span>
+                  </span>
+                </p>
+              ))}
+            </div>
+
+            {/* Save button */}
+            <div className="field is-grouped">
+              <div className="control">
+                <button
+                  className={`button is-primary ${props.loadingState}`}
+                  type="submit"
+                  onClick={(e) =>
+                    props.handleFormSubmit(e, {
+                      tripCreator: userId,
+                      destination,
+                      startDate,
+                      endDate,
+                      travelers,
+                    })
+                  }
                 >
-                  {" "}
-                  x{" "}
-                </span>
-              </span>
-            </p>
-          ))}
-        </div>
+                  {props.buttonText}
+                </button>
 
-        {/* Save button */}
-        <div className="field is-grouped">
-          <div className="control">
-            <button
-              className={`button is-primary ${props.loadingState}`}
-              type="submit"
-              onClick={(e) =>
-                props.handleFormSubmit(e, {
-                  tripCreator: userId,
-                  destination,
-                  startDate,
-                  endDate,
-                  travelers,
-                })
-              }
-            >
-              {props.buttonText}
-            </button>
-
-            <Link to={`/user/${userId}/trips`}>
-              <button className="button  ml-4 cancel-button">Cancel</button>
-            </Link>
-          </div>
+                <Link to={`/user/${userId}/trips`}>
+                  <button className="button  ml-4 cancel-button">Cancel</button>
+                </Link>
+              </div>
+            </div>
+          </form>
         </div>
-      </form>
+      </div>
     </>
   );
 };
