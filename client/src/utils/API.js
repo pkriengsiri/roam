@@ -43,7 +43,7 @@ const API = {
   // API methods for expenses
 
   createExpense: function (expenseData) {
-    return axios.post(`/api/expense`, expenseData);
+    return axios.post(`/api/expenses`, expenseData);
   }
 };
 

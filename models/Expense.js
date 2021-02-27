@@ -26,15 +26,15 @@ const ExpenseSchema = new Schema({
     // ],
   },
   description: { type: String },
-  expenseShare: [
-    {
-      travelerId: { type: Schema.Types.ObjectId, ref: "User" },
-      shareOfTotalExpense: { type: Number }, // how much this user owes for their portion of the total expense // Ex: U1 = $10
-      // contributionToTotalExpense:{type:Number},  // how much this user originally paid to the total expense // Ex: U1 = $100
-    },
+  // expenseShare: [
+  //   {
+  //     travelerId: { type: Schema.Types.ObjectId, ref: "User" },
+  //     shareOfTotalExpense: { type: Number }, // how much this user owes for their portion of the total expense // Ex: U1 = $10
+  //     // contributionToTotalExpense:{type:Number},  // how much this user originally paid to the total expense // Ex: U1 = $100
+  //   },
     
-  ], //array of userIds
-  expenseBalanced: { type: Boolean, required:"Transaction must be balanced. (true)" }, // MUST BE TRUE Can mongo calculate or be dynamic?
+  // ], //array of userIds
+  // expenseBalanced: { type: Boolean, required:"Transaction must be balanced. (true)" }, // MUST BE TRUE Can mongo calculate or be dynamic?
 });
 
 const Expense = mongoose.model("Expense", ExpenseSchema);
