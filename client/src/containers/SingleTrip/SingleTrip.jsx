@@ -44,13 +44,14 @@ const SingleTrip = () => {
       </h1>
 
       <div className="columns is-centered">
-        <div className="column is-3">
+        <div className="column is-6 trip-container">
+
           <figure>
             <img className="trip-image" src={imageUrl} />
           </figure>
-        </div>
-        <div className="column is-3">
-          <div class="card">
+        {/* </div>
+        <div className="column is-3"> */}
+          <div class="card single-trip-card">
             <div class="card-content">
               <div class="content">
                 <h2 className="subtitle">Travelers:</h2>
@@ -78,10 +79,7 @@ const SingleTrip = () => {
       </div>
       <div className="columns is-centered">
         <div className="column is-2">
-          {/* <button className="button is-primary mr-4 is-size-5">
-            Dashboard
-          </button> */}
-
+         /
           <Link
             to={`/user/${userId}/trips`}
             className="button is-primary mr-4 is-size-4"
