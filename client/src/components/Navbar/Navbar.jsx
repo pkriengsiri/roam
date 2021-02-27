@@ -51,15 +51,15 @@ const Navbar = ({ setUserContext }) => {
           setSignupModalState={setSignUpModalState}
         />
       )}
-      <nav class="navbar" role="navigation" aria-label="main navigation">
-        <div class="navbar-brand">
+      <nav className="navbar" role="navigation" aria-label="main navigation">
+        <div className="navbar-brand">
           <Link to="/">
             <img src={Logo} width="112" className="ml-4 mt-1" />
           </Link>
 
           <a
             role="button"
-            class="navbar-burger"
+            className="navbar-burger"
             aria-label="menu"
             aria-expanded="false"
             data-target="navbarBasicExample"
@@ -75,15 +75,15 @@ const Navbar = ({ setUserContext }) => {
           </a>
         </div>
 
-        <div id="navbarBasicExample" class="navbar-menu">
+        <div id="navbarBasicExample" className="navbar-menu">
           {/* Logged in navbar */}
           {userContext.userId && (
-            <div class="navbar-end ">
-              <div class="navbar-item has-dropdown is-hoverable">
-                <a class="navbar-link">
+            <div className="navbar-end ">
+              <div className="navbar-item has-dropdown is-hoverable">
+                <a className="navbar-link">
                   <i className="nav-icon fas fa-user-circle fa-2x"></i>
                 </a>
-                <div class="navbar-dropdown is-right">
+                <div className="navbar-dropdown is-right">
                   <Link
                     to={`/user/${userContext.userId}/trips`}
                     className="navbar-item"
@@ -96,7 +96,7 @@ const Navbar = ({ setUserContext }) => {
                   >
                     Edit Profile
                   </Link>
-                  <hr class="navbar-divider" />
+                  <hr className="navbar-divider" />
                   <a className="navbar-item" onClick={handleLogout}>
                     <strong>Logout</strong>
                   </a>
@@ -106,13 +106,15 @@ const Navbar = ({ setUserContext }) => {
           )}
           {/* Logged out navbar */}
           {!userContext.userId && (
-            <div class="navbar-end">
-              <div class="navbar-item">
-                <div class="buttons">
-                  <a class="button is-primary">
+            <div className="navbar-end">
+              <div className="navbar-item">
+                <div className="buttons">
+                  <a onClick={toggleSignUpModal} className="button is-primary">
                     <strong>Sign up</strong>
                   </a>
-                  <a class="button is-light">Log in</a>
+                  <a onClick={toggleLoginModal} className="button is-light">
+                    Log in
+                  </a>
                 </div>
               </div>
             </div>
