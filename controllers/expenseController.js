@@ -8,7 +8,7 @@ module.exports = {
       .catch((err) => res.status(422).json(err));
   },
   findById: function (req, res) {
-    db.Trip.findById(req.params.id)
+    db.Expense.findById(req.params.id)
       .then((dbExpense) => res.json(dbExpense))
       .catch((err) => res.status(422).json(err));
   },

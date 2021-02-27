@@ -7,6 +7,10 @@ router.route("/")
 .get(expenseController.findAll)
 .post(expenseController.create);
 
+// Route for /api/expenses/:id
+router.route("/:id")
+.get(expenseController.findById)
+
 // Routes for /api/expenses/user/:id
 router
   .route("/user/:id")
