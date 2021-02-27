@@ -39,7 +39,7 @@ const SingleTrip = () => {
       <h1 className="title has-text-centered">Your trip to {destination}!</h1>
       <h1 className="subtitle has-text-centered">
         <svg
-          class="DateRangePickerInput_calendarIcon_svg DateRangePickerInput_calendarIcon_svg_1"
+          className="DateRangePickerInput_calendarIcon_svg DateRangePickerInput_calendarIcon_svg_1"
           focusable="false"
           viewBox="0 0 1393.1 1500"
         >
