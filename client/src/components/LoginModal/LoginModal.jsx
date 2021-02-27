@@ -37,7 +37,7 @@ const LoginModal = ({ closeLoginModal, setLoginModalState }) => {
                 console.log(err);
                 setLoginFailureMessage("Login attempt failed");
               } else {
-                setUserContext({ userId: data._id });
+                setUserContext({ userId: data._id, email: data.email });
                 history.push(`/user/${data._id}/trips`);
                 setLoginModalState(false);
               }
