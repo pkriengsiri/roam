@@ -1,11 +1,19 @@
 .destination:hover {
-color: #F48E3F;
-font-size: 2.1rem;
-
+  color: #f48e3f;
+  font-size: 2.1rem;
 }
 
 .icon:hover {
-    color: #F48E3F;
-    font-size: 18px;
-    
-    }
+  color: #f48e3f;
+  font-size: 18px;
+}
+
+.places-image {
+  height: 350px;
+  width: 100%;
+  object-fit: cover;
+}
+
+.trip-card {
+    min-height: 450px;
+}
