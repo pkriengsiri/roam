@@ -3,6 +3,7 @@ import "./Dashboard.css";
 import TripCard from "../../components/TripCard/TripCard";
 import API from "../../utils/API";
 import { Link, useParams } from "react-router-dom";
+import TripsHero from "../../Assets/Images/trips-hero.png";
 
 const Dashboard = () => {
   const { userId } = useParams();
@@ -41,7 +42,7 @@ const Dashboard = () => {
         Start planning your trips today!
       </h1>
       <section>
-        <img className="animate fadeInLeft one" src="/trips-hero.png" alt="" />
+        <img className="animate fadeInLeft one" src={TripsHero} alt="" />
       </section>
 
       <div className="container has-text-centered mt-6 pl-6 pr-6">
