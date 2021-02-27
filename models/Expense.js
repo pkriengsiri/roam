@@ -64,4 +64,18 @@ module.exports = Expense;
 //  //  expense balanced will now require shares===total && contributions===total
 
 
+/// sample
+// {
+//   "expenseCreator": "603867da83472d73a864bd02",
+//   "trip": "603a58a00e0ab53f805724d7",
+//   "totalExpenseAmount": 123.45,
+//   "category": "Food",
+//   "description": "this is a test",
+//   "expenseShare": [
+//       {
+//           "travelerId": "603867da83472d73a864bd02",
+//           "shareOfTotalExpense": 123.45
+//       }
+//   ]
+// }
 

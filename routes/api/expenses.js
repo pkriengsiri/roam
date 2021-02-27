@@ -3,7 +3,9 @@ const router = require("express").Router();
 const expenseController = require("../../controllers/expenseController");
 
 // Route for /api/expenses
-router.route("/").post(expenseController.create);
+router.route("/")
+.get(expenseController.findAll)
+.post(expenseController.create);
 
 // Routes for /api/expenses/user/:id
 router
