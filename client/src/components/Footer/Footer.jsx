@@ -17,22 +17,34 @@ const Footer = () => {
           </div>
           <div className="column is-9">
             <p>
-          <strong className="has-text-light">Roam</strong> by <a href="https://github.com/jeanarose" target="_blank">Jeana Rose Mathis</a>,
-          <a href="https://github.com/mollymccollumwx" target="_blank">Molly McCollum</a>, <a href="https://github.com/pkriengsiri" target="_blank">Pete Kriengsiri</a>, & <a href="https://github.com/tonyschwebach" target="_blank">Tony Schwebach</a>. The source code is
-          licensed
-          <a
-            className="has-text-light"
-            href="http://opensource.org/licenses/mit-license.php"
-          >
-            {" "}
-            MIT.
-          </a>
-          
-        </p>
+              <strong className="has-text-light">Roam</strong> by{" "}
+              <a href="https://github.com/jeanarose" target="_blank">
+                Jeana Rose Mathis
+              </a>
+              ,
+              <a href="https://github.com/mollymccollumwx" target="_blank">
+                {"  "}
+                Molly McCollum
+              </a>
+              ,{" "}
+              <a href="https://github.com/pkriengsiri" target="_blank">
+                Pete Kriengsiri
+              </a>
+              , &{" "}
+              <a href="https://github.com/tonyschwebach" target="_blank">
+                Tony Schwebach
+              </a>
+              . The source code is licensed
+              <a
+                className="has-text-light"
+                href="http://opensource.org/licenses/mit-license.php"
+              >
+                {" "}
+                MIT.
+              </a>
+            </p>
           </div>
         </div>
-
-        
       </div>
     </footer>
   );
