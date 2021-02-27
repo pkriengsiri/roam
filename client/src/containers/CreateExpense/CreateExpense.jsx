@@ -1,7 +1,11 @@
-import { useState } from "react";
+import { useState, useContext } from "react";
+import { useParams, Link } from "react-router-dom";
 import React from "react";
+import UserContext from "../../contexts/UserContext";
 
 const CreateExpense = () => {
+    const { userContext } = useContext(UserContext);
+
   const [totalExpenseAmount, setTotalExpenseAmount] = useState("");
   const [description, setDescription] = useState("");
   const [expenseCategory, setExpenseCategory] = useState("");
@@ -10,6 +14,9 @@ const CreateExpense = () => {
       e.preventDefault();
       console.log("you submitted the form")
   }
+
+  const { tripId } = useParams();
+  const { userId } = useParams();
 
   return (
     <div className="container mt-6">
