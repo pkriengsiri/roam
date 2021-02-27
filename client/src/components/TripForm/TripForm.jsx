@@ -5,6 +5,13 @@ import "./TripForm.css";
 import { useParams, Link } from "react-router-dom";
 import axios from "axios";
 import UserContext from "../../contexts/UserContext";
+import "react-dates/initialize";
+import {
+  DateRangePicker,
+  SingleDatePicker,
+  DayPickerRangeController,
+} from "react-dates";
+import "react-dates/lib/css/_datepicker.css";
 
 const TripForm = (props) => {
   const { userContext } = useContext(UserContext);
@@ -135,13 +142,27 @@ const TripForm = (props) => {
             {/* date picker section  */}
             <div className="mb-5">
               <label className="label">Dates</label>
-              <DatePicker
+              {/* <DatePicker
                 selected={startDate}
                 onChange={onChange}
                 startDate={startDate}
                 endDate={endDate}
                 selectsRange
                 inline
+              /> */}
+
+              <DateRangePicker
+                startDate={this.state.startDate} // momentPropTypes.momentObj or null,
+                startDateId="your_unique_start_date_id" // PropTypes.string.isRequired,
+                endDate={this.state.endDate} // momentPropTypes.momentObj or null,
+                endDateId="your_unique_end_date_id" // PropTypes.string.isRequired,
+                onDatesChange={({ startDate, endDate }) =>
+                  this.setState({ startDate, endDate })
+                } // PropTypes.func.isRequired,
+                focusedInput={this.state.focusedInput} // PropTypes.oneOf([START_DATE, END_DATE]) or null,
+                onFocusChange={(focusedInput) =>
+                  this.setState({ focusedInput })
+                } // PropTypes.func.isRequired,
               />
             </div>
           </form>
