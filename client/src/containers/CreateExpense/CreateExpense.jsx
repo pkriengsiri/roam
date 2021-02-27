@@ -83,11 +83,14 @@ const CreateExpense = () => {
 
           <div className="field is-grouped">
             <div className="control">
-              <button className="button is-link">Submit</button>
+              <button className="button is-primary">Submit</button>
             </div>
-            <div className="control">
-              <button className="button is-link is-light">Cancel</button>
-            </div>
+            <Link
+            to={`/user/${userId}/trips/${tripId}`}
+            className="button is-light mr-4"
+          >
+            Cancel
+          </Link>
           </div>
           </form>
         </div>
