@@ -41,7 +41,7 @@ const Dashboard = () => {
       <h1 className="subtitle is-size-4 has-text-centered mt-3">
         Start planning your trips today!
       </h1>
-      <section>
+      <section className="has-text-centered">
         <img className="animate fadeInLeft one trips-hero" src={TripsHero} alt="" />
       </section>
 
