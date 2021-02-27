@@ -39,8 +39,18 @@ const Navbar = ({ setUserContext }) => {
   };
   return (
     <>
-      {loginModalState && <LoginModal closeLoginModal={closeLoginModal} />}
-      {signUpModalState && <SignUpModal closeSignUpModal={closeSignUpModal} />}
+      {loginModalState && (
+        <LoginModal
+          closeLoginModal={closeLoginModal}
+          setLoginModalState={setLoginModalState}
+        />
+      )}
+      {signUpModalState && (
+        <SignUpModal
+          closeSignUpModal={closeSignUpModal}
+          setSignupModalState={setSignUpModalState}
+        />
+      )}
       <nav
         className="navbar pl-6 pr-6"
         role="navigation"

@@ -1,4 +1,7 @@
 const db = require("../models");
+const axios = require("axios");
+const fetch = require("node-fetch");
+var cloudinary = require("cloudinary").v2;
 
 // Defining methods for the userController
 module.exports = {
@@ -17,16 +20,56 @@ module.exports = {
   create: async function (req, res) {
     // add user ids for by email
     const requestObject = await addTravelerIdByEmail(req.body);
-    // create trip id
-    db.Trip.create(requestObject)
-      .then((dbTrip) => {
-        // ad the trip id to each travel
-        addTripToTravelers(dbTrip);
+
+    // Query places route
+    axios
+      .get(
+        `https://maps.googleapis.com/maps/api/place/findplacefromtext/json?input=${requestObject.destination}&inputtype=textquery&fields=name,photos&key=${process.env.PLACES_API_KEY}`
+      )
+      .then((response) => {
+        const photoReference =
+          response.data.candidates[0].photos[0].photo_reference;
+        // Store get the image URL
+        const placesImageUrl = `https://maps.googleapis.com/maps/api/place/photo?photoreference=${photoReference}&key=${process.env.PLACES_API_KEY}&maxwidth=400&maxheight=400`;
+        // Upload the image to cloudinary
+        cloudinary.uploader.upload(placesImageUrl, function (error, result) {
+          if (error) {
+            console.log(error);
+            db.Trip.create(requestObject)
+              .then((dbTrip) => {
+                // ad the trip id to each travel
+                addTripToTravelers(dbTrip);
+              })
+              .then((dbTrip) => {
+                res.json(dbTrip);
+              })
+              .catch((err) => res.status(422).json(err));
+          } else {
+            requestObject.imageUrl = result.url;
+            db.Trip.create(requestObject)
+              .then((dbTrip) => {
+                // ad the trip id to each travel
+                addTripToTravelers(dbTrip);
+              })
+              .then((dbTrip) => {
+                res.json(dbTrip);
+              })
+              .catch((err) => res.status(422).json(err));
+          }
+        });
       })
-      .then((dbTrip) => {
-        res.json(dbTrip);
-      })
-      .catch((err) => res.status(422).json(err));
+      .catch((err) => {
+        console.log(err);
+        db.Trip.create(requestObject)
+          .then((dbTrip) => {
+            // ad the trip id to each travel
+            addTripToTravelers(dbTrip);
+          })
+          .then((dbTrip) => {
+            res.json(dbTrip);
+          })
+          .catch((err) => res.status(422).json(err));
+      });
   },
 
   update: async function (req, res) {
