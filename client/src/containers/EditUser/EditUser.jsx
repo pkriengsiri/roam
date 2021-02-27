@@ -45,7 +45,7 @@ const EditUser = () => {
 
   // NEED TO UPDATE THE IMAGE WITH EDIT FUNCTIONALITY
   return (
-    <div className="container mt-6">
+    <div className="container mt-6 pl-6 pr-6">
       <h1 className="title has-text-centered">Edit Account</h1>
       <form onSubmit={handleFormSubmit}>
         <div className="columns is-centered is-vcentered">

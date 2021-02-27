@@ -18,7 +18,11 @@
   width: 100%;
 }
 
-/* .is-light {
-  background-color: #F48E3F !important;
+.is-light {
+  background-color: #f48e3f !important;
   color: white !important;
-} */
+}
+
+i {
+  color: black;
+}

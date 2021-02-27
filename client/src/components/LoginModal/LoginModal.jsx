@@ -120,7 +120,7 @@ const LoginModal = ({ closeLoginModal, setUserContext }) => {
           </section>
           <footer className="modal-card-foot">
             <button className="button is-primary" onClick={handleSubmit}>
-              Log-in
+              Login
             </button>
             <button className="button" onClick={closeLoginModal}>
               Cancel

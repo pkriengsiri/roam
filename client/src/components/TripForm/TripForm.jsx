@@ -105,8 +105,8 @@ const TripForm = (props) => {
   return (
     <>
       {/* destination section  */}
-      <div className="columns is-centered">
-        <div className="column is-two-thirds">
+      <div className="columns is-centered ">
+        <div className="column is-half">
           <form
             className="trip-form"
             onSubmit={(e) =>

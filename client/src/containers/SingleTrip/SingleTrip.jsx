@@ -37,7 +37,7 @@ const SingleTrip = () => {
   }, []);
 
   return (
-    <div className="container mt-6">
+    <div className="container mt-6 pl-6 pr-6">
       <h1 className="title has-text-centered">Your trip to {destination}!</h1>
       <h1 className="subtitle has-text-centered">
         {startDate?.toLocaleDateString()} - {endDate?.toLocaleDateString()}
