@@ -36,7 +36,7 @@ const Dashboard = () => {
     <>
       <h1 className="title is-size-1 has-text-centered mt-6 pl-6 pr-6">{currentUser}</h1>
           <section>
-            <img className="animate fadeInUp one "src="/trips-hero.png" alt="" />
+            <img className="animate fadeInLeft one "src="/trips-hero.png" alt="" />
           </section>
        
 
