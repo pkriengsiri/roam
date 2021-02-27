@@ -19,7 +19,7 @@ module.exports = {
       (acc, curr) => acc + curr.shareOfTotalExpense,
       0
     );
-      // check if the total expense amount equals the total share expense
+    // check if the total expense amount equals the total share expense
     if (req.body.totalExpenseAmount === checkBalance) {
       // ensure expenseBalanced key is set to true
       req.body.expenseBalanced = true;
@@ -38,19 +38,14 @@ module.exports = {
   delete: function (req, res) {},
 };
 
-
-
 // after expense is created, add the expense id to the trip
-const addExpenseToTrip = async (dbObject) => {
-  await dbObject.travelers
-    // filter to only travelers with a trip id
-    .filter((traveler) => traveler.travelerId !== "")
-    // update each traveler's trips
-    .forEach((traveler) => {
-      db.Trip.findByIdAndUpdate(traveler.travelerId, {
-        $push: { trips: dbObject._id },
-      })
-        // .then((res) => console.log(res))
-        .catch((err) => console.log(err));
-    });
+const addExpenseToTrip = async (dbExpenseObject) => {
+  await db.Trip.findByIdAndUpdate(dbExpenseObject.trip, {
+    $push: { expenses: dbExpenseObject._id },
+  })
+
+    // .then((res) => console.log(res))
+    .catch((err) => console.log(err));
 };
+
+
