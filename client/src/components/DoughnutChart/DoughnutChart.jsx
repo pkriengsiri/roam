@@ -1,12 +1,23 @@
-import React from 'react';
-import { Doughnut } from 'react-chartjs-2';
+import React, {useState} from "react";
+import { Doughnut } from "react-chartjs-2";
 
 const DoughnutChart = () => {
-    return (
-        <div>
-            <Doughnut data={...} />
-        </div>
-    );
+  const [data, setData] = useState({
+    datasets: [
+      {
+        data: [10, 20, 30],
+      },
+    ],
+
+    labels: ["Food & Dining", "Airfare", "Other"],
+    backgroundColor: [""]
+  });
+
+  return (
+    <div>
+      <Doughnut data={data}/>
+    </div>
+  );
 };
 
 export default DoughnutChart;
