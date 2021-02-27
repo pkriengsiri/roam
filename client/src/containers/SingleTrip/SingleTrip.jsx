@@ -34,8 +34,6 @@ const SingleTrip = () => {
     }
   }, []);
 
-
-
   return (
     <div className="container mt-6 pl-6 pr-6">
       <h1 className="title has-text-centered">Your trip to {destination}!</h1>
@@ -54,8 +52,8 @@ const SingleTrip = () => {
           <h2 className="subtitle">Travelers:</h2>
           <ul>
             {travelers.map((traveler, index) => {
-              console.log(traveler.travelerEmail)
-              console.log(userContext.email)
+              console.log(traveler.travelerEmail);
+              console.log(userContext.email);
               return (
                 <li key={index}>
                   {traveler.travelerEmail === userContext.email && (
@@ -63,8 +61,8 @@ const SingleTrip = () => {
                   )}
                   {/* if no traveler email, do not render  */}
                   {traveler.travelerEmail && (
-                      <span> `${traveler.travelerEmail} - `</span>
-                    )}
+                    <span> {`${traveler.travelerEmail} - `}</span>
+                  )}
                   <span>
                     <em>{traveler.status}</em>
                   </span>

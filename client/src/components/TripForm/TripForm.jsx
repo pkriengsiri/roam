@@ -241,7 +241,7 @@ const TripForm = (props) => {
                     )}
                     {/* if no traveler email, do not render  */}
                     {traveler.travelerEmail && (
-                      <span> `${traveler.travelerEmail} - `</span>
+                      <span> {`${traveler.travelerEmail} - `}</span>
                     )}
                     <span>
                       <em>{traveler.status}</em>
