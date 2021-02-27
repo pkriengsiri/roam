@@ -42,7 +42,11 @@ const Dashboard = () => {
         Start planning your trips today!
       </h1>
       <section className="has-text-centered">
-        <img className="animate fadeInLeft one trips-hero" src={TripsHero} alt="" />
+        <img
+          className="animate fadeInLeft one trips-hero"
+          src={TripsHero}
+          alt=""
+        />
       </section>
 
       <div className="container has-text-centered mt-6 pl-6 pr-6">
@@ -57,24 +61,22 @@ const Dashboard = () => {
             )}
           </div>
         </div>
-        <div className="columns is-centered">
-          {trips.map((trip) => (
-            <TripCard
-              {...trip}
-              startDate={new Date(trip.startDate)}
-              endDate={new Date(trip.endDate)}
-              tripId={trip._id}
-              key={trip._id}
-            />
-          ))}
-        </div>
-        <Link
-          to={`/user/${userId}/trips/new`}
-          className="button is-primary mr-4 is-size-4"
-        >
-          Create Trip
-        </Link>
+        {trips.map((trip) => (
+          <TripCard
+            {...trip}
+            startDate={new Date(trip.startDate)}
+            endDate={new Date(trip.endDate)}
+            tripId={trip._id}
+            key={trip._id}
+          />
+        ))}
       </div>
+      <Link
+        to={`/user/${userId}/trips/new`}
+        className="button is-primary mr-4 is-size-4"
+      >
+        Create Trip
+      </Link>
     </>
   );
 };
