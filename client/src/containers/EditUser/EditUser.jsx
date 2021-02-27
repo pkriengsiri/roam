@@ -11,7 +11,6 @@ const EditUser = () => {
   const [lastName, setLastName] = useState("");
   const [email, setEmail] = useState("");
 
-
   useEffect(() => {
     if (userId) {
       API.getUser(userId)
@@ -46,7 +45,7 @@ const EditUser = () => {
 
   // NEED TO UPDATE THE IMAGE WITH EDIT FUNCTIONALITY
   return (
-    <div className="container">
+    <div className="container mt-6">
       <h1 className="title has-text-centered">Edit Account</h1>
       <form onSubmit={handleFormSubmit}>
         <div className="columns is-centered is-vcentered">
@@ -101,7 +100,7 @@ const EditUser = () => {
                 />
               </div>
             </div>
-            <div className="columns is-vcentered">
+            <div className="columns is-vcentered mt-2">
               <div className="column is-narrow">
                 <button
                   type="submit"

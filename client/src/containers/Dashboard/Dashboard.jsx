@@ -34,13 +34,14 @@ const Dashboard = () => {
   }, []);
 
   return (
-    <div className="container has-text-centered">
+    <div className="container has-text-centered mt-6">
       {/* global alert for not filling out user profile */}
       <div className="columns is-centered">
         <div className="column is-8 has-text-centered">
           {/* conditional rendering for displaying name IF it is in the database */}
-          <h1 className="title">{currentUser}</h1>
-          <h1 className="title">Your Trips:</h1>
+          <h1 className="title is-size-1">{currentUser}</h1>
+          {trips.length !== 0 && <h1 className="title">Your Trips:</h1>}
+          {trips.length === 0 && <h1 className="title">You don't have any trips planned yet!</h1>}
         </div>
       </div>
       {trips.map((trip) => (

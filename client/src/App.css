@@ -17,3 +17,8 @@
   flex: 1 0 auto;
   width: 100%;
 }
+
+.is-light {
+  background-color: #F48E3F !important;
+  color: white !important;
+}
