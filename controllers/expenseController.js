@@ -36,13 +36,22 @@ module.exports = {
     }
   },
 
-  findByUserId: function (req, res) {},
-  findByTripId: function (req, res) {},
-  edit: function (req, res) {},
-  delete: function (req, res) {
+  // findByUserId: function (req, res) {},
+  // use User routes for findByIdWithExpenses
+
+  // findByTripId: function (req, res) {},
+  // use Trip routes for findByIdWithExpenses
+
+  update: function (req, res) {
+    db.Expense.findByIdAndUpdate(req.params.id, { ...req.body }, { new: true })
+      .then((dbExpense) => res.json(dbExpense))
+      .catch((err) => res.status(422).json(err));
+  },
+
+  remove: function (req, res) {
     db.Expense.findByIdAndDelete(req.params.id)
-    .then((dbExpense)=>res.json(dbTrip))
-    .catch((err)=>res.json(err))
+      .then((dbExpense) => res.json(dbTrip))
+      .catch((err) => res.status(422).json(err));
   },
 };
 

@@ -9,7 +9,9 @@ router.route("/")
 
 // Route for /api/expenses/:id
 router.route("/:id")
-.get(expenseController.findById);
+.get(expenseController.findById)
+.put(expenseController.update)
+.delete(expenseController.remove);
 
 // Routes for /api/expenses/user/:id
 // router.route("/user/:id")
