@@ -19,13 +19,13 @@ const Home = ({ setUserContext }) => {
 
   const closeLoginModal = (e) => {
     e.preventDefault();
-    setLoginModalState(false);
     onDisplay(false);
+    setLoginModalState(false);
   };
   const closeSignUpModal = (e) => {
     e.preventDefault();
-    setSignUpModalState(false);
     onDisplay(false);
+    setSignUpModalState(false);
   };
   const toggleLoginModal = (e) => {
     e.preventDefault();
