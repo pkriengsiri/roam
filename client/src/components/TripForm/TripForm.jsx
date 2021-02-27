@@ -160,8 +160,8 @@ const TripForm = (props) => {
             <div className="mb-5">
               <label className="label">Dates</label>
 
-
-              <DateRangePicker className="date-range-picker"
+              <DateRangePicker
+                className="date-range-picker"
                 startDate={startDate}
                 startDateId="trip-start-date"
                 endDate={endDate}
@@ -239,7 +239,10 @@ const TripForm = (props) => {
                     {traveler.travelerEmail === userContext.email && (
                       <span>YOU - </span>
                     )}
-                    {`${traveler.travelerEmail} - `}
+                    {/* if no traveler email, do not render  */}
+                    {traveler.travelerEmail && (
+                      <span> `${traveler.travelerEmail} - `</span>
+                    )}
                     <span>
                       <em>{traveler.status}</em>
                     </span>

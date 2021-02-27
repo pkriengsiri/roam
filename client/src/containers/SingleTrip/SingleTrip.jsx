@@ -61,7 +61,10 @@ const SingleTrip = () => {
                   {traveler.travelerEmail === userContext.email && (
                     <span>YOU - </span>
                   )}
-                  {`${traveler.travelerEmail} - `}
+                  {/* if no traveler email, do not render  */}
+                  {traveler.travelerEmail && (
+                      <span> `${traveler.travelerEmail} - `</span>
+                    )}
                   <span>
                     <em>{traveler.status}</em>
                   </span>
