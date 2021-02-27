@@ -161,14 +161,7 @@ const TripForm = (props) => {
             {/* date picker section  */}
             <div className="mb-5">
               <label className="label">Dates</label>
-              {/* <DatePicker
-                selected={startDate}
-                onChange={onChange}
-                startDate={startDate}
-                endDate={endDate}
-                selectsRange
-                inline
-              /> */}
+
 
               <DateRangePicker
                 startDate={startDate}
