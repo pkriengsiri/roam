@@ -26,7 +26,7 @@ const TripCard = ({
         <div className="card trip-card">
           <div class="card-image">
             <figure class="image is-4by3">
-              <img src={imageUrl} />
+              <img className="places-image" src={imageUrl} />
             </figure>
           </div>
           <div className="card-content has-text-left">
