@@ -1,6 +1,6 @@
 import React from "react";
 import "./Footer.css";
-import Logo from "../../Assets/Images/roam5.svg";
+import Logo from "../../Assets/Images/roam_inverted.svg";
 import { Link } from "react-router-dom";
 
 const Footer = () => {
