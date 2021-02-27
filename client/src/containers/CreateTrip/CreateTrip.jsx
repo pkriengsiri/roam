@@ -14,6 +14,7 @@ const CreateTrip = () => {
 
   const handleFormSubmit = (e, formObject) => {
     e.preventDefault();
+    setLoadingState("is-loading");
     API.createTrip(formObject)
       //TODO: // use context to set signed in user as tripCreator
 
