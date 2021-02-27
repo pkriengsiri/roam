@@ -3,6 +3,7 @@ import "./Dashboard.css";
 import TripCard from "../../components/TripCard/TripCard";
 import API from "../../utils/API";
 import { Link, useParams } from "react-router-dom";
+import TripsHero from "../../Assets/Images/trips-hero.png";
 
 const Dashboard = () => {
   const { userId } = useParams();
@@ -40,8 +41,8 @@ const Dashboard = () => {
       <h1 className="subtitle is-size-4 has-text-centered mt-3">
         Start planning your trips today!
       </h1>
-      <section>
-        <img className="animate fadeInLeft one" src="/trips-hero.png" alt="" />
+      <section className="has-text-centered">
+        <img className="animate fadeInLeft one trips-hero" src={TripsHero} alt="" />
       </section>
 
       <div className="container has-text-centered mt-6 pl-6 pr-6">
@@ -56,7 +57,7 @@ const Dashboard = () => {
             )}
           </div>
         </div>
-        
+        <div className="columns is-centered">
           {trips.map((trip) => (
             <TripCard
               {...trip}
@@ -66,7 +67,7 @@ const Dashboard = () => {
               key={trip._id}
             />
           ))}
-        
+        </div>
         <Link
           to={`/user/${userId}/trips/new`}
           className="button is-primary mr-4 is-size-4"

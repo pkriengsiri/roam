@@ -38,7 +38,9 @@ const SingleTrip = () => {
 
   return (
     <div className="container mt-6 pl-6 pr-6">
-      <h1 className="title has-text-centered">Your trip to {destination}!</h1>
+      <h1 className="title has-text-centered">Your trip to {destination}! <Link to={`/user/${userId}/trips/${tripId}/edit`}>
+                      <i className="edit-trip-icon far fa-edit m-1 "></i>
+                    </Link></h1>
       <h1 className="subtitle has-text-centered">
         <svg
           className="DateRangePickerInput_calendarIcon_svg DateRangePickerInput_calendarIcon_svg_1"
@@ -51,6 +53,11 @@ const SingleTrip = () => {
           {startDate?.toLocaleDateString()} - {endDate?.toLocaleDateString()}
         </span>
       </h1>
+      {/* <h1 className="has-text-centered title edit-trip"> <Link to={`/user/${userId}/trips/${tripId}/edit`}>
+                      <i className="edit-trip-icon far fa-edit m-1 "></i>
+                    </Link>Edit Trip</h1> */}
+      
+     
       <div className="columns is-centered">
         <div className="column is-6 trip-container">
           <figure>

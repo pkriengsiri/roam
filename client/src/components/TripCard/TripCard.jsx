@@ -20,11 +20,10 @@ const TripCard = ({
   const { userId } = useParams();
 
   return (
-    <div className="columns is-centered">
-      <div className="column is-5">
+    // <div className="columns is-centered">
+      <div className="column is-6">
         <div className="card trip-card">
           <div className="card-content has-text-left">
-            
             <div className="media">
               <div className="media-content media-card-content">
                 <div className="columns is-gapless">
@@ -41,14 +40,13 @@ const TripCard = ({
                       <i className="icon fas fa-eye"></i>
                     </Link>
                     {userId === tripCreator && (
-                    <Link to={`/user/${userId}/trips/${tripId}/edit`}>
-                      <i className="icon far fa-edit m-1"></i>
-                    </Link>
-                  )}
+                      <Link to={`/user/${userId}/trips/${tripId}/edit`}>
+                        <i className="icon far fa-edit m-1"></i>
+                      </Link>
+                    )}
+                  </div>
                 </div>
-                
               </div>
-            </div>
             </div>
             <div className="columns">
               <div className="column is-10">
@@ -64,18 +62,18 @@ const TripCard = ({
                     {startDate?.toLocaleDateString()} -{" "}
                     {endDate?.toLocaleDateString()}
                   </span>
-                 
-                  <p><i className="fas fa-users fa-xs mr-2"></i>
+
+                  <p>
+                    <i className="fas fa-users fa-xs mr-2"></i>
                     {travelers.length}
                   </p>
                 </div>
-                
               </div>
             </div>
           </div>
         </div>
       </div>
-      </div>
+    // </div>
   );
 };
 
