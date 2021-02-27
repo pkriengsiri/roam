@@ -59,7 +59,8 @@ const EditTrip = () => {
             </div>
           </div>
         </div>
-        <TripForm handleFormSubmit={handleFormSubmit} buttonText="Save" />
+        <TripForm handleFormSubmit={handleFormSubmit} buttonText="Save" startDateId="editTripStartDate"
+        endDateId="editTripEndDate"/>
       </div>
     </>
   );

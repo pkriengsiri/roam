@@ -12,6 +12,7 @@ import {
   DayPickerRangeController,
 } from "react-dates";
 import "react-dates/lib/css/_datepicker.css";
+import moment from "moment";
 
 const TripForm = (props) => {
   const { userContext } = useContext(UserContext);
@@ -21,6 +22,7 @@ const TripForm = (props) => {
   const [startDate, setStartDate] = useState(null);
   const [endDate, setEndDate] = useState(null);
   const [focusedInput, setFocusedInput] = useState(null);
+
   const [travelers, setTravelers] = useState([
     {
       travelerId: props.tripCreatorId,
@@ -104,6 +106,11 @@ const TripForm = (props) => {
     setEndDate(end);
   };
 
+  const handleDatesChange = ({ startDate, endDate }) => {
+    setStartDate(startDate);
+    setEndDate(endDate);
+  };
+
   // validates an email address
   const validateEmail = (email) => {
     const re = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
@@ -153,18 +160,13 @@ const TripForm = (props) => {
               /> */}
 
               <DateRangePicker
-                startDate={startDate} // momentPropTypes.momentObj or null,
-                startDateId={props.startDateId} // PropTypes.string.isRequired,
-                endDate={endDate} // momentPropTypes.momentObj or null,
-                endDateId={props.endDateId} // PropTypes.string.isRequired,
-                onDatesChange={({ startDate, endDate }) => {
-                  setStartDate({ startDate });
-                  setEndDate({ endDate });
-                }} // PropTypes.func.isRequired,
-                focusedInput={focusedInput} // PropTypes.oneOf([START_DATE, END_DATE]) or null,
-                onFocusChange={(focusedInput) =>
-                  setFocusedInput({ focusedInput })
-                } // PropTypes.func.isRequired,
+                startDate={startDate}
+                startDateId="tata-start-date"
+                endDate={endDate}
+                endDateId="tata-end-date"
+                onDatesChange={handleDatesChange}
+                focusedInput={focusedInput}
+                onFocusChange={(focusedInput) => setFocusedInput(focusedInput)}
               />
             </div>
           </form>
