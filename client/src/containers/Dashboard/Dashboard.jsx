@@ -53,7 +53,13 @@ const Dashboard = () => {
           </div>
         </div>
         {trips.map((trip) => (
-          <TripCard {...trip} tripId={trip._id} key={trip._id} />
+          <TripCard
+            {...trip}
+            startDate={new Date(trip.startDate)}
+            endDate={new Date(trip.endDate)}
+            tripId={trip._id}
+            key={trip._id}
+          />
         ))}
 
         <Link

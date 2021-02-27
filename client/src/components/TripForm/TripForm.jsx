@@ -1,18 +1,32 @@
 import React, { useState, useEffect, useContext } from "react";
-import DatePicker from "react-datepicker";
-import "react-datepicker/dist/react-datepicker.css";
 import "./TripForm.css";
 import { useParams, Link } from "react-router-dom";
 import axios from "axios";
 import UserContext from "../../contexts/UserContext";
+import "react-dates/initialize";
+import { DateRangePicker } from "react-dates";
+import "react-dates/lib/css/_datepicker.css";
+import moment from "moment";
+import {
+  VERTICAL_ORIENTATION,
+  HORIZONTAL_ORIENTATION,
+} from "react-dates/constants";
+import Alert from "../Alert/Alert";
+import AlertContext from "../../contexts/AlertContext";
+import "./react_dates_overrides.css"
 
 const TripForm = (props) => {
   const { userContext } = useContext(UserContext);
+  const { onDisplay, display, theme } = useContext(AlertContext);
+
   // state for form object
   const [destination, setDestination] = useState("");
   // TODO: Do we want travel start date initiated as today?
-  const [startDate, setStartDate] = useState(new Date());
+  const [startDate, setStartDate] = useState(null);
   const [endDate, setEndDate] = useState(null);
+  const [focusedInput, setFocusedInput] = useState(null);
+  const [calendarStack, setCalendarStack] = useState("HORIZONTAL_ORIENTATION");
+
   const [travelers, setTravelers] = useState([
     {
       travelerId: props.tripCreatorId,
@@ -36,11 +50,12 @@ const TripForm = (props) => {
       axios
         .get(`/api/trips/${tripId}`)
         .then((response) => {
-          const responseStartDate = new Date(response.data.startDate);
-          const responseEndDate = new Date(response.data.endDate);
+          const responseStartDate = moment(response.data.startDate);
+          const responseEndDate = moment(response.data.endDate);
           setDestination(response.data.destination);
           setStartDate(responseStartDate);
           setEndDate(responseEndDate);
+
           setTravelers(response.data.travelers);
         })
         .catch((err) => {
@@ -48,6 +63,15 @@ const TripForm = (props) => {
         });
     }
   }, [tripId]);
+
+  // check window viewport to set orientation of calendar so it is responsive in mobile
+  useEffect(() => {
+    if (window.innerWidth <= 768) {
+      setCalendarStack(VERTICAL_ORIENTATION);
+    } else {
+      setCalendarStack(HORIZONTAL_ORIENTATION);
+    }
+  }, []);
 
   // add traveler to the travelers list
   const addTraveler = (e) => {
@@ -90,10 +114,9 @@ const TripForm = (props) => {
   };
 
   // set calendar dates
-  const onChange = (dates) => {
-    const [start, end] = dates;
-    setStartDate(start);
-    setEndDate(end);
+  const handleDatesChange = ({ startDate, endDate }) => {
+    setStartDate(startDate);
+    setEndDate(endDate);
   };
 
   // validates an email address
@@ -135,13 +158,28 @@ const TripForm = (props) => {
             {/* date picker section  */}
             <div className="mb-5">
               <label className="label">Dates</label>
-              <DatePicker
-                selected={startDate}
-                onChange={onChange}
+
+              <DateRangePicker
+                className="date-range-picker"
                 startDate={startDate}
+                startDateId="trip-start-date"
                 endDate={endDate}
-                selectsRange
-                inline
+                endDateId="trip-end-date"
+                onDatesChange={handleDatesChange}
+                focusedInput={focusedInput}
+                onFocusChange={(focusedInput) => setFocusedInput(focusedInput)}
+                // optional props
+                showDefaultInputIcon={true} // calendar icon
+                showClearDates={true} // clear dates with x button
+                isOutsideRange={() => false} // allow past dates
+                //  // for mobile view: https://github.com/airbnb/react-dates/issues/262
+                // orientation={react-dates/constants.VERTICAL_ORIENTATION} does wonders combined with withPortal={true} or with withFullScreenPortal={true}
+                orientation={calendarStack}
+                // withPortal={true}
+
+                //  // if we want to use date range picker on single trip view
+                // disabled={true}
+                // showClearDates={false}
               />
             </div>
           </form>
@@ -200,7 +238,10 @@ const TripForm = (props) => {
                     {traveler.travelerEmail === userContext.email && (
                       <span>YOU - </span>
                     )}
-                    {`${traveler.travelerEmail} - `}
+                    {/* if no traveler email, do not render  */}
+                    {traveler.travelerEmail && (
+                      <span> {`${traveler.travelerEmail} - `}</span>
+                    )}
                     <span>
                       <em>{traveler.status}</em>
                     </span>
@@ -236,11 +277,14 @@ const TripForm = (props) => {
                   {props.buttonText}
                 </button>
 
-                <Link to={`/user/${userId}/trips`}>
+                <Link onClick={()=>props.closeTripForm()}to={`/user/${userId}/trips`}>
                   <button className="button  ml-4 cancel-button">Cancel</button>
                 </Link>
               </div>
             </div>
+            {display && (
+              <Alert color={theme}>Please complete all fields.</Alert>
+            )}
           </form>
         </div>
       </div>

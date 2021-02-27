@@ -4,6 +4,11 @@ font-size: 2.1rem;
 
 }
 
+.media-card-content{
+    border-bottom: rgba(211, 211, 211, 0.548) 1px solid;
+    padding-bottom: 7px;
+}
+
 .icon:hover {
     color: #F48E3F;
     font-size: 18px;
@@ -19,4 +24,8 @@ font-size: 2.1rem;
     border: 2px solid #33C1BF;
     
 
+}
+
+.trip-card-content{
+    margin-top: -10px;
 }
