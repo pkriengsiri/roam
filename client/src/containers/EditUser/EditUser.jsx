@@ -109,7 +109,7 @@ const EditUser = () => {
                   Update
                 </button>
               </div>
-              <div className="column is-3">
+              <div className="column is-5">
                 <Link to={`/user/${userId}/trips`} className="skip-link">
                   Skip this Step
                 </Link>
