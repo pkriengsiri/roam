@@ -19,10 +19,7 @@ const CreateTrip = () => {
       //TODO: // use context to set signed in user as tripCreator
 
       .then((response) => {
-        // console.log(response.data);
-
         history.push(`/user/${userId}/trips`);
-        
       })
       .catch((err) => console.log(err));
   };
