@@ -16,8 +16,9 @@ const CreateExpense = () => {
             <div className="control has-icons-left has-icons-right">
               <input
                 className="input"
-                type="text"
-                placeholder="Text input"
+                type="number"
+                min="0"
+                placeholder="100,000"
                 value={totalExpenseAmount}
                 name="totalExpenseAmount"
                 onChange={(e) => setTotalExpenseAmount(e.target.value)}
@@ -32,7 +33,11 @@ const CreateExpense = () => {
             <label className="label">Category</label>
             <div className="control">
               <div className="select">
-                <select name="category" value={expenseCategory} onChange={(e) => setExpenseCategory(e.target.value)}>
+                <select
+                  name="category"
+                  value={expenseCategory}
+                  onChange={(e) => setExpenseCategory(e.target.value)}
+                >
                   <option>Activities</option>
                   <option>Airfare</option>
                   <option>Car & Gas</option>
