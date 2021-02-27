@@ -53,7 +53,7 @@ const TripCard = ({
               <div className="column is-10">
                 <div className="content">
                   <time dateTime="2016-1-1">
-                    {startDate.substring(0, 10)} to {endDate.substring(0, 10)}
+                    {startDate?.toLocaleDateString()} - {endDate?.toLocaleDateString()}
                   </time>
                 </div>
               </div>
