@@ -41,7 +41,7 @@ const Dashboard = () => {
         Start planning your trips today!
       </h1>
       <section>
-        <img src="/trips-hero.png" alt="" />
+        <img className="animate fadeInLeft one" src="/trips-hero.png" alt="" />
       </section>
 
       <div className="container has-text-centered mt-6 pl-6 pr-6">
@@ -56,7 +56,7 @@ const Dashboard = () => {
             )}
           </div>
         </div>
-        <div className="columns is-centered is-multiline">
+        
           {trips.map((trip) => (
             <TripCard
               {...trip}
@@ -66,7 +66,7 @@ const Dashboard = () => {
               key={trip._id}
             />
           ))}
-        </div>
+        
         <Link
           to={`/user/${userId}/trips/new`}
           className="button is-primary mr-4 is-size-4"
