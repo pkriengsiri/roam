@@ -15,24 +15,27 @@ const ExpenseForm = (props) => {
   const { tripId } = useParams();
   const { userId } = useParams();
 
-  const handleAmountChange = (e)=>{
-    
-  }
-
-
+  const handleAmountChange = (e) => {
+    console.log(e.target.value);
+    const re = /[+-]?[0-9]{1,3}(?:,?[0-9]{3})*\.[0-9]{2}/;
+    console.log(re.test(e.target.value));
+    // if (re.test(e.target.value)) {
+    setExpenseCategory(e.target.value);
+    console.log(expenseCategory);
+    // }
+  };
 
   return (
     <form
       onSubmit={(e) => {
         e.preventDefault();
-          props.handleFormSubmit(e, {
-            expenseCreator: userId,
-            trip: tripId,
-            totalExpenseAmount,
-            category: expenseCategory,
-            description,
-          });
-        
+        props.handleFormSubmit(e, {
+          expenseCreator: userId,
+          trip: tripId,
+          totalExpenseAmount,
+          category: expenseCategory,
+          description,
+        });
       }}
     >
       <div className="field">
@@ -47,7 +50,15 @@ const ExpenseForm = (props) => {
             placeholder=""
             value={totalExpenseAmount}
             name="totalExpenseAmount"
-            onChange={(e) => setTotalExpenseAmount(e.target.value)}
+            onChange={(e) => {
+              let num = e.target.value
+                .toString()
+                .split(".")
+                .map((el, i) => (i ? el.split("").slice(0, 2).join("") : el))
+                .join(".");
+
+              setTotalExpenseAmount(num);
+            }}
           />
           <span className="icon is-small is-left">
             <i className="fas fa-dollar-sign"></i>
@@ -97,7 +108,11 @@ const ExpenseForm = (props) => {
         <div className="control">
           <button className="button is-primary">Submit</button>
         </div>
-        <Link onClick={() => props.closeForm()} to={`/user/${userId}/trips/${tripId}`} className="button mr-4">
+        <Link
+          onClick={() => props.closeForm()}
+          to={`/user/${userId}/trips/${tripId}`}
+          className="button mr-4"
+        >
           Cancel
         </Link>
       </div>
