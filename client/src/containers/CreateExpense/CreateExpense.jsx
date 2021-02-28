@@ -9,7 +9,7 @@ const CreateExpense = () => {
 
   const [totalExpenseAmount, setTotalExpenseAmount] = useState("");
   const [description, setDescription] = useState("");
-  const [expenseCategory, setExpenseCategory] = useState("");
+  const [expenseCategory, setExpenseCategory] = useState("Activities");
 
   const { tripId } = useParams();
   const { userId } = useParams();

@@ -76,8 +76,8 @@ const SingleTrip = () => {
                 <h2 className="subtitle">Travelers:</h2>
                 <ul>
                   {travelers.map((traveler, index) => {
-                    console.log(traveler.travelerEmail);
-                    console.log(userContext.email);
+                    // console.log(traveler.travelerEmail);
+                    // console.log(userContext.email);
                     return (
                       <li key={index}>
                         {traveler.travelerEmail === userContext.email && (
