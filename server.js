@@ -8,6 +8,10 @@ const cookieParser = require("cookie-parser");
 const jwt = require('express-jwt');
 const jsonwebtoken = require('jsonwebtoken');
 const fileupload = require("express-fileupload");
+const csrf = require("csurf");
+const csrfProtection = csrf({
+  cookie: true
+});
 
 // Server port
 const PORT = process.env.PORT || 3001;
@@ -22,6 +26,7 @@ app.use(
     useTempFiles: true,
   })
 );
+app.use(csrfProtection);
 
 // Mongoose connection
 mongoose

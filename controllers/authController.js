@@ -42,4 +42,7 @@ module.exports = {
         res.status(500).end();
       });
   },
+  reLogin: function(req,res) {
+    res.json({ csrfToken: req.csrfToken() });
+  }
 };

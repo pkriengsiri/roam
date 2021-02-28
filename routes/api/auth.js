@@ -13,8 +13,10 @@ const router = require("express").Router();
 const {
     createNewUser, 
     loginUser,
+    reLogin
 } = require("../../controllers/authController");
 
+router.route('/relogin').get(reLogin);
 router.route("/signup").post(createNewUser);
 router.route("/login").post(loginUser);
 
