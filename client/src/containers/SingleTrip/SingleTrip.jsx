@@ -67,7 +67,7 @@ const SingleTrip = () => {
       <div className="columns is-centered">
         <div className="column is-6 trip-container">
           <figure>
-            <img className="trip-image" src={imageUrl} />
+            <img className="trip-image" src={imageUrl} alt={destination}/>
           </figure>
           {/* </div>
         <div className="column is-3"> */}
@@ -107,7 +107,7 @@ const SingleTrip = () => {
         <div className="column is-2">
           <Link
             to={`/user/${userId}/trips/${tripId}/expense`}
-            className="button is-primary is-size-4"
+            className="button mr-4 is-size-4 is-light"
             type="submit"
           >
             Create Expense

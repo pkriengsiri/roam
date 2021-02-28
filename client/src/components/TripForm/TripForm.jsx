@@ -7,10 +7,6 @@ import "react-dates/initialize";
 import { DateRangePicker } from "react-dates";
 import "react-dates/lib/css/_datepicker.css";
 import moment from "moment";
-import {
-  VERTICAL_ORIENTATION,
-  HORIZONTAL_ORIENTATION,
-} from "react-dates/constants";
 import Alert from "../Alert/Alert";
 import AlertContext from "../../contexts/AlertContext";
 import "./react_dates_overrides.css";
