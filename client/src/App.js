@@ -16,6 +16,7 @@ import AlertContext from "./contexts/AlertContext";
 import ExpenseContext from "./contexts/ExpenseContext";
 
 import useFindUser from "./hooks/useFindUser";
+import PrivateRoute from "./components/PrivateRoute/PrivateRoute";
 
 function App() {
   
@@ -62,7 +63,7 @@ function App() {
                 {/* <Route exact path="/user/:userId" component={Dashboard} /> */}
                 <Route exact path="/user/:userId/trips" component={Dashboard} />
                 <Route exact path="/user/:userId/edit" component={EditUser} />
-                <Route
+                <PrivateRoute
                   exact
                   path="/user/:userId/trips/new"
                   component={CreateTrip}

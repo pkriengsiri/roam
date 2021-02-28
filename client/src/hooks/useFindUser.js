@@ -1,32 +1,42 @@
 // Dependencies
-import { useState, useEffect } from "react";
+import { useEffect, useState } from "react";
 import API from "../utils/API";
 import jwt from "jsonwebtoken";
 import Axios from "axios";
 
-export default function useFindUser() {
-  const [userContext, setUserContext] = useState({
-    email: "",
-    id: "",
-  });
+const useFindUser = () => {
   const [isLoading, setLoading] = useState(true);
+  const [userContext, setUserContext] = useState({});
 
   useEffect(() => {
-    const getCsrfToken = async () => {
-      const { data } = await API.relogin();
-      jwt.verify(data.token, process.env.REACT_APP_SECRET, (err, data) => {
-        if (err) {
-          console.log(err);
-          setLoading(false);
-        } else {
-          setUserContext({ userId: data._id, email: data.email });
-          setLoading(false);
-          // setUserContext({ userId: data._id, email: data.email });
-        }
+    // const getCsrfToken = async () => {
+    setUserContext({key:true});
+    API.relogin()
+      .then((response) => {
+        jwt.verify(
+          response.data.token,
+          process.env.REACT_APP_SECRET,
+          (err, data) => {
+            if (err) {
+              console.log(err);
+              setLoading(false);
+            } else {
+              setUserContext({ userId: data._id, email: data.email });
+              console.log(userContext);
+              setLoading(false);
+              // setUserContext({ userId: data._id, email: data.email });
+            }
+          }
+        );
+        //   Axios.defaults.headers.post["X-CSRF-Token"] = response.data.csrfToken;
+      })
+      .catch((err) => {
+        console.log(err);
+        setLoading(false);
       });
-      Axios.defaults.headers.post["X-CSRF-Token"] = data.csrfToken;
-    };
-    getCsrfToken();
+    // };
+    console.log(userContext);
+    // getCsrfToken();
 
     // async function findUser() {
     //   try {
@@ -45,4 +55,6 @@ export default function useFindUser() {
     setUserContext,
     isLoading,
   };
-}
+};
+
+export default useFindUser;
