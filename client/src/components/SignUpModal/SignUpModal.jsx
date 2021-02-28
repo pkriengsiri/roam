@@ -34,9 +34,8 @@ const SignUpModal = ({ closeSignUpModal, setSignupModalState}) => {
       })
         .then((response) => {
           // Validate response then redirect
-          const token = Cookies.get('token');
           jwt.verify(
-            token,
+            response.data.token,
             process.env.REACT_APP_SECRET,
             (err, data) => {
               if (err) {

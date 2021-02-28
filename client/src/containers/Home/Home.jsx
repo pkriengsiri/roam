@@ -18,19 +18,19 @@ const Home = ({ setUserContext }) => {
   const { userContext } = useContext(UserContext);
 
   useEffect(() => {
-    const token = Cookies.get('token');
-          jwt.verify(
-            token,
-            process.env.REACT_APP_SECRET,
-            (err, data) => {
-              if (err) {
-                // TODO:  display an error message to the user stating that the sign-up failed (use global alert)
-                console.log(err);
-              } else {
-                setUserContext({ userId: data._id, email: data.email });
-              }
-            }
-          );
+    // const token = Cookies.get('token');
+    //       jwt.verify(
+    //         token,
+    //         process.env.REACT_APP_SECRET,
+    //         (err, data) => {
+    //           if (err) {
+    //             // TODO:  display an error message to the user stating that the sign-up failed (use global alert)
+    //             console.log(err);
+    //           } else {
+    //             setUserContext({ userId: data._id, email: data.email });
+    //           }
+    //         }
+    //       );
     document.title = "Roam";
   }, []);
 

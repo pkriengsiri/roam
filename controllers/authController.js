@@ -13,8 +13,11 @@ module.exports = {
       userToCreate.password = hashedPassword;
       db.User.create(userToCreate)
         .then((newUser) => {
-          const token = jwt.sign({ _id: newUser._id, email: newUser.email }, process.env.SECRET);
-          res.cookie('token', token, { httpOnly: true });
+          const token = jwt.sign(
+            { _id: newUser._id, email: newUser.email },
+            process.env.SECRET
+          );
+          res.cookie("token", token, { httpOnly: true });
           res.json({ token: token });
         })
         .catch((err) => {
@@ -30,7 +33,7 @@ module.exports = {
         bcrypt.compare(req.body.password, foundUser.password, (err, result) => {
           if (result) {
             const token = jwt.sign({ _id: foundUser._id }, process.env.SECRET);
-            res.cookie('token', token, { httpOnly: true });
+            res.cookie("token", token, { httpOnly: true });
             res.json({ token: token });
           } else {
             res.status(401).end();
@@ -42,7 +45,25 @@ module.exports = {
         res.status(500).end();
       });
   },
-  reLogin: function(req,res) {
-    res.json({ csrfToken: req.csrfToken() });
-  }
+  reLogin: function (req, res) {
+    console.log("success");
+    const token = req.cookies.token;
+    jwt.verify(token, process.env.SECRET, (err, data) => {
+      if (err) {
+        console.log(err);
+        res.status(401).end();
+      } else {
+        db.User.findOne({ email: data.email.toLowerCase() })
+          .then((foundUser) => {
+            const token = jwt.sign({ _id: foundUser._id }, process.env.SECRET);
+            res.cookie("token", token, { httpOnly: true });
+            res.json({ token: token });
+          })
+          .catch((err) => {
+            console.log(err);
+            res.status(500).end();
+          });
+      }
+    });
+  },
 };
