@@ -71,21 +71,28 @@ const TripForm = (props) => {
     } else {
       setCalendarStack("horizontal");
     }
-  }, []);
+  }, [window.innerWidth]);
+
+  // remove valid email prompt state when traveler is empty
+  useEffect(() => {
+    if (traveler === "") {
+      setValidEmailPromptState(true);
+    }
+  }, [traveler]);
 
   // add traveler to the travelers list
   const addTraveler = (e) => {
     e.preventDefault();
-    const newTraveler = travelers.find((traveler) => {
-      return traveler.travelerEmail === e.target.traveler.value.toLowerCase();
+    const newTraveler = travelers.find((el) => {
+      return el.travelerEmail === traveler?.toLowerCase();
     });
     if (newTraveler) {
-      //Todo: add alert
-      console.log("user already exists");
+      // TODO: glow existing traveler bubble
+      // console.log("user already exists");
     } else {
-      if (validateEmail(e.target.traveler.value)) {
+      if (validateEmail(traveler)) {
         setValidEmailPromptState(true);
-        const newInvite = e.target.traveler.value.toLowerCase();
+        const newInvite = traveler?.toLowerCase();
         setTravelers([
           ...travelers,
           { travelerEmail: newInvite, travelerId: "", status: "pending" },
@@ -199,7 +206,9 @@ const TripForm = (props) => {
                       onChange={(e) => setTraveler(e.target.value)}
                     />
                     <span className="icon is-medium is-left">
-                      <i className={focusedInput?"is-hidden":"fas fa-users"}></i>
+                      <i
+                        className={focusedInput ? "is-hidden" : "fas fa-users"}
+                      ></i>
                     </span>
                     {!validEmailPromptState && (
                       <p className="validation">
@@ -263,15 +272,16 @@ const TripForm = (props) => {
                 <button
                   className={`button is-primary ${props.loadingState}`}
                   type="submit"
-                  onClick={(e) =>
+                  onClick={(e) => {
+                    addTraveler(e);
                     props.handleFormSubmit(e, {
                       tripCreator: userId,
                       destination,
                       startDate,
                       endDate,
                       travelers,
-                    })
-                  }
+                    });
+                  }}
                 >
                   {props.buttonText}
                 </button>
