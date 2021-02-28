@@ -6,8 +6,6 @@ import ExpenseContext from "../../contexts/ExpenseContext";
 const dataArray = [];
 
 const DoughnutChart = ({ expenses }) => {
-
-
   const [data, setData] = useState([]);
 
   const [dataObject, setDataObject] = useState({
@@ -20,7 +18,17 @@ const DoughnutChart = ({ expenses }) => {
     labels: ["Food & Dining", "Airfare", "Other"],
   });
 
-  // const expenseCategoryTotals = expenses.
+  const calculateExpenseCategoryTotals = (arrayOfExpenseObjects) => {
+    let expensesMap = {};
+    for (let i = 0; i < arrayOfExpenseObjects.length; i++) {
+      let category = arrayOfExpenseObjects[i].category;
+      if (category in expensesMap) {
+        expensesMap.category += arrayOfExpenseObjects[i].totalExpenseAmount;
+      } else {
+        expensesMap[category] = arrayOfExpenseObjects[i].totalExpenseAmount;
+      }
+    }
+  };
 
   //   useEffect(() => {
   //     API.getExpense('603ad2f2a76c6e231d8cd33a').then((response)=> {
@@ -40,7 +48,6 @@ const DoughnutChart = ({ expenses }) => {
         height={200}
         options={{ maintainAspectRatio: false }}
       />
-
     </div>
   );
 };
