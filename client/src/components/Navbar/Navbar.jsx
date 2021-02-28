@@ -5,6 +5,7 @@ import SignUpModal from "../../components/SignUpModal/SignUpModal";
 import { Link, useHistory } from "react-router-dom";
 import UserContext from "../../contexts/UserContext";
 import "./Navbar.css";
+import API from "../../utils/API";
 
 const Navbar = ({ setUserContext }) => {
   const [loginModalState, setLoginModalState] = useState(false);
@@ -34,8 +35,15 @@ const Navbar = ({ setUserContext }) => {
 
   const handleLogout = (e) => {
     e.preventDefault();
-    setUserContext({ email: "", id: "" });
-    history.push("/");
+    API.logoutUser().then((response) => {
+      console.log(response); 
+      setUserContext({ email: "", id: "" });
+      history.push("/");
+    }).catch((error) => {
+      console.log(error);
+    });
+
+    
   };
   return (
     <>
@@ -51,7 +59,11 @@ const Navbar = ({ setUserContext }) => {
           setSignupModalState={setSignUpModalState}
         />
       )}
-      <nav className="navbar pl-6 pr-6" role="navigation" aria-label="main navigation">
+      <nav
+        className="navbar pl-6 pr-6"
+        role="navigation"
+        aria-label="main navigation"
+      >
         <div className="navbar-brand">
           <Link to="/">
             <img src={Logo} width="112" className="ml-4 mt-1" />

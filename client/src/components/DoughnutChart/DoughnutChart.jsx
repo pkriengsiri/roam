@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useContext } from "react";
+import React, { useState, useEffect } from "react";
 import { Doughnut } from "react-chartjs-2";
 import API from "../../utils/API";
 import ExpenseContext from "../../contexts/ExpenseContext";
@@ -6,7 +6,7 @@ import ExpenseContext from "../../contexts/ExpenseContext";
 const dataArray = [];
 
 const DoughnutChart = ({ expenses }) => {
-  const { expenseContext, setExpenseContext } = useContext(ExpenseContext);
+
 
   const [data, setData] = useState([]);
 
@@ -19,6 +19,8 @@ const DoughnutChart = ({ expenses }) => {
     ],
     labels: ["Food & Dining", "Airfare", "Other"],
   });
+
+  // const expenseCategoryTotals = expenses.
 
   //   useEffect(() => {
   //     API.getExpense('603ad2f2a76c6e231d8cd33a').then((response)=> {
