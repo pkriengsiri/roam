@@ -4,6 +4,7 @@ import React from "react";
 import API from "../../utils/API";
 import ExpenseForm from "../../components/ExpenseFrom/ExpenseForm";
 import AlertContext from "../../contexts/AlertContext";
+import DeleteModal from "../../components/DeleteModal/DeleteModal";
 
 const EditExpense = () => {
   const history = useHistory();
@@ -11,8 +12,6 @@ const EditExpense = () => {
   const { tripId } = useParams();
   const { userId } = useParams();
   const { expenseId } = useParams();
-
-  
 
   const handleFormSubmit = (e, formObject) => {
     e.preventDefault();
@@ -43,7 +42,16 @@ const EditExpense = () => {
 
   return (
     <div className="container mt-6">
-      <h1 className="title has-text-centered">Edit Expense (trash can)</h1>
+      <div className="columns is-centered is-vcentered">
+        <div className="column is-3">
+          <h1 className="title has-text-centered">Edit Expense</h1>
+        </div>
+        <div className="column is-1">
+          <a>
+            <i className="far fa-trash-alt fa-lg"></i>
+          </a>
+        </div>
+      </div>
       <div className="columns is-centered">
         <div className="column is-4">
           <ExpenseForm

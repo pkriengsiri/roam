@@ -65,7 +65,7 @@ const EditTrip = () => {
         <div className="columns is-centered">
           <div className="column is-half ">
             <div className="columns is-vcentered ">
-              <div className="column is-5">
+              <div className="column is-6">
                 <h1 className="title">Edit Your Trip</h1>
               </div>
               <div className="column is-1">
