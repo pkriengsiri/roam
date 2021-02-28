@@ -2,11 +2,14 @@ import React, { useEffect, useState } from "react";
 import "./EditUser.css";
 import API from "../../utils/API";
 import { useParams, useHistory, Link } from "react-router-dom";
+import FormData from "form-data";
+import * as fs from 'fs';
+import axios from "axios";
 
 const EditUser = () => {
   const { userId } = useParams();
   const history = useHistory();
-
+  const [fileInput, setFileInput] = useState();
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
   const [email, setEmail] = useState("");
@@ -29,19 +32,70 @@ const EditUser = () => {
   const handleFormSubmit = (e) => {
     e.preventDefault();
     let preStoreEmail = email;
-    API.editUser(userId, {
-      firstName: firstName,
-      lastName: lastName,
-      email: preStoreEmail.toLowerCase(),
-    })
-      .then((response) => {
-        console.log(response);
-        history.push(`/user/${response.data._id}/trips`);
+    console.log(fileInput);
+    var data = new FormData();
+    data.append("photo", fs.createReadStream(fileInput));
+    // var form = new FormData();
+    // form.append("photo", fileInput, "file");
+
+    var config = {
+      method: "post",
+      url: "localhost:3001/api/users",
+      headers: {
+        ...data.getHeaders(),
+      },
+      // data: form,
+    };
+
+    axios(config)
+      .then(function (response) {
+        console.log(JSON.stringify(response.data));
       })
-      .catch((err) => {
-        console.log(err);
+      .catch(function (error) {
+        console.log(error);
       });
+    // API.editUser(userId, {
+    //   firstName: firstName,
+    //   lastName: lastName,
+    //   email: preStoreEmail.toLowerCase(),
+    // })
+    //   .then((response) => {
+    //     console.log(response);
+    //     history.push(`/user/${response.data._id}/trips`);
+    //   })
+    //   .catch((err) => {
+    //     console.log(err);
+    //   });
   };
+
+  // ///////////////// JQUERY //////////////
+  // var form = new FormData();
+  // form.append("photo", fileInput.files[0], "file");
+
+  // var settings = {
+  //   url: "/upload/" + newUser.id,
+  //   method: "POST",
+  //   timeout: 0,
+  //   processData: false,
+  //   mimeType: "multipart/form-data",
+  //   contentType: false,
+  //   data: form,
+  // };
+
+  // $.ajax(settings).done(function (response) {
+  //   console.log(response);
+  // });
+  // /////////////////// AXIOS //////////
+
+  // data.append(
+  //   "photo",
+  //   fs.createReadStream(
+  //     "/Users/ChadMathis/GT_Bootcamp/gt-ft/projects/roam/client/src/Assets/Images/default-trip-image.jpg"
+  //   )
+  // );
+  // data.append("photo", fs.createReadStream("/path/to/file"));
+
+  // //////////////////
 
   // NEED TO UPDATE THE IMAGE WITH EDIT FUNCTIONALITY
   return (
@@ -62,7 +116,16 @@ const EditUser = () => {
             {/* Upload input */}
             <div className="file has-name is-fullwidth mt-4">
               <label className="file-label">
-                <input className="file-input" type="file" name="resume" />
+                <input
+                  className="file-input"
+                  type="file"
+                  name="resume"
+                  onChange={(e) => {
+                    const { value } = e.target;
+                    console.log(value);
+                    setFileInput(value);
+                  }}
+                />
                 <span className="file-cta">
                   <span className="file-icon">
                     <i className="fas fa-upload"></i>
