@@ -66,7 +66,7 @@ const SingleTrip = () => {
       <div className="columns is-centered">
         <div className="column is-6 trip-container">
           <figure>
-            <img className="trip-image" src={imageUrl} alt={destination}/>
+            <img className="trip-image" src={imageUrl} alt={destination} />
           </figure>
           {/* </div>
         <div className="column is-3"> */}
@@ -92,25 +92,6 @@ const SingleTrip = () => {
               </div>
             </div>
           </div>
-        </div>
-      </div>
-      <div className="columns is-centered">
-        <div className="column is-3">
-          <Link
-            to={`/user/${userId}/trips`}
-            className="button is-primary is-size-4"
-          >
-            Dashboard
-          </Link>
-        </div>
-        <div className="column is-2">
-          <Link
-            to={`/user/${userId}/trips/${tripId}/expense`}
-            className="button mr-4 is-size-4 is-light"
-            type="submit"
-          >
-            Create Expense
-          </Link>
         </div>
       </div>
 
@@ -142,6 +123,25 @@ const SingleTrip = () => {
         </div>
         <div className="column is-6">
           <h1 className="title has-text-centered">Packing List</h1>
+        </div>
+      </div>
+      <div className="columns is-centered">
+        <div className="column is-3">
+          <Link
+            to={`/user/${userId}/trips`}
+            className="button is-primary is-size-4"
+          >
+            Dashboard
+          </Link>
+        </div>
+        <div className="column is-2">
+          <Link
+            to={`/user/${userId}/trips/${tripId}/expense`}
+            className="button mr-4 is-size-4 is-light"
+            type="submit"
+          >
+            Create Expense
+          </Link>
         </div>
       </div>
     </div>
