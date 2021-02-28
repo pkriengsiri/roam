@@ -34,6 +34,7 @@ const Navbar = ({ setUserContext }) => {
 
   const handleLogout = (e) => {
     e.preventDefault();
+    
     setUserContext({ email: "", id: "" });
     history.push("/");
   };
