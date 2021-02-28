@@ -5,6 +5,7 @@ import { useParams, useHistory, Link } from "react-router-dom";
 import FormData from "form-data";
 import * as fs from "fs";
 import axios from "axios";
+import Alert from "../../components/Alert/Alert";
 
 const EditUser = () => {
   const { userId } = useParams();
@@ -14,6 +15,8 @@ const EditUser = () => {
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
   const [email, setEmail] = useState("");
+  const [fileUploadStatus, setFileUploadStatus] = useState(false);
+  const [changedProfileImageUrl, setChangedProfileImageUrl] = useState("");
 
   useEffect(() => {
     if (userId) {
@@ -39,35 +42,38 @@ const EditUser = () => {
       email: preStoreEmail.toLowerCase(),
     })
       .then((response) => {
-        const id = response.data._id;
-        // console.log(fileInput);
-        var formdata = new FormData();
-        formdata.append("photo", fileInput, "file");
-
-        var requestOptions = {
-          method: "POST",
-          body: formdata,
-          // redirect: "follow",
-        };
-
-        fetch(`/api/users/upload/${id}`, requestOptions)
-          .then((response) => {
-            console.log("test");
-            history.push(`/user/${id}/trips`);
-            return response.text();
-          })
-          .then((result) => {
-            console.log(result);
-          })
-          .catch((error) => console.log("error", error));
-          history.push(`/user/${id}/trips`);
-          console.log("here");
-
-        
+        history.push(`/user/${userId}/trips`);
+        console.log("here");
       })
       .catch((err) => {
         console.log(err);
       });
+  };
+
+  const addPhoto = () => {
+    // console.log(fileInput);
+    var formdata = new FormData();
+    formdata.append("photo", fileInput, "file");
+    var requestOptions = {
+      method: "POST",
+      body: formdata,
+      // redirect: "follow",
+    };
+
+    fetch(`/api/users/upload/${userId}`, requestOptions)
+      .then((response) => {
+        console.log(response);
+        return response.text();
+      })
+      .then((result) => {
+        // console.log(result);
+        const res= JSON.parse(result);
+        setFileUploadStatus(true);
+        console.log(result.url);
+        console.log(res.url);
+        setChangedProfileImageUrl(res.url);
+      })
+      .catch((error) => console.log("error", error));
   };
 
   // NEED TO UPDATE THE IMAGE WITH EDIT FUNCTIONALITY
@@ -81,38 +87,57 @@ const EditUser = () => {
           <div className="column is-3 mb-6">
             {/* Profile picture */}
             <figure className="image profile-picture is-128x128 ">
-              <img
-                className="is-rounded"
-                src="https://placekitten.com/128/128"
-              />
+              {changedProfileImageUrl ? (
+                <img className="is-rounded" src={changedProfileImageUrl} />
+              ) : (
+                <img
+                  className="is-rounded"
+                  src="https://placekitten.com/128/128"
+                />
+              )}
             </figure>
             {/* Upload input */}
-            <div className="profile-picture-file file has-name is-fullwidth mt-4">
-              <label className="file-label">
-                <input
-                  className="file-input"
-                  type="file"
-                  name="resume"
-                  onChange={(e) => {
-                    setFileName(e.target.files[0].name)
-                    setFileInput(e.target.files[0]);
-                  }}
-                />
-                <span className="file-cta">
-                  <span className="file-icon">
-                    <i className="fas fa-upload"></i>
+
+            <div className="field has-addons">
+              <div className="control has-icons-left">
+                <div className="profile-picture-file file has-name mt-4">
+                  <label className="file-label">
+                    <input
+                      className="file-input"
+                      type="file"
+                      name="resume"
+                      onChange={(e) => {
+                        setFileName(e.target.files[0].name);
+                        setFileInput(e.target.files[0]);
+                      }}
+                    />
+                    <span className="file-cta">
+                      <span className="file-icon">
+                        <i className="fas fa-upload"></i>
+                      </span>
+                      <span className="file-label">Edit</span>
+                    </span>
+                    <span
+                      className="profile-picture-file-name file-name"
+                      id="file-type"
+                      value="image/png"
+                    >
+                      {fileName ? fileName : "No file uploaded"}
+                    </span>
+                  </label>
+                  <span>
+                    <i
+                      type="submit"
+                      className="fas fa-plus fa-lg add-traveler-button"
+                      onClick={addPhoto}
+                    ></i>
                   </span>
-                  <span className="file-label">Edit</span>
-                </span>
-                <span
-                  className="profile-picture-file-name file-name"
-                  id="file-type"
-                  value="image/png"
-                >
-                  {fileName ? fileName: "No file uploaded"}
-                </span>
-              </label>
+                </div>
+              </div>
             </div>
+            {fileUploadStatus && (
+              <Alert color="success">File Upload Succeeded</Alert>
+            )}
           </div>
           <div className="column is-5">
             <div className="field">

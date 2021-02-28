@@ -57,7 +57,7 @@ module.exports = {
         { ...req.body, profileImageUrl: result.url },
         { new: true }
       )
-        .then((dbUser) => res.json({status: "true"}))
+        .then((dbUser) => res.send({url: dbUser.profileImageUrl}))
         .catch((err) => {
           console.log(err);
           res.status(422).json(err)});
