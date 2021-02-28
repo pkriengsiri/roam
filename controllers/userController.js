@@ -1,4 +1,5 @@
 const db = require("../models");
+const cloudinary = require("cloudinary").v2;
 
 // Defining methods for the userController
 module.exports = {
@@ -17,7 +18,7 @@ module.exports = {
 
   findByIdWithTrips: function (req, res) {
     db.User.findById(req.params.userId)
-    .populate({path:"trips",options:{sort:{"startDate":1}}})
+      .populate({ path: "trips", options: { sort: { startDate: 1 } } })
       .then((dbUser) => res.json(dbUser))
       .catch((err) => res.status(422).json(err));
   },
@@ -37,14 +38,28 @@ module.exports = {
   },
 
   create: function (req, res) {
-    db.User.create({ ...req.body, email: req.body.email.toLowerCase() })
-      .then((dbUser) => res.json(dbUser))
-      .catch((err) => res.status(422).json(err));
+    const file = req.files.photo;
+    cloudinary.uploader.upload(file.tempFilePath, (err, res) => {
+      if (err) throw err;
+      console.log("Cloudinary URL: " + res.url);
+      db.User.create({
+        ...req.body,
+        email: req.body.email.toLowerCase(),
+        profileImageUrl: res.url,
+      })
+        .then((dbUser) => res.json(dbUser))
+        .catch((err) => res.status(422).json(err));
+    });
   },
+
   update: function (req, res) {
-    db.User.findOneAndUpdate({ _id: req.params.id }, { ...req.body, email: req.body.email.toLowerCase() }, {
-      new: true,
-    })
+    db.User.findOneAndUpdate(
+      { _id: req.params.id },
+      { ...req.body, email: req.body.email.toLowerCase() },
+      {
+        new: true,
+      }
+    )
       .then((dbUser) => res.json(dbUser))
       .catch((err) => res.status(422).json(err));
   },

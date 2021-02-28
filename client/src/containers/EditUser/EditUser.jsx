@@ -49,9 +49,9 @@ const EditUser = () => {
       {/* Header */}
       <h1 className="title has-text-centered">Edit Account</h1>
       <form onSubmit={handleFormSubmit}>
-        <div className="columns is-centered">
+        <div className="columns is-centered is-vcentered">
           {/* Column with profile picture and photo upload input */}
-          <div className="column is-4 ">
+          <div className="column is-3 mb-6">
             {/* Profile picture */}
             <figure className="image profile-picture is-128x128 ">
               <img
@@ -60,14 +60,14 @@ const EditUser = () => {
               />
             </figure>
             {/* Upload input */}
-            <div className="file has-name is-fullwidth">
+            <div className="file has-name is-fullwidth mt-4">
               <label className="file-label">
                 <input className="file-input" type="file" name="resume" />
                 <span className="file-cta">
                   <span className="file-icon">
                     <i className="fas fa-upload"></i>
                   </span>
-                  <span className="file-label">Edit profile picture</span>
+                  <span className="file-label">Edit</span>
                 </span>
                 <span className="file-name" id="file-type" value="image/png">
                   No file uploaded
