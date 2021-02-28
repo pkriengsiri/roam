@@ -45,7 +45,7 @@ const Dashboard = () => {
       </h1> */}
 
       <div className="columns is-gapless is-centered is-vcentered mt-4">
-        <div className="column is-1 ">
+        <div className="column is-1">
           <figure className="image">
             <img className="is-rounded dashboard-profile-picture" src={profileImage} />
           </figure>
