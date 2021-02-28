@@ -34,15 +34,6 @@ const DoughnutChart = ({ expenses }) => {
     ],
   });
 
-  const [dataObject, setDataObject] = useState({
-    datasets: [
-      {
-        data: [10, 20, 30],
-        backgroundColor: ["#938DB9", "#F6A465", "#8EE1E0"],
-      },
-    ],
-    labels: ["Food & Dining", "Airfare", "Other"],
-  });
 
   useEffect(() => {
     setSummaryExpenses(calculateExpenseCategoryTotals(expenses));
@@ -54,20 +45,6 @@ const DoughnutChart = ({ expenses }) => {
     setSummaryArrays(deconstructMap(summaryExpenses));
   }, [summaryExpenses]);
 
-  useEffect(() => {
-    console.log(summaryArrays.dataValues);
-    console.log(summaryArrays.colors);
-    console.log(summaryArrays.categories);
-    // setDataObject({
-    //   datasets: [
-    //     {
-    //       data: summaryArrays?.dataValues,
-    //       backgroundColor: summaryArrays?.colors,
-    //     },
-    //   ],
-    //   labels: summaryArrays?.categories,
-    // });
-  }, [summaryArrays]);
 
   // color palette
   const colorPalette = [
@@ -107,18 +84,6 @@ const DoughnutChart = ({ expenses }) => {
     };
   };
 
-  //  map over all expenses
-  //  store mapped array as state
-
-  //   useEffect(() => {
-  //     API.getExpense('603ad2f2a76c6e231d8cd33a').then((response)=> {
-  //         console.log(response.data.totalExpenseAmount);
-  //         setData(response.data.totalExpenseAmount);
-  //         dataArray.push(data);
-  //         console.log(dataArray);
-
-  //     })
-  //   }, [])
 
   return (
     <div>
