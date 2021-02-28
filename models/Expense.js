@@ -26,15 +26,15 @@ const ExpenseSchema = new Schema({
     // ],
   },
   description: { type: String },
-  expenseShare: [
-    {
-      travelerId: { type: Schema.Types.ObjectId, ref: "User" },
-      shareOfTotalExpense: { type: Number }, // how much this user owes for their portion of the total expense // Ex: U1 = $10
-      // contributionToTotalExpense:{type:Number},  // how much this user originally paid to the total expense // Ex: U1 = $100
-    },
+  // expenseShare: [
+  //   {
+  //     travelerId: { type: Schema.Types.ObjectId, ref: "User" },
+  //     shareOfTotalExpense: { type: Number }, // how much this user owes for their portion of the total expense // Ex: U1 = $10
+  //     // contributionToTotalExpense:{type:Number},  // how much this user originally paid to the total expense // Ex: U1 = $100
+  //   },
     
-  ], //array of userIds
-  expenseBalanced: { type: Boolean, required:"Transaction must be balanced. (true)" }, // MUST BE TRUE Can mongo calculate or be dynamic?
+  // ], //array of userIds
+  // expenseBalanced: { type: Boolean, required:"Transaction must be balanced. (true)" }, // MUST BE TRUE Can mongo calculate or be dynamic?
 });
 
 const Expense = mongoose.model("Expense", ExpenseSchema);
@@ -66,16 +66,17 @@ module.exports = Expense;
 
 /// sample
 // {
-//   "expenseCreator": "603867da83472d73a864bd02",
-//   "trip": "603a58a00e0ab53f805724d7",
+//   "expenseCreator": "603bad7cdad90579e8b42958",
+//   "trip": "603bad93dad90579e8b42959",
 //   "totalExpenseAmount": 123.45,
 //   "category": "Food",
 //   "description": "this is a test",
 //   "expenseShare": [
 //       {
-//           "travelerId": "603867da83472d73a864bd02",
+//           "travelerId": "603bad7cdad90579e8b42958",
 //           "shareOfTotalExpense": 123.45
 //       }
-//   ]
+//   ],
+//  "expenseBalanced": true
 // }
 

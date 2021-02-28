@@ -3,6 +3,7 @@ import { useParams, Link } from "react-router-dom";
 import API from "../../utils/API";
 import "./SingleTrip.css";
 import UserContext from "../../contexts/UserContext";
+import DoughnutChart from "../../components/DoughnutChart/DoughnutChart";
 
 import axios from "axios";
 
@@ -14,6 +15,7 @@ const SingleTrip = () => {
   const [endDate, setEndDate] = useState(null);
   const [travelers, setTravelers] = useState([]);
   const [imageUrl, setImageUrl] = useState("");
+  const [expenses, setExpenses] = useState([]);
 
   // browser params
   const { tripId } = useParams();
@@ -31,6 +33,7 @@ const SingleTrip = () => {
           setEndDate(responseEndDate);
           setTravelers(response.data.travelers);
           setImageUrl(response.data.imageUrl);
+          setExpenses(response.data.expenses);
         })
         .catch((err) => {
           console.log(err);
@@ -103,6 +106,25 @@ const SingleTrip = () => {
           >
             Dashboard
           </Link>
+        </div>
+        <div className="column is-2">
+          <Link
+            to={`/user/${userId}/trips/${tripId}/expense`}
+            className="button is-primary mr-4 is-size-4"
+            type="submit"
+          >
+            Create Expense
+          </Link>
+        </div>
+      </div>
+
+      {/* EXPENSES  */}
+      <h1 className="title has-text-centered">Expenses</h1>
+      <div className="columns is-centered">
+        <div className="column is-6">
+          <h2 className="has-text-centered">Total Expenses</h2>
+          <DoughnutChart expenses={expenses} />
+
         </div>
       </div>
     </div>

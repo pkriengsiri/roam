@@ -7,12 +7,14 @@ import Dashboard from "./containers/Dashboard/Dashboard";
 import CreateTrip from "./containers/CreateTrip/CreateTrip";
 import EditTrip from "./containers/EditTrip/EditTrip";
 import SingleTrip from "./containers/SingleTrip/SingleTrip";
+import CreateExpense from "./containers/CreateExpense/CreateExpense";
 import Navbar from "./components/Navbar/Navbar";
 import Footer from "./components/Footer/Footer";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import "./App.css";
 import UserContext from "./contexts/UserContext";
 import AlertContext from "./contexts/AlertContext";
+import ExpenseContext from "./contexts/ExpenseContext";
 import API from "./utils/API";
 import Cookies from "js-cookie";
 import jwt from "jsonwebtoken";
@@ -20,6 +22,10 @@ import jwt from "jsonwebtoken";
 function App() {
   const [userContext, setUserContext] = useState({
     email: "",
+    id: "",
+  });
+
+  const [expenseContext, setExpenseContext] = useState({
     id: "",
   });
 
