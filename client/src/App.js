@@ -15,9 +15,9 @@ import UserContext from "./contexts/UserContext";
 import AlertContext from "./contexts/AlertContext";
 import API from "./utils/API";
 import Cookies from "js-cookie";
+import jwt from "jsonwebtoken";
 
 function App() {
- 
   const [userContext, setUserContext] = useState({
     email: "",
     id: "",
@@ -33,13 +33,25 @@ function App() {
   const { context } = useContext(UserContext);
 
   useEffect(() => {
-    const token = Cookies.get('token');
-    console.log(token);
-    console.log("here");
-    console.log(context?.userId);
-
+    const token = Cookies.get("token");
     const getCsrfToken = async () => {
       const { data } = await API.relogin();
+      console.log(data);
+      jwt.verify(
+        data.token,
+        process.env.REACT_APP_SECRET,
+        (err, data) => {
+          if (err) {
+            // TODO:  display an error message to the user stating that the sign-up failed (use global alert)
+            console.log(err);
+          } else {
+            setUserContext({ userId: data._id, email: data.email });
+            // history.push(`/user/${data._id}/edit`);
+            // setSignupModalState(false);
+          }
+        }
+      );
+
       Axios.defaults.headers.post["X-CSRF-Token"] = data.csrfToken;
     };
     getCsrfToken();

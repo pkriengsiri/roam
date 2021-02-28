@@ -53,9 +53,12 @@ module.exports = {
         console.log(err);
         res.status(401).end();
       } else {
-        db.User.findOne({ email: data.email.toLowerCase() })
+        console.log(data);
+        db.User.findOne({ _id: data._id })
           .then((foundUser) => {
-            const token = jwt.sign({ _id: foundUser._id }, process.env.SECRET);
+            console.log(foundUser);
+            const token = jwt.sign({ _id: foundUser._id,email:foundUser.email }, process.env.SECRET);
+            console.log(token);
             res.cookie("token", token, { httpOnly: true });
             res.json({ token: token });
           })
