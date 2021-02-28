@@ -1,5 +1,4 @@
 import { useEffect, useState, useContext } from "react";
-import Axios from "axios";
 import "./sass/App.scss";
 import Home from "./containers/Home/Home";
 import EditUser from "./containers/EditUser/EditUser";
@@ -15,14 +14,12 @@ import "./App.css";
 import UserContext from "./contexts/UserContext";
 import AlertContext from "./contexts/AlertContext";
 import ExpenseContext from "./contexts/ExpenseContext";
-import API from "./utils/API";
-import jwt from "jsonwebtoken";
+
+import useFindUser from "./hooks/useFindUser";
 
 function App() {
   
-  const {user, setUser}
-
-
+  const {userContext, setUserContext, isLoading} = useFindUser();
 
   const [expenseContext, setExpenseContext] = useState({
     id: "",
@@ -52,7 +49,7 @@ function App() {
   // }, []);
 
   return (
-    <UserContext.Provider value={{ userContext, setUserContext }}>
+    <UserContext.Provider value={{ userContext, setUserContext, isLoading }}>
       <AlertContext.Provider value={alertContext}>
         <div className="App">
           <Router>

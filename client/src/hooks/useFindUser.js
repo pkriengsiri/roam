@@ -1,6 +1,8 @@
 // Dependencies
 import { useState, useEffect } from "react";
 import API from "../utils/API";
+import jwt from "jsonwebtoken";
+import Axios from "axios";
 
 export default function useFindUser() {
   const [userContext, setUserContext] = useState({
@@ -17,8 +19,7 @@ export default function useFindUser() {
           console.log(err);
           setLoading(false);
         } else {
-          setEmail(data.email);
-          setUserId(data._id);
+          setUserContext({ userId: data._id, email: data.email });
           setLoading(false);
           // setUserContext({ userId: data._id, email: data.email });
         }
@@ -40,7 +41,8 @@ export default function useFindUser() {
   }, []);
 
   return {
-    user,
+    userContext,
+    setUserContext,
     isLoading,
   };
 }
