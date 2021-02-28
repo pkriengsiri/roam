@@ -33,69 +33,32 @@ const EditUser = () => {
     e.preventDefault();
     let preStoreEmail = email;
     console.log(fileInput);
-    var data = new FormData();
-    data.append("photo", fileInput, "file");
-    // var form = new FormData();
-    // form.append("photo", fileInput, "file");
+    var formdata = new FormData();
+    formdata.append("photo", fileInput, "file");
 
-    var config = {
-      method: "post",
-      url: "localhost:3001/api/users",
-      headers: {
-        ...data.getHeaders(),
-      },
-      // data: form,
+    var requestOptions = {
+      method: "POST",
+      body: formdata,
+      redirect: "follow",
     };
 
-    axios(config)
-      .then(function (response) {
-        console.log(JSON.stringify(response.data));
+    fetch("/api/users", requestOptions)
+      .then((response) => response.text())
+      .then((result) => console.log(result))
+      .catch((error) => console.log("error", error));
+    API.editUser(userId, {
+      firstName: firstName,
+      lastName: lastName,
+      email: preStoreEmail.toLowerCase(),
+    })
+      .then((response) => {
+        console.log(response);
+        history.push(`/user/${response.data._id}/trips`);
       })
-      .catch(function (error) {
-        console.log(error);
+      .catch((err) => {
+        console.log(err);
       });
-    // API.editUser(userId, {
-    //   firstName: firstName,
-    //   lastName: lastName,
-    //   email: preStoreEmail.toLowerCase(),
-    // })
-    //   .then((response) => {
-    //     console.log(response);
-    //     history.push(`/user/${response.data._id}/trips`);
-    //   })
-    //   .catch((err) => {
-    //     console.log(err);
-    //   });
   };
-
-  // ///////////////// JQUERY //////////////
-  // var form = new FormData();
-  // form.append("photo", fileInput.files[0], "file");
-
-  // var settings = {
-  //   url: "/upload/" + newUser.id,
-  //   method: "POST",
-  //   timeout: 0,
-  //   processData: false,
-  //   mimeType: "multipart/form-data",
-  //   contentType: false,
-  //   data: form,
-  // };
-
-  // $.ajax(settings).done(function (response) {
-  //   console.log(response);
-  // });
-  // /////////////////// AXIOS //////////
-
-  // data.append(
-  //   "photo",
-  //   fs.createReadStream(
-  //     "/Users/ChadMathis/GT_Bootcamp/gt-ft/projects/roam/client/src/Assets/Images/default-trip-image.jpg"
-  //   )
-  // );
-  // data.append("photo", fs.createReadStream("/path/to/file"));
-
-  // //////////////////
 
   // NEED TO UPDATE THE IMAGE WITH EDIT FUNCTIONALITY
   return (
@@ -114,16 +77,14 @@ const EditUser = () => {
               />
             </figure>
             {/* Upload input */}
-            <div className="file has-name is-fullwidth mt-4">
+            <div className="profile-picture-file file has-name is-fullwidth mt-4">
               <label className="file-label">
                 <input
                   className="file-input"
                   type="file"
                   name="resume"
                   onChange={(e) => {
-                    const { value } = e.target;
-                    console.log(value);
-                    setFileInput(value);
+                    setFileInput(e.target.files[0]);
                   }}
                 />
                 <span className="file-cta">
@@ -132,7 +93,11 @@ const EditUser = () => {
                   </span>
                   <span className="file-label">Edit</span>
                 </span>
-                <span className="file-name" id="file-type" value="image/png">
+                <span
+                  className="profile-picture-file-name file-name"
+                  id="file-type"
+                  value="image/png"
+                >
                   No file uploaded
                 </span>
               </label>
