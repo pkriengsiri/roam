@@ -7,7 +7,7 @@ const csrfProtection = csrf({
 });
 
 //csurf middleware
-router.use(csrfProtection);
+// router.use(csrfProtection);
 
 // Route for /api/expenses
 router.route("/")

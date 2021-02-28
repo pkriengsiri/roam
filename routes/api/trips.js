@@ -7,7 +7,7 @@ const csrfProtection = csrf({
 });
 
 //csurf middleware
-router.use(csrfProtection);
+// router.use(csrfProtection);
 
 // Routes for /api/trips
 router.route("/").get(tripController.findAll).post(tripController.create);

@@ -2,17 +2,16 @@
 const router = require("express").Router();
 const userController = require("../../controllers/userController");
 const jwt = require("express-jwt");
-const cookieParser = require("cookie-parser");const csrf = require("csurf");
+const cookieParser = require("cookie-parser");
+const csrf = require("csurf");
 const csrfProtection = csrf({
   cookie: true
 });
 
 //middleware
-router.use(csrfProtection);
+// router.use(csrfProtection);
 router.use(cookieParser());
 
-//csurf middleware
-router.use(csrfProtection);
 
 // Routes for /api/users
 router.route("/").get(userController.findAll).post(userController.create);
@@ -33,18 +32,20 @@ router
   .put(userController.update)
   .delete(userController.remove);
 
-// router.route("/:userId/trips").get(userController.findByIdWithTrips);
-router.get(
-  "/:userId/trips",
-  jwt({
-      secret: process.env.SECRET,
-      getToken: (req) => {
-        return req.cookies.token;
-      },
-      algorithms: ["HS256"],
-    })
-  ,userController.findByIdWithTrips
-);
+// Route for /api/user/:userId/trips
+router.route("/:userId/trips").get(userController.findByIdWithTrips);
+
+// router.get(
+//   "/:userId/trips",
+//   jwt({
+//       secret: process.env.SECRET,
+//       getToken: (req) => {
+//         return req.cookies.token;
+//       },
+//       algorithms: ["HS256"],
+//     })
+//   ,userController.findByIdWithTrips
+// );
 
 // Routes for /api/users/:id/expenses
 router

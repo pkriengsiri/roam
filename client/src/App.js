@@ -42,6 +42,7 @@ function App() {
           if (err) {
             console.log(err);
           } else {
+            
             setUserContext({ userId: data._id, email: data.email });
           }
         }
