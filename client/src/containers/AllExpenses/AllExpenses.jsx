@@ -26,7 +26,27 @@ const AllExpenses = (props) => {
   }, []);
   return (
     <div className="container mt-6 pl-6 pr-6">
-      <h1 className="title has-text-centered">All Expenses for {destination}</h1>
+      <h1 className="title has-text-centered">Expenses for {destination}</h1>
+        <div className="columns">
+            <div className="column is-full">
+                <table className="table is-fullwidth">
+                    <thead className="expense-table-head has-text-centered">
+                        <tr>
+                            <th>Expense</th>
+                            <th>Category</th>
+                            <th>Amount</th>
+                            <th>Contributors</th>
+                        </tr>
+                    </thead>
+                    <tbody className="has-text-centered">
+                        <th>Bubble Tea</th>
+                        <td>Food & Dining</td>
+                        <td>$50</td>
+                        <td>v</td>
+                    </tbody>
+                </table>
+            </div>
+        </div>
     </div>
   );
 };
