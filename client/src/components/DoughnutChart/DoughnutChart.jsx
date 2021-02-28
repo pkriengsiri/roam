@@ -1,12 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { Doughnut } from "react-chartjs-2";
 import API from "../../utils/API";
-import ExpenseContext from "../../contexts/ExpenseContext";
-
-const dataArray = [];
 
 const DoughnutChart = ({ expenses }) => {
-  const [data, setData] = useState([]);
   const [summaryExpenses, setSummaryExpenses] = useState({});
   const [summaryArrays, setSummaryArrays] = useState({
     labels: [
@@ -22,18 +18,17 @@ const DoughnutChart = ({ expenses }) => {
       {
         data: [0, 0, 0, 0, 0, 0, 0],
         backgroundColor: [
-          "#938DB9", // light purple
-          "#F6A465", // light orange
-          "#8EE1E0", // light blue
-          "#938DB9", // light purple
-          "#F6A465", // light orange
-          "#8EE1E0", // light blue
-          "#938DB9", // light purple,
+          "#938DB9", // light purple "Blue Bell"
+          "#F6A465", // light orange "sandy brown"
+          "#8EE1E0", // light blue "middle blue green"
+          "#5A5388", // darker purple "purple navy"
+          "#F48E3F", // darker orange "cadmium orange"
+          "#33C1BF", // darker blue "maximum blue green"
+          "#2E3560", // darkest purple "space cadet",
         ],
       },
     ],
   });
-
 
   useEffect(() => {
     setSummaryExpenses(calculateExpenseCategoryTotals(expenses));
@@ -45,16 +40,23 @@ const DoughnutChart = ({ expenses }) => {
     setSummaryArrays(deconstructMap(summaryExpenses));
   }, [summaryExpenses]);
 
-
   // color palette
   const colorPalette = [
-    "#938DB9", // light purple
-    "#F6A465", // light orange
-    "#8EE1E0", // light blue
-    "#938DB9", // light purple
-    "#F6A465", // light orange
-    "#8EE1E0", // light blue
-    "#938DB9", // light purple
+    //   Activities:"#938DB9", // light purple "Blue Bell"
+    //   Airfare:"#F6A465", // light orange "sandy brown"
+    //   Car&Gas:"#8EE1E0", // light blue "middle blue green"
+    //  Food & Dining:"#5A5388", // darker purple "purple navy"
+    //   Entertainment:"#F48E3F", // darker orange "cadmium orange"
+    //   Lodging:"#33C1BF", // darker blue "maximum blue green"
+    //   Other:"#2E3560", // darkest purple "space cadet"
+
+    "#938DB9", // light purple "Blue Bell"
+    "#F6A465", // light orange "sandy brown"
+    "#8EE1E0", // light blue "middle blue green"
+    "#5A5388", // darker purple "purple navy"
+    "#F48E3F", // darker orange "cadmium orange"
+    "#33C1BF", // darker blue "maximum blue green"
+    "#2E3560", // darkest purple "space cadet"
   ];
 
   // total all received expenses for the trip
@@ -83,7 +85,6 @@ const DoughnutChart = ({ expenses }) => {
       datasets: [{ data: dataValues, backgroundColor: colors }],
     };
   };
-
 
   return (
     <div>
