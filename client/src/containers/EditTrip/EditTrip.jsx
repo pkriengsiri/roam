@@ -1,7 +1,6 @@
 import React, { useEffect, useState, useContext } from "react";
 import axios from "axios";
 import "./EditTrip.css";
-import API from "../../utils/API";
 import { useHistory, useParams } from "react-router-dom";
 import TripForm from "../../components/TripForm/TripForm";
 import DeleteModal from "../../components/DeleteModal/DeleteModal";

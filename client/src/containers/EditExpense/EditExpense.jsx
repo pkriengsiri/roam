@@ -12,6 +12,8 @@ const EditExpense = () => {
   const { userId } = useParams();
   const { expenseId } = useParams();
 
+  
+
   const handleFormSubmit = (e, formObject) => {
     e.preventDefault();
     if (
@@ -27,7 +29,7 @@ const EditExpense = () => {
       API.editExpense(expenseId, formObject)
         .then((response) => {
           console.log(response.data);
-        //   history.push(`/user/${userId}/trips/${tripId}`);
+          //   history.push(`/user/${userId}/trips/${tripId}`);
         })
         .catch((err) => {
           console.log(err);
@@ -41,7 +43,7 @@ const EditExpense = () => {
 
   return (
     <div className="container mt-6">
-      <h1 className="title has-text-centered">Edit Expense:</h1>
+      <h1 className="title has-text-centered">Edit Expense (trash can)</h1>
       <div className="columns is-centered">
         <div className="column is-4">
           <ExpenseForm
