@@ -13,7 +13,7 @@ import {
 } from "react-dates/constants";
 import Alert from "../Alert/Alert";
 import AlertContext from "../../contexts/AlertContext";
-import "./react_dates_overrides.css"
+import "./react_dates_overrides.css";
 
 const TripForm = (props) => {
   const { userContext } = useContext(UserContext);
@@ -25,7 +25,7 @@ const TripForm = (props) => {
   const [startDate, setStartDate] = useState(null);
   const [endDate, setEndDate] = useState(null);
   const [focusedInput, setFocusedInput] = useState(null);
-  const [calendarStack, setCalendarStack] = useState("HORIZONTAL_ORIENTATION");
+  const [calendarStack, setCalendarStack] = useState("horizontal");
 
   const [travelers, setTravelers] = useState([
     {
@@ -67,42 +67,49 @@ const TripForm = (props) => {
   // check window viewport to set orientation of calendar so it is responsive in mobile
   useEffect(() => {
     if (window.innerWidth <= 768) {
-      setCalendarStack(VERTICAL_ORIENTATION);
+      setCalendarStack("vertical");
     } else {
-      setCalendarStack(HORIZONTAL_ORIENTATION);
+      setCalendarStack("horizontal");
     }
-  }, []);
+  }, [window.innerWidth]);
+
+  // remove valid email prompt state when traveler is empty
+  useEffect(() => {
+    if (traveler === "") {
+      setValidEmailPromptState(true);
+    }
+  }, [traveler]);
 
   // add traveler to the travelers list
-  const addTraveler = (e) => {
-    e.preventDefault();
-    const newTraveler = travelers.find((traveler) => {
-      return traveler.travelerEmail === e.target.traveler.value.toLowerCase();
-    });
-    if (newTraveler) {
-      //Todo: add alert
-      console.log("user already exists");
+ 
+
+  const addTraveler = () => {
+    const existingTraveler = travelers.find(
+      (el) => el.travelerEmail === traveler?.toLowerCase()
+    );
+    if (existingTraveler) {
+      // TODO: glow existing traveler bubble
+      setTraveler("");
+      // console.log("user already exists");
     } else {
-      if (validateEmail(e.target.traveler.value)) {
+      if (validateEmail(traveler)) {
         setValidEmailPromptState(true);
-        const newInvite = e.target.traveler.value.toLowerCase();
-        setTravelers([
-          ...travelers,
-          { travelerEmail: newInvite, travelerId: "", status: "pending" },
-        ]);
+        const newInvite = {
+          travelerEmail: traveler?.toLowerCase(),
+          travelerId: "",
+          status: "pending",
+        };
+        setTravelers([...travelers, newInvite]);
         setTraveler("");
       } else {
         setValidEmailPromptState(false);
       }
-      // TODO: "Invite Sent" alert or message
     }
   };
 
   // remove traveler
   const removeTraveler = (targetEmail) => {
     if (targetEmail === userContext.email) {
-      console.log(targetEmail);
-      console.log(traveler.travelerEmail);
       setValidRemoveState(false);
     } else {
       let filteredTravelers = travelers.filter(
@@ -130,16 +137,21 @@ const TripForm = (props) => {
       <div className="columns is-centered">
         <div className="column is-half">
           <form
+            id="trip-form"
             className="trip-form"
-            onSubmit={(e) =>
+            onSubmit={ (e) => {
+              e.preventDefault();
+              console.log("trip  submit")
+              addTraveler();
+            
               props.handleFormSubmit(e, {
                 tripCreator: userId,
                 destination,
                 startDate,
                 endDate,
                 travelers,
-              })
-            }
+              });
+            }}
           >
             {/* destination section  */}
             <div className="field mb-2">
@@ -160,7 +172,6 @@ const TripForm = (props) => {
               <label className="label">Dates</label>
 
               <DateRangePicker
-                className="date-range-picker"
                 startDate={startDate}
                 startDateId="trip-start-date"
                 endDate={endDate}
@@ -185,7 +196,15 @@ const TripForm = (props) => {
           </form>
           {/* invite travelers section  */}
 
-          <form className="invite" onSubmit={addTraveler}>
+          <form
+            id="add-traveler-form"
+            className="invite"
+            onSubmit={(e) => {
+              e.preventDefault();
+              console.log("add traveler form submit")
+              addTraveler();
+            }}
+          >
             <label className="label">Invite Others!</label>
             <div className="columns is-vcentered">
               <div className="column">
@@ -200,7 +219,9 @@ const TripForm = (props) => {
                       onChange={(e) => setTraveler(e.target.value)}
                     />
                     <span className="icon is-medium is-left">
-                      <i className="fas fa-users"></i>
+                      <i
+                        className={focusedInput ? "is-hidden" : "fas fa-users"}
+                      ></i>
                     </span>
                     {!validEmailPromptState && (
                       <p className="validation">
@@ -210,14 +231,18 @@ const TripForm = (props) => {
 
                     <span>
                       <i
-                        type="submit"
+                       
                         className="fas fa-plus fa-lg add-traveler-button"
                         className=""
                       ></i>
                     </span>
                   </div>
                   <div className="control">
-                    <button type="submit" className="button">
+                    <button
+                      type="submit"
+                      form="add-traveler-form"
+                      className="button"
+                    >
                       <i className="fas fa-plus fa-lg"></i>
                     </button>
                   </div>
@@ -239,20 +264,24 @@ const TripForm = (props) => {
                       <span>YOU - </span>
                     )}
                     {/* if no traveler email, do not render  */}
-                    {traveler.travelerEmail && (
+                    {traveler?.travelerEmail && (
                       <span> {`${traveler.travelerEmail} - `}</span>
                     )}
                     <span>
                       <em>{traveler.status}</em>
                     </span>
-                    <span
-                      // data-email={traveler.email}
-                      onClick={() => removeTraveler(traveler.travelerEmail)}
-                      // onClick={(e) => removeTraveler(e)}
-                    >
-                      {" "}
-                      x{" "}
-                    </span>
+
+                    {traveler.status !== "Trip Creator" && (
+                      <span
+                        className="remove-travler-x"
+                        // data-email={traveler.email}
+                        onClick={() => removeTraveler(traveler.travelerEmail)}
+                        // onClick={(e) => removeTraveler(e)}
+                      >
+                        {" "}
+                        x{" "}
+                      </span>
+                    )}
                   </span>
                 </p>
               ))}
@@ -264,20 +293,15 @@ const TripForm = (props) => {
                 <button
                   className={`button is-primary ${props.loadingState}`}
                   type="submit"
-                  onClick={(e) =>
-                    props.handleFormSubmit(e, {
-                      tripCreator: userId,
-                      destination,
-                      startDate,
-                      endDate,
-                      travelers,
-                    })
-                  }
+                  form="trip-form"
                 >
                   {props.buttonText}
                 </button>
 
-                <Link onClick={()=>props.closeTripForm()}to={`/user/${userId}/trips`}>
+                <Link
+                  onClick={() => props.closeTripForm()}
+                  to={`/user/${userId}/trips`}
+                >
                   <button className="button  ml-4 cancel-button">Cancel</button>
                 </Link>
               </div>
