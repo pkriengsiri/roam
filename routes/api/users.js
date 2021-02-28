@@ -7,6 +7,15 @@ router.route("/")
 .get(userController.findAll)
 .post(userController.create);
 
+// Routes for /api/users/upload
+router.route("/upload/:id")
+.post(userController.uploadImage);
+
+// Routes for /api/users
+router.route("/")
+.get(userController.findAll)
+.post(userController.create);
+
 // Routes for /api/users/:id
 router
   .route("/:id")

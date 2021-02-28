@@ -32,28 +32,37 @@ const EditUser = () => {
   const handleFormSubmit = (e) => {
     e.preventDefault();
     let preStoreEmail = email;
-    console.log(fileInput);
-    var formdata = new FormData();
-    formdata.append("photo", fileInput, "file");
-
-    var requestOptions = {
-      method: "POST",
-      body: formdata,
-      redirect: "follow",
-    };
-
-    fetch("/api/users", requestOptions)
-      .then((response) => response.text())
-      .then((result) => console.log(result))
-      .catch((error) => console.log("error", error));
     API.editUser(userId, {
       firstName: firstName,
       lastName: lastName,
       email: preStoreEmail.toLowerCase(),
     })
       .then((response) => {
-        console.log(response);
-        history.push(`/user/${response.data._id}/trips`);
+        const id = response.data._id;
+        // console.log(fileInput);
+        var formdata = new FormData();
+        formdata.append("photo", fileInput, "file");
+
+        var requestOptions = {
+          method: "POST",
+          body: formdata,
+          // redirect: "follow",
+        };
+
+        fetch(`/api/users/upload/${id}`, requestOptions)
+          .then((response) => {
+            console.log("test");
+            history.push(`/user/${id}/trips`);
+            return response.text();
+          })
+          .then((result) => {
+            console.log(result);
+          })
+          .catch((error) => console.log("error", error));
+          history.push(`/user/${id}/trips`);
+          console.log("here");
+
+        
       })
       .catch((err) => {
         console.log(err);
