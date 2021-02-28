@@ -81,8 +81,7 @@ const TripForm = (props) => {
   }, [traveler]);
 
   // add traveler to the travelers list
-  const addTraveler = (e) => {
-    e.preventDefault();
+  const addTraveler = () => {
     const newTraveler = travelers.find(
       (el) => el.travelerEmail === traveler?.toLowerCase()
     );
@@ -103,15 +102,12 @@ const TripForm = (props) => {
       } else {
         setValidEmailPromptState(false);
       }
-      // TODO: "Invite Sent" alert or message
     }
   };
 
   // remove traveler
   const removeTraveler = (targetEmail) => {
     if (targetEmail === userContext.email) {
-      console.log(targetEmail);
-      console.log(traveler.travelerEmail);
       setValidRemoveState(false);
     } else {
       let filteredTravelers = travelers.filter(
@@ -140,15 +136,16 @@ const TripForm = (props) => {
         <div className="column is-half">
           <form
             className="trip-form"
-            onSubmit={(e) =>
+            onSubmit={(e) => {
+              addTraveler();
               props.handleFormSubmit(e, {
                 tripCreator: userId,
                 destination,
                 startDate,
                 endDate,
                 travelers,
-              })
-            }
+              });
+            }}
           >
             {/* destination section  */}
             <div className="field mb-2">
@@ -193,7 +190,13 @@ const TripForm = (props) => {
           </form>
           {/* invite travelers section  */}
 
-          <form className="invite" onSubmit={addTraveler}>
+          <form
+            className="invite"
+            onSubmit={(e) => {
+              e.preventDefault();
+              addTraveler();
+            }}
+          >
             <label className="label">Invite Others!</label>
             <div className="columns is-vcentered">
               <div className="column">
@@ -249,20 +252,23 @@ const TripForm = (props) => {
                       <span>YOU - </span>
                     )}
                     {/* if no traveler email, do not render  */}
-                    {traveler.travelerEmail && (
+                    {traveler?.travelerEmail && (
                       <span> {`${traveler.travelerEmail} - `}</span>
                     )}
                     <span>
                       <em>{traveler.status}</em>
                     </span>
-                    <span
-                      // data-email={traveler.email}
-                      onClick={() => removeTraveler(traveler.travelerEmail)}
-                      // onClick={(e) => removeTraveler(e)}
-                    >
-                      {" "}
-                      x{" "}
-                    </span>
+
+                    {traveler.status !== "Trip Creator" && (
+                      <span className="remove-travler-x"
+                        // data-email={traveler.email}
+                        onClick={() => removeTraveler(traveler.travelerEmail)}
+                        // onClick={(e) => removeTraveler(e)}
+                      >
+                        {" "}
+                        x{" "}
+                      </span>
+                    )}
                   </span>
                 </p>
               ))}
@@ -275,14 +281,15 @@ const TripForm = (props) => {
                   className={`button is-primary ${props.loadingState}`}
                   type="submit"
                   onClick={(e) => {
-                    addTraveler(e);
-                    props.handleFormSubmit(e, {
-                      tripCreator: userId,
-                      destination,
-                      startDate,
-                      endDate,
-                      travelers,
-                    });
+                    addTraveler().then(
+                      props.handleFormSubmit(e, {
+                        tripCreator: userId,
+                        destination,
+                        startDate,
+                        endDate,
+                        travelers,
+                      })
+                    );
                   }}
                 >
                   {props.buttonText}
