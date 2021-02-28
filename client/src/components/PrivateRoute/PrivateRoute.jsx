@@ -1,6 +1,7 @@
 import React, { useContext } from "react";
 import { Route, Redirect } from "react-router-dom";
 import UserContext from "../../contexts/UserContext";
+import Loader from "../Loader/Loader";
 // import Loading from "./../components/Loading";
 
 export default function PrivateRoute(props) {
@@ -9,7 +10,8 @@ export default function PrivateRoute(props) {
 
   const { component: Component, ...rest } = props;
   if (isLoading) {
-    //   return <Loading/>
+    
+    // return <Loader />
     return null;
   }
   if (userContext.userId) {
