@@ -1,11 +1,12 @@
 import { useState, useContext } from "react";
-import { useParams, Link } from "react-router-dom";
+import { useParams, Link, useHistory} from "react-router-dom";
 import React from "react";
 import UserContext from "../../contexts/UserContext";
 import API from "../../utils/API";
 
 const CreateExpense = () => {
-  const { userContext } = useContext(UserContext);
+  
+  const history = useHistory();
 
   const [totalExpenseAmount, setTotalExpenseAmount] = useState("");
   const [description, setDescription] = useState("");
@@ -21,6 +22,7 @@ const CreateExpense = () => {
     })
       .then((response) => {
         console.log(response.data);
+        history.push(`/user/${userId}/trips`);
       })
       .catch((err) => {
         console.log(err);

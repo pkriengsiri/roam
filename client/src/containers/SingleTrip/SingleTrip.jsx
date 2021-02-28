@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useContext } from "react";
-import { useParams, Link } from "react-router-dom";
+import { useParams, Link, useHistory } from "react-router-dom";
 import API from "../../utils/API";
 import "./SingleTrip.css";
 import UserContext from "../../contexts/UserContext";
@@ -107,12 +107,13 @@ const SingleTrip = () => {
         <div className="column is-2">
         <Link
             to={`/user/${userId}/trips/${tripId}/expense`}
-            className="button is-primary mr-4 is-size-4"
+            className="button is-primary mr-4 is-size-4" type="submit"
           >
             Create Expense
           </Link>
         </div>
       </div>
+      <h1 className="title has-text-centered">Expenses</h1>
       <DoughnutChart />
     </div>
   );
