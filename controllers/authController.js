@@ -32,7 +32,10 @@ module.exports = {
       .then((foundUser) => {
         bcrypt.compare(req.body.password, foundUser.password, (err, result) => {
           if (result) {
-            const token = jwt.sign({ _id: foundUser._id }, process.env.SECRET);
+            const token = jwt.sign(
+              { _id: foundUser._id, email: foundUser.email },
+              process.env.SECRET
+            );
             res.cookie("token", token, { httpOnly: true });
             res.json({ token: token });
           } else {
@@ -46,19 +49,18 @@ module.exports = {
       });
   },
   reLogin: function (req, res) {
-    console.log("success");
     const token = req.cookies.token;
     jwt.verify(token, process.env.SECRET, (err, data) => {
       if (err) {
         console.log(err);
         res.status(401).end();
       } else {
-        console.log(data);
         db.User.findOne({ _id: data._id })
           .then((foundUser) => {
-            console.log(foundUser);
-            const token = jwt.sign({ _id: foundUser._id,email:foundUser.email }, process.env.SECRET);
-            console.log(token);
+            const token = jwt.sign(
+              { _id: foundUser._id, email: foundUser.email },
+              process.env.SECRET
+            );
             res.cookie("token", token, { httpOnly: true });
             res.json({ token: token });
           })
