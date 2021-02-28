@@ -9,6 +9,17 @@ height: 300px;
 width: 1000px;
 }
 
+.dashboard-profile-picture {
+  max-height: 100px !important;
+  max-width: 100px !important;
+  object-fit: cover;
+  margin-left: auto;
+}
+.dashboard-figure {
+  margin-right: 0 !important;
+  padding-right: 0 !important;
+}
+
 
 
 .animate {

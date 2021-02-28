@@ -3,7 +3,7 @@ import "./Dashboard.css";
 import TripCard from "../../components/TripCard/TripCard";
 import API from "../../utils/API";
 import { Link, useParams } from "react-router-dom";
-import Doodle2 from "../../components/Doodle/Doodle2";
+import Doodle2 from "../../components/Doodle/Doodle2"
 import { set } from "mongoose";
 
 const Dashboard = () => {
@@ -14,12 +14,12 @@ const Dashboard = () => {
 
   useEffect(() => {
     API.getUser(userId)
-      .then((response) => {
-        setProfileImage(response.data.profileImageUrl);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
+    .then((response) => {
+      setProfileImage(response.data.profileImageUrl);
+    })
+    .catch((err) => {
+      console.log(err);
+    });
 
     API.getUserWithTrips(userId)
       .then((response) => {
@@ -38,19 +38,27 @@ const Dashboard = () => {
 
   return (
     <>
-    <div className="columns">
-    <div className = "column">
       <h1 className="title is-size-1 has-text-centered mt-6 pl-6 pr-6">
         {currentUser}
       </h1>
-      <figure className="image is-128x128">
-        <img class="is-rounded" src={profileImage} />
-      </figure>
-      </div>
-      </div>
       <h1 className="subtitle is-size-4 has-text-centered mt-3">
         Start planning your trips today!
       </h1>
+
+      {/* <div className="columns is-gapless is-centered is-vcentered mt-4">
+        <div className="column is-2">
+          <figure className="image dashboard-figure">
+            <img className="is-rounded dashboard-profile-picture" src={profileImage} />
+          </figure>
+        </div>
+        <div className="column is-4 mb-5 has-text-centered">
+          <h1 className="title is-size-1 mt-6 pr-6">
+            {currentUser}
+          </h1>
+
+          <h2 class="subtitle is-size-4 mr-6">Start planning your trips today! </h2>
+        </div>
+      </div> */}
       <section className="has-text-centered">
         <Doodle2 />
       </section>
