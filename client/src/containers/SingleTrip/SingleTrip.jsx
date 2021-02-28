@@ -13,6 +13,7 @@ const SingleTrip = () => {
   const [endDate, setEndDate] = useState(null);
   const [travelers, setTravelers] = useState([]);
   const [imageUrl, setImageUrl] = useState("");
+  const [expenses, setExpenses] = useState([]);
 
   // browser params
   const { tripId } = useParams();
@@ -30,6 +31,7 @@ const SingleTrip = () => {
           setEndDate(responseEndDate);
           setTravelers(response.data.travelers);
           setImageUrl(response.data.imageUrl);
+          setExpenses(response.data.expenses);
         })
         .catch((err) => {
           console.log(err);
@@ -119,8 +121,8 @@ const SingleTrip = () => {
       <div className="columns is-centered">
         <div className="column is-6">
           <h2 className="has-text-centered">Total Expenses</h2>
-          <DoughnutChart />
-          
+          <DoughnutChart expenses={expenses} />
+
         </div>
       </div>
     </div>

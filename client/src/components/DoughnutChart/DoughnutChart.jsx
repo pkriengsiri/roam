@@ -5,46 +5,40 @@ import ExpenseContext from "../../contexts/ExpenseContext";
 
 const dataArray = [];
 
-const DoughnutChart = () => {
+const DoughnutChart = ({ expenses }) => {
+  const { expenseContext, setExpenseContext } = useContext(ExpenseContext);
 
-const { expenseContext, setExpenseContext } = useContext(ExpenseContext);
-
-const [data, setData] = useState([]);
+  const [data, setData] = useState([]);
 
   const [dataObject, setDataObject] = useState({
     datasets: [
       {
-        
-        data: [10,20, 30],
-        backgroundColor: [
-            "#938DB9",
-            "#F6A465",
-            "#8EE1E0",
-          ],
+        data: [10, 20, 30],
+        backgroundColor: ["#938DB9", "#F6A465", "#8EE1E0"],
       },
-      
     ],
     labels: ["Food & Dining", "Airfare", "Other"],
-    
-   
-    
   });
 
-//   useEffect(() => {
-//     API.getExpense('603ad2f2a76c6e231d8cd33a').then((response)=> {
-//         console.log(response.data.totalExpenseAmount);
-//         setData(response.data.totalExpenseAmount);
-//         dataArray.push(data);
-//         console.log(dataArray);
-        
+  //   useEffect(() => {
+  //     API.getExpense('603ad2f2a76c6e231d8cd33a').then((response)=> {
+  //         console.log(response.data.totalExpenseAmount);
+  //         setData(response.data.totalExpenseAmount);
+  //         dataArray.push(data);
+  //         console.log(dataArray);
 
-
-//     })
-//   }, [])
+  //     })
+  //   }, [])
 
   return (
     <div>
-      <Doughnut data={dataObject} width={200} height={200} options={{ maintainAspectRatio: false}}/>
+      <Doughnut
+        data={dataObject}
+        width={200}
+        height={200}
+        options={{ maintainAspectRatio: false }}
+      />
+
     </div>
   );
 };

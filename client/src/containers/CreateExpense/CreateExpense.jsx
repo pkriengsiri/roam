@@ -26,7 +26,7 @@ const CreateExpense = () => {
     })
       .then((response) => {
         console.log(response.data);
-        history.push(`/user/${userId}/trips`);
+        history.push(`/user/${userId}/trips/${tripId}`);
       })
       .catch((err) => {
         console.log(err);
