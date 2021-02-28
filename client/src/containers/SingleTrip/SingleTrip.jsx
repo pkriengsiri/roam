@@ -4,6 +4,8 @@ import API from "../../utils/API";
 import "./SingleTrip.css";
 import UserContext from "../../contexts/UserContext";
 
+import axios from "axios";
+
 const SingleTrip = () => {
   const { userContext } = useContext(UserContext);
 
@@ -35,6 +37,8 @@ const SingleTrip = () => {
         });
     }
   }, []);
+
+
 
   return (
     <div className="container mt-6 pl-6 pr-6">
@@ -73,8 +77,6 @@ const SingleTrip = () => {
                 <h2 className="subtitle">Travelers:</h2>
                 <ul>
                   {travelers.map((traveler, index) => {
-                    console.log(traveler.travelerEmail);
-                    console.log(userContext.email);
                     return (
                       <li key={index}>
                         {traveler.travelerEmail === userContext.email && (
