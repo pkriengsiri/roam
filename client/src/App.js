@@ -41,18 +41,13 @@ function App() {
   useEffect(() => {
     const getCsrfToken = async () => {
       const { data } = await API.relogin();
-      jwt.verify(
-        data.token,
-        process.env.REACT_APP_SECRET,
-        (err, data) => {
-          if (err) {
-            console.log(err);
-          } else {
-            
-            setUserContext({ userId: data._id, email: data.email });
-          }
+      jwt.verify(data.token, process.env.REACT_APP_SECRET, (err, data) => {
+        if (err) {
+          console.log(err);
+        } else {
+          setUserContext({ userId: data._id, email: data.email });
         }
-      );
+      });
       Axios.defaults.headers.post["X-CSRF-Token"] = data.csrfToken;
     };
     getCsrfToken();
@@ -86,6 +81,11 @@ function App() {
                   exact
                   path="/user/:userId/trips/:tripId/edit"
                   component={EditTrip}
+                />
+                <Route
+                  exact
+                  path="/user/:userId/trips/:tripId/expense"
+                  component={CreateExpense}
                 />
               </Switch>
             </main>
