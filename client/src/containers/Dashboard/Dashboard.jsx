@@ -3,22 +3,23 @@ import "./Dashboard.css";
 import TripCard from "../../components/TripCard/TripCard";
 import API from "../../utils/API";
 import { Link, useParams } from "react-router-dom";
-import TripsHero from "../../Assets/Images/trips-hero.png";
 import Doodle2 from "../../components/Doodle/Doodle2"
+import { set } from "mongoose";
 
 const Dashboard = () => {
   const { userId } = useParams();
   const [trips, setTrips] = useState([]);
   const [currentUser, setCurrentUser] = useState("");
+  const [profileImage, setProfileImage] = useState("");
 
   useEffect(() => {
-    // API.getTrips()
-    //   .then((response) => {
-    //     setTrips(response.data);
-    //   })
-    //   .catch((err) => {
-    //     console.log(err);
-    //   });
+    API.getUser(userId)
+    .then((response) => {
+      setProfileImage(response.data.profileImageUrl);
+    })
+    .catch((err) => {
+      console.log(err);
+    });
 
     API.getUserWithTrips(userId)
       .then((response) => {
@@ -36,20 +37,29 @@ const Dashboard = () => {
 
   return (
     <>
-      <h1 className="title is-size-1 has-text-centered mt-6 pl-6 pr-6">
+      {/* <h1 className="title is-size-1 has-text-centered mt-6 pl-6 pr-6">
         {currentUser}
       </h1>
       <h1 className="subtitle is-size-4 has-text-centered mt-3">
         Start planning your trips today!
-      </h1>
+      </h1> */}
+
+      <div className="columns is-gapless is-centered is-vcentered mt-4">
+        <div className="column is-1">
+          <figure className="image">
+            <img className="is-rounded dashboard-profile-picture" src={profileImage} />
+          </figure>
+        </div>
+        <div className="column is-3 mb-5 has-text-left">
+          <h1 className="title is-size-1 dashboard-welcome has-text-centered mt-4">
+            {currentUser}
+          </h1>
+
+          <h2 className="subtitle dashboard-subtitle has-text-centered">Start planning your trips today! </h2>
+        </div>
+      </div>
       <section className="has-text-centered">
         <Doodle2 />
-        {/* OLD DOODLE */}
-        {/* <img
-          className="animate fadeInLeft one trips-hero"
-          src={TripsHero}
-          alt=""
-        /> */}
       </section>
 
       <div className="container has-text-centered mt-6 pl-6 pr-6">
