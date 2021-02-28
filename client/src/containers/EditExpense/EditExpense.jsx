@@ -5,11 +5,12 @@ import API from "../../utils/API";
 import ExpenseForm from "../../components/ExpenseFrom/ExpenseForm";
 import AlertContext from "../../contexts/AlertContext";
 
-const CreateExpense = () => {
+const EditExpense = () => {
   const history = useHistory();
   const { onDisplay, display, theme } = useContext(AlertContext);
   const { tripId } = useParams();
   const { userId } = useParams();
+  const { expenseId } = useParams();
 
   const handleFormSubmit = (e, formObject) => {
     e.preventDefault();
@@ -23,10 +24,10 @@ const CreateExpense = () => {
     } else {
       onDisplay(false);
 
-      API.createExpense(formObject)
+      API.editExpense(expenseId, formObject)
         .then((response) => {
           console.log(response.data);
-          history.push(`/user/${userId}/trips/${tripId}`);
+        //   history.push(`/user/${userId}/trips/${tripId}`);
         })
         .catch((err) => {
           console.log(err);
@@ -40,7 +41,7 @@ const CreateExpense = () => {
 
   return (
     <div className="container mt-6">
-      <h1 className="title has-text-centered">Create an Expense:</h1>
+      <h1 className="title has-text-centered">Edit Expense:</h1>
       <div className="columns is-centered">
         <div className="column is-4">
           <ExpenseForm
@@ -53,4 +54,4 @@ const CreateExpense = () => {
   );
 };
 
-export default CreateExpense;
+export default EditExpense;
