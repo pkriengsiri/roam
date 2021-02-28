@@ -2,7 +2,6 @@
 const router = require("express").Router();
 const userController = require("../../controllers/userController");
 const jwt = require("express-jwt");
-const cookieParser = require("cookie-parser");
 const csrf = require("csurf");
 const csrfProtection = csrf({
   cookie: true
@@ -10,7 +9,13 @@ const csrfProtection = csrf({
 
 //middleware
 // router.use(csrfProtection);
-router.use(cookieParser());
+router.use(
+  jwt({
+    secret: process.env.SECRET,
+    getToken: (req) => req.cookies.token,
+    algorithms: ['HS256']
+  })
+);
 
 
 // Routes for /api/users
