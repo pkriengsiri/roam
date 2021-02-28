@@ -81,28 +81,31 @@ const TripForm = (props) => {
   }, [traveler]);
 
   // add traveler to the travelers list
+  let newInvite;
+
   const addTraveler = () => {
-    const newTraveler = travelers.find(
+    const existingTraveler = travelers.find(
       (el) => el.travelerEmail === traveler?.toLowerCase()
     );
-    console.log(newTraveler);
-    if (newTraveler) {
+    if (existingTraveler) {
       // TODO: glow existing traveler bubble
       setTraveler("");
       // console.log("user already exists");
     } else {
       if (validateEmail(traveler)) {
         setValidEmailPromptState(true);
-        const newInvite = traveler?.toLowerCase();
-        setTravelers([
-          ...travelers,
-          { travelerEmail: newInvite, travelerId: "", status: "pending" },
-        ]);
+        newInvite = {
+          travelerEmail: traveler?.toLowerCase(),
+          travelerId: "",
+          status: "pending",
+        };
+        setTravelers([...travelers, newInvite]);
         setTraveler("");
       } else {
         setValidEmailPromptState(false);
       }
     }
+  
   };
 
   // remove traveler
@@ -136,16 +139,15 @@ const TripForm = (props) => {
         <div className="column is-half">
           <form
             className="trip-form"
-            onSubmit={(e) => {
+            onClick={(e) => {
               addTraveler();
               props.handleFormSubmit(e, {
                 tripCreator: userId,
                 destination,
                 startDate,
                 endDate,
-                travelers,
+                travelers
               });
-            }}
           >
             {/* destination section  */}
             <div className="field mb-2">
@@ -260,7 +262,8 @@ const TripForm = (props) => {
                     </span>
 
                     {traveler.status !== "Trip Creator" && (
-                      <span className="remove-travler-x"
+                      <span
+                        className="remove-travler-x"
                         // data-email={traveler.email}
                         onClick={() => removeTraveler(traveler.travelerEmail)}
                         // onClick={(e) => removeTraveler(e)}
@@ -281,15 +284,14 @@ const TripForm = (props) => {
                   className={`button is-primary ${props.loadingState}`}
                   type="submit"
                   onClick={(e) => {
-                    addTraveler().then(
-                      props.handleFormSubmit(e, {
-                        tripCreator: userId,
-                        destination,
-                        startDate,
-                        endDate,
-                        travelers,
-                      })
-                    );
+                    addTraveler();
+                    props.handleFormSubmit(e, {
+                      tripCreator: userId,
+                      destination,
+                      startDate,
+                      endDate,
+                      travelers
+                    });
                   }}
                 >
                   {props.buttonText}
