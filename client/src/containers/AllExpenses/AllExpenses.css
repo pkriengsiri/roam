@@ -1,3 +1,26 @@
-.is-hoverable:hover {
-    background-color: #2e3560 !important;
+/* .is-hoverable:hover {
+  background-color: #2e3560 !important;
+} */
+
+/* dropdown-content dropdown-item */
+/* .dropdown-content,
+.dropdown-item {
+  background-color: rgba(0, 0, 0, 0) !important;
+  display: inline;
 }
+
+.expenses-table {
+  background-color: #a29dc2;
+  color: white;
+}
+
+.th {
+  background-color: #2e3560 !important;
+  color: white !important;
+} */
+
+/* $table-background-color: #a29dc2;
+$table-striped-row-even-background-color: #7c74ab;
+$table-color: white;
+$table-head-cell-color: white;
+$table-head-background-color: $purple; */
