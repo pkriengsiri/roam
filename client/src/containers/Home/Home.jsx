@@ -76,7 +76,7 @@ const Home = ({ setUserContext }) => {
           <source src={BeachVideo} type="video/mp4" />
         </video>
 
-        {userContext.id !== "" && (
+        {userContext.userId && (
           <>
             <AnimatedLogo />
             <h1 className="has-text-centered title slogan">
@@ -90,7 +90,7 @@ const Home = ({ setUserContext }) => {
             </Link>
           </>
         )}
-        {userContext.id === "" && (
+        {!userContext.userId && (
           <>
             <AnimatedLogo />
             <h1 className="has-text-centered title slogan">

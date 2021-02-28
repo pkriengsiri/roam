@@ -1,0 +1,24 @@
+#loader-wrapper .loader-section {
+    position: fixed;
+    top: 0;
+    width: 51%;
+    height: 100%;
+    background: #000;
+    z-index: 1000;
+    animation: fade-in-loader 1s;
+} @keyframes fade-in-loader {
+    from {
+        opacity: 1;
+    }
+    to {
+        opacity: 0;
+    }
+}
+ 
+#loader-wrapper .loader-section.section-left {
+    left: 0;
+}
+ 
+#loader-wrapper .loader-section.section-right {
+    right: 0;
+}
