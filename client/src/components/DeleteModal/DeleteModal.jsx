@@ -1,9 +1,9 @@
-import React, { useEffect } from "react";
+import React from "react";
 import "./DeleteModal.css";
-import { useParams, useHistory } from "react-router-dom";
 
-const DeleteModal = ({ closeDeleteModal, userId, tripId, handleDeleteClick }) => {
-  const history = useHistory();
+
+const DeleteModal = ({ closeDeleteModal, handleDeleteClick, }) => {
+
 
   return (
     <>

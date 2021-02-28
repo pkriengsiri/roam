@@ -71,8 +71,6 @@ const EditTrip = () => {
         <DeleteModal
           handleDeleteClick={handleDeleteClick}
           closeDeleteModal={closeDeleteModal}
-          userId={userId}
-          tripId={tripId}
         />
       )}
       <div className="container mt-6 pl-6 pr-6">
