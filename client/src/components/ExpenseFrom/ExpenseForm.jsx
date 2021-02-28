@@ -15,15 +15,6 @@ const ExpenseForm = (props) => {
   const { tripId } = useParams();
   const { userId } = useParams();
 
-  const handleAmountChange = (e) => {
-    console.log(e.target.value);
-    const re = /[+-]?[0-9]{1,3}(?:,?[0-9]{3})*\.[0-9]{2}/;
-    console.log(re.test(e.target.value));
-    // if (re.test(e.target.value)) {
-    setExpenseCategory(e.target.value);
-    console.log(expenseCategory);
-    // }
-  };
 
   return (
     <form
@@ -46,8 +37,7 @@ const ExpenseForm = (props) => {
             type="number"
             min="0"
             step=".01"
-            // pattern="^\d*(\.\d{0,2})?$"
-            placeholder=""
+            placeholder="Enter an amount"
             value={totalExpenseAmount}
             name="totalExpenseAmount"
             onChange={(e) => {
@@ -74,8 +64,8 @@ const ExpenseForm = (props) => {
               name="category"
               value={expenseCategory}
               onChange={(e) => setExpenseCategory(e.target.value)}
-            >
-              <option disabled="disabled" defaultValue={"Select One"}>
+            required>
+              <option disabled="disabled" value="" className="is-hidden">
                 Select One
               </option>
               <option>Activities</option>

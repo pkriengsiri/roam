@@ -1,7 +1,15 @@
-.textarea{
+.textarea {
   background-color: white;
 }
 
-.select select{
+.select select {
   background-color: white;
+}
+
+.select select:invalid {
+  color: lightgray;
+}
+
+option {
+  color: #363636;
 }
