@@ -103,7 +103,7 @@ const CreateExpense = () => {
               </div>
               <Link
                 to={`/user/${userId}/trips/${tripId}`}
-                className="button is-light mr-4"
+                className="button mr-4"
               >
                 Cancel
               </Link>

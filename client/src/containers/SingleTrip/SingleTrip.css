@@ -24,8 +24,19 @@
 
 .edit-trip-icon:hover {
   color: #F48E3F;
+
 }
 
 .edit-trip {
   font-size: medium;
 }
+
+.expense-button {
+  background-color: #F48E3F;
+  color: white
+}
+
+/* .expense-button:hover {
+  background-color: #F3812B;
+  color: white
+} */
