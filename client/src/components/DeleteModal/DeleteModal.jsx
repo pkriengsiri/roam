@@ -3,20 +3,20 @@ import API from "../../utils/API";
 import "./DeleteModal.css";
 import { useParams, useHistory } from "react-router-dom";
 
-const DeleteModal = ({ closeDeleteModal, userId, tripId }) => {
+const DeleteModal = ({ closeDeleteModal, userId, tripId, handleDeleteClick }) => {
   const history = useHistory();
 
-  const handleDeleteClick = () => {
+  // const handleDeleteClick = () => {
 
-    API.deleteTrip(tripId)
-      .then((response) => {
+  //   API.deleteTrip(tripId)
+  //     .then((response) => {
 
-        history.push(`/user/${userId}/trips`);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-  };
+  //       history.push(`/user/${userId}/trips`);
+  //     })
+  //     .catch((err) => {
+  //       console.log(err);
+  //     });
+  // };
 
   return (
     <>

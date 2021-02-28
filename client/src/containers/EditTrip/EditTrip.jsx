@@ -5,6 +5,7 @@ import { useHistory, useParams } from "react-router-dom";
 import TripForm from "../../components/TripForm/TripForm";
 import DeleteModal from "../../components/DeleteModal/DeleteModal";
 import AlertContext from "../../contexts/AlertContext";
+import API from "../../utils/API";
 
 const EditTrip = () => {
   const { onDisplay, display, theme } = useContext(AlertContext);
@@ -52,10 +53,23 @@ const EditTrip = () => {
     setDeleteModalState(true);
   };
 
+  const handleDeleteClick = () => {
+
+    API.deleteTrip(tripId)
+      .then((response) => {
+
+        history.push(`/user/${userId}/trips`);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+
   return (
     <>
       {deleteModalState && (
         <DeleteModal
+          handleDeleteClick={handleDeleteClick}
           closeDeleteModal={closeDeleteModal}
           userId={userId}
           tripId={tripId}
