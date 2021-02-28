@@ -84,7 +84,7 @@ const Home = ({ setUserContext }) => {
             </h1>
             <Link
               to={`/user/${userContext.userId}/trips`}
-              className="button is-primary is-size- dashboard-button"
+              className="button is-primary is-size-4 dashboard-button"
             >
               Dashboard
             </Link>
