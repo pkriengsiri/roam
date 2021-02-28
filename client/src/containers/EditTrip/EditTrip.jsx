@@ -57,7 +57,7 @@ const EditTrip = () => {
 
     API.deleteTrip(tripId)
       .then((response) => {
-
+        console.log(response);
         history.push(`/user/${userId}/trips`);
       })
       .catch((err) => {

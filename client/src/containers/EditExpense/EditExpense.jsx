@@ -12,6 +12,7 @@ const EditExpense = () => {
   const { tripId } = useParams();
   const { userId } = useParams();
   const { expenseId } = useParams();
+  const [deleteModalState, setDeleteModalState] = useState(false);
 
   const handleFormSubmit = (e, formObject) => {
     e.preventDefault();
@@ -28,7 +29,7 @@ const EditExpense = () => {
       API.editExpense(expenseId, formObject)
         .then((response) => {
           console.log(response.data);
-          //   history.push(`/user/${userId}/trips/${tripId}`);
+            history.push(`/user/${userId}/trips/${tripId}`);
         })
         .catch((err) => {
           console.log(err);
@@ -36,18 +37,53 @@ const EditExpense = () => {
     }
   };
 
+  const togglesDeleteModal = (e) => {
+    e.preventDefault();
+
+    setDeleteModalState(true);
+  };
+
+  const closeDeleteModal = (e) => {
+    e.preventDefault();
+    setDeleteModalState(false);
+  };
+
+  const handleDeleteClick = () => {
+
+    API.deleteExpense(expenseId)
+      .then((response) => {
+        console.log(response);
+        history.push(`/user/${userId}/trips/${tripId}`);
+        
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+
+
   const closeForm = () => {
     onDisplay(false);
   };
 
   return (
+    <>
+    {deleteModalState && (
+        <DeleteModal
+          handleDeleteClick={handleDeleteClick}
+          closeDeleteModal={closeDeleteModal}
+          userId={userId}
+          tripId={tripId}
+          expenseId={expenseId}
+        />
+      )}
     <div className="container mt-6">
       <div className="columns is-centered is-vcentered">
         <div className="column is-3">
           <h1 className="title has-text-centered">Edit Expense</h1>
         </div>
         <div className="column is-1">
-          <a>
+          <a onClick={togglesDeleteModal}>
             <i className="far fa-trash-alt fa-lg"></i>
           </a>
         </div>
@@ -61,6 +97,7 @@ const EditExpense = () => {
         </div>
       </div>
     </div>
+    </>
   );
 };
 
