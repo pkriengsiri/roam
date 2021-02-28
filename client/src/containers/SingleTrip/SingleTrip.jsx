@@ -120,7 +120,7 @@ const SingleTrip = () => {
       <h1 className="title has-text-centered">Expenses</h1>
       <div className="columns is-centered">
         <div className="column is-6">
-          {expenses.length > 0 && (
+          {expenses.length <1  && (
             <h2 className="has-text-centered">No Expenses Entered Yet</h2>
           )}
 
