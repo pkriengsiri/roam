@@ -3,7 +3,6 @@ import "./Dashboard.css";
 import TripCard from "../../components/TripCard/TripCard";
 import API from "../../utils/API";
 import { Link, useParams } from "react-router-dom";
-import TripsHero from "../../Assets/Images/trips-hero.png";
 import Doodle2 from "../../components/Doodle/Doodle2"
 
 const Dashboard = () => {
@@ -44,12 +43,6 @@ const Dashboard = () => {
       </h1>
       <section className="has-text-centered">
         <Doodle2 />
-        {/* OLD DOODLE */}
-        {/* <img
-          className="animate fadeInLeft one trips-hero"
-          src={TripsHero}
-          alt=""
-        /> */}
       </section>
 
       <div className="container has-text-centered mt-6 pl-6 pr-6">
