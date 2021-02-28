@@ -1,19 +1,19 @@
 // Import a Google Font
-@import url('https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;0,700;1,300&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;0,700;1,300&display=swap");
 
 // Set your brand colors
-$purple: #2E3560;
-$purple-lighter: #938DB9;
-$teal: #33C1BF;
-$teal-lighter: #8EE1E0;
-$orange: #F48E3F;
-$orange-lighter: #F6A465;
+$purple: #2e3560;
+$purple-lighter: #938db9;
+$teal: #33c1bf;
+$teal-lighter: #8ee1e0;
+$orange: #f48e3f;
+$orange-lighter: #f6a465;
 // $white: #F6F1E9;
 $white: whitesmoke;
 $blue: #011638;
 
 // Update Bulma's global variables
-$family-sans-serif: 'Lato', sans-serif;
+$family-sans-serif: "Lato", sans-serif;
 // $grey-dark: $brown;
 // $grey-light: $beige-light;
 $primary: $purple;
@@ -23,6 +23,11 @@ $primary: $purple;
 
 // Update some of Bulma's component variables
 $body-background-color: $white;
+$table-background-color: #a29dc2;
+$table-striped-row-even-background-color: #7c74ab;
+$table-color: white;
+$table-head-cell-color: white;
+$table-head-background-color: $purple;
 // $control-border-width: 2px;
 // $input-border-color: transparent;
 // $input-shadow: none;
