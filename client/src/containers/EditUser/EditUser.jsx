@@ -3,8 +3,6 @@ import "./EditUser.css";
 import API from "../../utils/API";
 import { useParams, useHistory, Link } from "react-router-dom";
 import FormData from "form-data";
-import * as fs from "fs";
-import axios from "axios";
 import Alert from "../../components/Alert/Alert";
 
 const EditUser = () => {
@@ -69,7 +67,6 @@ const EditUser = () => {
         // console.log(result);
         const res = JSON.parse(result);
         setFileUploadStatus(true);
-        console.log(result.url);
         console.log(res.url);
         setChangedProfileImageUrl(res.url);
       })
@@ -144,7 +141,7 @@ const EditUser = () => {
               </div>
             </div>
             {fileUploadStatus && (
-              <Alert color="success">File Upload Succeeded</Alert>
+              <Alert color="is-primary">File Upload Succeeded</Alert>
             )}
           </div>
           <div className="column is-5">
