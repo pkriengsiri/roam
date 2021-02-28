@@ -25,7 +25,7 @@ const SingleTrip = () => {
     if (tripId) {
       API.getTrip(tripId)
         .then((response) => {
-          // console.log(response.data);
+          console.log(response.data);
           setDestination(response.data.destination);
           const responseStartDate = new Date(response.data.startDate);
           const responseEndDate = new Date(response.data.endDate);
@@ -40,8 +40,6 @@ const SingleTrip = () => {
         });
     }
   }, []);
-
-
 
   return (
     <div className="container mt-6 pl-6 pr-6">
@@ -99,10 +97,10 @@ const SingleTrip = () => {
         </div>
       </div>
       <div className="columns is-centered">
-        <div className="column is-2">
+        <div className="column is-3">
           <Link
             to={`/user/${userId}/trips`}
-            className="button is-primary mr-4 is-size-4"
+            className="button is-primary is-size-4"
           >
             Dashboard
           </Link>
@@ -110,7 +108,7 @@ const SingleTrip = () => {
         <div className="column is-2">
           <Link
             to={`/user/${userId}/trips/${tripId}/expense`}
-            className="button is-primary mr-4 is-size-4"
+            className="button is-primary is-size-4"
             type="submit"
           >
             Create Expense
@@ -119,12 +117,31 @@ const SingleTrip = () => {
       </div>
 
       {/* EXPENSES  */}
-      <h1 className="title has-text-centered">Expenses</h1>
-      <div className="columns is-centered">
-        <div className="column is-6">
-          <h2 className="has-text-centered">Total Expenses</h2>
-          <DoughnutChart expenses={expenses} />
 
+      <div className="columns is-centered">
+        <div className="column is-6 has-text-centered">
+          <h1 className="title has-text-centered">Expenses</h1>
+          {expenses.length === 0 && (
+            <>
+            <h1>No Expenses Yet</h1>
+            <Link
+            to={`/user/${userId}/trips/${tripId}/expense`}
+            className="button is-primary is-size-6"
+            type="submit"
+          >
+            Create Expense
+          </Link>
+          </>
+          )}
+          {expenses.length !== 0 && (
+            <>
+              <h2 className="has-text-centered">Total Expenses</h2>
+              <DoughnutChart expenses={expenses} />
+            </>
+          )}
+        </div>
+        <div className="column is-6">
+          <h1 className="title has-text-centered">Packing List</h1>
         </div>
       </div>
     </div>
