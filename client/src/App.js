@@ -43,12 +43,9 @@ function App() {
             console.log(err);
           } else {
             setUserContext({ userId: data._id, email: data.email });
-            // history.push(`/user/${data._id}/edit`);
-            // setSignupModalState(false);
           }
         }
       );
-
       Axios.defaults.headers.post["X-CSRF-Token"] = data.csrfToken;
     };
     getCsrfToken();
