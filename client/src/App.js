@@ -8,6 +8,7 @@ import CreateTrip from "./containers/CreateTrip/CreateTrip";
 import EditTrip from "./containers/EditTrip/EditTrip";
 import SingleTrip from "./containers/SingleTrip/SingleTrip";
 import CreateExpense from "./containers/CreateExpense/CreateExpense";
+import AllExpenses from "./containers/AllExpenses/AllExpenses";
 import Navbar from "./components/Navbar/Navbar";
 import Footer from "./components/Footer/Footer";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
@@ -34,7 +35,6 @@ function App() {
     onDisplay: (display, theme) =>
       setAlertContext({ ...alertContext, display, theme }),
   });
-
 
   useEffect(() => {
     const getCsrfToken = async () => {
@@ -84,6 +84,11 @@ function App() {
                   exact
                   path="/user/:userId/trips/:tripId/expense"
                   component={CreateExpense}
+                />
+                <Route
+                  exact
+                  path="/user/:userId/trips/:tripId/expenses"
+                  component={AllExpenses}
                 />
               </Switch>
             </main>
