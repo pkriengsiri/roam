@@ -9,14 +9,10 @@ const useFindUser = () => {
   const [userContext, setUserContext] = useState({});
 
   useEffect(() => {
-    // const getCsrfToken = async () => {
-    setUserContext({key:true});
-    API.relogin()
-      .then((response) => {
-        jwt.verify(
-          response.data.token,
-          process.env.REACT_APP_SECRET,
-          (err, data) => {
+    const getCsrfToken = async () => {
+      API.relogin()
+        .then((response) => {
+          jwt.verify(response.data.token, process.env.REACT_APP_SECRET, (err, data) => {
             if (err) {
               console.log(err);
               setLoading(false);
@@ -26,17 +22,16 @@ const useFindUser = () => {
               setLoading(false);
               // setUserContext({ userId: data._id, email: data.email });
             }
-          }
-        );
-        //   Axios.defaults.headers.post["X-CSRF-Token"] = response.data.csrfToken;
-      })
-      .catch((err) => {
-        console.log(err);
-        setLoading(false);
-      });
-    // };
+          });
+          Axios.defaults.headers.post["X-CSRF-Token"] = response.data.csrfToken;
+        })
+        .catch((err) => {
+          console.log(err);
+          setLoading(false);
+        });
+    };
     console.log(userContext);
-    // getCsrfToken();
+    getCsrfToken();
 
     // async function findUser() {
     //   try {
