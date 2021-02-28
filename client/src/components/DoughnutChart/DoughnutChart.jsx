@@ -80,6 +80,7 @@ const DoughnutChart = ({ expenses }) => {
     "#938DB9", // light purple
   ];
 
+  // total all received expenses for the trip
   const calculateExpenseCategoryTotals = (arrayOfExpenseObjects) => {
     let expensesMap = {};
     for (let i = 0; i < arrayOfExpenseObjects.length; i++) {
@@ -93,6 +94,7 @@ const DoughnutChart = ({ expenses }) => {
     return expensesMap;
   };
 
+  // deconstruct the summary map into arrays to fit the donut chart tree structure
   const deconstructMap = (mappedObject) => {
     // make array for labels
     const categories = Object.keys(mappedObject);
