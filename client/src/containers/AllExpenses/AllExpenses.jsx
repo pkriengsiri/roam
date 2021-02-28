@@ -47,6 +47,7 @@ const AllExpenses = (props) => {
               ))}
             </tbody>
           </table>
+          <button className=""></button>
         </div>
       </div>
     </div>
