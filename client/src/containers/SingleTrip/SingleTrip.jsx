@@ -104,12 +104,6 @@ const SingleTrip = () => {
           >
             Dashboard
           </Link>
-          <Link
-            to={`/user/${userId}/trips/${tripId}/expenses`}
-            className="button is-primary mr-4 is-size-4"
-          >
-            All Expenses
-          </Link>
         </div>
         <div className="column is-2">
           <Link
@@ -127,7 +121,9 @@ const SingleTrip = () => {
       <div className="columns is-centered">
         <div className="column is-6">
           <h2 className="has-text-centered">Total Expenses</h2>
-          <DoughnutChart expenses={expenses} />
+          <Link to={`/user/${userId}/trips/${tripId}/expenses`}>
+            <DoughnutChart expenses={expenses} />
+          </Link>
         </div>
       </div>
     </div>
