@@ -84,7 +84,7 @@ const EditUser = () => {
       <form onSubmit={handleFormSubmit}>
         <div className="columns is-centered is-vcentered">
           {/* Column with profile picture and photo upload input */}
-          <div className="column is-3 mb-6">
+          <div className="column is-3 mb-6 mr-6">
             {/* Profile picture */}
             <figure className="image profile-picture is-128x128 ">
               {changedProfileImageUrl ? (
@@ -125,22 +125,21 @@ const EditUser = () => {
                       {fileName ? fileName : "No file uploaded"}
                     </span>
                   </label>
-                  <span>
+                  {/* <span>
                     <i
                       type="submit"
                       className="fas fa-plus fa-lg add-traveler-button"
                       onClick={addPhoto}
                     ></i>
-                  </span>
-                </div>
-                <div className="control">
-                  <button
-                    type="submit"
-                    form="add-traveler-form"
-                    className="button"
-                  >
-                    <i className="fas fa-plus fa-lg"></i>
-                  </button>
+                  </span> */}
+                  <div className="control">
+                    <span
+                      // type="submit"
+                      className="button"
+                    >
+                      <i onClick={addPhoto} className="fas fa-plus fa-lg"></i>
+                    </span>
+                  </div>
                 </div>
               </div>
             </div>
