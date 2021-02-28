@@ -6,8 +6,6 @@ const Doodle2 = () => {
     <svg
       xmlns="http://www.w3.org/2000/svg"
       xmlnsXlink="http://www.w3.org/1999/xlink"
-      width="1915"
-      height="598"
       version="1.2"
       viewBox="0 0 1436.25 448.5"
       className="profile-doodle"

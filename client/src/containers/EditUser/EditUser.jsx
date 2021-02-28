@@ -3,8 +3,6 @@ import "./EditUser.css";
 import API from "../../utils/API";
 import { useParams, useHistory, Link } from "react-router-dom";
 import FormData from "form-data";
-import * as fs from "fs";
-import axios from "axios";
 import Alert from "../../components/Alert/Alert";
 
 const EditUser = () => {
@@ -26,6 +24,7 @@ const EditUser = () => {
           setFirstName(response.data.firstName);
           setLastName(response.data.lastName);
           setEmail(response.data.email);
+          setChangedProfileImageUrl(response.data.profileImageUrl);
         })
         .catch((err) => {
           console.log(err);
@@ -67,9 +66,8 @@ const EditUser = () => {
       })
       .then((result) => {
         // console.log(result);
-        const res= JSON.parse(result);
+        const res = JSON.parse(result);
         setFileUploadStatus(true);
-        console.log(result.url);
         console.log(res.url);
         setChangedProfileImageUrl(res.url);
       })
@@ -84,14 +82,17 @@ const EditUser = () => {
       <form onSubmit={handleFormSubmit}>
         <div className="columns is-centered is-vcentered">
           {/* Column with profile picture and photo upload input */}
-          <div className="column is-3 mb-6">
+          <div className="column is-3 mb-6 mr-6">
             {/* Profile picture */}
-            <figure className="image profile-picture is-128x128 ">
+            <figure className="image">
               {changedProfileImageUrl ? (
-                <img className="is-rounded" src={changedProfileImageUrl} />
+                <img
+                  className="is-rounded profile-picture"
+                  src={changedProfileImageUrl}
+                />
               ) : (
                 <img
-                  className="is-rounded"
+                  className="is-rounded profile-picture"
                   src="https://placekitten.com/128/128"
                 />
               )}
@@ -125,18 +126,26 @@ const EditUser = () => {
                       {fileName ? fileName : "No file uploaded"}
                     </span>
                   </label>
-                  <span>
+                  {/* <span>
                     <i
                       type="submit"
                       className="fas fa-plus fa-lg add-traveler-button"
                       onClick={addPhoto}
                     ></i>
-                  </span>
+                  </span> */}
+                  <div className="control">
+                    <span
+                      // type="submit"
+                      className="button"
+                    >
+                      <i onClick={addPhoto} className="fas fa-plus fa-lg"></i>
+                    </span>
+                  </div>
                 </div>
               </div>
             </div>
             {fileUploadStatus && (
-              <Alert color="success">File Upload Succeeded</Alert>
+              <Alert color="is-primary">File Upload Succeeded</Alert>
             )}
           </div>
           <div className="column is-5">
