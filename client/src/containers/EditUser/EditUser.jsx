@@ -46,17 +46,34 @@ const EditUser = () => {
   // NEED TO UPDATE THE IMAGE WITH EDIT FUNCTIONALITY
   return (
     <div className="container mt-6 pl-6 pr-6">
+      {/* Header */}
       <h1 className="title has-text-centered">Edit Account</h1>
       <form onSubmit={handleFormSubmit}>
-        <div className="columns is-centered is-vcentered">
-          <div className="column is-3">
-            <figure className="image is-128x128">
+        <div className="columns is-centered">
+          {/* Column with profile picture and photo upload input */}
+          <div className="column is-4 ">
+            {/* Profile picture */}
+            <figure className="image profile-picture is-128x128 ">
               <img
                 className="is-rounded"
                 src="https://placekitten.com/128/128"
               />
             </figure>
-            <p>Edit your picture</p>
+            {/* Upload input */}
+            <div className="file has-name is-fullwidth">
+              <label className="file-label">
+                <input className="file-input" type="file" name="resume" />
+                <span className="file-cta">
+                  <span className="file-icon">
+                    <i className="fas fa-upload"></i>
+                  </span>
+                  <span className="file-label">Edit profile picture</span>
+                </span>
+                <span className="file-name" id="file-type" value="image/png">
+                  No file uploaded
+                </span>
+              </label>
+            </div>
           </div>
           <div className="column is-5">
             <div className="field">
