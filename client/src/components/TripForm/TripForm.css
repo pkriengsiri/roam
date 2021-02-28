@@ -27,3 +27,7 @@
   color: white;
   line-height: 45px;
 }
+
+.remove-travler-x:hover{
+cursor: pointer;
+}
