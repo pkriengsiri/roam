@@ -1,16 +1,23 @@
 import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import API from "../../utils/API";
-import "./AllExpenses.css"
+import "./AllExpenses.css";
 
 const AllExpenses = (props) => {
   const { userId, tripId } = useParams();
   const [destination, setDestination] = useState("");
+  // const [category, setCategory] = useState("");
+  // const [description, setDescription] = useState("");
+  // const [amount, setAmount] = useState()
+  const [expenseArray, setExpenseArray] = useState([]);
+
   useEffect(() => {
     if (tripId) {
       API.getTrip(tripId)
         .then((response) => {
-          // console.log(response.data);
+          // console.log(response.data.expenses)
+          setExpenseArray(response.data.expenses);
+          console.log(expenseArray);
           setDestination(response.data.destination);
           //   const responseStartDate = new Date(response.data.startDate);
           //   const responseEndDate = new Date(response.data.endDate);
@@ -27,7 +34,9 @@ const AllExpenses = (props) => {
   }, []);
   return (
     <div className="container mt-6 pl-6 pr-6">
-      <h1 className="title has-text-centered">Expenses for {destination}</h1>
+      <h1 className="title has-text-centered">
+        Expenses for {destination} Trip
+      </h1>
       <div className="columns">
         <div className="column is-full">
           <table className="table is-striped is-fullwidth">
@@ -40,13 +49,21 @@ const AllExpenses = (props) => {
               </tr>
             </thead>
             <tbody className="has-text-centered">
+              {expenseArray.map(expense=>(
+                <tr className="is-hoverable">
+                  <td>{expense.description}</td>
+                  <td>{expense.category}</td>
+                  <td>${expense.totalExpenseAmount}</td>
+                  <td>V</td>
+                </tr>
+              ))}
               <tr className="is-hoverable">
                 <td>Bubble Tea</td>
                 <td>Food & Dining</td>
                 <td>$50</td>
                 <td>v</td>
               </tr>
-              <tr className="is-hoverable">
+              {/* <tr className="is-hoverable">
                 <td>Cheesecake Factory</td>
                 <td>Food & Dining</td>
                 <td>$300</td>
@@ -57,7 +74,7 @@ const AllExpenses = (props) => {
                 <td>Food & Dining</td>
                 <td>$540</td>
                 <td>v</td>
-              </tr>
+              </tr> */}
             </tbody>
           </table>
         </div>
