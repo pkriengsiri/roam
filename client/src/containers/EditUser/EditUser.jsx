@@ -24,6 +24,7 @@ const EditUser = () => {
           setFirstName(response.data.firstName);
           setLastName(response.data.lastName);
           setEmail(response.data.email);
+          setChangedProfileImageUrl(response.data.profileImageUrl)
         })
         .catch((err) => {
           console.log(err);
