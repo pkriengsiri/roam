@@ -16,7 +16,6 @@ import UserContext from "./contexts/UserContext";
 import AlertContext from "./contexts/AlertContext";
 import ExpenseContext from "./contexts/ExpenseContext";
 import API from "./utils/API";
-import Cookies from "js-cookie";
 import jwt from "jsonwebtoken";
 
 function App() {
@@ -36,7 +35,6 @@ function App() {
       setAlertContext({ ...alertContext, display, theme }),
   });
 
-  const { context } = useContext(UserContext);
 
   useEffect(() => {
     const getCsrfToken = async () => {
