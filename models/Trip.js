@@ -12,7 +12,7 @@ const tripSchema = new Schema({
   imageUrl: {
     type: String,
     trim: true,
-    default: "",
+    default: "https://res.cloudinary.com/djou7v3ho/image/upload/v1614465147/default-trip-image_mldlfd.jpg",
   },
   startDate: {
     type: Date,
