@@ -67,7 +67,7 @@ const EditUser = () => {
       })
       .then((result) => {
         // console.log(result);
-        const res= JSON.parse(result);
+        const res = JSON.parse(result);
         setFileUploadStatus(true);
         console.log(result.url);
         console.log(res.url);
@@ -132,6 +132,15 @@ const EditUser = () => {
                       onClick={addPhoto}
                     ></i>
                   </span>
+                </div>
+                <div className="control">
+                  <button
+                    type="submit"
+                    form="add-traveler-form"
+                    className="button"
+                  >
+                    <i className="fas fa-plus fa-lg"></i>
+                  </button>
                 </div>
               </div>
             </div>

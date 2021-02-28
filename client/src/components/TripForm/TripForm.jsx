@@ -228,13 +228,6 @@ const TripForm = (props) => {
                         Please enter a valid email address
                       </p>
                     )}
-
-                    <span>
-                      <i
-                        className="fas fa-plus fa-lg add-traveler-button"
-                        className=""
-                      ></i>
-                    </span>
                   </div>
                   <div className="control">
                     <button
