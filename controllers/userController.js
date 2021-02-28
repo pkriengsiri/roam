@@ -38,17 +38,29 @@ module.exports = {
   },
 
   create: function (req, res) {
+    db.User.create({
+      ...req.body,
+      email: req.body.email.toLowerCase(),
+      profileImageUrl: res.url,
+    })
+      .then((dbUser) => res.json(dbUser))
+      .catch((err) => res.status(422).json(err));
+  },
+
+  uploadImage: function (req, res) {
     const file = req.files.photo;
-    cloudinary.uploader.upload(file.tempFilePath, (err, res) => {
+    cloudinary.uploader.upload(file.tempFilePath, (err, result) => {
       if (err) throw err;
-      console.log("Cloudinary URL: " + res.url);
-      db.User.create({
-        ...req.body,
-        email: req.body.email.toLowerCase(),
-        profileImageUrl: res.url,
-      })
-        .then((dbUser) => res.json(dbUser))
-        .catch((err) => res.status(422).json(err));
+      console.log("Cloudinary URL: " + result.url);
+      db.User.findOneAndUpdate(
+        { _id: req.params.id },
+        { ...req.body, profileImageUrl: result.url },
+        { new: true }
+      )
+        .then((dbUser) => res.send({url: dbUser.profileImageUrl}))
+        .catch((err) => {
+          console.log(err);
+          res.status(422).json(err)});
     });
   },
 
