@@ -1,6 +1,13 @@
 // Dependencies
 const router = require("express").Router();
 const expenseController = require("../../controllers/expenseController");
+const csrf = require("csurf");
+const csrfProtection = csrf({
+  cookie: true
+});
+
+//csurf middleware
+router.use(csrfProtection);
 
 // Route for /api/expenses
 router.route("/")
