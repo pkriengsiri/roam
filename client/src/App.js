@@ -33,16 +33,13 @@ function App() {
   const { context } = useContext(UserContext);
 
   useEffect(() => {
-    const token = Cookies.get("token");
     const getCsrfToken = async () => {
       const { data } = await API.relogin();
-      console.log(data);
       jwt.verify(
         data.token,
         process.env.REACT_APP_SECRET,
         (err, data) => {
           if (err) {
-            // TODO:  display an error message to the user stating that the sign-up failed (use global alert)
             console.log(err);
           } else {
             setUserContext({ userId: data._id, email: data.email });
