@@ -16,10 +16,9 @@ const Home = ({ setUserContext }) => {
   const { userContext } = useContext(UserContext);
 
   useEffect(() => {
-    // const cookie = document.cookie;
-    // var decodedCookie = decodeURIComponent(document.cookie);
-    // console.log(decodedCookie);
-    console.log("cookie"+Cookies.get('token'));
+    console.log(Cookies.get('token'));
+    Cookies.remove('token');
+    console.log("Cookie should be blank ",Cookies.get('token'));
     document.title = "Roam";
   }, []);
 
