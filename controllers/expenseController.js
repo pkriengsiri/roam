@@ -14,12 +14,12 @@ module.exports = {
   },
 
   create: function (req, res) {
-    // create a variable to total the array of the expense share
+    // // create a variable to total the array of the expense share
     // let checkBalance = req.body.expenseShare.reduce(
     //   (acc, curr) => acc + curr.shareOfTotalExpense,
     //   0
     // );
-    // // check if the total expense amount equals the total share expense
+    // // // check if the total expense amount equals the total share expense
     // if (req.body.totalExpenseAmount === checkBalance) {
     //   // ensure expenseBalanced key is set to true
     //   req.body.expenseBalanced = true;

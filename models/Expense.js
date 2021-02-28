@@ -66,16 +66,17 @@ module.exports = Expense;
 
 /// sample
 // {
-//   "expenseCreator": "603867da83472d73a864bd02",
-//   "trip": "603a58a00e0ab53f805724d7",
+//   "expenseCreator": "603bad7cdad90579e8b42958",
+//   "trip": "603bad93dad90579e8b42959",
 //   "totalExpenseAmount": 123.45,
 //   "category": "Food",
 //   "description": "this is a test",
 //   "expenseShare": [
 //       {
-//           "travelerId": "603867da83472d73a864bd02",
+//           "travelerId": "603bad7cdad90579e8b42958",
 //           "shareOfTotalExpense": 123.45
 //       }
-//   ]
+//   ],
+//  "expenseBalanced": true
 // }
 

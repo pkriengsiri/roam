@@ -1,24 +1,28 @@
-import { useState, useContext } from "react";
-import { useParams, Link, useHistory} from "react-router-dom";
+import { useState, useContext, useEffect } from "react";
+import { useParams, Link, useHistory } from "react-router-dom";
 import React from "react";
 import UserContext from "../../contexts/UserContext";
 import API from "../../utils/API";
 
 const CreateExpense = () => {
-  
   const history = useHistory();
 
   const [totalExpenseAmount, setTotalExpenseAmount] = useState("");
   const [description, setDescription] = useState("");
   const [expenseCategory, setExpenseCategory] = useState("");
 
+  const { tripId } = useParams();
+  const { userId } = useParams();
+
   const handleFormSubmit = (e) => {
     e.preventDefault();
 
     API.createExpense({
-      totalExpenseAmount: totalExpenseAmount,
+      expenseCreator: userId,
+      trip: tripId,
+      totalExpenseAmount,
       category: expenseCategory,
-      description: description,
+      description,
     })
       .then((response) => {
         console.log(response.data);
@@ -28,9 +32,6 @@ const CreateExpense = () => {
         console.log(err);
       });
   };
-
-  const { tripId } = useParams();
-  const { userId } = useParams();
 
   return (
     <div className="container mt-6">
@@ -63,12 +64,13 @@ const CreateExpense = () => {
               <div className="control">
                 <div className="select">
                   <select
-                  
                     name="category"
                     value={expenseCategory}
                     onChange={(e) => setExpenseCategory(e.target.value)}
                   >
-                    <option disabled="disabled" defaultValue="Select One">Select One</option>
+                    <option disabled="disabled" defaultValue="Select One">
+                      Select One
+                    </option>
                     <option>Activities</option>
                     <option>Airfare</option>
                     <option>Car & Gas</option>
