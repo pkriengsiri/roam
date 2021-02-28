@@ -5,7 +5,6 @@ import "./SingleTrip.css";
 import UserContext from "../../contexts/UserContext";
 import DoughnutChart from "../../components/DoughnutChart/DoughnutChart";
 
-
 const SingleTrip = () => {
   const { userContext } = useContext(UserContext);
 
@@ -122,20 +121,22 @@ const SingleTrip = () => {
           <h1 className="title has-text-centered">Expenses</h1>
           {expenses.length === 0 && (
             <>
-            <h1>No Expenses Yet</h1>
-            <Link
-            to={`/user/${userId}/trips/${tripId}/expense`}
-            className="button is-primary is-size-6"
-            type="submit"
-          >
-            Create Expense
-          </Link>
-          </>
+              <h1>No Expenses Yet</h1>
+              <Link
+                to={`/user/${userId}/trips/${tripId}/expense`}
+                className="button is-primary is-size-6"
+                type="submit"
+              >
+                Create Expense
+              </Link>
+            </>
           )}
           {expenses.length !== 0 && (
             <>
               <h2 className="has-text-centered">Total Expenses</h2>
-              <DoughnutChart expenses={expenses} />
+              <Link to={`/user/${userId}/trips/${tripId}/expenses`}>
+                <DoughnutChart expenses={expenses} />
+              </Link>
             </>
           )}
         </div>
@@ -143,7 +144,6 @@ const SingleTrip = () => {
           <h1 className="title has-text-centered">Packing List</h1>
         </div>
       </div>
-      
     </div>
   );
 };
