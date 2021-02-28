@@ -61,24 +61,24 @@ function App() {
                   <Home setUserContext={setUserContext} />
                 </Route>
                 {/* <Route exact path="/user/:userId" component={Dashboard} /> */}
-                <Route exact path="/user/:userId/trips" component={Dashboard} />
-                <Route exact path="/user/:userId/edit" component={EditUser} />
+                <PrivateRoute exact path="/user/:userId/trips" component={Dashboard} />
+                <PrivateRoute exact path="/user/:userId/edit" component={EditUser} />
                 <PrivateRoute
                   exact
                   path="/user/:userId/trips/new"
                   component={CreateTrip}
                 />
-                <Route
+                <PrivateRoute
                   exact
                   path="/user/:userId/trips/:tripId"
                   component={SingleTrip}
                 />
-                <Route
+                <PrivateRoute
                   exact
                   path="/user/:userId/trips/:tripId/edit"
                   component={EditTrip}
                 />
-                <Route
+                <PrivateRoute
                   exact
                   path="/user/:userId/trips/:tripId/expense"
                   component={CreateExpense}
