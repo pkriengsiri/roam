@@ -14,6 +14,7 @@ const [data, setData] = useState([]);
   const [dataObject, setDataObject] = useState({
     datasets: [
       {
+        
         data: [10,20, 30],
         backgroundColor: [
             "#938DB9",
@@ -24,6 +25,8 @@ const [data, setData] = useState([]);
       
     ],
     labels: ["Food & Dining", "Airfare", "Other"],
+    
+   
     
   });
 
@@ -41,7 +44,7 @@ const [data, setData] = useState([]);
 
   return (
     <div>
-      <Doughnut data={dataObject} />
+      <Doughnut data={dataObject} width={200} height={200} options={{ maintainAspectRatio: false}}/>
     </div>
   );
 };
