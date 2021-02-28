@@ -41,7 +41,7 @@ const SignUpModal = ({ closeSignUpModal, setSignupModalState}) => {
                 // TODO:  display an error message to the user stating that the sign-up failed (use global alert)
                 console.log(err);
               } else {
-                setUserContext({ userId: data._id });
+                setUserContext({ userId: data._id, email: data.email });
                 history.push(`/user/${data._id}/edit`);
                 setSignupModalState(false);
               }

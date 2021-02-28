@@ -3,14 +3,13 @@
   color: black;
 }
 
-/* .trips-hero{
-  background-image: url("../../Assets/Images/trips-hero.png");
-  background-size: cover;
+.trips-hero{
+  
+height: 300px;
+width: 1000px;
 }
 
-.trips-hero-body {
-  min-height: 200px;
-} */
+
 
 .animate {
   -webkit-animation-duration: 1s;

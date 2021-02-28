@@ -8,9 +8,11 @@ router.route("/").get(tripController.findAll).post(tripController.create);
 // Routes for /api/trips/:id
 router
   .route("/:id")
-  .get(tripController.findById)
+  // .get(tripController.findById)
+  .get(tripController.findByIdWithExpenses) // return the trip with the expenses
   .put(tripController.update)
   .delete(tripController.remove);
+
 
 // Export
 module.exports = router;

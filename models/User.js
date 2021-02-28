@@ -14,6 +14,7 @@ const UserSchema = new Schema({
   lastName: { type: String, trim: true, default: "" },
   // recording trips on users and trips may be redundant
   trips: [{ type: Schema.Types.ObjectId, ref: "Trip" }],
+  expenses: [{ type: Schema.Types.ObjectId, ref: "Expense" }],
 });
 
 const User = mongoose.model("User", UserSchema);

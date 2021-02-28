@@ -1,5 +1,4 @@
 const mongoose = require("mongoose");
-
 const Schema = mongoose.Schema;
 
 const tripSchema = new Schema({
@@ -33,6 +32,7 @@ const tripSchema = new Schema({
       travelerId: { type: String, trim: true },
     },
   ], //array of userIds
+  expenses: [{ type: Schema.Types.ObjectId, ref: "Expense" }],
 });
 
 const Trip = mongoose.model("Trip", tripSchema);
