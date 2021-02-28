@@ -1,46 +1,100 @@
 import React, { useState, useEffect } from "react";
 import { Doughnut } from "react-chartjs-2";
 import API from "../../utils/API";
-import ExpenseContext from "../../contexts/ExpenseContext";
-
-const dataArray = [];
 
 const DoughnutChart = ({ expenses }) => {
-
-
-  const [data, setData] = useState([]);
-
-  const [dataObject, setDataObject] = useState({
+  const [summaryExpenses, setSummaryExpenses] = useState({});
+  const [summaryArrays, setSummaryArrays] = useState({
+    labels: [
+      "Activities",
+      "Airfare",
+      "Car & Gas",
+      "Food & Dining",
+      "Entertainment",
+      "Lodging",
+      "Other",
+    ],
     datasets: [
       {
-        data: [10, 20, 30],
-        backgroundColor: ["#938DB9", "#F6A465", "#8EE1E0"],
+        data: [0, 0, 0, 0, 0, 0, 0],
+        backgroundColor: [
+          "#938DB9", // light purple "Blue Bell"
+          "#F6A465", // light orange "sandy brown"
+          "#8EE1E0", // light blue "middle blue green"
+          "#5A5388", // darker purple "purple navy"
+          "#F48E3F", // darker orange "cadmium orange"
+          "#33C1BF", // darker blue "maximum blue green"
+          "#2E3560", // darkest purple "space cadet",
+        ],
       },
     ],
-    labels: ["Food & Dining", "Airfare", "Other"],
   });
 
-  // const expenseCategoryTotals = expenses.
+  useEffect(() => {
+    setSummaryExpenses(calculateExpenseCategoryTotals(expenses));
+  }, [expenses]);
 
-  //   useEffect(() => {
-  //     API.getExpense('603ad2f2a76c6e231d8cd33a').then((response)=> {
-  //         console.log(response.data.totalExpenseAmount);
-  //         setData(response.data.totalExpenseAmount);
-  //         dataArray.push(data);
-  //         console.log(dataArray);
+  useEffect(() => {
+    // console.log(summaryExpenses)
+    // console.log(Object.keys(summaryExpenses))
+    setSummaryArrays(deconstructMap(summaryExpenses));
+  }, [summaryExpenses]);
 
-  //     })
-  //   }, [])
+  // color palette
+  const colorPalette = [
+    //   Activities:"#938DB9", // light purple "Blue Bell"
+    //   Airfare:"#F6A465", // light orange "sandy brown"
+    //   Car&Gas:"#8EE1E0", // light blue "middle blue green"
+    //  Food & Dining:"#5A5388", // darker purple "purple navy"
+    //   Entertainment:"#F48E3F", // darker orange "cadmium orange"
+    //   Lodging:"#33C1BF", // darker blue "maximum blue green"
+    //   Other:"#2E3560", // darkest purple "space cadet"
+
+    "#938DB9", // light purple "Blue Bell"
+    "#F6A465", // light orange "sandy brown"
+    "#8EE1E0", // light blue "middle blue green"
+    "#5A5388", // darker purple "purple navy"
+    "#F48E3F", // darker orange "cadmium orange"
+    "#33C1BF", // darker blue "maximum blue green"
+    "#2E3560", // darkest purple "space cadet"
+  ];
+
+  // total all received expenses for the trip
+  const calculateExpenseCategoryTotals = (arrayOfExpenseObjects) => {
+    let expensesMap = {};
+    for (let i = 0; i < arrayOfExpenseObjects.length; i++) {
+      let category = arrayOfExpenseObjects[i].category;
+      if (category in expensesMap) {
+        expensesMap[category] += arrayOfExpenseObjects[i].totalExpenseAmount;
+      } else {
+        expensesMap[category] = arrayOfExpenseObjects[i].totalExpenseAmount;
+      }
+    }
+    return expensesMap;
+  };
+
+  // deconstruct the summary map into arrays to fit the donut chart tree structure
+  const deconstructMap = (mappedObject) => {
+    // make array for labels
+    const categories = Object.keys(mappedObject);
+    // make array for data
+    const dataValues = categories.map((el) => mappedObject[el]);
+    const colors = categories.map((el, index) => colorPalette[index]);
+    return {
+      labels: categories,
+      datasets: [{ data: dataValues, backgroundColor: colors }],
+    };
+  };
 
   return (
     <div>
+      {}
       <Doughnut
-        data={dataObject}
+        data={summaryArrays}
         width={200}
         height={200}
         options={{ maintainAspectRatio: false }}
       />
-
     </div>
   );
 };
