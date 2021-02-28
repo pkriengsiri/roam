@@ -7,8 +7,7 @@ import BeachVideo from "./Beach1.mp4";
 import AlertContext from "../../contexts/AlertContext";
 import UserContext from "../../contexts/UserContext";
 import AnimatedLogo from "../../components/AnimatedLogo/AnimatedLogo";
-import Doodle from "../../components/Doodle/Doodle";
-import Doodle2 from "../../components/Doodle/Doodle2";
+import Cookies from "js-cookie";
 
 const Home = ({ setUserContext }) => {
   const [loginModalState, setLoginModalState] = useState(false);
@@ -20,6 +19,7 @@ const Home = ({ setUserContext }) => {
     // const cookie = document.cookie;
     // var decodedCookie = decodeURIComponent(document.cookie);
     // console.log(decodedCookie);
+    console.log("cookie"+Cookies.get('token'));
     document.title = "Roam";
   }, []);
 
