@@ -35,29 +35,21 @@ const DoughnutChart = ({ expenses }) => {
   }, [expenses]);
 
   useEffect(() => {
-    // console.log(summaryExpenses)
-    // console.log(Object.keys(summaryExpenses))
     setSummaryArrays(deconstructMap(summaryExpenses));
   }, [summaryExpenses]);
 
   // color palette
-  const colorPalette = [
-    //   Activities:"#938DB9", // light purple "Blue Bell"
-    //   Airfare:"#F6A465", // light orange "sandy brown"
-    //   Car&Gas:"#8EE1E0", // light blue "middle blue green"
-    //  Food & Dining:"#5A5388", // darker purple "purple navy"
-    //   Entertainment:"#F48E3F", // darker orange "cadmium orange"
-    //   Lodging:"#33C1BF", // darker blue "maximum blue green"
-    //   Other:"#2E3560", // darkest purple "space cadet"
+  const colorPalette = 
+  {
+      Activities:"#938DB9", // light purple "Blue Bell"
+      Airfare:"#F6A465", // light orange "sandy brown"
+      "Car & Gas":"#8EE1E0", // light blue "middle blue green"
+      "Food & Dining":"#5A5388", // darker purple "purple navy"
+      Entertainment:"#F48E3F", // darker orange "cadmium orange"
+      Lodging:"#33C1BF", // darker blue "maximum blue green"
+      Other:"#2E3560", // darkest purple "space cadet"
+  };
 
-    "#938DB9", // light purple "Blue Bell"
-    "#F6A465", // light orange "sandy brown"
-    "#8EE1E0", // light blue "middle blue green"
-    "#5A5388", // darker purple "purple navy"
-    "#F48E3F", // darker orange "cadmium orange"
-    "#33C1BF", // darker blue "maximum blue green"
-    "#2E3560", // darkest purple "space cadet"
-  ];
 
   // total all received expenses for the trip
   const calculateExpenseCategoryTotals = (arrayOfExpenseObjects) => {
@@ -70,8 +62,10 @@ const DoughnutChart = ({ expenses }) => {
         expensesMap[category] = arrayOfExpenseObjects[i].totalExpenseAmount;
       }
     }
+
     return expensesMap;
   };
+
 
   // deconstruct the summary map into arrays to fit the donut chart tree structure
   const deconstructMap = (mappedObject) => {
@@ -79,7 +73,7 @@ const DoughnutChart = ({ expenses }) => {
     const categories = Object.keys(mappedObject);
     // make array for data
     const dataValues = categories.map((el) => mappedObject[el]);
-    const colors = categories.map((el, index) => colorPalette[index]);
+    const colors = categories.map((el) => colorPalette[el]);
     return {
       labels: categories,
       datasets: [{ data: dataValues, backgroundColor: colors }],
