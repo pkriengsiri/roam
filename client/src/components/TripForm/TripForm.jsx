@@ -81,28 +81,31 @@ const TripForm = (props) => {
   }, [traveler]);
 
   // add traveler to the travelers list
- 
 
   const addTraveler = () => {
-    const existingTraveler = travelers.find(
-      (el) => el.travelerEmail === traveler?.toLowerCase()
-    );
-    if (existingTraveler) {
-      // TODO: glow existing traveler bubble
-      setTraveler("");
-      // console.log("user already exists");
-    } else {
-      if (validateEmail(traveler)) {
-        setValidEmailPromptState(true);
-        const newInvite = {
-          travelerEmail: traveler?.toLowerCase(),
-          travelerId: "",
-          status: "pending",
-        };
-        setTravelers([...travelers, newInvite]);
+    // console.log(e.target.id);
+    // if there is a traveler in the input field check if that traveler is already in the travelers list and if valid email address
+    if (traveler !== "") {
+      const existingTraveler = travelers.find(
+        (el) => el.travelerEmail === traveler?.toLowerCase()
+      );
+      if (existingTraveler) {
+        // TODO: glow existing traveler bubble
         setTraveler("");
+        // console.log("user already exists");
       } else {
-        setValidEmailPromptState(false);
+        if (validateEmail(traveler)) {
+          setValidEmailPromptState(true);
+          const newInvite = {
+            travelerEmail: traveler?.toLowerCase(),
+            travelerId: "",
+            status: "pending",
+          };
+          setTravelers([...travelers, newInvite]);
+          setTraveler("");
+        } else {
+          setValidEmailPromptState(false);
+        }
       }
     }
   };
@@ -139,11 +142,8 @@ const TripForm = (props) => {
           <form
             id="trip-form"
             className="trip-form"
-            onSubmit={ (e) => {
+            onSubmit={(e) => {
               e.preventDefault();
-              console.log("trip  submit")
-              addTraveler();
-            
               props.handleFormSubmit(e, {
                 tripCreator: userId,
                 destination,
@@ -201,7 +201,7 @@ const TripForm = (props) => {
             className="invite"
             onSubmit={(e) => {
               e.preventDefault();
-              console.log("add traveler form submit")
+              // console.log("add traveler form submit");
               addTraveler();
             }}
           >
@@ -231,7 +231,6 @@ const TripForm = (props) => {
 
                     <span>
                       <i
-                       
                         className="fas fa-plus fa-lg add-traveler-button"
                         className=""
                       ></i>
