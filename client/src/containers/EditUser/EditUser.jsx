@@ -3,7 +3,7 @@ import "./EditUser.css";
 import API from "../../utils/API";
 import { useParams, useHistory, Link } from "react-router-dom";
 import FormData from "form-data";
-import * as fs from 'fs';
+import * as fs from "fs";
 import axios from "axios";
 
 const EditUser = () => {
@@ -34,7 +34,7 @@ const EditUser = () => {
     let preStoreEmail = email;
     console.log(fileInput);
     var data = new FormData();
-    data.append("photo", fs.createReadStream(fileInput));
+    data.append("photo", fileInput, "file");
     // var form = new FormData();
     // form.append("photo", fileInput, "file");
 
