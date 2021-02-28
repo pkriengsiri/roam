@@ -103,5 +103,10 @@ dist
 # TernJS port file
 .tern-port
 
+<<<<<<< HEAD
+# Temp files
+/tmp
+=======
 # tmp folder created by cloudinary
 /tmp
+>>>>>>> 3b40ef009b763eaf13ba03ba97d4d7e22d1460e0

@@ -3,24 +3,27 @@ import "./Dashboard.css";
 import TripCard from "../../components/TripCard/TripCard";
 import API from "../../utils/API";
 import { Link, useParams } from "react-router-dom";
-import Doodle2 from "../../components/Doodle/Doodle2"
+import Doodle2 from "../../components/Doodle/Doodle2";
+import { set } from "mongoose";
 
 const Dashboard = () => {
   const { userId } = useParams();
   const [trips, setTrips] = useState([]);
   const [currentUser, setCurrentUser] = useState("");
+  const [profileImage, setProfileImage] = useState("");
 
   useEffect(() => {
-    // API.getTrips()
-    //   .then((response) => {
-    //     setTrips(response.data);
-    //   })
-    //   .catch((err) => {
-    //     console.log(err);
-    //   });
+    API.getUser(userId)
+      .then((response) => {
+        setProfileImage(response.data.profileImageUrl);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
 
     API.getUserWithTrips(userId)
       .then((response) => {
+        console.log(response.data.trips);
         setTrips(response.data.trips);
         if (!response.data.firstName) {
           setCurrentUser(`Welcome!`);
@@ -35,9 +38,16 @@ const Dashboard = () => {
 
   return (
     <>
+    <div className="columns">
+    <div className = "column">
       <h1 className="title is-size-1 has-text-centered mt-6 pl-6 pr-6">
         {currentUser}
       </h1>
+      <figure className="image is-128x128">
+        <img class="is-rounded" src={profileImage} />
+      </figure>
+      </div>
+      </div>
       <h1 className="subtitle is-size-4 has-text-centered mt-3">
         Start planning your trips today!
       </h1>
