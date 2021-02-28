@@ -7,6 +7,7 @@ import AlertContext from "../../contexts/AlertContext";
 import UserContext from "../../contexts/UserContext";
 import Alert from "../Alert/Alert";
 import useEmail from "../../hooks/useEmail";
+import Cookies from "js-cookie";
 
 const SignUpModal = ({ closeSignUpModal, setSignupModalState}) => {
   const [password, setPassword] = useState("");
@@ -33,8 +34,9 @@ const SignUpModal = ({ closeSignUpModal, setSignupModalState}) => {
       })
         .then((response) => {
           // Validate response then redirect
+          const token = Cookies.get('token');
           jwt.verify(
-            response.data.token,
+            token,
             process.env.REACT_APP_SECRET,
             (err, data) => {
               if (err) {

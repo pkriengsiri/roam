@@ -8,6 +8,7 @@ import BeachVideo from "./Beach1.mp4";
 import AlertContext from "../../contexts/AlertContext";
 import UserContext from "../../contexts/UserContext";
 import AnimatedLogo from "../../components/AnimatedLogo/AnimatedLogo";
+import jwt from "jsonwebtoken";
 import Cookies from "js-cookie";
 
 const Home = ({ setUserContext }) => {
@@ -17,9 +18,20 @@ const Home = ({ setUserContext }) => {
   const { userContext } = useContext(UserContext);
 
   useEffect(() => {
-    console.log(Cookies.get('token'));
-    Cookies.remove('token');
-    console.log("Cookie should be blank ",Cookies.get('token'));
+    const token = Cookies.get('token');
+    console.log(token);
+          jwt.verify(
+            token,
+            process.env.REACT_APP_SECRET,
+            (err, data) => {
+              if (err) {
+                // TODO:  display an error message to the user stating that the sign-up failed (use global alert)
+                console.log(err);
+              } else {
+                setUserContext({ userId: data._id, email: data.email });
+              }
+            }
+          );
     document.title = "Roam";
   }, []);
 
