@@ -2,10 +2,10 @@
 const router = require("express").Router();
 const userController = require("../../controllers/userController");
 const jwt = require("express-jwt");
-const csrf = require("csurf");
-const csrfProtection = csrf({
-  cookie: true
-});
+// const csrf = require("csurf");
+// const csrfProtection = csrf({
+//   cookie: true
+// });
 
 //middleware
 // router.use(csrfProtection);

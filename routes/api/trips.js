@@ -1,13 +1,21 @@
 // Dependencies
 const router = require("express").Router();
 const tripController = require("../../controllers/tripController");
-const csrf = require("csurf");
-const csrfProtection = csrf({
-  cookie: true
-});
+const jwt = require("express-jwt");
+// const csrf = require("csurf");
+// const csrfProtection = csrf({
+//   cookie: true
+// });
 
-//csurf middleware
+// middleware
 // router.use(csrfProtection);
+router.use(
+  jwt({
+    secret: process.env.SECRET,
+    getToken: (req) => req.cookies.token,
+    algorithms: ['HS256']
+  })
+);
 
 // Routes for /api/trips
 router.route("/").get(tripController.findAll).post(tripController.create);

@@ -1,13 +1,21 @@
 // Dependencies
 const router = require("express").Router();
 const expenseController = require("../../controllers/expenseController");
-const csrf = require("csurf");
-const csrfProtection = csrf({
-  cookie: true
-});
+const jwt = require("express-jwt");
+// const csrf = require("csurf");
+// const csrfProtection = csrf({
+//   cookie: true
+// });
 
-//csurf middleware
+//middleware
 // router.use(csrfProtection);
+router.use(
+  jwt({
+    secret: process.env.SECRET,
+    getToken: (req) => req.cookies.token,
+    algorithms: ['HS256']
+  })
+);
 
 // Route for /api/expenses
 router.route("/")
