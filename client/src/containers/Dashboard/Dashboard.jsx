@@ -46,17 +46,17 @@ const Dashboard = () => {
       </h1>
 
       {/* <div className="columns is-gapless is-centered is-vcentered mt-4">
-        <div className="column is-2">
+        <div className="column is-1 mr-4">
           <figure className="image dashboard-figure">
             <img className="is-rounded dashboard-profile-picture" src={profileImage} />
           </figure>
         </div>
-        <div className="column is-4 mb-5 has-text-centered">
-          <h1 className="title is-size-1 mt-6 pr-6">
+        <div className="column is-3 mb-5 has-text-centered">
+          <h1 className="title is-size-1 has-text-left">
             {currentUser}
           </h1>
 
-          <h2 class="subtitle is-size-4 mr-6">Start planning your trips today! </h2>
+          <h2 class="subtitle has-text-left">Start planning your trips today! </h2>
         </div>
       </div> */}
       <section className="has-text-centered">
