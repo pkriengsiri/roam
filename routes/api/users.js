@@ -22,7 +22,6 @@ router.get(
   jwt({
       secret: process.env.SECRET,
       getToken: (req) => {
-        console.log("token"+req.cookies.token)
         return req.cookies.token;
       },
       algorithms: ["HS256"],

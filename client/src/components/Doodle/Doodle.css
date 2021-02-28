@@ -3,11 +3,11 @@
 }
 @keyframes fadeinsun {
   from {
-    left: -200px;
+    transform: translateY(50px);
     fill: #ebdfcf;
   }
   to {
-      left: 0px;
+    transform: translateY(0px);
     fill: #f48e00;
   }
 }
