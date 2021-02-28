@@ -10,6 +10,7 @@ const EditUser = () => {
   const { userId } = useParams();
   const history = useHistory();
   const [fileInput, setFileInput] = useState();
+  const [fileName, setFileName] = useState("");
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
   const [email, setEmail] = useState("");
@@ -93,6 +94,7 @@ const EditUser = () => {
                   type="file"
                   name="resume"
                   onChange={(e) => {
+                    setFileName(e.target.files[0].name)
                     setFileInput(e.target.files[0]);
                   }}
                 />
@@ -107,7 +109,7 @@ const EditUser = () => {
                   id="file-type"
                   value="image/png"
                 >
-                  No file uploaded
+                  {fileName ? fileName: "No file uploaded"}
                 </span>
               </label>
             </div>
