@@ -70,7 +70,7 @@ const DoughnutChart = ({ expenses }) => {
   // deconstruct the summary map into arrays to fit the donut chart tree structure
   const deconstructMap = (mappedObject) => {
     // make array for labels
-    const categories = Object.keys(mappedObject);
+    const categories = Object.keys(mappedObject).sort();
     // make array for data
     const dataValues = categories.map((el) => mappedObject[el]);
     const colors = categories.map((el) => colorPalette[el]);
