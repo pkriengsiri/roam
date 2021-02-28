@@ -24,7 +24,7 @@ const EditUser = () => {
           setFirstName(response.data.firstName);
           setLastName(response.data.lastName);
           setEmail(response.data.email);
-          setChangedProfileImageUrl(response.data.profileImageUrl)
+          setChangedProfileImageUrl(response.data.profileImageUrl);
         })
         .catch((err) => {
           console.log(err);
@@ -84,9 +84,12 @@ const EditUser = () => {
           {/* Column with profile picture and photo upload input */}
           <div className="column is-3 mb-6 mr-6">
             {/* Profile picture */}
-            <figure className="image profile-picture is-128x128 ">
+            <figure className="image">
               {changedProfileImageUrl ? (
-                <img className="is-rounded" src={changedProfileImageUrl} />
+                <img
+                  className="is-rounded profile-picture"
+                  src={changedProfileImageUrl}
+                />
               ) : (
                 <img
                   className="is-rounded"

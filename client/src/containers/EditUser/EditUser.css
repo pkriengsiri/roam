@@ -7,6 +7,10 @@
 }
 
 .profile-picture {
+  max-height: 175px !important;
+  max-width: 175px !important;
+  object-fit: cover;
   margin-left: auto;
   margin-right: auto;
 }
+
