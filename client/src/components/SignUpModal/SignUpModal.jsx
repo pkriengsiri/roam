@@ -7,6 +7,7 @@ import AlertContext from "../../contexts/AlertContext";
 import UserContext from "../../contexts/UserContext";
 import Alert from "../Alert/Alert";
 import useEmail from "../../hooks/useEmail";
+import Cookies from "js-cookie";
 
 const SignUpModal = ({ closeSignUpModal, setSignupModalState}) => {
   const [password, setPassword] = useState("");

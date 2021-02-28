@@ -51,7 +51,6 @@ module.exports = {
     const file = req.files.photo;
     cloudinary.uploader.upload(file.tempFilePath, (err, result) => {
       if (err) throw err;
-      console.log("Cloudinary URL: " + result.url);
       db.User.findOneAndUpdate(
         { _id: req.params.id },
         { ...req.body, profileImageUrl: result.url },

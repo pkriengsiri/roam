@@ -5,11 +5,17 @@ const API = {
   getUsers: function () {
     return axios.get("/api/users");
   },
+  relogin: function() {
+    return axios.get("/api/auth/relogin");
+  },
   createUser: function (userData) {
     return axios.post("/api/auth/signup", userData);
   },
   loginUser: function (userData) {
     return axios.post("/api/auth/login", userData);
+  },
+  logoutUser: function () {
+    return axios.get("/api/auth/logout");
   },
   getUser: function (id) {
     return axios.get(`/api/users/${id}`);

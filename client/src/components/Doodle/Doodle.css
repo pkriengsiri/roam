@@ -1,0 +1,27 @@
+.doodle-sun {
+  animation: fadeinsun 2s;
+}
+@keyframes fadeinsun {
+  from {
+    transform: translateY(50px);
+    fill: #ebdfcf;
+  }
+  to {
+    transform: translateY(0px);
+    fill: #f48e00;
+  }
+}
+
+.doodle-car {
+  position: relative;
+  z-index: 1;	
+  animation: animateleft 3s;
+}
+@keyframes animateleft {
+  from {
+    transform: translateX(-800px);
+  }
+  to {
+    transform: translateX(0px);
+  }
+}
