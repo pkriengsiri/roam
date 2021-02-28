@@ -81,7 +81,7 @@ const TripForm = (props) => {
   }, [traveler]);
 
   // add traveler to the travelers list
-  let newInvite;
+ 
 
   const addTraveler = () => {
     const existingTraveler = travelers.find(
@@ -94,7 +94,7 @@ const TripForm = (props) => {
     } else {
       if (validateEmail(traveler)) {
         setValidEmailPromptState(true);
-        newInvite = {
+        const newInvite = {
           travelerEmail: traveler?.toLowerCase(),
           travelerId: "",
           status: "pending",
@@ -105,7 +105,6 @@ const TripForm = (props) => {
         setValidEmailPromptState(false);
       }
     }
-  
   };
 
   // remove traveler
@@ -138,16 +137,21 @@ const TripForm = (props) => {
       <div className="columns is-centered">
         <div className="column is-half">
           <form
+            id="trip-form"
             className="trip-form"
-            onClick={(e) => {
+            onSubmit={ (e) => {
+              e.preventDefault();
+              console.log("trip  submit")
               addTraveler();
+            
               props.handleFormSubmit(e, {
                 tripCreator: userId,
                 destination,
                 startDate,
                 endDate,
-                travelers
+                travelers,
               });
+            }}
           >
             {/* destination section  */}
             <div className="field mb-2">
@@ -193,9 +197,11 @@ const TripForm = (props) => {
           {/* invite travelers section  */}
 
           <form
+            id="add-traveler-form"
             className="invite"
             onSubmit={(e) => {
               e.preventDefault();
+              console.log("add traveler form submit")
               addTraveler();
             }}
           >
@@ -225,14 +231,18 @@ const TripForm = (props) => {
 
                     <span>
                       <i
-                        type="submit"
+                       
                         className="fas fa-plus fa-lg add-traveler-button"
                         className=""
                       ></i>
                     </span>
                   </div>
                   <div className="control">
-                    <button type="submit" className="button">
+                    <button
+                      type="submit"
+                      form="add-traveler-form"
+                      className="button"
+                    >
                       <i className="fas fa-plus fa-lg"></i>
                     </button>
                   </div>
@@ -283,16 +293,7 @@ const TripForm = (props) => {
                 <button
                   className={`button is-primary ${props.loadingState}`}
                   type="submit"
-                  onClick={(e) => {
-                    addTraveler();
-                    props.handleFormSubmit(e, {
-                      tripCreator: userId,
-                      destination,
-                      startDate,
-                      endDate,
-                      travelers
-                    });
-                  }}
+                  form="trip-form"
                 >
                   {props.buttonText}
                 </button>
