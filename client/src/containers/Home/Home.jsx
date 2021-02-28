@@ -17,7 +17,9 @@ const Home = ({ setUserContext }) => {
   const { userContext } = useContext(UserContext);
 
   useEffect(() => {
-    console.log("cookie"+document.cookie);
+    // const cookie = document.cookie;
+    // var decodedCookie = decodeURIComponent(document.cookie);
+    // console.log(decodedCookie);
     document.title = "Roam";
   }, []);
 
@@ -100,8 +102,6 @@ const Home = ({ setUserContext }) => {
           <TestimonialCard />
         </div>
       </div>
-
-      <Doodle2 />
     </>
   );
 };
