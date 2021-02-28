@@ -15,54 +15,19 @@ width: 1000px;
   object-fit: cover;
   margin-left: auto;
 }
-.dashboard-figure {
-  margin-right: 0 !important;
-  padding-right: 0 !important;
+
+@media screen and (max-width: 875px) {
+  .dashboard-welcome {
+    font-size: xx-large !important;
+  }
+  .dashboard-subtitle {
+    font-size: medium;
+  }
+  .dashboard-profile-picture {
+    max-height: 50px !important;
+    max-width: 50px !important;
+    object-fit: cover;
+    margin-left:auto;
+    margin-right: auto;
+  }
 }
-
-
-
-.animate {
-  -webkit-animation-duration: 1s;
-  animation-duration: 1s;
-  -webkit-animation-fill-mode: both;
-  animation-fill-mode: both;
-}
-
-.one {
-  -webkit-animation-delay: 0.1s;
-  -moz-animation-delay: 0.1s;
-  animation-delay: 0.1s;
-  }
-
-  @-webkit-keyframes fadeInLeft {
-    from {
-      opacity: 0;
-      -webkit-transform: translate3d(-100%, 0, 0);
-      transform: translate3d(-100%, 0, 0);
-    }
-  
-    to {
-      opacity: 1;
-      -webkit-transform: none;
-      transform: none;
-    }
-  }
-  @keyframes fadeInLeft {
-    from {
-      opacity: 0;
-      -webkit-transform: translate3d(-100%, 0, 0);
-      transform: translate3d(-100%, 0, 0);
-    }
-  
-    to {
-      opacity: 1;
-      -webkit-transform: none;
-      transform: none;
-    }
-  }
-  
-  .fadeInLeft {
-    -webkit-animation-name: fadeInLeft;
-    animation-name: fadeInLeft;
-  }
