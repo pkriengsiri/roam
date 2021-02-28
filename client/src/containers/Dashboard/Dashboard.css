@@ -9,49 +9,25 @@ height: 300px;
 width: 1000px;
 }
 
-
-
-.animate {
-  -webkit-animation-duration: 1s;
-  animation-duration: 1s;
-  -webkit-animation-fill-mode: both;
-  animation-fill-mode: both;
+.dashboard-profile-picture {
+  max-height: 100px !important;
+  max-width: 100px !important;
+  object-fit: cover;
+  margin-left: auto;
 }
 
-.one {
-  -webkit-animation-delay: 0.1s;
-  -moz-animation-delay: 0.1s;
-  animation-delay: 0.1s;
+@media screen and (max-width: 876px) {
+  .dashboard-welcome {
+    font-size: xx-large !important;
   }
-
-  @-webkit-keyframes fadeInLeft {
-    from {
-      opacity: 0;
-      -webkit-transform: translate3d(-100%, 0, 0);
-      transform: translate3d(-100%, 0, 0);
-    }
-  
-    to {
-      opacity: 1;
-      -webkit-transform: none;
-      transform: none;
-    }
+  .dashboard-subtitle {
+    font-size: medium;
   }
-  @keyframes fadeInLeft {
-    from {
-      opacity: 0;
-      -webkit-transform: translate3d(-100%, 0, 0);
-      transform: translate3d(-100%, 0, 0);
-    }
-  
-    to {
-      opacity: 1;
-      -webkit-transform: none;
-      transform: none;
-    }
+  .dashboard-profile-picture {
+    max-height: 50px !important;
+    max-width: 50px !important;
+    object-fit: cover;
+    margin-left:auto;
+    margin-right: auto;
   }
-  
-  .fadeInLeft {
-    -webkit-animation-name: fadeInLeft;
-    animation-name: fadeInLeft;
-  }
+}
