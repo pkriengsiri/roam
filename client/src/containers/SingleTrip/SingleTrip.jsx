@@ -5,7 +5,6 @@ import "./SingleTrip.css";
 import UserContext from "../../contexts/UserContext";
 import DoughnutChart from "../../components/DoughnutChart/DoughnutChart";
 
-import axios from "axios";
 
 const SingleTrip = () => {
   const { userContext } = useContext(UserContext);
@@ -144,6 +143,7 @@ const SingleTrip = () => {
           <h1 className="title has-text-centered">Packing List</h1>
         </div>
       </div>
+      
     </div>
   );
 };

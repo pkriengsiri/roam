@@ -16,7 +16,7 @@ width: 1000px;
   margin-left: auto;
 }
 
-@media screen and (max-width: 875px) {
+@media screen and (max-width: 876px) {
   .dashboard-welcome {
     font-size: xx-large !important;
   }
