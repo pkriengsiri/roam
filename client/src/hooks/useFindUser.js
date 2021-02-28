@@ -3,8 +3,10 @@ import { useState, useEffect } from "react";
 import API from "../utils/API";
 
 export default function useFindUser() {
-  const [userId, setUserId] = useState(null);
-  const [email, setEmail] = useState(null);
+  const [userContext, setUserContext] = useState({
+    email: "",
+    id: "",
+  });
   const [isLoading, setLoading] = useState(true);
 
   useEffect(() => {
@@ -24,6 +26,17 @@ export default function useFindUser() {
       Axios.defaults.headers.post["X-CSRF-Token"] = data.csrfToken;
     };
     getCsrfToken();
+
+    // async function findUser() {
+    //   try {
+    //     let res = API.relogin();
+    //     setUser(res.data.currentUser);
+    //     setLoading(false);
+    //   } catch (err) {
+    //     setLoading(false);
+    //   }
+    // }
+    // findUser();
   }, []);
 
   return {

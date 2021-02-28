@@ -19,10 +19,10 @@ import API from "./utils/API";
 import jwt from "jsonwebtoken";
 
 function App() {
-  const [userContext, setUserContext] = useState({
-    email: "",
-    id: "",
-  });
+  
+  const {user, setUser}
+
+
 
   const [expenseContext, setExpenseContext] = useState({
     id: "",
@@ -36,20 +36,20 @@ function App() {
   });
 
 
-  useEffect(() => {
-    const getCsrfToken = async () => {
-      const { data } = await API.relogin();
-      jwt.verify(data.token, process.env.REACT_APP_SECRET, (err, data) => {
-        if (err) {
-          console.log(err);
-        } else {
-          setUserContext({ userId: data._id, email: data.email });
-        }
-      });
-      Axios.defaults.headers.post["X-CSRF-Token"] = data.csrfToken;
-    };
-    getCsrfToken();
-  }, []);
+  // useEffect(() => {
+  //   const getCsrfToken = async () => {
+  //     const { data } = await API.relogin();
+  //     jwt.verify(data.token, process.env.REACT_APP_SECRET, (err, data) => {
+  //       if (err) {
+  //         console.log(err);
+  //       } else {
+  //         setUserContext({ userId: data._id, email: data.email });
+  //       }
+  //     });
+  //     Axios.defaults.headers.post["X-CSRF-Token"] = data.csrfToken;
+  //   };
+  //   getCsrfToken();
+  // }, []);
 
   return (
     <UserContext.Provider value={{ userContext, setUserContext }}>
