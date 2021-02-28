@@ -140,10 +140,6 @@ const SingleTrip = () => {
           )}
         </div>
         <div className="column is-6">
-          <h2 className="has-text-centered">Total Expenses</h2>
-          <Link to={`/user/${userId}/trips/${tripId}/expenses`}>
-            <DoughnutChart expenses={expenses} />
-          </Link>
           <h1 className="title has-text-centered">Packing List</h1>
         </div>
       </div>
