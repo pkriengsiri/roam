@@ -83,11 +83,13 @@ const TripForm = (props) => {
   // add traveler to the travelers list
   const addTraveler = (e) => {
     e.preventDefault();
-    const newTraveler = travelers.find((el) => {
-      return el.travelerEmail === traveler?.toLowerCase();
-    });
+    const newTraveler = travelers.find(
+      (el) => el.travelerEmail === traveler?.toLowerCase()
+    );
+    console.log(newTraveler);
     if (newTraveler) {
       // TODO: glow existing traveler bubble
+      setTraveler("");
       // console.log("user already exists");
     } else {
       if (validateEmail(traveler)) {
