@@ -92,7 +92,7 @@ const EditUser = () => {
                 />
               ) : (
                 <img
-                  className="is-rounded"
+                  className="is-rounded profile-picture"
                   src="https://placekitten.com/128/128"
                 />
               )}
