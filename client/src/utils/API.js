@@ -44,6 +44,10 @@ const API = {
 
   createExpense: function (expenseData) {
     return axios.post(`/api/expenses`, expenseData);
+  },
+
+  getExpense: function (id) {
+    return axios.get(`/api/expenses/${id}`);
   }
 };
 

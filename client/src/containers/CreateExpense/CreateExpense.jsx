@@ -13,7 +13,6 @@ const CreateExpense = () => {
 
   const handleFormSubmit = (e) => {
     e.preventDefault();
-    console.log("you submitted the form");
 
     API.createExpense({
       totalExpenseAmount: totalExpenseAmount,
