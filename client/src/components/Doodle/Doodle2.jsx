@@ -10,6 +10,7 @@ const Doodle2 = () => {
       height="598"
       version="1.2"
       viewBox="0 0 1436.25 448.5"
+      className="profile-doodle"
     >
       <defs>
         <clipPath id="clip1">

@@ -44,11 +44,12 @@ const Dashboard = () => {
       </h1>
       <section className="has-text-centered">
         <Doodle2 />
-        <img
+        {/* OLD DOODLE */}
+        {/* <img
           className="animate fadeInLeft one trips-hero"
           src={TripsHero}
           alt=""
-        />
+        /> */}
       </section>
 
       <div className="container has-text-centered mt-6 pl-6 pr-6">
