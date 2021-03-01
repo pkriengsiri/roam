@@ -1,4 +1,4 @@
-import React, { useState, useContext } from "react";
+import React, { useState, useContext, useEffect } from "react";
 import Logo from "../../Assets/Images/roam5.svg";
 import LoginModal from "../../components/LoginModal/LoginModal";
 import SignUpModal from "../../components/SignUpModal/SignUpModal";
@@ -10,8 +10,23 @@ import API from "../../utils/API";
 const Navbar = ({ setUserContext }) => {
   const [loginModalState, setLoginModalState] = useState(false);
   const [signUpModalState, setSignUpModalState] = useState(false);
+  const [profileImage, setProfileImage] = useState("");
   const history = useHistory();
   const { userContext } = useContext(UserContext);
+
+  useEffect(() => {
+    if (userContext.userId) {
+      API.getUser(userContext.userId)
+        .then((response) => {
+          console.log(response.data.profileImageUrl);
+          setProfileImage(response.data.profileImageUrl);
+          console.log(profileImage)
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    }
+  }, []);
 
   const toggleLoginModal = (e) => {
     e.preventDefault();
@@ -94,11 +109,20 @@ const Navbar = ({ setUserContext }) => {
               <div className="navbar-item has-dropdown is-hoverable">
                 <a className="navbar-link">
                   {/* <i className="nav-icon fas fa-user-circle fa-2x"></i> */}
-                  <img
-                    className="navbar-profile-picture is-rounded"
-                    src="https://res.cloudinary.com/djou7v3ho/image/upload/v1614532245/Avatar-removebg-preview_1_g04ftj.png"
-                    alt=""
-                  />
+                  {userContext.userId && (
+                    <img
+                      className="navbar-profile-picture is-rounded"
+                      src={profileImage}
+                      alt=""
+                    />
+                  )}
+                  {!userContext.userId && (
+                    <img
+                      className="navbar-profile-picture is-rounded"
+                      src="https://res.cloudinary.com/djou7v3ho/image/upload/v1614532245/Avatar-removebg-preview_1_g04ftj.png"
+                      alt=""
+                    />
+                  )}
                 </a>
                 <div className="navbar-dropdown is-right">
                   <Link
