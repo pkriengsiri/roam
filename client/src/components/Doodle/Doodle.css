@@ -3,16 +3,16 @@
 }
 
 .doodle-sun {
-  animation: fadeinsun 2s;
+  animation: fadeinsun 3s forwards;
 }
 @keyframes fadeinsun {
   from {
-    transform: translateY(50px);
-    fill: #ebdfcf;
+    transform: translateY(50px) ;
+    fill: #f48e00;
   }
   to {
-    transform: translateY(0px);
-    fill: #f48e00;
+    transform: translateY(-25px);
+    fill: #fff018;
   }
 }
 
