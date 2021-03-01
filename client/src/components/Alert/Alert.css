@@ -1,3 +1,7 @@
 .error {
     color:red;
 }
+
+.success {
+    color: rgb(57, 191, 57);
+}

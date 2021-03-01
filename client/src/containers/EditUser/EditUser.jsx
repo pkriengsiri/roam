@@ -1,9 +1,10 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useContext } from "react";
 import "./EditUser.css";
 import API from "../../utils/API";
 import { useParams, useHistory, Link } from "react-router-dom";
 import FormData from "form-data";
 import Alert from "../../components/Alert/Alert";
+import AlertContext from "../../contexts/AlertContext";
 
 const EditUser = () => {
   const { userId } = useParams();
@@ -13,14 +14,17 @@ const EditUser = () => {
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
   const [email, setEmail] = useState("");
-  const [fileUploadStatus, setFileUploadStatus] = useState(false);
+  const [fileUploadStatus, setFileUploadStatus] = useState(null);
   const [changedProfileImageUrl, setChangedProfileImageUrl] = useState("");
+  const [fileType, setFileType] = useState("");
+  const { onDisplay, display, theme } = useContext(AlertContext);
+  const [loadingState, setLoadingState] = useState("");
+  const [displayIcon, setDisplayIcon] = useState("");
 
   useEffect(() => {
     if (userId) {
       API.getUser(userId)
         .then((response) => {
-          // console.log(response);
           setFirstName(response.data.firstName);
           setLastName(response.data.lastName);
           setEmail(response.data.email);
@@ -49,27 +53,34 @@ const EditUser = () => {
   };
 
   const addPhoto = () => {
-    // console.log(fileInput);
-    var formdata = new FormData();
-    formdata.append("photo", fileInput, "file");
-    var requestOptions = {
-      method: "POST",
-      body: formdata,
-      // redirect: "follow",
-    };
+    setLoadingState("is-loading spinner");
+    setDisplayIcon("hide-icon");
+    if (fileType !== "") {
+      var formdata = new FormData();
+      formdata.append("photo", fileInput, "file");
+      var requestOptions = {
+        method: "POST",
+        body: formdata,
+      };
 
-    fetch(`/api/users/upload/${userId}`, requestOptions)
-      .then((response) => {
-        return response.text();
-      })
-      .then((result) => {
-        // console.log(result);
-        const res = JSON.parse(result);
-        setFileUploadStatus(true);
-        // console.log(res.url);
-        setChangedProfileImageUrl(res.url);
-      })
-      .catch((error) => console.log("error", error));
+      fetch(`/api/users/upload/${userId}`, requestOptions)
+        .then((response) => {
+          return response.text();
+        })
+        .then((result) => {
+          setLoadingState("");
+          const res = JSON.parse(result);
+          setFileUploadStatus("true");
+          setChangedProfileImageUrl(res.url);
+          setLoadingState("");
+          setDisplayIcon("");
+        })
+        .catch((error) => console.log("error", error));
+    } else {
+      setLoadingState("");
+      setDisplayIcon("");
+      setFileUploadStatus("false");
+    }
   };
 
   // NEED TO UPDATE THE IMAGE WITH EDIT FUNCTIONALITY
@@ -80,7 +91,7 @@ const EditUser = () => {
       <form onSubmit={handleFormSubmit}>
         <div className="columns is-centered is-vcentered">
           {/* Column with profile picture and photo upload input */}
-          <div className="column is-3 mb-6 mr-6">
+          <div className="column is-4 mb-6 mr-6">
             {/* Profile picture */}
             <figure className="image">
               {changedProfileImageUrl ? (
@@ -91,13 +102,13 @@ const EditUser = () => {
               ) : (
                 <img
                   className="is-rounded profile-picture"
-                  src="https://placekitten.com/128/128"
+                  src="https://res.cloudinary.com/djou7v3ho/image/upload/v1614532245/Avatar-removebg-preview_1_g04ftj.png"
                 />
               )}
             </figure>
             {/* Upload input */}
 
-            <div className="field has-addons">
+            <div className="field has-addons upload-field">
               <div className="control has-icons-left">
                 <div className="profile-picture-file file has-name mt-4">
                   <label className="file-label">
@@ -107,6 +118,7 @@ const EditUser = () => {
                       name="resume"
                       onChange={(e) => {
                         setFileName(e.target.files[0].name);
+                        setFileType(e.target.files[0].type);
                         setFileInput(e.target.files[0]);
                       }}
                     />
@@ -124,26 +136,25 @@ const EditUser = () => {
                       {fileName ? fileName : "No file uploaded"}
                     </span>
                   </label>
-                  {/* <span>
-                    <i
-                      type="submit"
-                      className="fas fa-plus fa-lg add-traveler-button"
-                      onClick={addPhoto}
-                    ></i>
-                  </span> */}
                   <div className="control">
                     <span
                       // type="submit"
-                      className="button"
+                      className={`button ${loadingState}`}
                     >
-                      <i onClick={addPhoto} className="fas fa-plus fa-lg"></i>
+                      <i
+                        onClick={addPhoto}
+                        className={`fas fa-plus fa-lg ${displayIcon}`}
+                      ></i>
                     </span>
                   </div>
                 </div>
               </div>
             </div>
-            {fileUploadStatus && (
-              <Alert color="is-primary">File Upload Succeeded</Alert>
+            {fileUploadStatus === "true" && (
+              <Alert color={"success"}>File Upload Succeeded</Alert>
+            )}
+            {fileUploadStatus === "false" && (
+              <Alert color={"error"}>Please upload a valid file</Alert>
             )}
           </div>
           <div className="column is-5">
@@ -151,7 +162,7 @@ const EditUser = () => {
               <label className="label">First Name</label>
               <div className="control">
                 <input
-                autoFocus
+                  autoFocus
                   name="firstName"
                   className="input"
                   type="text"
