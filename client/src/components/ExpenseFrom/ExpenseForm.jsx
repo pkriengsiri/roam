@@ -22,6 +22,7 @@ const ExpenseForm = (props) => {
   const [expenseBalanced, setExpenseBalanced] = useState(true);
   const [remainder, setRemainder] = useState(0);
   const [shareType, setShareType] = useState("Solo");
+  // const [customPlaceholder, setCustomPlaceholder] = useState();
 
   const { tripId } = useParams();
   const { userId } = useParams();
@@ -102,25 +103,30 @@ const ExpenseForm = (props) => {
     }
   }, [shareType, totalExpenseAmount, trip, userContext]);
 
+  // use effect to set placeholder value for custom split
+  // useEffect(()=>{
+  //   if (shareType!=="Custom Split"){
+  //     setCustomPlaceholder(expenseShare)
+  //   }
+
+  // },[shareType,expenseShare])
+
   // force number input to be in USD
   const handleNumericChange = (e) => {
     let num = e.target.value
       .toString()
+      .toString()
       .split(".")
       .map((el, i) => (i ? el.split("").slice(0, 2).join("") : el))
       .join(".");
+    num = num === "" ? 0 : num;
     console.log(e.target);
     if (e.target.id === "totalExpenseAmount") {
-      setTotalExpenseAmount(num);
+      // console.log(typeof parseFloat(num))
+      setTotalExpenseAmount(parseFloat(num));
     } else if (e.target.name === "shareExpenseAmount") {
-      let updateTravelerEmail=e.target.id
-      let updateTravelerAmount=e.target.value
-      console.log(updateTravelerEmail);
-      console.log(updateTravelerAmount);
-      let updateArray = trip.travelers.map((traveler) => ({
-        travelerEmail: traveler.travelerEmail,
-        shareOfTotalExpense: 0,
-      }));
+      let updateTravelerEmail = e.target.id;
+      let updateArray = expenseShare;
 
       if (shareType === "Custom Split" && trip.travelers.length > 0) {
         let updateTravelerCustomSplit = updateArray.find(
@@ -129,7 +135,7 @@ const ExpenseForm = (props) => {
         updateArray = updateArray.filter(
           (el) => el.travelerEmail !== updateTravelerEmail
         );
-        updateTravelerCustomSplit.shareOfTotalExpense = updateTravelerAmount;
+        updateTravelerCustomSplit.shareOfTotalExpense = parseFloat(num);
         setExpenseShare([...updateArray, updateTravelerCustomSplit]);
       }
     }
@@ -227,7 +233,8 @@ const ExpenseForm = (props) => {
                       min="0"
                       step=".01"
                       placeholder={traveler.shareOfTotalExpense}
-                      // value={shareType!=="Custom Split"? traveler.shareOfTotalExpense:""}
+                      // value={shareType!=="Custom Split"? traveler.shareOfTotalExpense:customPlaceholder.shareOfTotalExpense}
+                      value={traveler.shareOfTotalExpense}
                       // value={placeholder}
                       name="shareExpenseAmount"
                       id={traveler.travelerEmail}
