@@ -12,7 +12,7 @@ module.exports = {
       });
   },
   create: function (req, res) {
-    db.Packing.create({
+    db.PackingList.create({
       ...req.body,
     })
       .then((dbPackingList) => {
@@ -22,6 +22,26 @@ module.exports = {
         // Add packing list to user?
       })
       .catch((err) => {
+        res.status(422).json(err);
+      });
+  },
+  update: function (req, res) {
+    db.PackingList.findByIdAndUpdate(
+      req.params.id,
+      { ...req.body },
+      { new: true }
+    )
+      .then((dbPackingList) => res.json(dbPackingList))
+      .catch((err) => {
+        console.log(err);
+        res.status(422).json(err);
+      });
+  },
+  remove: function (req, res) {
+    db.PackingList.findByIdAndDelete(req.params.id)
+      .then((dbPackingList) => res.json(dbPackingList))
+      .catch((err) => {
+        console.log(err);
         res.status(422).json(err);
       });
   },
