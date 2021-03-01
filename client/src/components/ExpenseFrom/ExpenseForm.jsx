@@ -73,23 +73,32 @@ const ExpenseForm = (props) => {
   useEffect(() => {
     console.log(shareType);
     console.log(totalExpenseAmount);
+    let updateArray = trip.travelers.map((traveler) => ({
+      travelerEmail: traveler.travelerEmail,
+      shareOfTotalExpense: 0,
+    }));
+    const total = totalExpenseAmount !== "" ? totalExpenseAmount : 0;
+
     if (shareType === "Solo" && trip.travelers.length > 0) {
-      let updateArray = trip.travelers.map((traveler) => ({
-        travelerEmail: traveler.travelerEmail,
-        shareOfTotalExpense: 0,
-      }));
       let updateExpenseCreatorShare = updateArray.find(
         (el) => el.travelerEmail === userContext.email
       );
       updateArray = updateArray.filter(
         (el) => el.travelerEmail !== userContext.email
       );
-      if (totalExpenseAmount === "") {
-        updateExpenseCreatorShare.shareOfTotalExpense = 0;
-      } else {
-        updateExpenseCreatorShare.shareOfTotalExpense = totalExpenseAmount;
-      }
+      updateExpenseCreatorShare.shareOfTotalExpense = total;
       setExpenseShare([...updateArray, updateExpenseCreatorShare]);
+    } else if (shareType === "Share Evenly" && trip.travelers.length > 0) {
+      let subtotal = 0;
+      let evenSplit = parseFloat((total / updateArray.length).toFixed(2));
+      for (let i = 0; i < updateArray.length; i++) {
+        updateArray[i].shareOfTotalExpense = evenSplit;
+        if (i === updateArray.length - 1) {
+          updateArray[i].shareOfTotalExpense = total - subtotal;
+        }
+        subtotal += updateArray[i].shareOfTotalExpense;
+      }
+      setExpenseShare([...updateArray]);
     }
   }, [shareType, totalExpenseAmount, trip, userContext]);
 
@@ -101,21 +110,6 @@ const ExpenseForm = (props) => {
       .map((el, i) => (i ? el.split("").slice(0, 2).join("") : el))
       .join(".");
     setTotalExpenseAmount(num);
-
-    // if (shareType === "Solo") {
-    //   let updateArray = expenseShare;
-    //   let updateExpenseCreatorShare = updateArray.find(
-    //     (el) => el.travelerEmail === userContext.email
-    //   );
-    //   updateArray = updateArray.filter(
-    //     (el) => el.travelerEmail !== userContext.email
-    //   );
-    //   if (num === "") {
-    //     num = 0;
-    //   }
-    //   updateExpenseCreatorShare.shareOfTotalExpense = num;
-    //   setExpenseShare([...updateArray, updateExpenseCreatorShare]);
-    // }
 
     // if (shareType === "Share Evenly") {
     //   let updateArray = expenseShare;
