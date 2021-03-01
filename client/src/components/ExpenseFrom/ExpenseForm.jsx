@@ -94,7 +94,9 @@ const ExpenseForm = (props) => {
       for (let i = 0; i < updateArray.length; i++) {
         updateArray[i].shareOfTotalExpense = evenSplit;
         if (i === updateArray.length - 1) {
-          updateArray[i].shareOfTotalExpense = total - subtotal;
+          updateArray[i].shareOfTotalExpense = parseFloat(
+            (total - subtotal).toFixed(2)
+          );
         }
         subtotal += updateArray[i].shareOfTotalExpense;
       }
@@ -110,22 +112,6 @@ const ExpenseForm = (props) => {
       .map((el, i) => (i ? el.split("").slice(0, 2).join("") : el))
       .join(".");
     setTotalExpenseAmount(num);
-
-    // if (shareType === "Share Evenly") {
-    //   let updateArray = expenseShare;
-    //   let subtotal = 0;
-    //   let evenSplit = parseFloat((num / updateArray.length).toFixed(2));
-    //   for (let i = 0; i < updateArray.length; i++) {
-    //     console.log(evenSplit);
-    //     subtotal += evenSplit;
-    //     console.log(subtotal);
-    //     updateArray[i].shareOfTotalExpense = evenSplit;
-    //   }
-
-    //   if (num === "") {
-    //     num = 0;
-    //   }
-    // }
   };
 
   return (
@@ -199,14 +185,41 @@ const ExpenseForm = (props) => {
       </div>
 
       {/* drop down form for splitting expense */}
-
-      {expenseShare.map((traveler) => (
-        <div
-          className="field is-horizontal ml-5 mt-2"
-          key={traveler.travelerEmail}
-        >
+      {shareType !== "Solo" && (
+        <div className="expense-share-mini-form">
+          {expenseShare.map((traveler) => (
+            <div
+              className="field is-horizontal ml-5 mt-2"
+              key={traveler.travelerEmail}
+            >
+              <div className="field-label is-small">
+                <label className="label">{traveler.travelerEmail}</label>
+              </div>
+              <div className="field-body">
+                <div className="field">
+                  <p className="control">
+                    <input
+                      className="input is-small"
+                      type="number"
+                      min="0"
+                      step=".01"
+                      placeholder={traveler.shareOfTotalExpense}
+                      value={traveler.shareOfTotalExpense}
+                      name="shareExpenseAmount"
+                      id={traveler.travelerEmail}
+                    />
+                  </p>
+                </div>
+              </div>
+            </div>
+          ))}
+        </div>
+      )}
+      {/* conditinally render custom remainder check if on custom split */}
+      {shareType === "Custom Split" && (
+        <div className="field is-horizontal ml-5 mt-2">
           <div className="field-label is-small">
-            <label className="label">{traveler.travelerEmail}</label>
+            <label className="label">Remainder</label>
           </div>
           <div className="field-body">
             <div className="field">
@@ -216,39 +229,17 @@ const ExpenseForm = (props) => {
                   type="number"
                   min="0"
                   step=".01"
-                  placeholder={traveler.shareOfTotalExpense}
-                  value={traveler.shareOfTotalExpense}
-                  name="shareExpenseAmount"
-                  id={traveler.travelerEmail}
+                  placeholder={remainder}
+                  value={remainder}
+                  name="remaining"
+                  id="remaining"
+                  disabled
                 />
               </p>
             </div>
           </div>
         </div>
-      ))}
-
-      <div className="field is-horizontal ml-5 mt-2">
-        <div className="field-label is-small">
-          <label className="label">Remainder</label>
-        </div>
-        <div className="field-body">
-          <div className="field">
-            <p className="control">
-              <input
-                className="input is-small"
-                type="number"
-                min="0"
-                step=".01"
-                placeholder={remainder}
-                value={remainder}
-                name="remaining"
-                id="remaining"
-                disabled
-              />
-            </p>
-          </div>
-        </div>
-      </div>
+      )}
 
       <div className="field">
         <label className="label">Category</label>
