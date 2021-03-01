@@ -29,7 +29,7 @@ const EditExpense = () => {
       API.editExpense(expenseId, formObject)
         .then((response) => {
           console.log(response.data);
-          history.push(`/user/${userId}/trips/${tripId}`);
+          history.push(`/user/${userId}/trips/${tripId}/expenses`);
         })
         .catch((err) => {
           console.log(err);
