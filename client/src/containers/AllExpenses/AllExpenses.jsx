@@ -8,14 +8,12 @@ const AllExpenses = (props) => {
   const { userId, tripId } = useParams();
   const [destination, setDestination] = useState("");
   const [expenseArray, setExpenseArray] = useState([]);
-  // const [buttonDisplayState, setButtonDisplayState] = useState(false);
   const [displayContributors, setDisplayContributors] = useState([]);
 
   useEffect(() => {
     if (tripId) {
       API.getTrip(tripId)
         .then((response) => {
-          // console.log(response.data);
           setExpenseArray(response.data.expenses);
           setDestination(response.data.destination);
 
@@ -42,29 +40,12 @@ const AllExpenses = (props) => {
 
     let buttonDataIndex;
     buttonDataIndex = e.target.dataset.index;
-    // console.log(buttonDataIndex);
-    // console.log(displayContributorsArr);
     // Change the value of the item in the array being clicked
     displayContributorsArr[buttonDataIndex] = !displayContributorsArr[
       buttonDataIndex
     ];
-    // console.log(displayContributorsArr);
     // Set the state
     setDisplayContributors(displayContributorsArr);
-
-    // if (buttonDisplayState) {
-    //   var element = document.querySelectorAll(`[data-row]`);
-    //   element.forEach((element) => element.classList.remove("is-hidden"));
-    //   setButtonDisplayState(false);
-    // } else {
-    //   let buttonDataId;
-    //   buttonDataId = e.target.dataset.id;
-    //   console.log(buttonDataId);
-    //   var element = document.querySelector(`[data-row="${buttonDataId}"]`);
-    //   element.classList.add("is-hidden");
-    //   setButtonDisplayState(true);
-    // }
-    // setDisplayContributors();
   };
   return (
     <div className="container mt-6 pl-6 pr-6">
