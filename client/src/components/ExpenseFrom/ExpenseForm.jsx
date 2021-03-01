@@ -7,6 +7,7 @@ import Alert from "../Alert/Alert";
 import AlertContext from "../../contexts/AlertContext";
 import API from "../../utils/API";
 import { SingleDatePicker } from "react-dates";
+import "./SingleDatePicker.css";
 
 const ExpenseForm = (props) => {
   const { onDisplay, display, theme } = useContext(AlertContext);
@@ -23,7 +24,7 @@ const ExpenseForm = (props) => {
   const [expenseBalanced, setExpenseBalanced] = useState(true);
   const [remainder, setRemainder] = useState(0);
   const [date, setDate] = useState(null);
-  const [focusedInput, setFocusedInput] = useState(null);
+  const [focused, setFocused] = useState(null);
   const [calendarStack, setCalendarStack] = useState("horizontal");
 
   const { tripId } = useParams();
@@ -101,12 +102,6 @@ const ExpenseForm = (props) => {
     setExpenseShare([...updateArray, updateExpenseCreatorShare]);
   };
 
-  // set calendar dates
-  const handleDatesChange = (date) => {
-    setDate(date);
-    
-  };
-
   return (
     <form
       onSubmit={(e) => {
@@ -124,7 +119,17 @@ const ExpenseForm = (props) => {
     >
       <div className="field">
         <label className="label">Expense Date</label>
-        <SingleDatePicker />
+        <SingleDatePicker
+          className="single-date-picker"
+          date={date}
+          onDateChange={(date) => setDate(date)}
+          focused={focused}
+          onFocusChange={({ focused }) => setFocused(focused)}
+          id="date"
+          showDefaultInputIcon={true} // calendar icon
+          showClearDate={true} // clear dates with x button
+          orientation={calendarStack}
+        />
         <label className="label">Amount</label>
         <div className="control has-icons-left has-icons-right">
           <input
