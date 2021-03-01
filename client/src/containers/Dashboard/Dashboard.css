@@ -10,9 +10,10 @@ width: 1000px;
 }
 
 .dashboard-profile-picture {
-  max-height: 100px !important;
-  max-width: 100px !important;
+  max-height: 90px !important;
+  max-width: 90px !important;
   object-fit: cover;
+  margin-right: auto;
   margin-left: auto;
 }
 
