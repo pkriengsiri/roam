@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useContext } from "react";
+import React, { useState, useEffect, useContext, useRef } from "react";
 import "./TripForm.css";
 import { useParams, Link } from "react-router-dom";
 import axios from "axios";
@@ -10,6 +10,45 @@ import moment from "moment";
 import Alert from "../Alert/Alert";
 import AlertContext from "../../contexts/AlertContext";
 import "./react_dates_overrides.css";
+
+let autoComplete;
+
+const loadScript = (url, callback) => {
+  let script = document.createElement("script");
+  script.type = "text/javascript";
+
+  if (script.readyState) {
+    script.onreadystatechange = function () {
+      if (script.readyState === "loaded" || script.readyState === "complete") {
+        script.onreadystatechange = null;
+        callback();
+      }
+    };
+  } else {
+    script.onload = () => callback();
+  }
+
+  script.src = url;
+  document.getElementsByTagName("head")[0].appendChild(script);
+};
+
+function handleScriptLoad(updateQuery, autoCompleteRef) {
+  autoComplete = new window.google.maps.places.Autocomplete(
+    autoCompleteRef.current,
+    { types: ["(regions)"] }
+  );
+  autoComplete.setFields(["address_components", "formatted_address"]);
+  autoComplete.addListener("place_changed", () =>
+    handlePlaceSelect(updateQuery)
+  );
+}
+
+async function handlePlaceSelect(updateQuery) {
+  const addressObject = autoComplete.getPlace();
+  const query = addressObject.formatted_address;
+  updateQuery(query);
+  console.log(addressObject);
+}
 
 const TripForm = (props) => {
   const { userContext } = useContext(UserContext);
@@ -36,12 +75,18 @@ const TripForm = (props) => {
   const [traveler, setTraveler] = useState("");
   const [validEmailPromptState, setValidEmailPromptState] = useState(true);
   const [validRemoveState, setValidRemoveState] = useState(true);
+  const [query, setQuery] = useState("");
+  const autoCompleteRef = useRef(null);
 
   // browser params
   const { tripId } = useParams();
   const { userId } = useParams();
 
   useEffect(() => {
+    loadScript(
+      `https://maps.googleapis.com/maps/api/js?key=${process.env.REACT_APP_PLACES_API_KEY}&libraries=places`,
+      () => handleScriptLoad(setQuery, autoCompleteRef)
+    );
     if (tripId) {
       axios
         .get(`/api/trips/${tripId}`)
@@ -163,6 +208,16 @@ const TripForm = (props) => {
                   onChange={(e) => setDestination(e.target.value)}
                 />
               </div>
+            </div>
+            <div className="field mb-2">
+            <label className="label">Destination</label>
+            <div className="control">
+              <input
+                ref={autoCompleteRef}
+                onChange={(event) => setQuery(event.target.value)}
+                placeholder="Enter a City"
+                value={query}
+              /></div>
             </div>
             {/* date picker section  */}
             <div className="mb-5">
