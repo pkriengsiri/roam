@@ -73,13 +73,21 @@ const Dashboard = () => {
   return (
     <>
       <div className="container has-text-centered pl-6 pr-6 mt-6">
-        {trips.length !== 0 && (
+        {trips.length !== 0 && currentUser !== "" && (
           <h1 className="title is-size-1 has-text-centered pl-6 pr-6">
             {currentUser}'s Trips
           </h1>
         )}
-        {trips.length === 0 && (
+        {trips.length !== 0 && currentUser === "" && (
+          <h1 className="title is-size-1 has-text-centered pl-6 pr-6">
+            Your Trips
+          </h1>
+        )}
+        {trips.length === 0 && currentUser !== "" && (
           <h1 className="title">Welcome{`, ${currentUser}`}!</h1>
+        )}
+        {trips.length === 0 && currentUser === "" && (
+          <h1 className="title">Welcome!</h1>
         )}
 
         <section className="has-text-centered">
