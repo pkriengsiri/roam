@@ -1,17 +1,38 @@
-import React from "react";
+import React, { useState } from "react";
+import { toISODateString } from "react-dates";
 
 const PackingList = () => {
+  const [todos, setTodos] = useState([]);
+  const [todo, setTodo] = useState("");
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+
+    const newTodo = {
+      id: new Date().getTime(),
+      text: todo,
+      completed: false,
+    };
+    setTodos([...todos].concat(newTodo));
+    setTodos("");
+  };
+
   return (
     <div>
-      <div class="columns">
-        <div class="column is-4"></div>
-        <div class="control">
-          <input class="input" type="text" placeholder="Add Item" />
-        </div>
-        <div class="control">
-          <button class="button is-primary">Submit</button>
-        </div>
-      </div>
+      <form onSubmit={handleSubmit}>
+        <input
+          type="text"
+          placeholder="Add an item"
+          value={todo}
+          name="text"
+          onChange={(e) => setTodo(e.target.value)}
+        />
+        <button>Add</button>
+      </form>
+
+      {todos.map((todo) => (
+        <div>{todo.text}</div>
+      ))}
     </div>
   );
 };
