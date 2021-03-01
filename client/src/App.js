@@ -7,6 +7,7 @@ import CreateTrip from "./containers/CreateTrip/CreateTrip";
 import EditTrip from "./containers/EditTrip/EditTrip";
 import SingleTrip from "./containers/SingleTrip/SingleTrip";
 import CreateExpense from "./containers/CreateExpense/CreateExpense";
+import EditExpense from "./containers/EditExpense/EditExpense";
 import Navbar from "./components/Navbar/Navbar";
 import Footer from "./components/Footer/Footer";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
@@ -82,6 +83,11 @@ function App() {
                   exact
                   path="/user/:userId/trips/:tripId/expense"
                   component={CreateExpense}
+                />
+                <Route
+                  exact
+                  path="/user/:userId/trips/:tripId/expense/:expenseId/edit"
+                  component={EditExpense}
                 />
               </Switch>
             </main>

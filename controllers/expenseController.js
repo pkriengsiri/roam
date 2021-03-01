@@ -50,8 +50,9 @@ module.exports = {
 
   remove: function (req, res) {
     db.Expense.findByIdAndDelete(req.params.id)
-      .then((dbExpense) => res.json(dbTrip))
-      .catch((err) => res.status(422).json(err));
+      .then((dbExpense) => res.json(dbExpense))
+      .catch((err) => {console.log(err);
+        res.status(422).json(err)});
   },
 };
 

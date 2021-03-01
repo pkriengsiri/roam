@@ -1,7 +1,6 @@
 import { useState, useContext, useEffect } from "react";
 import { useParams, Link, useHistory } from "react-router-dom";
 import React from "react";
-import UserContext from "../../contexts/UserContext";
 import API from "../../utils/API";
 import ExpenseForm from "../../components/ExpenseFrom/ExpenseForm";
 import AlertContext from "../../contexts/AlertContext";

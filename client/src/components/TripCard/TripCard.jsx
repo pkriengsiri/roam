@@ -21,7 +21,7 @@ const TripCard = ({
 
   return (
     <div className="columns is-centered">
-      <div className="column is-5">
+      <div className="column is-6">
         <div className="card trip-card">
           <div className="card-content has-text-left">
             <div className="media">
