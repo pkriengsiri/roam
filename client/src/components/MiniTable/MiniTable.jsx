@@ -3,7 +3,8 @@ import React from "react";
 const MiniTable = () => {
   return (
     <div>
-      <table className="table">
+      <h1>Testing</h1>
+      {/* <table className="table">
         <thead>
           <tr>
             <th>Name</th>
@@ -33,7 +34,7 @@ const MiniTable = () => {
             <td>20</td>
           </tr>
         </tbody>
-      </table>
+      </table> */}
     </div>
   );
 };

@@ -125,7 +125,7 @@ const SingleTrip = () => {
           <h1 className="title has-text-centered">Packing List</h1>
         </div>
       </div>
-      <div className="columns is-centered">
+      <div className="columns is-centered mt-6">
         <div className="column is-3">
           <Link
             to={`/user/${userId}/trips`}

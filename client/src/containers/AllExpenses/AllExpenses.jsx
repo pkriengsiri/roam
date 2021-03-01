@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useParams, Link } from "react-router-dom";
-import MiniTable from "../../components/MiniTable/MiniTable";
 import API from "../../utils/API";
+import MiniTable from "../../components/MiniTable/MiniTable"
 import "./AllExpenses.css";
 
 const AllExpenses = (props) => {
@@ -75,10 +75,24 @@ const AllExpenses = (props) => {
                     </td>
                   </tr>
                   <tr className="has-text-dark" data-row={index}>
-                    <td>Test</td>
-                    <td>Test</td>
-                    <td>Test</td>
-                    <td>Test</td>
+                    <td></td>
+                    <td><MiniTable/></td>
+                    <td>
+                      <ul>
+                        <li>$10</li>
+                        <li>$20</li>
+                        <li>$20</li>
+                        <li>$15</li>
+                      </ul>
+                    </td>
+                    <td>
+                      <ul>
+                        <li>Tony</li>
+                        <li>Pete</li>
+                        <li>Molly</li>
+                        <li>Jeana Rose</li>
+                      </ul>
+                    </td>
                   </tr>
                 </>
               ))}
