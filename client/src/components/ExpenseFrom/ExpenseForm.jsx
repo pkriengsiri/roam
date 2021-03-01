@@ -11,7 +11,7 @@ const ExpenseForm = (props) => {
   const { onDisplay, display, theme } = useContext(AlertContext);
   const { userContext } = useContext(UserContext);
   const { tripContext, setTripContext } = useContext(TripContext);
-  const [trip, setTrip] = useState({travelers:[]});
+  const [trip, setTrip] = useState({ travelers: [] });
 
   const [totalExpenseAmount, setTotalExpenseAmount] = useState("");
   const [expenseCategory, setExpenseCategory] = useState("");
@@ -42,6 +42,12 @@ const ExpenseForm = (props) => {
     API.getTrip(tripId)
       .then((response) => {
         setTrip(response.data);
+        setExpenseShare(
+          response.data.travelers.map((traveler) => ({
+            travelerEmail: traveler.travelerEmail,
+            shareOfTotalExpense: 0,
+          }))
+        );
       })
       .catch((err) => {
         console.log(err);
@@ -49,7 +55,6 @@ const ExpenseForm = (props) => {
   }, []);
 
   const handleTotalExpenseChange = (e) => {
-    console.log("hi");
     let num = e.target.value
       .toString()
       .split(".")
@@ -57,9 +62,19 @@ const ExpenseForm = (props) => {
       .join(".");
 
     setTotalExpenseAmount(num);
-    setExpenseShare([
-      { travelerEmail: userContext.email, shareOfTotalExpense: num },
-    ]);
+    let updateArray = expenseShare;
+    // console.log(
+    //   updateArray.find((el) => el.travelerEmail === userContext.email)
+    // );
+    let updateExpenseCreatorShare = updateArray.find(
+      (el) => el.travelerEmail === userContext.email
+    );
+    updateArray = updateArray.filter(
+      (el) => el.travelerEmail !== userContext.email
+    );
+    updateExpenseCreatorShare.shareOfTotalExpense = num;
+
+    setExpenseShare([...updateArray, updateExpenseCreatorShare]);
   };
 
   return (
@@ -105,22 +120,25 @@ const ExpenseForm = (props) => {
       {/* drop down form for splitting expense */}
 
       {trip.travelers.map((traveler) => (
-      <div className="field is-horizontal ml-5 mt-2">
-        <div className="field-label is-small">
-          <label className="label">{traveler.travelerEmail}</label>
-        </div>
-        <div className="field-body">
-          <div className="field">
-            <p className="control">
-              <input
-                className="input is-small"
-                type="email"
-                placeholder="Amount"
-              />
-            </p>
+        <div
+          className="field is-horizontal ml-5 mt-2"
+          key={traveler.travelerEmail}
+        >
+          <div className="field-label is-small">
+            <label className="label">{traveler.travelerEmail}</label>
+          </div>
+          <div className="field-body">
+            <div className="field">
+              <p className="control">
+                <input
+                  className="input is-small"
+                  type="email"
+                  placeholder="Amount"
+                />
+              </p>
+            </div>
           </div>
         </div>
-      </div>
       ))}
 
       <div className="field">
@@ -155,7 +173,7 @@ const ExpenseForm = (props) => {
             className="textarea"
             placeholder="Description of the expense"
             type="text"
-            maxlength="30"
+            maxLength="30"
             name="description"
             value={description}
             onChange={(e) => setDescription(e.target.value)}
