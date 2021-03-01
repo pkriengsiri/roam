@@ -35,16 +35,16 @@ const PackingList = () => {
   };
 
   const editItem = (id) => {
-      const updatedList = [...list].map((item) => {
-          if (item.id === id){
-              item.text = editingText;
-          }
-          return item;
-      })
-      setList(updatedList);
-      setEditingText("");
-      setItemEditing(null);
-  }
+    const updatedList = [...list].map((item) => {
+      if (item.id === id) {
+        item.text = editingText;
+      }
+      return item;
+    });
+    setList(updatedList);
+    setEditingText("");
+    setItemEditing(null);
+  };
 
   return (
     <div>
@@ -78,8 +78,11 @@ const PackingList = () => {
               )}
 
               <button onClick={() => deleteItem(item.id)}>Delete</button>
-              <button onClick={() => setItemEditing(item.id)}>Edit</button>
-              <button onClick={()=> editItem(item.id)}>Save</button>
+              {itemEditing === item.id ? (
+                <button onClick={() => editItem(item.id)}>Save</button>
+              ) : (
+                <button onClick={() => setItemEditing(item.id)}>Edit</button>
+              )}
             </div>
           ))}
         </div>
