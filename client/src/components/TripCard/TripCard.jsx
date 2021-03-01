@@ -20,7 +20,7 @@ const TripCard = ({
   const { userId } = useParams();
 
   return (
-    <div className="columns is-centered">
+    // <div className="columns is-centered">
       <div className="column is-6">
         <div className="card trip-card">
           <div className="card-content has-text-left">
@@ -73,7 +73,7 @@ const TripCard = ({
           </div>
         </div>
       </div>
-    </div>
+    // </div>
   );
 };
 

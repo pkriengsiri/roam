@@ -107,7 +107,7 @@ const SingleTrip = () => {
             <>
               <h1>No Expenses Yet</h1>
               <Link
-                to={`/user/${userId}/trips/${tripId}/expense`}
+                to={`/user/${userId}/trips/${tripId}/expenses/new`}
                 className="button is-primary is-size-6"
                 type="submit"
               >
@@ -139,7 +139,7 @@ const SingleTrip = () => {
         </div>
         <div className="column is-2">
           <Link
-            to={`/user/${userId}/trips/${tripId}/expense`}
+            to={`/user/${userId}/trips/${tripId}/expenses/new`}
             className="button mr-4 is-size-4 is-light"
             type="submit"
           >

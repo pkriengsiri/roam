@@ -3,9 +3,9 @@
     top: 0;
     width: 51%;
     height: 100%;
-    background: #000;
+    background: whitesmoke;
     z-index: 1000;
-    animation: fade-in-loader 1s;
+    animation: fade-in-loader 2s;
 } @keyframes fade-in-loader {
     from {
         opacity: 1;
