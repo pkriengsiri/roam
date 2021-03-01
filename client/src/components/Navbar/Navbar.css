@@ -9,3 +9,7 @@ a.navbar-link:hover, a.navbar-link:active {
 .navbar-divider {
     background-color: #2e356095;
 }
+
+.navbar-profile-picture {
+    border-radius: 50px;
+}

@@ -35,15 +35,15 @@ const Navbar = ({ setUserContext }) => {
 
   const handleLogout = (e) => {
     e.preventDefault();
-    API.logoutUser().then((response) => {
-      console.log(response); 
-      setUserContext({ email: "", id: "" });
-      history.push("/");
-    }).catch((error) => {
-      console.log(error);
-    });
-
-    
+    API.logoutUser()
+      .then((response) => {
+        console.log(response);
+        setUserContext({ email: "", id: "" });
+        history.push("/");
+      })
+      .catch((error) => {
+        console.log(error);
+      });
   };
   return (
     <>
@@ -93,7 +93,12 @@ const Navbar = ({ setUserContext }) => {
             <div className="navbar-end ">
               <div className="navbar-item has-dropdown is-hoverable">
                 <a className="navbar-link">
-                  <i className="nav-icon fas fa-user-circle fa-2x"></i>
+                  {/* <i className="nav-icon fas fa-user-circle fa-2x"></i> */}
+                  <img
+                    className="navbar-profile-picture is-rounded"
+                    src="https://res.cloudinary.com/djou7v3ho/image/upload/v1614532245/Avatar-removebg-preview_1_g04ftj.png"
+                    alt=""
+                  />
                 </a>
                 <div className="navbar-dropdown is-right">
                   <Link
