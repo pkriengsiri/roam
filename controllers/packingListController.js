@@ -5,7 +5,7 @@ module.exports = {
   findById: function (req, res) {
     db.PackingList.findById(req.params.id)
       .then((dbPackingList) => {
-        res.json(packingList);
+        res.json(dbPackingList);
       })
       .catch((err) => {
         res.status(422).json(err);
