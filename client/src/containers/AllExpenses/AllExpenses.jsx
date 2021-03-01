@@ -47,6 +47,12 @@ const AllExpenses = (props) => {
     // Set the state
     setDisplayContributors(displayContributorsArr);
   };
+
+  const convertDate = (date) => {
+    const formattedDate = new Date(date);
+    return formattedDate.toLocaleDateString();
+  }
+
   return (
     <div className="container mt-6 pl-6 pr-6">
       <h1 className="title has-text-centered">
@@ -76,7 +82,7 @@ const AllExpenses = (props) => {
                         <i className="edit-expense-icon far fa-edit m-1 "></i>
                       </Link>
                     </td>
-                    <td className="is-vcentered">{expense.date.substring(0,10)}</td>
+                    <td className="is-vcentered">{convertDate(expense.date)}</td>
                     <td className="is-vcentered">{expense.description}</td>
                     <td className="is-vcentered">{expense.category}</td>
                     <td className="is-vcentered">
