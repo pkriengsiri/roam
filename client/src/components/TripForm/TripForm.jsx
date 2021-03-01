@@ -33,9 +33,10 @@ const loadScript = (url, callback) => {
 };
 
 function handleScriptLoad(updateQuery, autoCompleteRef) {
+  var sessionToken = new window.google.maps.places.AutocompleteSessionToken();
   autoComplete = new window.google.maps.places.Autocomplete(
     autoCompleteRef.current,
-    { types: ["(regions)"] }
+    { types: ["(regions)"], sessionToken: sessionToken}
   );
   autoComplete.setFields(["address_components", "formatted_address"]);
   autoComplete.addListener("place_changed", () =>

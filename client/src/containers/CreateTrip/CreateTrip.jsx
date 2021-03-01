@@ -7,6 +7,7 @@ import UserContext from "../../contexts/UserContext";
 import AlertContext from "../../contexts/AlertContext";
 
 
+
 const CreateTrip = () => {
   const { onDisplay, display, theme } = useContext(AlertContext);
 
