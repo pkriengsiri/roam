@@ -23,8 +23,29 @@
   padding-left: 25px;
   padding-right: 25px;
 }
-/* 
+
 .upload-field {
-  margin-left: auto;
-  margin-right: auto;
-} */
+  margin-left: 110px !important;
+}
+
+/* Media query at 1406px */
+@media screen and (max-width: 1407px) {
+  .upload-field{
+    margin-left: 70px !important;
+  }
+}
+
+/* Media query at 1215px */
+@media screen and (max-width: 1215px) {
+  .upload-field{
+    margin-left: 20px !important;
+  }
+}
+
+
+/* Media query at 768px */
+@media screen and (max-width: 768px) {
+  .upload-field{
+    margin-left: 30px !important;
+  }
+}

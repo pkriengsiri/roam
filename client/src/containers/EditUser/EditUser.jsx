@@ -24,6 +24,7 @@ const EditUser = () => {
   const { userContext, setUserContext } = useContext(UserContext);
 
   useEffect(() => {
+    console.log(fileName);
     if (userId) {
       API.getUser(userId)
         .then((response) => {
@@ -76,7 +77,7 @@ const EditUser = () => {
           setChangedProfileImageUrl(res.url);
           setLoadingState("");
           setDisplayIcon("");
-          setUserContext({...userContext, userProfileImage: res.url});
+          setUserContext({ ...userContext, userProfileImage: res.url });
         })
         .catch((error) => console.log("error", error));
     } else {
@@ -94,7 +95,7 @@ const EditUser = () => {
       <form onSubmit={handleFormSubmit}>
         <div className="columns is-centered is-vcentered">
           {/* Column with profile picture and photo upload input */}
-          <div className="column is-4 mb-6 mr-6">
+          <div className="column is-5 mb-6">
             {/* Profile picture */}
             <figure className="image">
               {changedProfileImageUrl ? (
@@ -112,7 +113,7 @@ const EditUser = () => {
             {/* Upload input */}
 
             <div className="field has-addons upload-field">
-              <div className="control has-icons-left">
+              <div className="control">
                 <div className="profile-picture-file file has-name mt-4">
                   <label className="file-label">
                     <input
@@ -159,9 +160,7 @@ const EditUser = () => {
             {fileUploadStatus === "false" && (
               <Alert color={"error"}>Please upload a valid file</Alert>
             )}
-          </div>
-          <div className="column is-5">
-            <div className="field">
+            <div className="field mt-4">
               <label className="label">First Name</label>
               <div className="control">
                 <input
@@ -219,6 +218,9 @@ const EditUser = () => {
               </div>
             </div>
           </div>
+          {/* <div className="column is-5"> */}
+
+          {/* </div> */}
         </div>
       </form>
     </div>
