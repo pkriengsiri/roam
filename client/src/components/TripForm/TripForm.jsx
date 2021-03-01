@@ -85,7 +85,7 @@ const TripForm = (props) => {
   useEffect(() => {
     loadScript(
       `https://maps.googleapis.com/maps/api/js?key=${process.env.REACT_APP_PLACES_API_KEY}&libraries=places`,
-      () => handleScriptLoad(setQuery, autoCompleteRef)
+      () => handleScriptLoad(setDestination, autoCompleteRef)
     );
     if (tripId) {
       axios
@@ -195,9 +195,9 @@ const TripForm = (props) => {
             }}
           >
             {/* destination section  */}
-            <div className="field mb-2">
-              <label className="label">Destination</label>
-              <div className="control">
+            {/* <div className="field mb-2"> */}
+              {/* <label className="label">Destination</label> */}
+              {/* <div className="control">
                 <input
                   autoFocus
                   className="input"
@@ -207,16 +207,16 @@ const TripForm = (props) => {
                   value={destination}
                   onChange={(e) => setDestination(e.target.value)}
                 />
-              </div>
-            </div>
+              </div> */}
+            {/* </div> */}
             <div className="field mb-2">
             <label className="label">Destination</label>
             <div className="control">
               <input
                 ref={autoCompleteRef}
-                onChange={(event) => setQuery(event.target.value)}
+                onChange={(event) => setDestination(event.target.value)}
                 placeholder="Enter a City"
-                value={query}
+                value={destination}
               /></div>
             </div>
             {/* date picker section  */}
