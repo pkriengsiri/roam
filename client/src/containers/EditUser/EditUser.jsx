@@ -5,6 +5,7 @@ import { useParams, useHistory, Link } from "react-router-dom";
 import FormData from "form-data";
 import Alert from "../../components/Alert/Alert";
 import AlertContext from "../../contexts/AlertContext";
+import UserContext from "../../contexts/UserContext";
 
 const EditUser = () => {
   const { userId } = useParams();
