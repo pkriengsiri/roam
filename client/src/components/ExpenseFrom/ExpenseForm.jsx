@@ -8,6 +8,7 @@ import AlertContext from "../../contexts/AlertContext";
 import API from "../../utils/API";
 import { SingleDatePicker } from "react-dates";
 import "./SingleDatePicker.css";
+import moment from "moment";
 
 const ExpenseForm = (props) => {
   const { onDisplay, display, theme } = useContext(AlertContext);
@@ -38,9 +39,11 @@ const ExpenseForm = (props) => {
     if (expenseId) {
       API.getExpense(expenseId)
         .then((response) => {
+          const date= moment(response.data.date);
           setTotalExpenseAmount(response.data.totalExpenseAmount);
           setExpenseCategory(response.data.category);
           setDescription(response.data.description);
+          setDate(moment(date));
         })
         .catch((err) => {
           console.log(err);
@@ -189,6 +192,7 @@ const ExpenseForm = (props) => {
           orientation={calendarStack}
           isOutsideRange={() => false}
           anchorDirection="ANCHOR_RIGHT"
+          numberOfMonths="1"
 
         />
         <label className="label">Amount</label>
