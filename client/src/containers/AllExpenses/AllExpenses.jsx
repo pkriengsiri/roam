@@ -15,7 +15,7 @@ const AllExpenses = (props) => {
     if (tripId) {
       API.getTrip(tripId)
         .then((response) => {
-          console.log(response.data)
+          // console.log(response.data);
           setExpenseArray(response.data.expenses);
           setDestination(response.data.destination);
 
@@ -39,16 +39,16 @@ const AllExpenses = (props) => {
     // Create a copy of the displayContributors array
     const displayContributorsArr = [...displayContributors];
     // Det the id of the button being clicked
-    
+
     let buttonDataIndex;
     buttonDataIndex = e.target.dataset.index;
-    console.log(buttonDataIndex)
-    console.log(displayContributorsArr)
+    // console.log(buttonDataIndex);
+    // console.log(displayContributorsArr);
     // Change the value of the item in the array being clicked
     displayContributorsArr[buttonDataIndex] = !displayContributorsArr[
       buttonDataIndex
     ];
-    console.log(displayContributorsArr)
+    // console.log(displayContributorsArr);
     // Set the state
     setDisplayContributors(displayContributorsArr);
 
@@ -84,11 +84,13 @@ const AllExpenses = (props) => {
               </tr>
             </thead>
             <tbody className="has-text-centered expenses-body">
-              {expenseArray.map((expense,index) => (
+              {expenseArray.map((expense, index) => (
                 <>
                   <tr key={expense._id} className="is-hoverable expense-row">
                     <td>
-                      <Link to={`/user/${userId}/trips/${tripId}/expenses/${expense._id}/edit`}>
+                      <Link
+                        to={`/user/${userId}/trips/${tripId}/expenses/${expense._id}/edit`}
+                      >
                         <i className="edit-expense-icon far fa-edit m-1 "></i>
                       </Link>
                     </td>
@@ -110,25 +112,17 @@ const AllExpenses = (props) => {
                   </tr>
                   {displayContributors[index] && (
                     <tr className="has-text-dark" data-row={index}>
-                      <td></td>
-                      <td>
-                        <MiniTable />
-                      </td>
-                      <td>
-                        <ul>
-                          <li>$10</li>
-                          <li>$20</li>
-                          <li>$20</li>
-                          <li>$15</li>
-                        </ul>
-                      </td>
-                      <td>
-                        <ul>
-                          <li>Tony</li>
-                          <li>Pete</li>
-                          <li>Molly</li>
-                          <li>Jeana Rose</li>
-                        </ul>
+                      <td colSpan="5">
+                        <div>
+                          {/* Mini-table goes here */}
+                          <p>
+                            Lorem ipsum dolor sit amet consectetur adipisicing
+                            elit. Labore natus incidunt quaerat quis culpa nisi!
+                            Impedit, cum iusto! Accusamus officia repudiandae
+                            nulla architecto officiis distinctio. Odit, libero.
+                            Tenetur, sed sit!
+                          </p>
+                        </div>
                       </td>
                     </tr>
                   )}
