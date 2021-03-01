@@ -28,10 +28,3 @@
 .trip-card-content{
     margin-top: -10px;
 }
-
-.trip-card {
-    /* height: 250px;
-    width: 500px; */
-    min-width: 400px;
-    min-height: 100px;
-}

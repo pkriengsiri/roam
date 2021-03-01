@@ -28,11 +28,11 @@ const Dashboard = () => {
     API.getUserWithTrips(userId)
       .then((response) => {
         setTrips(response.data.trips);
-        setTypeOfTripsToDisplay("Upcoming")
+        setTypeOfTripsToDisplay("Upcoming");
         if (!response.data.firstName) {
-          setCurrentUser(`Welcome!`);
+          setCurrentUser(``);
         } else {
-          setCurrentUser(`Welcome, ${response.data.firstName}!`);
+          setCurrentUser(`${response.data.firstName}`);
         }
       })
       .catch((err) => {
@@ -60,10 +60,10 @@ const Dashboard = () => {
 
   // if no upcoming trips, default to all trips
   useEffect(() => {
-    if (filteredTrips.length === 0 && typeOfTripsToDisplay==="Upcoming") {
+    if (filteredTrips.length === 0 && typeOfTripsToDisplay === "Upcoming") {
       setTypeOfTripsToDisplay("All");
     }
-  }, [filteredTrips,typeOfTripsToDisplay]);
+  }, [filteredTrips, typeOfTripsToDisplay]);
 
   // function to change which trips to display
   const changeDisplay = (e) => {
@@ -72,95 +72,71 @@ const Dashboard = () => {
 
   return (
     <>
-      {/* <h1 className="title is-size-1 has-text-centered mt-6 pl-6 pr-6">
-        {currentUser}
-      </h1>
-      <h1 className="subtitle is-size-4 has-text-centered mt-3">
-        Start planning your trips today!
-      </h1> */}
-      <div className="columns is-gapless is-centered is-vcentered mt-4">
-        <div className="column is-1">
-          <figure className="image">
-            <img
-              className="is-rounded dashboard-profile-picture"
-              src={profileImage}
-            />
-          </figure>
-        </div>
-        <div className="column is-3 mb-5 has-text-left">
-          <h1 className="title is-size-1 dashboard-welcome has-text-centered mt-4">
-            {currentUser}
+      <div className="container has-text-centered pl-6 pr-6 mt-6">
+        {trips.length !== 0 && (
+          <h1 className="title is-size-1 has-text-centered pl-6 pr-6">
+            {currentUser}'s Trips
           </h1>
+        )}
+        {trips.length === 0 && (
+          <h1 className="title">Welcome{`, ${currentUser}`}!</h1>
+        )}
 
-          <h2 className="subtitle dashboard-subtitle has-text-centered">
-            Start planning your trips today!{" "}
-          </h2>
-        </div>
-      </div>
-      <section className="has-text-centered">
-        <Doodle2 />
-      </section>
-
-      <div className="container has-text-centered mt-6 pl-6 pr-6">
-        {/* global alert for not filling out user profile */}
-        <div className="columns is-centered">
-          <div className="column is-8 has-text-centered">
-            {/* conditional rendering for displaying name IF it is in the database */}
-            {/* Conditional rendering for if the user has trips or not */}
-            {trips.length !== 0 && <h1 className="title">Your Trips</h1>}
-            {trips.length === 0 && (
-              <h1 className="title">You don't have any trips planned yet!</h1>
-            )}
-          </div>
-        </div>
+        <section className="has-text-centered">
+          <Doodle2 />
+        </section>
 
         {/* toggle trips to view buttons      */}
-        <div className="buttons is-centered has-addons">
-          <button
-            className={
-              typeOfTripsToDisplay === "All"
-                ? "button is-primary is-selected "
-                : "button"
-            }
-            onClick={(e) => changeDisplay(e)}
-          >
-            All
-          </button>
-          <button
-            className={
-              typeOfTripsToDisplay === "Upcoming"
-                ? "button is-primary is-selected"
-                : "button"
-            }
-            onClick={(e) => changeDisplay(e)}
-          >
-            Upcoming
-          </button>
-          <button
-            className={
-              typeOfTripsToDisplay === "Past"
-                ? "button is-primary is-selected"
-                : "button"
-            }
-            onClick={(e) => changeDisplay(e)}
-          >
-            Past
-          </button>
-        </div>
-
-        {filteredTrips.map((trip) => (
-          <TripCard
-            {...trip}
-            startDate={new Date(trip.startDate)}
-            endDate={new Date(trip.endDate)}
-            tripId={trip._id}
-            key={trip._id}
-          />
-        ))}
-        <Link
-          to={`/user/${userId}/trips/new`}
-          className="button is-primary mr-4 is-size-4 "
-        >
+        {trips.length === 0 ? (
+          <h1 className="subtitle">You don't have any trips planned yet.</h1>
+        ) : (
+          <>
+            <div className="buttons is-centered has-addons ">
+              <button
+                className={
+                  typeOfTripsToDisplay === "All"
+                    ? "button is-primary is-selected "
+                    : "button"
+                }
+                onClick={(e) => changeDisplay(e)}
+              >
+                All
+              </button>
+              <button
+                className={
+                  typeOfTripsToDisplay === "Upcoming"
+                    ? "button is-primary is-selected"
+                    : "button"
+                }
+                onClick={(e) => changeDisplay(e)}
+              >
+                Upcoming
+              </button>
+              <button
+                className={
+                  typeOfTripsToDisplay === "Past"
+                    ? "button is-primary is-selected"
+                    : "button"
+                }
+                onClick={(e) => changeDisplay(e)}
+              >
+                Past
+              </button>
+            </div>
+            <div className="columns is-centered is-multiline">
+              {filteredTrips.map((trip) => (
+                <TripCard
+                  {...trip}
+                  startDate={new Date(trip.startDate)}
+                  endDate={new Date(trip.endDate)}
+                  tripId={trip._id}
+                  key={trip._id}
+                />
+              ))}
+            </div>
+          </>
+        )}
+        <Link to={`/user/${userId}/trips/new`} className="button is-primary">
           Create Trip
         </Link>
       </div>
