@@ -8,9 +8,9 @@ const AllExpenses = (props) => {
   const { userId, tripId } = useParams();
   const [destination, setDestination] = useState("");
   const [expenseArray, setExpenseArray] = useState([]);
+  const [buttonDisplayState, setButtonDisplayState] = useState(false);
   const [displayContributors, setDisplayContributors] = useState(false);
   let buttonDataId;
-  let contributorsDataId;
   useEffect(() => {
     if (tripId) {
       API.getTrip(tripId)
@@ -26,21 +26,18 @@ const AllExpenses = (props) => {
 
   const handleContributors = (e) => {
     e.preventDefault();
-    // console.log(e.target.dataset.id);
-    // Render new row with Mini Table information
-    // Where e.target.dataset.id, set button status to
-    // console.log(e.target.parentNode.parentNode.parentNode)
-
-    // console.log(e.target.parentNode.parentNode.parentNode.children[5].dataset)
-    // buttonDataId = e.target.dataset.id;
-    // console.log(buttonDataId);
+    if (buttonDisplayState) {
+      var element = document.querySelectorAll(`[data-row]`);
+      element.forEach((element) => element.classList.remove("is-hidden"));
+      setButtonDisplayState(false);
+    } else {
+      buttonDataId = e.target.dataset.id;
+      console.log(buttonDataId);
+      var element = document.querySelector(`[data-row="${buttonDataId}"]`);
+      element.classList.add("is-hidden");
+      setButtonDisplayState(true);
+    }
     setDisplayContributors();
-
-    // if (!displayContributors) {
-    //   //  If ids match, display contributors
-    // } else {
-    //   setDisplayContributors("");
-    // }
   };
   return (
     <div className="container mt-6 pl-6 pr-6">
@@ -64,53 +61,25 @@ const AllExpenses = (props) => {
                   <tr key={index} className="is-hoverable expense-row">
                     <td className="is-vcentered">{expense.description}</td>
                     <td className="is-vcentered">{expense.category}</td>
-                    <td className="is-vcentered">${expense.totalExpenseAmount}</td>
+                    <td className="is-vcentered">
+                      ${expense.totalExpenseAmount}
+                    </td>
                     {/* Dropdown for MiniTable goes here */}
                     <td className="is-vcentered">
-                      {/* <i
+                      <i
                         onClick={handleContributors}
                         data-id={index}
                         className="button fas fa-angle-down"
                         aria-hidden="true"
-                      ></i> */}
-                      <div className="dropdown is-hoverable is-right">
-                        <div className="dropdown-trigger ">
-                          <button
-                            className="button"
-                            aria-haspopup="true"
-                            aria-controls="dropdown-menu3"
-                          >
-                            <span className="icon is-small">
-                              <i
-                                className="fas fa-angle-down"
-                                aria-hidden="true"
-                              ></i>
-                            </span>
-                          </button>
-                        </div>
-                        <div
-                          className="dropdown-menu"
-                          id="dropdown-menu3"
-                          role="menu"
-                        >
-                          <div className="dropdown-content">
-                            <a href="#" className="dropdown-item">
-                              <MiniTable />
-                            </a>
-                          </div>
-                        </div>
-                      </div>
+                      ></i>
                     </td>
                   </tr>
-                  {/* {displayContributors} */}
-                  {/* {buttonDataId && ( */}
-                  {/* <tr data-id={index}>
-                      <td>Test</td>
-                      <td>Test</td>
-                      <td>Test</td>
-                      <td>Test</td>
-                    </tr> */}
-                  {/* )} */}
+                  <tr className="has-text-dark" data-row={index}>
+                    <td>Test</td>
+                    <td>Test</td>
+                    <td>Test</td>
+                    <td>Test</td>
+                  </tr>
                 </>
               ))}
             </tbody>
