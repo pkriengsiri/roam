@@ -27,6 +27,7 @@ const ExpenseForm = (props) => {
   const { userId } = useParams();
   const { expenseId } = useParams();
 
+  // at mount, populate form for edit trip
   useEffect(() => {
     if (expenseId) {
       API.getExpense(expenseId)
@@ -42,6 +43,7 @@ const ExpenseForm = (props) => {
     }
   }, []);
 
+  // at mount, get trip information and initialize expenseShare array
   useEffect(() => {
     API.getTrip(tripId)
       .then((response) => {
@@ -58,6 +60,7 @@ const ExpenseForm = (props) => {
       });
   }, []);
 
+  // calculate remainder/ variance when changes are made to total or breakdown
   useEffect(() => {
     let sumOfShare = expenseShare;
     sumOfShare = expenseShare.reduce(
@@ -65,29 +68,41 @@ const ExpenseForm = (props) => {
       0
     );
     setRemainder(totalExpenseAmount - sumOfShare);
-  }, [expenseShare]);
+  }, [expenseShare, totalExpenseAmount]);
 
-  const handleTotalExpenseChange = (e) => {
-    let num = e.target.value
-      .toString()
-      .split(".")
-      .map((el, i) => (i ? el.split("").slice(0, 2).join("") : el))
-      .join(".");
-
-    if (shareType === "solo") {
-      setTotalExpenseAmount(num);
-      let updateArray = expenseShare;
+  useEffect(() => {
+    console.log(shareType);
+    console.log(totalExpenseAmount);
+    if (shareType === "Solo" && trip.travelers.length > 0) {
+      let updateArray = trip.travelers.map((traveler) => ({
+        travelerEmail: traveler.travelerEmail,
+        shareOfTotalExpense: 0,
+      }));
       let updateExpenseCreatorShare = updateArray.find(
         (el) => el.travelerEmail === userContext.email
       );
       updateArray = updateArray.filter(
         (el) => el.travelerEmail !== userContext.email
       );
-      updateExpenseCreatorShare.shareOfTotalExpense = num;
+      if (totalExpenseAmount === "") {
+        updateExpenseCreatorShare.shareOfTotalExpense = 0;
+      } else {
+        updateExpenseCreatorShare.shareOfTotalExpense = totalExpenseAmount;
+      }
       setExpenseShare([...updateArray, updateExpenseCreatorShare]);
     }
-    // if (shareType === "Share Evenly") {
-    //   setTotalExpenseAmount(num);
+  }, [shareType, totalExpenseAmount, trip, userContext]);
+
+  // force number input to be in USD
+  const handleTotalExpenseChange = (e) => {
+    let num = e.target.value
+      .toString()
+      .split(".")
+      .map((el, i) => (i ? el.split("").slice(0, 2).join("") : el))
+      .join(".");
+    setTotalExpenseAmount(num);
+
+    // if (shareType === "Solo") {
     //   let updateArray = expenseShare;
     //   let updateExpenseCreatorShare = updateArray.find(
     //     (el) => el.travelerEmail === userContext.email
@@ -95,21 +110,27 @@ const ExpenseForm = (props) => {
     //   updateArray = updateArray.filter(
     //     (el) => el.travelerEmail !== userContext.email
     //   );
+    //   if (num === "") {
+    //     num = 0;
+    //   }
     //   updateExpenseCreatorShare.shareOfTotalExpense = num;
     //   setExpenseShare([...updateArray, updateExpenseCreatorShare]);
     // }
 
-    // if (shareType === "Custom") {
-    //   setTotalExpenseAmount(num);
+    // if (shareType === "Share Evenly") {
     //   let updateArray = expenseShare;
-    //   let updateExpenseCreatorShare = updateArray.find(
-    //     (el) => el.travelerEmail === userContext.email
-    //   );
-    //   updateArray = updateArray.filter(
-    //     (el) => el.travelerEmail !== userContext.email
-    //   );
-    //   updateExpenseCreatorShare.shareOfTotalExpense = num;
-    //   setExpenseShare([...updateArray, updateExpenseCreatorShare]);
+    //   let subtotal = 0;
+    //   let evenSplit = parseFloat((num / updateArray.length).toFixed(2));
+    //   for (let i = 0; i < updateArray.length; i++) {
+    //     console.log(evenSplit);
+    //     subtotal += evenSplit;
+    //     console.log(subtotal);
+    //     updateArray[i].shareOfTotalExpense = evenSplit;
+    //   }
+
+    //   if (num === "") {
+    //     num = 0;
+    //   }
     // }
   };
 
@@ -151,37 +172,37 @@ const ExpenseForm = (props) => {
 
       {/* select how to split expense */}
       <div className="buttons is-centered has-addons ">
-              <button
-                className={
-                  shareType === "Solo"
-                    ? "button is-primary is-selected is-small"
-                    : "button is-small"
-                }
-                onClick={(e) => setShareType(e.target.innerHTML)}
-              >
-                Solo
-              </button>
-              <button
-                className={
-                  shareType === "Share Evenly"
-                    ? "button is-primary is-selected is-small"
-                    : "button is-small"
-                }
-                onClick={(e) => setShareType(e.target.innerHTML)}
-              >
-                Share Evenly
-              </button>
-              <button
-                className={
-                  shareType === "Custom Split"
-                    ? "button is-primary is-selected is-small"
-                    : "button is-small"
-                }
-                onClick={(e) => setShareType(e.target.innerHTML)}
-              >
-                Custom Split
-              </button>
-            </div>
+        <button
+          className={
+            shareType === "Solo"
+              ? "button is-primary is-selected is-small"
+              : "button is-small"
+          }
+          onClick={(e) => setShareType(e.target.innerHTML)}
+        >
+          Solo
+        </button>
+        <button
+          className={
+            shareType === "Share Evenly"
+              ? "button is-primary is-selected is-small"
+              : "button is-small"
+          }
+          onClick={(e) => setShareType(e.target.innerHTML)}
+        >
+          Share Evenly
+        </button>
+        <button
+          className={
+            shareType === "Custom Split"
+              ? "button is-primary is-selected is-small"
+              : "button is-small"
+          }
+          onClick={(e) => setShareType(e.target.innerHTML)}
+        >
+          Custom Split
+        </button>
+      </div>
 
       {/* drop down form for splitting expense */}
 
