@@ -60,8 +60,6 @@ const Dashboard = () => {
 
   // if no upcoming trips, default to all trips
   useEffect(() => {
-    console.log(filteredTrips.length)
-    console.log(typeOfTripsToDisplay)
     if (filteredTrips.length === 0 && typeOfTripsToDisplay==="Upcoming") {
       setTypeOfTripsToDisplay("All");
     }
