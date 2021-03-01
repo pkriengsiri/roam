@@ -13,7 +13,8 @@ const Dashboard = () => {
   const [trips, setTrips] = useState([]);
   const [currentUser, setCurrentUser] = useState("");
   const [profileImage, setProfileImage] = useState("");
-  const [tripsToDisplay, setTripsToDisplay] = useState("Upcoming");
+  const [typeOfTripsToDisplay, setTypeOfTripsToDisplay] = useState("Upcoming");
+  const [filteredTrips, setFilteredTrips] = useState([]);
 
   useEffect(() => {
     API.getUser(userId)
@@ -40,20 +41,23 @@ const Dashboard = () => {
 
   // function to change array of trips passed to trip cards
   useEffect(() => {
-    let filteredTrips = trips;
-    const today = moment().format();
-    if (tripsToDisplay === "Upcoming") {
-      return filteredTrips.filter((trip) => trip.startDate >= today);
-    } else if (tripsToDisplay === "Past") {
-      return filteredTrips.filter((trip) => trip.endDate <= today);
+    const today = moment().format().substring(0, 10);
+    if (typeOfTripsToDisplay === "Upcoming") {
+      setFilteredTrips(
+        trips.filter((trip) => trip.startDate.substring(0, 10) >= today)
+      );
+    } else if (typeOfTripsToDisplay === "Past") {
+      setFilteredTrips(
+        trips.filter((trip) => trip.endDate.substring(0, 10) <= today)
+      );
     } else {
-      return filteredTrips;
+      setFilteredTrips(trips);
     }
-  }, [tripsToDisplay]);
+  }, [typeOfTripsToDisplay,trips]);
 
   // function to change which trips to display
   const changeDisplay = (e) => {
-    setTripsToDisplay(e.target.innerHTML);
+    setTypeOfTripsToDisplay(e.target.innerHTML);
   };
 
   return (
@@ -104,7 +108,7 @@ const Dashboard = () => {
         <div className="buttons is-centered has-addons">
           <button
             className={
-              tripsToDisplay === "All"
+              typeOfTripsToDisplay === "All"
                 ? "button is-primary is-selected "
                 : "button"
             }
@@ -114,7 +118,7 @@ const Dashboard = () => {
           </button>
           <button
             className={
-              tripsToDisplay === "Upcoming"
+              typeOfTripsToDisplay === "Upcoming"
                 ? "button is-primary is-selected"
                 : "button"
             }
@@ -124,7 +128,7 @@ const Dashboard = () => {
           </button>
           <button
             className={
-              tripsToDisplay === "Past"
+              typeOfTripsToDisplay === "Past"
                 ? "button is-primary is-selected"
                 : "button"
             }
@@ -134,7 +138,7 @@ const Dashboard = () => {
           </button>
         </div>
 
-        {trips.map((trip) => (
+        {filteredTrips.map((trip) => (
           <TripCard
             {...trip}
             startDate={new Date(trip.startDate)}
