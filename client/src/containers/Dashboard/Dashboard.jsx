@@ -5,7 +5,6 @@ import API from "../../utils/API";
 import { Link, useParams } from "react-router-dom";
 import Doodle2 from "../../components/Doodle/Doodle2";
 import { set } from "mongoose";
-import Loader from "../../components/Loader/Loader";
 import moment from "moment";
 
 const Dashboard = () => {
