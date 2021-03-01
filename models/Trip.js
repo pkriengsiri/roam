@@ -12,7 +12,8 @@ const tripSchema = new Schema({
   imageUrl: {
     type: String,
     trim: true,
-    default: "https://res.cloudinary.com/djou7v3ho/image/upload/v1614465147/default-trip-image_mldlfd.jpg",
+    default:
+      "https://res.cloudinary.com/djou7v3ho/image/upload/v1614465147/default-trip-image_mldlfd.jpg",
   },
   startDate: {
     type: Date,
@@ -33,6 +34,7 @@ const tripSchema = new Schema({
     },
   ], //array of userIds
   expenses: [{ type: Schema.Types.ObjectId, ref: "Expense" }],
+  packingList: [{ type: Schema.Types.ObjectId, ref: "PackingList" }],
 });
 
 const Trip = mongoose.model("Trip", tripSchema);

@@ -6,6 +6,8 @@ import "./ExpenseForm.css";
 import Alert from "../Alert/Alert";
 import AlertContext from "../../contexts/AlertContext";
 import API from "../../utils/API";
+import { SingleDatePicker } from "react-dates";
+import "./SingleDatePicker.css";
 
 const ExpenseForm = (props) => {
   const { onDisplay, display, theme } = useContext(AlertContext);
@@ -21,6 +23,9 @@ const ExpenseForm = (props) => {
   ]);
   const [expenseBalanced, setExpenseBalanced] = useState(true);
   const [remainder, setRemainder] = useState(0);
+  const [date, setDate] = useState(null);
+  const [focused, setFocused] = useState(null);
+  const [calendarStack, setCalendarStack] = useState("horizontal");
   const [shareType, setShareType] = useState("Solo");
   // const [customPlaceholder, setCustomPlaceholder] = useState();
 
@@ -69,6 +74,15 @@ const ExpenseForm = (props) => {
     );
     setRemainder(parseFloat((totalExpenseAmount - sumOfShare).toFixed(2)));
   }, [expenseShare, totalExpenseAmount]);
+
+   // check window viewport to set orientation of calendar so it is responsive in mobile
+   useEffect(() => {
+    if (window.innerWidth <= 768) {
+      setCalendarStack("vertical");
+    } else {
+      setCalendarStack("horizontal");
+    }
+  }, [window.innerWidth]);
 
   // use effect for setting each traveler's share of the total expense
   useEffect(() => {
@@ -150,6 +164,7 @@ const ExpenseForm = (props) => {
       onSubmit={(e) => {
         e.preventDefault();
         props.handleFormSubmit(e, {
+          date: date,
           expenseCreator: userId,
           trip: tripId,
           totalExpenseAmount,
@@ -161,6 +176,21 @@ const ExpenseForm = (props) => {
       }}
     >
       <div className="field">
+        <label className="label">Expense Date</label>
+        <SingleDatePicker
+          className="single-date-picker"
+          date={date}
+          onDateChange={(date) => setDate(date)}
+          focused={focused}
+          onFocusChange={({ focused }) => setFocused(focused)}
+          id="date"
+          showDefaultInputIcon={true} // calendar icon
+          showClearDate={true} // clear dates with x button
+          orientation={calendarStack}
+          isOutsideRange={() => false}
+          anchorDirection="ANCHOR_RIGHT"
+
+        />
         <label className="label">Amount</label>
         <div className="control has-icons-left has-icons-right">
           <input
