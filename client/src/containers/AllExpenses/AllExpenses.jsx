@@ -49,31 +49,31 @@ const AllExpenses = (props) => {
       </h1>
       <div className="columns is-centered">
         <div className="column is-full has-text-centered">
-          <table className="table  is-fullwidth expenses-table">
+          <table className="table  is-fullwidth expenses-table is-striped">
             <thead className="expense-table-head has-text-centered">
               <tr>
-                <th>Expense</th>
-                <th>Category</th>
-                <th>Amount</th>
-                <th>Contributors</th>
+                <th className="has-text-light">Expense</th>
+                <th className="has-text-light">Category</th>
+                <th className="has-text-light">Amount</th>
+                <th className="has-text-light">Contributors</th>
               </tr>
             </thead>
-            <tbody className="has-text-centered">
+            <tbody className="has-text-centered expenses-body">
               {expenseArray.map((expense, index) => (
                 <>
-                  <tr key={index} className="is-hoverable">
+                  <tr key={index} className="is-hoverable expense-row">
                     <td className="is-vcentered">{expense.description}</td>
                     <td className="is-vcentered">{expense.category}</td>
                     <td className="is-vcentered">${expense.totalExpenseAmount}</td>
                     {/* Dropdown for MiniTable goes here */}
                     <td className="is-vcentered">
-                      <i
+                      {/* <i
                         onClick={handleContributors}
                         data-id={index}
                         className="button fas fa-angle-down"
                         aria-hidden="true"
-                      ></i>
-                      {/* <div className="dropdown is-hoverable">
+                      ></i> */}
+                      <div className="dropdown is-hoverable is-right">
                         <div className="dropdown-trigger ">
                           <button
                             className="button"
@@ -97,31 +97,9 @@ const AllExpenses = (props) => {
                             <a href="#" className="dropdown-item">
                               <MiniTable />
                             </a>
-                            <a href="#" className="dropdown-item">
-                              Modifiers
-                            </a>
-                            <a href="#" className="dropdown-item">
-                              Grid
-                            </a>
-                            <a href="#" className="dropdown-item">
-                              Form
-                            </a>
-                            <a href="#" className="dropdown-item">
-                              Elements
-                            </a>
-                            <a href="#" className="dropdown-item">
-                              Components
-                            </a>
-                            <a href="#" className="dropdown-item">
-                              Layout
-                            </a>
-                            <hr className="dropdown-divider" />
-                            <a href="#" className="dropdown-item">
-                              More
-                            </a>
                           </div>
                         </div>
-                      </div> */}
+                      </div>
                     </td>
                   </tr>
                   {/* {displayContributors} */}
