@@ -86,7 +86,7 @@ const AllExpenses = (props) => {
                   <tr key={expense._id} className="is-hoverable expense-row">
                     <td>
                       <Link to={`/user/${userId}/trips/${tripId}/expenses/${expense._id}/edit`}>
-                        <i className=" far fa-edit m-1 "></i>
+                        <i className="edit-expense-icon far fa-edit m-1 "></i>
                       </Link>
                     </td>
                     <td className="is-vcentered">{expense.description}</td>
