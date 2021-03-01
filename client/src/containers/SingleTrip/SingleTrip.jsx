@@ -5,7 +5,6 @@ import "./SingleTrip.css";
 import UserContext from "../../contexts/UserContext";
 import DoughnutChart from "../../components/DoughnutChart/DoughnutChart";
 
-
 const SingleTrip = () => {
   const { userContext } = useContext(UserContext);
 
@@ -67,7 +66,7 @@ const SingleTrip = () => {
       <div className="columns is-centered">
         <div className="column is-6 trip-container">
           <figure>
-            <img className="trip-image" src={imageUrl} alt={destination}/>
+            <img className="trip-image" src={imageUrl} alt={destination} />
           </figure>
           {/* </div>
         <div className="column is-3"> */}
@@ -95,7 +94,38 @@ const SingleTrip = () => {
           </div>
         </div>
       </div>
+
+      {/* EXPENSES  */}
+
       <div className="columns is-centered">
+        <div className="column is-6 has-text-centered">
+          <h1 className="title has-text-centered">Expenses</h1>
+          {expenses.length === 0 && (
+            <>
+              <h1>No Expenses Yet</h1>
+              <Link
+                to={`/user/${userId}/trips/${tripId}/expense`}
+                className="button is-primary is-size-6"
+                type="submit"
+              >
+                Create Expense
+              </Link>
+            </>
+          )}
+          {expenses.length !== 0 && (
+            <>
+              <h2 className="has-text-centered">Total Expenses</h2>
+              <Link to={`/user/${userId}/trips/${tripId}/expenses`}>
+                <DoughnutChart expenses={expenses} />
+              </Link>
+            </>
+          )}
+        </div>
+        <div className="column is-6">
+          <h1 className="title has-text-centered">Packing List</h1>
+        </div>
+      </div>
+      <div className="columns is-centered mt-6">
         <div className="column is-3">
           <Link
             to={`/user/${userId}/trips`}
@@ -114,36 +144,6 @@ const SingleTrip = () => {
           </Link>
         </div>
       </div>
-
-      {/* EXPENSES  */}
-
-      <div className="columns is-centered">
-        <div className="column is-6 has-text-centered">
-          <h1 className="title has-text-centered">Expenses</h1>
-          {expenses.length === 0 && (
-            <>
-            <h1>No Expenses Yet</h1>
-            <Link
-            to={`/user/${userId}/trips/${tripId}/expense`}
-            className="button is-primary is-size-6"
-            type="submit"
-          >
-            Create Expense
-          </Link>
-          </>
-          )}
-          {expenses.length !== 0 && (
-            <>
-              <h2 className="has-text-centered">Total Expenses</h2>
-              <DoughnutChart expenses={expenses} />
-            </>
-          )}
-        </div>
-        <div className="column is-6">
-          <h1 className="title has-text-centered">Packing List</h1>
-        </div>
-      </div>
-      
     </div>
   );
 };
