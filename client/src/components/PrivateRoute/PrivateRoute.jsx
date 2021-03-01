@@ -6,7 +6,7 @@ import Loader from "../Loader/Loader";
 
 export default function PrivateRoute(props) {
   const { userContext, isLoading } = useContext(UserContext);
-  console.log(userContext);
+  // console.log(userContext);
 
   const { component: Component, ...rest } = props;
   if (isLoading) {

@@ -21,7 +21,7 @@ const ExpenseForm = (props) => {
     if (expenseId) {
       API.getExpense(expenseId)
         .then((response) => {
-          console.log(response.data);
+          // console.log(response.data);
           setTotalExpenseAmount(response.data.totalExpenseAmount);
           setExpenseCategory(response.data.category);
           setDescription(response.data.description);
