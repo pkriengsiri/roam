@@ -5,6 +5,7 @@ import { useParams, useHistory, Link } from "react-router-dom";
 import FormData from "form-data";
 import Alert from "../../components/Alert/Alert";
 import AlertContext from "../../contexts/AlertContext";
+import UserContext from "../../contexts/UserContext";
 
 const EditUser = () => {
   const { userId } = useParams();
@@ -20,6 +21,7 @@ const EditUser = () => {
   const { onDisplay, display, theme } = useContext(AlertContext);
   const [loadingState, setLoadingState] = useState("");
   const [displayIcon, setDisplayIcon] = useState("");
+  const { userContext, setUserContext } = useContext(UserContext);
 
   useEffect(() => {
     if (userId) {
@@ -34,7 +36,7 @@ const EditUser = () => {
           console.log(err);
         });
     }
-  }, []);
+  }, [userContext]);
 
   const handleFormSubmit = (e) => {
     e.preventDefault();
@@ -74,6 +76,7 @@ const EditUser = () => {
           setChangedProfileImageUrl(res.url);
           setLoadingState("");
           setDisplayIcon("");
+          setUserContext({...userContext, userProfileImage: res.url});
         })
         .catch((error) => console.log("error", error));
     } else {

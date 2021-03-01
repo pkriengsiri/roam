@@ -22,11 +22,14 @@ const TripCard = ({
   return (
     <div className="column is-4 is-one-third-fullhd is-half-desktop">
       <div className="card trip-card">
-        <div className="card-image">
-          <figure className="image is-4by3">
-            <img className="places-image" src={imageUrl} />
-          </figure>
-        </div>
+        <Link to={`/user/${userId}/trips/${tripId}`}>
+          <div className="card-image">
+            <figure className="image is-4by3">
+              <img className="places-image" src={imageUrl} />
+            </figure>
+          </div>
+        </Link>
+
         <div className="card-content has-text-left">
           <div className="media">
             <div className="media-content">
