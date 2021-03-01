@@ -8,7 +8,7 @@ const AllExpenses = (props) => {
   const { userId, tripId } = useParams();
   const [destination, setDestination] = useState("");
   const [expenseArray, setExpenseArray] = useState([]);
-  const [buttonDisplayState, setButtonDisplayState] = useState(false);
+  // const [buttonDisplayState, setButtonDisplayState] = useState(false);
   const [displayContributors, setDisplayContributors] = useState([]);
 
   useEffect(() => {
@@ -17,9 +17,12 @@ const AllExpenses = (props) => {
         .then((response) => {
           setExpenseArray(response.data.expenses);
           setDestination(response.data.destination);
+
+          // Create an array to hold display state of contributor row and set value to false
           const expArr = response.data.expenses;
           const newArr = [];
           expArr.forEach(expense => {newArr.push(false)});
+          // Set the state to the new array
           setDisplayContributors(newArr);
         })
         .catch((err) => {
@@ -30,13 +33,14 @@ const AllExpenses = (props) => {
 
   const handleContributors = (e) => {
     e.preventDefault();
-    // console.log(displayContributors);
+    // Create a copy of the displayContributors array
     const displayContributorsArr = [...displayContributors];
-    console.log(displayContributorsArr);
+    // Det the id of the button being clicked
     let buttonDataId;
     buttonDataId = e.target.dataset.id;
+    // Change the value of the item in the array being clicked
     displayContributorsArr[buttonDataId] = !displayContributorsArr[buttonDataId];
-    console.log(displayContributorsArr);
+    // Set the state
     setDisplayContributors(displayContributorsArr);
 
     
