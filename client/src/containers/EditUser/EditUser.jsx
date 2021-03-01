@@ -1,9 +1,10 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useContext } from "react";
 import "./EditUser.css";
 import API from "../../utils/API";
 import { useParams, useHistory, Link } from "react-router-dom";
 import FormData from "form-data";
 import Alert from "../../components/Alert/Alert";
+import AlertContext from "../../contexts/AlertContext";
 
 const EditUser = () => {
   const { userId } = useParams();
@@ -13,15 +14,15 @@ const EditUser = () => {
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
   const [email, setEmail] = useState("");
-  const [fileUploadStatus, setFileUploadStatus] = useState(false);
+  const [fileUploadStatus, setFileUploadStatus] = useState();
   const [changedProfileImageUrl, setChangedProfileImageUrl] = useState("");
   const [fileType, setFileType] = useState("");
+  const { onDisplay, display, theme } = useContext(AlertContext);
 
   useEffect(() => {
     if (userId) {
       API.getUser(userId)
         .then((response) => {
-          // console.log(response);
           setFirstName(response.data.firstName);
           setLastName(response.data.lastName);
           setEmail(response.data.email);
@@ -50,7 +51,6 @@ const EditUser = () => {
   };
 
   const addPhoto = () => {
-    console.log(fileType);
     if (fileType !== "") {
       var formdata = new FormData();
       formdata.append("photo", fileInput, "file");
@@ -71,6 +71,8 @@ const EditUser = () => {
         .catch((error) => console.log("error", error));
     } else {
       // Set Alert component
+      setFileUploadStatus(false)
+      console.log("nope");
     }
   };
 
@@ -127,13 +129,6 @@ const EditUser = () => {
                       {fileName ? fileName : "No file uploaded"}
                     </span>
                   </label>
-                  {/* <span>
-                    <i
-                      type="submit"
-                      className="fas fa-plus fa-lg add-traveler-button"
-                      onClick={addPhoto}
-                    ></i>
-                  </span> */}
                   <div className="control">
                     <span
                       // type="submit"
@@ -146,7 +141,10 @@ const EditUser = () => {
               </div>
             </div>
             {fileUploadStatus && (
-              <Alert color="is-primary">File Upload Succeeded</Alert>
+              <Alert color={"primary"}className="has-text-danger">File Upload Succeeded</Alert>
+            )}
+            {!fileUploadStatus && (
+              <Alert color={"error"}className="has-text-danger">Please upload a valid file</Alert>
             )}
           </div>
           <div className="column is-5">
