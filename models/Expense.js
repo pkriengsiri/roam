@@ -4,6 +4,11 @@ const Schema = mongoose.Schema;
 
 const ExpenseSchema = new Schema({
   expenseCreator: { type: Schema.Types.ObjectId, ref: "User" },
+  date: {
+    type: Date,
+    required: "Please enter the date the expense was created.",
+    trim: true,
+  },
   trip: { type: Schema.Types.ObjectId, ref: "Trip" },
   totalExpenseAmount: {
     type: Number,
