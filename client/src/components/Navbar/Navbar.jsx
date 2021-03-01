@@ -11,23 +11,18 @@ const Navbar = ({ setUserContext }) => {
   const { userContext } = useContext(UserContext);
   const [loginModalState, setLoginModalState] = useState(false);
   const [signUpModalState, setSignUpModalState] = useState(false);
-  const [profileImage, setProfileImage] = useState("https://res.cloudinary.com/djou7v3ho/image/upload/v1614532245/Avatar-removebg-preview_1_g04ftj.png");
+  const [profileImage, setProfileImage] = useState(
+    "https://res.cloudinary.com/djou7v3ho/image/upload/v1614532245/Avatar-removebg-preview_1_g04ftj.png"
+  );
   const history = useHistory();
-  
-
 
   useEffect(() => {
-    console.log("navbar loadi");
-    console.log(userContext?.userId);
-    console.log("here");
     if (userContext?.userId) {
       API.getUser(userContext.userId)
         .then((response) => {
-          console.log(response.data.profileImageUrl);
           if (response.data.profileImageUrl) {
             setProfileImage(response.data.profileImageUrl);
-            console.log(profileImage);
-          } 
+          }
         })
         .catch((err) => {
           console.log(err);
