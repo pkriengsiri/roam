@@ -20,7 +20,7 @@ const TripCard = ({
   const { userId } = useParams();
 
   return (
-    <div className="column is-4 is-one-third-fullhd is-half-desktop">
+    <div className="column is-4 is-one-third-fullhd is-half-desktop ">
       <div className="card trip-card">
         <Link to={`/user/${userId}/trips/${tripId}`}>
           <div className="card-image">
