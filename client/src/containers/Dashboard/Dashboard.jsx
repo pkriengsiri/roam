@@ -45,15 +45,17 @@ const Dashboard = () => {
     if (typeOfTripsToDisplay === "Upcoming") {
       setFilteredTrips(
         trips.filter((trip) => trip.startDate.substring(0, 10) >= today)
+        .sort((a, b) => a.endDate.localeCompare(b.endDate))
       );
     } else if (typeOfTripsToDisplay === "Past") {
       setFilteredTrips(
-        trips.filter((trip) => trip.endDate.substring(0, 10) <= today)
+        trips
+          .filter((trip) => trip.endDate.substring(0, 10) <= today)
       );
     } else {
       setFilteredTrips(trips);
     }
-  }, [typeOfTripsToDisplay,trips]);
+  }, [typeOfTripsToDisplay, trips]);
 
   // function to change which trips to display
   const changeDisplay = (e) => {
