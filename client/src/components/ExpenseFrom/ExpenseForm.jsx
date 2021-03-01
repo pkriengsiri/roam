@@ -32,7 +32,6 @@ const ExpenseForm = (props) => {
     if (expenseId) {
       API.getExpense(expenseId)
         .then((response) => {
-          // console.log(response.data);
           setTotalExpenseAmount(response.data.totalExpenseAmount);
           setExpenseCategory(response.data.category);
           setDescription(response.data.description);
@@ -67,12 +66,11 @@ const ExpenseForm = (props) => {
       (sum, traveler) => sum + traveler.shareOfTotalExpense,
       0
     );
-    setRemainder(totalExpenseAmount - sumOfShare);
+    setRemainder(parseFloat((totalExpenseAmount - sumOfShare).toFixed(2)));
   }, [expenseShare, totalExpenseAmount]);
 
+  // use effect for setting each traveler's share of the total expense
   useEffect(() => {
-    console.log(shareType);
-    console.log(totalExpenseAmount);
     let updateArray = trip.travelers.map((traveler) => ({
       travelerEmail: traveler.travelerEmail,
       shareOfTotalExpense: 0,
@@ -80,14 +78,14 @@ const ExpenseForm = (props) => {
     const total = totalExpenseAmount !== "" ? totalExpenseAmount : 0;
 
     if (shareType === "Solo" && trip.travelers.length > 0) {
-      let updateExpenseCreatorShare = updateArray.find(
+      let updateExpenseCreator = updateArray.find(
         (el) => el.travelerEmail === userContext.email
       );
       updateArray = updateArray.filter(
         (el) => el.travelerEmail !== userContext.email
       );
-      updateExpenseCreatorShare.shareOfTotalExpense = total;
-      setExpenseShare([...updateArray, updateExpenseCreatorShare]);
+      updateExpenseCreator.shareOfTotalExpense = total;
+      setExpenseShare([...updateArray, updateExpenseCreator]);
     } else if (shareType === "Share Evenly" && trip.travelers.length > 0) {
       let subtotal = 0;
       let evenSplit = parseFloat((total / updateArray.length).toFixed(2));
@@ -105,13 +103,36 @@ const ExpenseForm = (props) => {
   }, [shareType, totalExpenseAmount, trip, userContext]);
 
   // force number input to be in USD
-  const handleTotalExpenseChange = (e) => {
+  const handleNumericChange = (e) => {
     let num = e.target.value
       .toString()
       .split(".")
       .map((el, i) => (i ? el.split("").slice(0, 2).join("") : el))
       .join(".");
-    setTotalExpenseAmount(num);
+    console.log(e.target);
+    if (e.target.id === "totalExpenseAmount") {
+      setTotalExpenseAmount(num);
+    } else if (e.target.name === "shareExpenseAmount") {
+      let updateTravelerEmail=e.target.id
+      let updateTravelerAmount=e.target.value
+      console.log(updateTravelerEmail);
+      console.log(updateTravelerAmount);
+      let updateArray = trip.travelers.map((traveler) => ({
+        travelerEmail: traveler.travelerEmail,
+        shareOfTotalExpense: 0,
+      }));
+
+      if (shareType === "Custom Split" && trip.travelers.length > 0) {
+        let updateTravelerCustomSplit = updateArray.find(
+          (el) => el.travelerEmail === updateTravelerEmail
+        );
+        updateArray = updateArray.filter(
+          (el) => el.travelerEmail !== updateTravelerEmail
+        );
+        updateTravelerCustomSplit.shareOfTotalExpense = updateTravelerAmount;
+        setExpenseShare([...updateArray, updateTravelerCustomSplit]);
+      }
+    }
   };
 
   return (
@@ -142,7 +163,8 @@ const ExpenseForm = (props) => {
             placeholder="Enter an amount"
             value={totalExpenseAmount}
             name="totalExpenseAmount"
-            onChange={handleTotalExpenseChange}
+            id="totalExpenseAmount"
+            onChange={(e) => handleNumericChange(e)}
           />
           <span className="icon is-small is-left">
             <i className="fas fa-dollar-sign"></i>
@@ -185,7 +207,7 @@ const ExpenseForm = (props) => {
       </div>
 
       {/* drop down form for splitting expense */}
-      {shareType !== "Solo" && (
+      {shareType !== "" && (
         <div className="expense-share-mini-form">
           {expenseShare.map((traveler) => (
             <div
@@ -200,13 +222,16 @@ const ExpenseForm = (props) => {
                   <p className="control">
                     <input
                       className="input is-small"
+                      disabled={shareType !== "Custom Split"}
                       type="number"
                       min="0"
                       step=".01"
                       placeholder={traveler.shareOfTotalExpense}
-                      value={traveler.shareOfTotalExpense}
+                      // value={shareType!=="Custom Split"? traveler.shareOfTotalExpense:""}
+                      // value={placeholder}
                       name="shareExpenseAmount"
                       id={traveler.travelerEmail}
+                      onChange={(e) => handleNumericChange(e)}
                     />
                   </p>
                 </div>
