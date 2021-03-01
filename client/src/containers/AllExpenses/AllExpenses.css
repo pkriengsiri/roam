@@ -21,3 +21,8 @@ $table-striped-row-even-background-color: #7c74ab;
 $table-color: white;
 $table-head-cell-color: white;
 $table-head-background-color: $purple; */
+
+.edit-expense-icon {
+  color: white;
+}
+
