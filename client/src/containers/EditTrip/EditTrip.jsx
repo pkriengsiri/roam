@@ -54,7 +54,6 @@ const EditTrip = () => {
   };
 
   const handleDeleteClick = () => {
-
     API.deleteTrip(tripId)
       .then((response) => {
         console.log(response);
