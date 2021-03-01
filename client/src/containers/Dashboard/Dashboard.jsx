@@ -78,7 +78,7 @@ const Dashboard = () => {
       <h1 className="subtitle is-size-4 has-text-centered mt-3">
         Start planning your trips today!
       </h1> */}
-      <div className="columns is-gapless is-centered is-vcentered mt-4">
+      <div className="columns is-gapless is-centered is-vcentered mt-4 fade-in-div">
         <div className="column is-1">
           <figure className="image">
             <img

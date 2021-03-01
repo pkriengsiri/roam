@@ -10,8 +10,7 @@ export default function PrivateRoute(props) {
 
   const { component: Component, ...rest } = props;
   if (isLoading) {
-    
-    // return <Loader />
+    return <Loader />;
     return null;
   }
   if (userContext.userId) {
