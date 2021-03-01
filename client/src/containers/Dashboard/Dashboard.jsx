@@ -6,6 +6,7 @@ import { Link, useParams } from "react-router-dom";
 import Doodle2 from "../../components/Doodle/Doodle2";
 import { set } from "mongoose";
 import Loader from "../../components/Loader/Loader";
+import moment from "moment";
 
 const Dashboard = () => {
   const { userId } = useParams();
@@ -37,6 +38,20 @@ const Dashboard = () => {
       });
   }, []);
 
+  // function to change array of trips passed to trip cards
+  useEffect(() => {
+    let filteredTrips = trips;
+    const today = moment().format();
+    if (tripsToDisplay === "Upcoming") {
+      return filteredTrips.filter((trip) => trip.startDate >= today);
+    } else if (tripsToDisplay === "Past") {
+      return filteredTrips.filter((trip) => trip.endDate <= today);
+    } else {
+      return filteredTrips;
+    }
+  }, [tripsToDisplay]);
+
+  // function to change which trips to display
   const changeDisplay = (e) => {
     setTripsToDisplay(e.target.innerHTML);
   };
@@ -85,6 +100,7 @@ const Dashboard = () => {
           </div>
         </div>
 
+        {/* toggle trips to view buttons      */}
         <div className="buttons is-centered has-addons">
           <button
             className={
