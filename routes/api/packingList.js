@@ -2,7 +2,16 @@
 const router = require("express").Router();
 const packingListController = require("../../controllers/packingListController");
 const jwt = require("express-jwt");
-// TODO: Add jwt route
+
+// middleware
+// router.use(csrfProtection);
+router.use(
+    jwt({
+      secret: process.env.SECRET,
+      getToken: (req) => req.cookies.token,
+      algorithms: ['HS256']
+    })
+  );
 
 // Route for /api/packing-list
 router
