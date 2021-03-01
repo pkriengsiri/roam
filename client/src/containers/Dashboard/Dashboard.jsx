@@ -5,6 +5,7 @@ import API from "../../utils/API";
 import { Link, useParams } from "react-router-dom";
 import Doodle2 from "../../components/Doodle/Doodle2"
 import { set } from "mongoose";
+import Loader from "../../components/Loader/Loader";
 
 const Dashboard = () => {
   const { userId } = useParams();
@@ -43,7 +44,6 @@ const Dashboard = () => {
       <h1 className="subtitle is-size-4 has-text-centered mt-3">
         Start planning your trips today!
       </h1> */}
-
       <div className="columns is-gapless is-centered is-vcentered mt-4">
         <div className="column is-1">
           <figure className="image">

@@ -1,22 +1,9 @@
-import React, { useEffect } from "react";
-import API from "../../utils/API";
+import React from "react";
 import "./DeleteModal.css";
-import { useParams, useHistory } from "react-router-dom";
 
-const DeleteModal = ({ closeDeleteModal, userId, tripId }) => {
-  const history = useHistory();
 
-  const handleDeleteClick = () => {
+const DeleteModal = ({ closeDeleteModal, handleDeleteClick, }) => {
 
-    API.deleteTrip(tripId)
-      .then((response) => {
-
-        history.push(`/user/${userId}/trips`);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-  };
 
   return (
     <>
@@ -25,7 +12,7 @@ const DeleteModal = ({ closeDeleteModal, userId, tripId }) => {
         <div className="modal-card">
           <header className="modal-card-head">
             <p className="modal-card-title">
-              Are you sure you want to delete your trip?
+              Are you sure you want to delete?
             </p>
             <button
               className="delete"

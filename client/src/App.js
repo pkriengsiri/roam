@@ -1,5 +1,4 @@
 import { useEffect, useState, useContext } from "react";
-import Axios from "axios";
 import "./sass/App.scss";
 import Home from "./containers/Home/Home";
 import EditUser from "./containers/EditUser/EditUser";
@@ -8,22 +7,16 @@ import CreateTrip from "./containers/CreateTrip/CreateTrip";
 import EditTrip from "./containers/EditTrip/EditTrip";
 import SingleTrip from "./containers/SingleTrip/SingleTrip";
 import CreateExpense from "./containers/CreateExpense/CreateExpense";
-import AllExpenses from "./containers/AllExpenses/AllExpenses";
-import Navbar from "./components/Navbar/Navbar";
 import Footer from "./components/Footer/Footer";
-import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import "./App.css";
 import UserContext from "./contexts/UserContext";
 import AlertContext from "./contexts/AlertContext";
 import ExpenseContext from "./contexts/ExpenseContext";
-import API from "./utils/API";
-import jwt from "jsonwebtoken";
+import useFindUser from "./hooks/useFindUser";
+import PrivateRoute from "./components/PrivateRoute/PrivateRoute";
 
 function App() {
-  const [userContext, setUserContext] = useState({
-    email: "",
-    id: "",
-  });
+  const { userContext, setUserContext, isLoading } = useFindUser();
 
   const [expenseContext, setExpenseContext] = useState({
     id: "",
@@ -36,23 +29,23 @@ function App() {
       setAlertContext({ ...alertContext, display, theme }),
   });
 
-  useEffect(() => {
-    const getCsrfToken = async () => {
-      const { data } = await API.relogin();
-      jwt.verify(data.token, process.env.REACT_APP_SECRET, (err, data) => {
-        if (err) {
-          console.log(err);
-        } else {
-          setUserContext({ userId: data._id, email: data.email });
-        }
-      });
-      Axios.defaults.headers.post["X-CSRF-Token"] = data.csrfToken;
-    };
-    getCsrfToken();
-  }, []);
+  // useEffect(() => {
+  //   const getCsrfToken = async () => {
+  //     const { data } = await API.relogin();
+  //     jwt.verify(data.token, process.env.REACT_APP_SECRET, (err, data) => {
+  //       if (err) {
+  //         console.log(err);
+  //       } else {
+  //         setUserContext({ userId: data._id, email: data.email });
+  //       }
+  //     });
+  //     Axios.defaults.headers.post["X-CSRF-Token"] = data.csrfToken;
+  //   };
+  //   getCsrfToken();
+  // }, []);
 
   return (
-    <UserContext.Provider value={{ userContext, setUserContext }}>
+    <UserContext.Provider value={{ userContext, setUserContext, isLoading }}>
       <AlertContext.Provider value={alertContext}>
         <div className="App">
           <Router>
@@ -63,32 +56,44 @@ function App() {
                   <Home setUserContext={setUserContext} />
                 </Route>
                 {/* <Route exact path="/user/:userId" component={Dashboard} /> */}
-                <Route exact path="/user/:userId/trips" component={Dashboard} />
-                <Route exact path="/user/:userId/edit" component={EditUser} />
-                <Route
+                <PrivateRoute
+                  exact
+                  path="/user/:userId/trips"
+                  component={Dashboard}
+                />
+                <PrivateRoute
+                  exact
+                  path="/user/:userId/edit"
+                  component={EditUser}
+                />
+                <PrivateRoute
                   exact
                   path="/user/:userId/trips/new"
                   component={CreateTrip}
                 />
-                <Route
+                <PrivateRoute
                   exact
                   path="/user/:userId/trips/:tripId"
                   component={SingleTrip}
                 />
-                <Route
+                <PrivateRoute
                   exact
                   path="/user/:userId/trips/:tripId/edit"
                   component={EditTrip}
                 />
-                <Route
+                <PrivateRoute
                   exact
                   path="/user/:userId/trips/:tripId/expense"
                   component={CreateExpense}
                 />
-                <Route
+                <PrivateRoute
                   exact
                   path="/user/:userId/trips/:tripId/expenses"
                   component={AllExpenses}
+                />
+                <PrivateRoute
+                  path="/user/:userId/trips/:tripId/expenses/:expenseId/edit"
+                  component={EditExpense}
                 />
               </Switch>
             </main>
