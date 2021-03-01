@@ -192,6 +192,7 @@ const ExpenseForm = (props) => {
           orientation={calendarStack}
           isOutsideRange={() => false}
           anchorDirection="ANCHOR_RIGHT"
+          numberOfMonths="1"
 
         />
         <label className="label">Amount</label>
