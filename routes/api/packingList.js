@@ -5,15 +5,15 @@ const jwt = require("express-jwt");
 
 // middleware
 // router.use(csrfProtection);
-router.use(
-    jwt({
-      secret: process.env.SECRET,
-      getToken: (req) => req.cookies.token,
-      algorithms: ['HS256']
-    })
-  );
+// router.use(
+//     jwt({
+//       secret: process.env.SECRET,
+//       getToken: (req) => req.cookies.token,
+//       algorithms: ['HS256']
+//     })
+//   );
 
-// Route for /api/packing-list
+// Route for /api/packingList
 router
   .route("/")
   .get(packingListController.findAll)
