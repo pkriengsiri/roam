@@ -22,7 +22,7 @@ const ExpenseForm = (props) => {
   const [expenseBalanced, setExpenseBalanced] = useState(true);
   const [remainder, setRemainder] = useState(0);
   const [shareType, setShareType] = useState("Solo");
-  // const [customPlaceholder, setCustomPlaceholder] = useState();
+ 
 
   const { tripId } = useParams();
   const { userId } = useParams();
@@ -62,13 +62,21 @@ const ExpenseForm = (props) => {
 
   // calculate remainder/ variance when changes are made to total or breakdown
   useEffect(() => {
-    let sumOfShare = expenseShare;
+    let  sumOfShare = expenseShare;
     sumOfShare = expenseShare.reduce(
       (sum, traveler) => sum + traveler.shareOfTotalExpense,
       0
     );
-    setRemainder(parseFloat((totalExpenseAmount - sumOfShare).toFixed(2)));
+    const remainder = parseFloat((totalExpenseAmount - sumOfShare).toFixed(2))
+    setRemainder(remainder);
+    if (remainder===0){
+      setExpenseBalanced(true)
+    } else if (remainder!==0){
+      setExpenseBalanced(false)
+    }
   }, [expenseShare, totalExpenseAmount]);
+
+
 
   // use effect for setting each traveler's share of the total expense
   useEffect(() => {
@@ -120,9 +128,13 @@ const ExpenseForm = (props) => {
       .join(".");
     num = num === "" ? 0 : num;
     console.log(e.target);
+
+    // if numeric change is for the total expense, set state for total expense
     if (e.target.id === "totalExpenseAmount") {
       // console.log(typeof parseFloat(num))
       setTotalExpenseAmount(parseFloat(num));
+
+    // if numeric change is for custom split shared expense, set state of expenseShare
     } else if (e.target.name === "shareExpenseAmount") {
       let updateTravelerEmail = e.target.id;
       let updateArray = expenseShare;
@@ -216,7 +228,7 @@ const ExpenseForm = (props) => {
       </div>
 
       {/* drop down form for splitting expense */}
-      {shareType !== "" && (
+      {shareType !== "Solo" && (
         <div className="expense-share-mini-form">
           {expenseShare.map((traveler) => (
             <div
