@@ -48,10 +48,11 @@ const AllExpenses = (props) => {
     setDisplayContributors(displayContributorsArr);
   };
 
+  // Method to convert dates from response
   const convertDate = (date) => {
     const formattedDate = new Date(date);
     return formattedDate.toLocaleDateString();
-  }
+  };
 
   return (
     <div className="container mt-6 pl-6 pr-6">
@@ -82,7 +83,9 @@ const AllExpenses = (props) => {
                         <i className="edit-expense-icon far fa-edit m-1 "></i>
                       </Link>
                     </td>
-                    <td className="is-vcentered">{convertDate(expense.date)}</td>
+                    <td className="is-vcentered">
+                      {convertDate(expense.date)}
+                    </td>
                     <td className="is-vcentered">{expense.description}</td>
                     <td className="is-vcentered">{expense.category}</td>
                     <td className="is-vcentered">
