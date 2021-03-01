@@ -10,7 +10,8 @@ import API from "../../utils/API";
 const ExpenseForm = (props) => {
   const { onDisplay, display, theme } = useContext(AlertContext);
   const { userContext } = useContext(UserContext);
-  const { tripContext } = useContext(TripContext);
+  const { tripContext, setTripContext } = useContext(TripContext);
+  const [trip, setTrip] = useState({travelers:[]});
 
   const [totalExpenseAmount, setTotalExpenseAmount] = useState("");
   const [expenseCategory, setExpenseCategory] = useState("");
@@ -37,6 +38,15 @@ const ExpenseForm = (props) => {
     }
   }, []);
 
+  useEffect(() => {
+    API.getTrip(tripId)
+      .then((response) => {
+        setTrip(response.data);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }, []);
 
   const handleTotalExpenseChange = (e) => {
     console.log("hi");
@@ -91,6 +101,27 @@ const ExpenseForm = (props) => {
 
         <button className="button mr-4 is-light">Custom Split</button>
       </div>
+
+      {/* drop down form for splitting expense */}
+
+      {trip.travelers.map((traveler) => (
+      <div className="field is-horizontal ml-5 mt-2">
+        <div className="field-label is-small">
+          <label className="label">{traveler.travelerEmail}</label>
+        </div>
+        <div className="field-body">
+          <div className="field">
+            <p className="control">
+              <input
+                className="input is-small"
+                type="email"
+                placeholder="Amount"
+              />
+            </p>
+          </div>
+        </div>
+      </div>
+      ))}
 
       <div className="field">
         <label className="label">Category</label>
