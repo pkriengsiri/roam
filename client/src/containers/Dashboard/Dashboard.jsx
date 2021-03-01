@@ -38,8 +38,7 @@ const Dashboard = () => {
   }, []);
 
   const changeDisplay = (e) => {
-    console.log(e.target)
-    setTripsToDisplay(e.target.value);
+    setTripsToDisplay(e.target.innerHTML);
   };
 
   return (
@@ -89,17 +88,6 @@ const Dashboard = () => {
         <div className="buttons is-centered has-addons">
           <button
             className={
-              tripsToDisplay === "Upcoming"
-                ? "button is-primary is-selected"
-                : "button"
-            }
-            onClick={(e) => changeDisplay(e)}
-          >
-            Upcoming
-          </button>
-
-          <button
-            className={
               tripsToDisplay === "All"
                 ? "button is-primary is-selected "
                 : "button"
@@ -110,7 +98,17 @@ const Dashboard = () => {
           </button>
           <button
             className={
-              tripsToDisplay === "{Past}"
+              tripsToDisplay === "Upcoming"
+                ? "button is-primary is-selected"
+                : "button"
+            }
+            onClick={(e) => changeDisplay(e)}
+          >
+            Upcoming
+          </button>
+          <button
+            className={
+              tripsToDisplay === "Past"
                 ? "button is-primary is-selected"
                 : "button"
             }
