@@ -19,6 +19,7 @@ const EditUser = () => {
   const [fileType, setFileType] = useState("");
   const { onDisplay, display, theme } = useContext(AlertContext);
   const [loadingState, setLoadingState] = useState("");
+  const [displayIcon, setDisplayIcon] = useState("");
 
   useEffect(() => {
     if (userId) {
@@ -53,7 +54,7 @@ const EditUser = () => {
 
   const addPhoto = () => {
     setLoadingState("is-loading");
-
+    setDisplayIcon("hide-icon");
     if (fileType !== "") {
       var formdata = new FormData();
       formdata.append("photo", fileInput, "file");
@@ -71,11 +72,13 @@ const EditUser = () => {
           const res = JSON.parse(result);
           setFileUploadStatus(true);
           setChangedProfileImageUrl(res.url);
+          setLoadingState("");
+          setDisplayIcon("");
         })
         .catch((error) => console.log("error", error));
     } else {
       // Set Alert component
-      setLoadingState("");
+
       setFileUploadStatus(false);
       console.log("nope");
     }
@@ -139,7 +142,10 @@ const EditUser = () => {
                       // type="submit"
                       className={`button ${loadingState}`}
                     >
-                      <i onClick={addPhoto} className="fas fa-plus fa-lg"></i>
+                      <i
+                        onClick={addPhoto}
+                        className={`fas fa-plus fa-lg ${displayIcon}`}
+                      ></i>
                     </span>
                   </div>
                 </div>
