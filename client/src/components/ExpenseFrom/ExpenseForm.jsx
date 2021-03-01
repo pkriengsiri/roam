@@ -8,10 +8,13 @@ import API from "../../utils/API";
 
 const ExpenseForm = (props) => {
   const { onDisplay, display, theme } = useContext(AlertContext);
+  const { userContext } = useContext(UserContext);
 
   const [totalExpenseAmount, setTotalExpenseAmount] = useState("");
-  const [description, setDescription] = useState("");
   const [expenseCategory, setExpenseCategory] = useState("");
+  const [description, setDescription] = useState("");
+  const [expenseShare, setExpenseShare] = useState([]);
+  const [expenseBalanced, setExpenseBalanced] = useState(true);
 
   const { tripId } = useParams();
   const { userId } = useParams();
@@ -32,6 +35,10 @@ const ExpenseForm = (props) => {
     }
   }, []);
 
+  const handleTotalExpenseChange = () => {
+    console.log("hi");
+  };
+
   return (
     <form
       onSubmit={(e) => {
@@ -42,6 +49,8 @@ const ExpenseForm = (props) => {
           totalExpenseAmount,
           category: expenseCategory,
           description,
+          expenseShare,
+          expenseBalanced,
         });
       }}
     >
@@ -65,6 +74,9 @@ const ExpenseForm = (props) => {
                 .join(".");
 
               setTotalExpenseAmount(num);
+              setExpenseShare([
+                { travelerEmail: userContext.email, shareOfTotalExpense: num },
+              ]);
             }}
           />
           <span className="icon is-small is-left">

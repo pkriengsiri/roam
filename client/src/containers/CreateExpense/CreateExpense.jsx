@@ -16,8 +16,8 @@ const CreateExpense = () => {
     if (
       !formObject.expenseCreator ||
       !formObject.totalExpenseAmount ||
-      formObject.category === "Select One" ||
-      !formObject.category
+      !formObject.category ||
+      formObject.category === "Select One" 
     ) {
       onDisplay(true, "error");
     } else {
