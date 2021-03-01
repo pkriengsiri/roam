@@ -13,7 +13,7 @@ router.use(
     })
   );
 
-// Route for /api/packingList
+// Route for /api/packing-list
 router
   .route("/")
   .get(packingListController.findAll)

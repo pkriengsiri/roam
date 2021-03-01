@@ -11,14 +11,16 @@ const PackingListSchema = new Schema({
     type: Schema.Types.ObjectId,
     ref: "Trip",
   },
-  packed: {
-    type: Boolean,
-    default: false,
-  },
-  item: {
-    type: String,
-    trim: true,
-  },
+
+  list: [
+    {
+      item: { type: String, trim: true },
+      packed: {
+        type: Boolean,
+        default: false,
+      },
+    },
+  ],
 });
 
 const PackingList = mongoose.model("PackingList", PackingListSchema);

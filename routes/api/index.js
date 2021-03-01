@@ -13,7 +13,7 @@ router.use("/users", userRoutes);
 router.use("/auth", authRoutes);
 // router.use("/placeImages", placeImages);
 router.use("/expenses",expenseRoutes);
-router.use("/packing-list", packingListRoutes)
+router.use("/packing-lists", packingListRoutes)
 
 
 
