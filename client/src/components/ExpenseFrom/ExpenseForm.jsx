@@ -1,6 +1,7 @@
 import React, { useState, useContext, useEffect } from "react";
 import { useParams, Link, useHistory } from "react-router-dom";
 import UserContext from "../../contexts/UserContext";
+import TripContext from "../../contexts/TripContext";
 import "./ExpenseForm.css";
 import Alert from "../Alert/Alert";
 import AlertContext from "../../contexts/AlertContext";
@@ -9,6 +10,7 @@ import API from "../../utils/API";
 const ExpenseForm = (props) => {
   const { onDisplay, display, theme } = useContext(AlertContext);
   const { userContext } = useContext(UserContext);
+  const { tripContext } = useContext(TripContext);
 
   const [totalExpenseAmount, setTotalExpenseAmount] = useState("");
   const [expenseCategory, setExpenseCategory] = useState("");
@@ -35,8 +37,19 @@ const ExpenseForm = (props) => {
     }
   }, []);
 
-  const handleTotalExpenseChange = () => {
+
+  const handleTotalExpenseChange = (e) => {
     console.log("hi");
+    let num = e.target.value
+      .toString()
+      .split(".")
+      .map((el, i) => (i ? el.split("").slice(0, 2).join("") : el))
+      .join(".");
+
+    setTotalExpenseAmount(num);
+    setExpenseShare([
+      { travelerEmail: userContext.email, shareOfTotalExpense: num },
+    ]);
   };
 
   return (
@@ -66,23 +79,17 @@ const ExpenseForm = (props) => {
             placeholder="Enter an amount"
             value={totalExpenseAmount}
             name="totalExpenseAmount"
-            onChange={(e) => {
-              let num = e.target.value
-                .toString()
-                .split(".")
-                .map((el, i) => (i ? el.split("").slice(0, 2).join("") : el))
-                .join(".");
-
-              setTotalExpenseAmount(num);
-              setExpenseShare([
-                { travelerEmail: userContext.email, shareOfTotalExpense: num },
-              ]);
-            }}
+            onChange={handleTotalExpenseChange}
           />
           <span className="icon is-small is-left">
             <i className="fas fa-dollar-sign"></i>
           </span>
         </div>
+      </div>
+      <div className="">
+        <button className="button is-primary">Share Evenly</button>
+
+        <button className="button mr-4 is-light">Custom Split</button>
       </div>
 
       <div className="field">

@@ -4,9 +4,11 @@ import API from "../../utils/API";
 import "./SingleTrip.css";
 import UserContext from "../../contexts/UserContext";
 import DoughnutChart from "../../components/DoughnutChart/DoughnutChart";
+import TripContext from "../../contexts/TripContext";
 
 const SingleTrip = () => {
   const { userContext } = useContext(UserContext);
+  const { setTripContext } = useContext(TripContext);
 
   const [destination, setDestination] = useState("");
   const [startDate, setStartDate] = useState(new Date());
@@ -23,7 +25,6 @@ const SingleTrip = () => {
     if (tripId) {
       API.getTrip(tripId)
         .then((response) => {
-          
           setDestination(response.data.destination);
           const responseStartDate = new Date(response.data.startDate);
           const responseEndDate = new Date(response.data.endDate);
@@ -32,6 +33,8 @@ const SingleTrip = () => {
           setTravelers(response.data.travelers);
           setImageUrl(response.data.imageUrl);
           setExpenses(response.data.expenses);
+          // console.log(response.data)
+          setTripContext({ trip: response.data });
         })
         .catch((err) => {
           console.log(err);

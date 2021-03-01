@@ -15,16 +15,14 @@ import Footer from "./components/Footer/Footer";
 import "./App.css";
 import UserContext from "./contexts/UserContext";
 import AlertContext from "./contexts/AlertContext";
-import ExpenseContext from "./contexts/ExpenseContext";
+import TripContext from "./contexts/TripContext";
 import useFindUser from "./hooks/useFindUser";
 import PrivateRoute from "./components/PrivateRoute/PrivateRoute";
 
 function App() {
   const { userContext, setUserContext, isLoading } = useFindUser();
 
-  const [expenseContext, setExpenseContext] = useState({
-    id: "",
-  });
+  const [tripContext, setTripContext] = useState({});
 
   const [alertContext, setAlertContext] = useState({
     display: false,
@@ -52,57 +50,62 @@ function App() {
     <UserContext.Provider value={{ userContext, setUserContext, isLoading }}>
       <AlertContext.Provider value={alertContext}>
         <div className="App">
-          <Router>
-            <Navbar setUserContext={setUserContext} userContext={userContext} />
-            <main className="page">
-              <Switch>
-                <Route exact path="/">
-                  <Home setUserContext={setUserContext} />
-                </Route>
-                {/* <Route exact path="/user/:userId" component={Dashboard} /> */}
-                <PrivateRoute
-                  exact
-                  path="/user/:userId/trips"
-                  component={Dashboard}
-                />
-                <PrivateRoute
-                  exact
-                  path="/user/:userId/edit"
-                  component={EditUser}
-                />
-                <PrivateRoute
-                  exact
-                  path="/user/:userId/trips/new"
-                  component={CreateTrip}
-                />
-                <PrivateRoute
-                  exact
-                  path="/user/:userId/trips/:tripId"
-                  component={SingleTrip}
-                />
-                <PrivateRoute
-                  exact
-                  path="/user/:userId/trips/:tripId/edit"
-                  component={EditTrip}
-                />
-                <PrivateRoute
-                  exact
-                  path="/user/:userId/trips/:tripId/expense"
-                  component={CreateExpense}
-                />
-                <PrivateRoute
-                  exact
-                  path="/user/:userId/trips/:tripId/expenses"
-                  component={AllExpenses}
-                />
-                <PrivateRoute
-                  path="/user/:userId/trips/:tripId/expenses/:expenseId/edit"
-                  component={EditExpense}
-                />
-              </Switch>
-            </main>
-            <Footer />
-          </Router>
+          <TripContext.Provider value={{ tripContext, setTripContext }}>
+            <Router>
+              <Navbar
+                setUserContext={setUserContext}
+                userContext={userContext}
+              />
+              <main className="page">
+                <Switch>
+                  <Route exact path="/">
+                    <Home setUserContext={setUserContext} />
+                  </Route>
+                  {/* <Route exact path="/user/:userId" component={Dashboard} /> */}
+                  <PrivateRoute
+                    exact
+                    path="/user/:userId/trips"
+                    component={Dashboard}
+                  />
+                  <PrivateRoute
+                    exact
+                    path="/user/:userId/edit"
+                    component={EditUser}
+                  />
+                  <PrivateRoute
+                    exact
+                    path="/user/:userId/trips/new"
+                    component={CreateTrip}
+                  />
+                  <PrivateRoute
+                    exact
+                    path="/user/:userId/trips/:tripId"
+                    component={SingleTrip}
+                  />
+                  <PrivateRoute
+                    exact
+                    path="/user/:userId/trips/:tripId/edit"
+                    component={EditTrip}
+                  />
+                  <PrivateRoute
+                    exact
+                    path="/user/:userId/trips/:tripId/expense"
+                    component={CreateExpense}
+                  />
+                  <PrivateRoute
+                    exact
+                    path="/user/:userId/trips/:tripId/expenses"
+                    component={AllExpenses}
+                  />
+                  <PrivateRoute
+                    path="/user/:userId/trips/:tripId/expenses/:expenseId/edit"
+                    component={EditExpense}
+                  />
+                </Switch>
+              </main>
+              <Footer />
+            </Router>
+          </TripContext.Provider>
         </div>
       </AlertContext.Provider>
     </UserContext.Provider>
