@@ -74,7 +74,7 @@ const AllExpenses = (props) => {
             <thead className="expense-table-head has-text-centered">
               <tr>
                 <th></th>
-                <th className="has-text-light">Expense</th>
+                <th className="has-text-light">Description</th>
                 <th className="has-text-light">Category</th>
                 <th className="has-text-light">Amount</th>
                 <th className="has-text-light">Contributors</th>
