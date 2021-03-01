@@ -1,0 +1,24 @@
+.destination:hover {
+  color: #f48e3f;
+  font-size: 2.1rem;
+}
+
+.media-card-content {
+  border-bottom: rgba(211, 211, 211, 0.548) 1px solid;
+  padding-bottom: 7px;
+}
+
+.icon:hover {
+  color: #f48e3f;
+  font-size: 18px;
+}
+
+.places-image {
+  height: 350px;
+  width: 100%;
+  object-fit: cover;
+}
+
+.trip-card {
+  min-height: 450px;
+}
