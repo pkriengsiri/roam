@@ -1,4 +1,4 @@
-.is-hoverable:hover {
+.expense-row.is-hoverable:hover {
   background-color: #635b91 !important;
 }
 

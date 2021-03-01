@@ -13,14 +13,22 @@ const Navbar = ({ setUserContext }) => {
   const [profileImage, setProfileImage] = useState("");
   const history = useHistory();
   const { userContext } = useContext(UserContext);
+  const defaultImage =
+    "https://res.cloudinary.com/djou7v3ho/image/upload/v1614532245/Avatar-removebg-preview_1_g04ftj.png";
 
   useEffect(() => {
+    console.log(userContext);
     if (userContext.userId) {
       API.getUser(userContext.userId)
         .then((response) => {
-          console.log(response.data.profileImageUrl);
-          setProfileImage(response.data.profileImageUrl);
-          console.log(profileImage)
+          // console.log(response.data.profileImageUrl);
+          // if (profileImage === defaultImage) {
+          //   setProfileImage(response.data.profileImageUrl);
+          //   console.log(profileImage);
+          // } else {
+          //   setProfileImage(defaultImage);
+          // }
+          setProfileImage(defaultImage);
         })
         .catch((err) => {
           console.log(err);
@@ -79,7 +87,7 @@ const Navbar = ({ setUserContext }) => {
         role="navigation"
         aria-label="main navigation"
       >
-        <div className="navbar-brand">
+        <div className="navbar-brand mt-1">
           <Link to="/">
             <img src={Logo} width="112" className="ml-4 mt-1" />
           </Link>
@@ -109,20 +117,11 @@ const Navbar = ({ setUserContext }) => {
               <div className="navbar-item has-dropdown is-hoverable">
                 <a className="navbar-link">
                   {/* <i className="nav-icon fas fa-user-circle fa-2x"></i> */}
-                  {userContext.userId && (
-                    <img
-                      className="navbar-profile-picture is-rounded"
-                      src={profileImage}
-                      alt=""
-                    />
-                  )}
-                  {!userContext.userId && (
-                    <img
-                      className="navbar-profile-picture is-rounded"
-                      src="https://res.cloudinary.com/djou7v3ho/image/upload/v1614532245/Avatar-removebg-preview_1_g04ftj.png"
-                      alt=""
-                    />
-                  )}
+                  <img
+                    className="navbar-profile-picture"
+                    src={profileImage}
+                    alt=""
+                  />
                 </a>
                 <div className="navbar-dropdown is-right">
                   <Link

@@ -11,5 +11,9 @@ a.navbar-link:hover, a.navbar-link:active {
 }
 
 .navbar-profile-picture {
-    border-radius: 50px;
+    border-radius: 50%;
+    object-fit: cover;
+    min-height: 45px;
+    /* max-height: 30px !important; */
+    /* max-height: 10px !important; */
 }
