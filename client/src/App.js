@@ -1,12 +1,16 @@
 import { useEffect, useState, useContext } from "react";
 import "./sass/App.scss";
+import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import Home from "./containers/Home/Home";
+import Navbar from "./components/Navbar/Navbar";
 import EditUser from "./containers/EditUser/EditUser";
 import Dashboard from "./containers/Dashboard/Dashboard";
 import CreateTrip from "./containers/CreateTrip/CreateTrip";
 import EditTrip from "./containers/EditTrip/EditTrip";
 import SingleTrip from "./containers/SingleTrip/SingleTrip";
 import CreateExpense from "./containers/CreateExpense/CreateExpense";
+import EditExpense from "./containers/EditExpense/EditExpense";
+import AllExpenses from "./containers/AllExpenses/AllExpenses";
 import Footer from "./components/Footer/Footer";
 import "./App.css";
 import UserContext from "./contexts/UserContext";
