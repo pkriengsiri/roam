@@ -37,15 +37,18 @@ const AllExpenses = (props) => {
   const handleContributors = (e) => {
     e.preventDefault();
     // Create a copy of the displayContributors array
-    console.log(e.target.dataset);
     const displayContributorsArr = [...displayContributors];
     // Det the id of the button being clicked
-    let buttonDataId;
-    buttonDataId = e.target.dataset.id;
+    
+    let buttonDataIndex;
+    buttonDataIndex = e.target.dataset.index;
+    console.log(buttonDataIndex)
+    console.log(displayContributorsArr)
     // Change the value of the item in the array being clicked
-    displayContributorsArr[buttonDataId] = !displayContributorsArr[
-      buttonDataId
+    displayContributorsArr[buttonDataIndex] = !displayContributorsArr[
+      buttonDataIndex
     ];
+    console.log(displayContributorsArr)
     // Set the state
     setDisplayContributors(displayContributorsArr);
 
@@ -81,7 +84,7 @@ const AllExpenses = (props) => {
               </tr>
             </thead>
             <tbody className="has-text-centered expenses-body">
-              {expenseArray.map((expense) => (
+              {expenseArray.map((expense,index) => (
                 <>
                   <tr key={expense._id} className="is-hoverable expense-row">
                     <td>
@@ -99,13 +102,14 @@ const AllExpenses = (props) => {
                       <i
                         onClick={handleContributors}
                         data-id={expense._id}
+                        data-index={index}
                         className="button fas fa-angle-down"
                         aria-hidden="true"
                       ></i>
                     </td>
                   </tr>
-                  {displayContributors[expense._id] && (
-                    <tr className="has-text-dark" data-row={expense._id}>
+                  {displayContributors[index] && (
+                    <tr className="has-text-dark" data-row={index}>
                       <td></td>
                       <td>
                         <MiniTable />
