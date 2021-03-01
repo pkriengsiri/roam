@@ -29,10 +29,10 @@ const AllExpenses = (props) => {
     // console.log(e.target.dataset.id);
     // Render new row with Mini Table information
     // Where e.target.dataset.id, set button status to
-    console.log(e.target.parentNode.parentNode.parentNode)
+    // console.log(e.target.parentNode.parentNode.parentNode)
 
-    console.log(e.target.parentNode.parentNode.parentNode.children[5].dataset)
-    buttonDataId = e.target.dataset.id;
+    // console.log(e.target.parentNode.parentNode.parentNode.children[5].dataset)
+    // buttonDataId = e.target.dataset.id;
     // console.log(buttonDataId);
     setDisplayContributors();
 
@@ -62,61 +62,61 @@ const AllExpenses = (props) => {
               {expenseArray.map((expense, index) => (
                 <>
                   <tr key={index} className="is-hoverable">
-                    <td>{expense.description}</td>
-                    <td>{expense.category}</td>
-                    <td>${expense.totalExpenseAmount}</td>
+                    <td className="is-vcentered">{expense.description}</td>
+                    <td className="is-vcentered">{expense.category}</td>
+                    <td className="is-vcentered">${expense.totalExpenseAmount}</td>
                     {/* Dropdown for MiniTable goes here */}
-                    <td>
+                    <td className="is-vcentered">
                       <i
                         onClick={handleContributors}
                         data-id={index}
-                        class="button fas fa-angle-down"
+                        className="button fas fa-angle-down"
                         aria-hidden="true"
                       ></i>
-                      {/* <div class="dropdown is-hoverable">
-                        <div class="dropdown-trigger ">
+                      {/* <div className="dropdown is-hoverable">
+                        <div className="dropdown-trigger ">
                           <button
-                            class="button"
+                            className="button"
                             aria-haspopup="true"
                             aria-controls="dropdown-menu3"
                           >
-                            <span class="icon is-small">
+                            <span className="icon is-small">
                               <i
-                                class="fas fa-angle-down"
+                                className="fas fa-angle-down"
                                 aria-hidden="true"
                               ></i>
                             </span>
                           </button>
                         </div>
                         <div
-                          class="dropdown-menu"
+                          className="dropdown-menu"
                           id="dropdown-menu3"
                           role="menu"
                         >
-                          <div class="dropdown-content">
-                            <a href="#" class="dropdown-item">
+                          <div className="dropdown-content">
+                            <a href="#" className="dropdown-item">
                               <MiniTable />
                             </a>
-                            <a href="#" class="dropdown-item">
+                            <a href="#" className="dropdown-item">
                               Modifiers
                             </a>
-                            <a href="#" class="dropdown-item">
+                            <a href="#" className="dropdown-item">
                               Grid
                             </a>
-                            <a href="#" class="dropdown-item">
+                            <a href="#" className="dropdown-item">
                               Form
                             </a>
-                            <a href="#" class="dropdown-item">
+                            <a href="#" className="dropdown-item">
                               Elements
                             </a>
-                            <a href="#" class="dropdown-item">
+                            <a href="#" className="dropdown-item">
                               Components
                             </a>
-                            <a href="#" class="dropdown-item">
+                            <a href="#" className="dropdown-item">
                               Layout
                             </a>
-                            <hr class="dropdown-divider" />
-                            <a href="#" class="dropdown-item">
+                            <hr className="dropdown-divider" />
+                            <a href="#" className="dropdown-item">
                               More
                             </a>
                           </div>
@@ -126,12 +126,12 @@ const AllExpenses = (props) => {
                   </tr>
                   {/* {displayContributors} */}
                   {/* {buttonDataId && ( */}
-                    <tr data-id={index}>
+                  {/* <tr data-id={index}>
                       <td>Test</td>
                       <td>Test</td>
                       <td>Test</td>
                       <td>Test</td>
-                    </tr>
+                    </tr> */}
                   {/* )} */}
                 </>
               ))}
