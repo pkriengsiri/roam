@@ -19,12 +19,12 @@ const DoughnutChart = ({ expenses }) => {
         data: [0, 0, 0, 0, 0, 0, 0],
         backgroundColor: [
           "#938DB9", // light purple "Blue Bell"
-          "#F6A465", // light orange "sandy brown"
+          "9BC0FD", // light blue "baby blue eyes"
           "#8EE1E0", // light blue "middle blue green"
           "#5A5388", // darker purple "purple navy"
           "#F48E3F", // darker orange "cadmium orange"
           "#33C1BF", // darker blue "maximum blue green"
-          "#2E3560", // darkest purple "space cadet",
+          "#03378C", // blue "dark cornflower blue",
         ],
       },
     ],
@@ -42,12 +42,12 @@ const DoughnutChart = ({ expenses }) => {
   const colorPalette = 
   {
       Activities:"#938DB9", // light purple "Blue Bell"
-      Airfare:"#F6A465", // light orange "sandy brown"
+      Airfare:"#9BC0FD", // light blue "baby blue eyes"
       "Car & Gas":"#8EE1E0", // light blue "middle blue green"
       "Food & Dining":"#5A5388", // darker purple "purple navy"
       Entertainment:"#F48E3F", // darker orange "cadmium orange"
       Lodging:"#33C1BF", // darker blue "maximum blue green"
-      Other:"#2E3560", // darkest purple "space cadet"
+      Other:"#03378C", // blue "dark cornflower blue"
   };
 
 
