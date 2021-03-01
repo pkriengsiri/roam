@@ -77,6 +77,7 @@ const SignUpModal = ({ closeSignUpModal, setSignupModalState}) => {
               <div className="field">
                 <div className="control has-icons-left">
                   <input
+                  autoFocus
                     className="input"
                     type="text"
                     placeholder="Email"

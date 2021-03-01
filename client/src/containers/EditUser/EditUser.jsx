@@ -151,6 +151,7 @@ const EditUser = () => {
               <label className="label">First Name</label>
               <div className="control">
                 <input
+                autoFocus
                   name="firstName"
                   className="input"
                   type="text"

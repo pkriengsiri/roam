@@ -32,7 +32,6 @@ const ExpenseForm = (props) => {
     }
   }, []);
 
-
   return (
     <form
       onSubmit={(e) => {
@@ -50,6 +49,7 @@ const ExpenseForm = (props) => {
         <label className="label">Amount</label>
         <div className="control has-icons-left has-icons-right">
           <input
+            autoFocus
             className="input"
             type="number"
             min="0"
@@ -81,7 +81,8 @@ const ExpenseForm = (props) => {
               name="category"
               value={expenseCategory}
               onChange={(e) => setExpenseCategory(e.target.value)}
-            required>
+              required
+            >
               <option disabled="disabled" value="" className="is-hidden">
                 Select One
               </option>
