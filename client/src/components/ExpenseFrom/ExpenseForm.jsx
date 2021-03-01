@@ -6,6 +6,7 @@ import "./ExpenseForm.css";
 import Alert from "../Alert/Alert";
 import AlertContext from "../../contexts/AlertContext";
 import API from "../../utils/API";
+import { SingleDatePicker } from "react-dates";
 
 const ExpenseForm = (props) => {
   const { onDisplay, display, theme } = useContext(AlertContext);
@@ -60,9 +61,10 @@ const ExpenseForm = (props) => {
   useEffect(() => {
     let sumOfShare = expenseShare;
     sumOfShare = expenseShare.reduce(
-      (sum, traveler) => sum + traveler.shareOfTotalExpense,0
+      (sum, traveler) => sum + traveler.shareOfTotalExpense,
+      0
     );
-    setRemainder(totalExpenseAmount-sumOfShare)
+    setRemainder(totalExpenseAmount - sumOfShare);
   }, [expenseShare]);
 
   const handleTotalExpenseChange = (e) => {
@@ -103,6 +105,7 @@ const ExpenseForm = (props) => {
       }}
     >
       <div className="field">
+        <label className="label">Expense Date</label>
         <label className="label">Amount</label>
         <div className="control has-icons-left has-icons-right">
           <input
