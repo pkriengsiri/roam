@@ -22,6 +22,9 @@ const ExpenseForm = (props) => {
   ]);
   const [expenseBalanced, setExpenseBalanced] = useState(true);
   const [remainder, setRemainder] = useState(0);
+  const [date, setDate] = useState(null);
+  const [focusedInput, setFocusedInput] = useState(null);
+  const [calendarStack, setCalendarStack] = useState("horizontal");
 
   const { tripId } = useParams();
   const { userId } = useParams();
@@ -67,6 +70,15 @@ const ExpenseForm = (props) => {
     setRemainder(totalExpenseAmount - sumOfShare);
   }, [expenseShare]);
 
+  // check window viewport to set orientation of calendar so it is responsive in mobile
+  useEffect(() => {
+    if (window.innerWidth <= 768) {
+      setCalendarStack("vertical");
+    } else {
+      setCalendarStack("horizontal");
+    }
+  }, [window.innerWidth]);
+
   const handleTotalExpenseChange = (e) => {
     let num = e.target.value
       .toString()
@@ -89,6 +101,12 @@ const ExpenseForm = (props) => {
     setExpenseShare([...updateArray, updateExpenseCreatorShare]);
   };
 
+  // set calendar dates
+  const handleDatesChange = (date) => {
+    setDate(date);
+    
+  };
+
   return (
     <form
       onSubmit={(e) => {
@@ -106,6 +124,7 @@ const ExpenseForm = (props) => {
     >
       <div className="field">
         <label className="label">Expense Date</label>
+        <SingleDatePicker />
         <label className="label">Amount</label>
         <div className="control has-icons-left has-icons-right">
           <input
