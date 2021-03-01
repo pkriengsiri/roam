@@ -1,40 +1,34 @@
 import React, { useState, useContext, useEffect } from "react";
+import UserContext from "../../contexts/UserContext";
 import Logo from "../../Assets/Images/roam5.svg";
 import LoginModal from "../../components/LoginModal/LoginModal";
 import SignUpModal from "../../components/SignUpModal/SignUpModal";
 import { Link, useHistory } from "react-router-dom";
-import UserContext from "../../contexts/UserContext";
 import "./Navbar.css";
 import API from "../../utils/API";
 
 const Navbar = ({ setUserContext }) => {
+  const { userContext } = useContext(UserContext);
   const [loginModalState, setLoginModalState] = useState(false);
   const [signUpModalState, setSignUpModalState] = useState(false);
-  const [profileImage, setProfileImage] = useState();
+  const [profileImage, setProfileImage] = useState(
+    "https://res.cloudinary.com/djou7v3ho/image/upload/v1614532245/Avatar-removebg-preview_1_g04ftj.png"
+  );
   const history = useHistory();
-  const { userContext } = useContext(UserContext);
-  const defaultImage =
-    "https://res.cloudinary.com/djou7v3ho/image/upload/v1614532245/Avatar-removebg-preview_1_g04ftj.png";
 
   useEffect(() => {
-    setProfileImage(defaultImage);
-    // console.log(userContext);
-    // if (userContext.userId) {
-    //   API.getUser(userContext.userId)
-    //     .then((response) => {
-    //       // console.log(response.data.profileImageUrl);
-    //       // if (profileImage === defaultImage) {
-    //       //   setProfileImage(response.data.profileImageUrl);
-    //       //   console.log(profileImage);
-    //       // } else {
-    //       //   setProfileImage(defaultImage);
-    //       // }
-    //     })
-    //     .catch((err) => {
-    //       console.log(err);
-    //     });
-    // }
-  }, []);
+    if (userContext?.userId) {
+      API.getUser(userContext.userId)
+        .then((response) => {
+          if (response.data.profileImageUrl) {
+            setProfileImage(response.data.profileImageUrl);
+          }
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    }
+  }, [userContext]);
 
   const toggleLoginModal = (e) => {
     e.preventDefault();

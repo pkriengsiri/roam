@@ -12,29 +12,20 @@ const ExpenseSchema = new Schema({
 
   category: {
     type: String,
-    default:"Other"
-    // choices:
-    // [
-    //   "Activities",
-    //   "Airfare",
-    //   "Car/Gas",
-    //   "Dining",
-    //   "Entertainment",
-    //   "Groceries",
-    //   "Lodging",
-    //   "Other",
-    // ],
+    default: "Other",
   },
   description: { type: String },
-  // expenseShare: [
-  //   {
-  //     travelerId: { type: Schema.Types.ObjectId, ref: "User" },
-  //     shareOfTotalExpense: { type: Number }, // how much this user owes for their portion of the total expense // Ex: U1 = $10
-  //     // contributionToTotalExpense:{type:Number},  // how much this user originally paid to the total expense // Ex: U1 = $100
-  //   },
-    
-  // ], //array of userIds
-  // expenseBalanced: { type: Boolean, required:"Transaction must be balanced. (true)" }, // MUST BE TRUE Can mongo calculate or be dynamic?
+  expenseShare: [
+    {
+      travelerEmail:  { type: String, trim: true },
+      shareOfTotalExpense: { type: Number }, // how much this user owes for their portion of the total expense // Ex: U1 = $10
+      // contributionToTotalExpense:{type:Number},  // how much this user originally paid to the total expense // Ex: U1 = $100
+    },
+  ], //array of userIds
+  expenseBalanced: {
+    type: Boolean,
+    required: "Transaction must be balanced. (true)",
+  }, // MUST BE TRUE Can mongo calculate or be dynamic?
 });
 
 const Expense = mongoose.model("Expense", ExpenseSchema);
@@ -51,18 +42,14 @@ module.exports = Expense;
 //  //    * add expense to userId  - does mongoose have option to auto add based on reference fields?
 //  //  * else response unbalanced, set expensedBalanced=false, do not send to db,  transaction 400class error
 
-
-
 // Second Step: Add other users and their share of the total (how much they owe for total expense)
 //  // functionality similiar to trip.travelers addTraveler (traveler email and amount owed(their share of the total expense))
 //  //  same front end and backend logic that already exists from step 1
 //  //  add expense to traveler by email?
 
-
 // Third Step:  Allow other users to make contribution
 //  //  step two but allow users to input share of total
 //  //  expense balanced will now require shares===total && contributions===total
-
 
 /// sample
 // {
@@ -79,4 +66,3 @@ module.exports = Expense;
 //   ],
 //  "expenseBalanced": true
 // }
-
