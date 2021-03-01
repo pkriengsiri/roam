@@ -4,6 +4,7 @@ import API from "../../utils/API";
 import "./SingleTrip.css";
 import UserContext from "../../contexts/UserContext";
 import DoughnutChart from "../../components/DoughnutChart/DoughnutChart";
+import PackingList from "../../components/PackingList/PackingList";
 import TripContext from "../../contexts/TripContext";
 
 const SingleTrip = () => {
@@ -105,7 +106,7 @@ const SingleTrip = () => {
               <img className="trip-image" src={imageUrl} alt={destination} />
             </figure>
           </div>
-          <div className="column is-3">
+          <div className="column is-4">
             <div className="card single-trip-card">
               <div className="card-content">
                 <div className="content">
@@ -159,6 +160,7 @@ const SingleTrip = () => {
           </div>
           <div className="column is-6">
             <h1 className="title has-text-centered">Packing List</h1>
+            <PackingList/>
           </div>
         </div>
         <div className="columns is-centered mt-6">
