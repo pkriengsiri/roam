@@ -91,7 +91,7 @@ const EditUser = () => {
       <form onSubmit={handleFormSubmit}>
         <div className="columns is-centered is-vcentered">
           {/* Column with profile picture and photo upload input */}
-          <div className="column is-5 mb-6 mr-6">
+          <div className="column is-4 mb-6 mr-6">
             {/* Profile picture */}
             <figure className="image">
               {changedProfileImageUrl ? (
