@@ -21,6 +21,7 @@ const ExpenseForm = (props) => {
   ]);
   const [expenseBalanced, setExpenseBalanced] = useState(true);
   const [remainder, setRemainder] = useState(0);
+  const [shareType, setShareType] = useState("Solo");
 
   const { tripId } = useParams();
   const { userId } = useParams();
@@ -60,9 +61,10 @@ const ExpenseForm = (props) => {
   useEffect(() => {
     let sumOfShare = expenseShare;
     sumOfShare = expenseShare.reduce(
-      (sum, traveler) => sum + traveler.shareOfTotalExpense,0
+      (sum, traveler) => sum + traveler.shareOfTotalExpense,
+      0
     );
-    setRemainder(totalExpenseAmount-sumOfShare)
+    setRemainder(totalExpenseAmount - sumOfShare);
   }, [expenseShare]);
 
   const handleTotalExpenseChange = (e) => {
@@ -72,23 +74,23 @@ const ExpenseForm = (props) => {
       .map((el, i) => (i ? el.split("").slice(0, 2).join("") : el))
       .join(".");
 
-    setTotalExpenseAmount(num);
-    let updateArray = expenseShare;
-    // console.log(
-    //   updateArray.find((el) => el.travelerEmail === userContext.email)
-    // );
-    let updateExpenseCreatorShare = updateArray.find(
-      (el) => el.travelerEmail === userContext.email
-    );
-    updateArray = updateArray.filter(
-      (el) => el.travelerEmail !== userContext.email
-    );
-    updateExpenseCreatorShare.shareOfTotalExpense = num;
-    setExpenseShare([...updateArray, updateExpenseCreatorShare]);
+    if (shareType === "solo") {
+      setTotalExpenseAmount(num);
+      let updateArray = expenseShare;
+      let updateExpenseCreatorShare = updateArray.find(
+        (el) => el.travelerEmail === userContext.email
+      );
+      updateArray = updateArray.filter(
+        (el) => el.travelerEmail !== userContext.email
+      );
+      updateExpenseCreatorShare.shareOfTotalExpense = num;
+      setExpenseShare([...updateArray, updateExpenseCreatorShare]);
+    }
   };
 
   return (
     <form
+      id="expense-form"
       onSubmit={(e) => {
         e.preventDefault();
         props.handleFormSubmit(e, {
@@ -122,9 +124,19 @@ const ExpenseForm = (props) => {
         </div>
       </div>
       <div className="">
-        <button className="button is-primary">Share Evenly</button>
+        <button
+          className="button is-primary"
+          onClick={(e) => setShareType(e.target.innerHTML)}
+        >
+          Share Evenly
+        </button>
 
-        <button className="button mr-4 is-light">Custom Split</button>
+        <button
+          className="button mr-4 is-light"
+          onClick={(e) => setShareType(e.target.innerHTML)}
+        >
+          Custom Split
+        </button>
       </div>
 
       {/* drop down form for splitting expense */}
@@ -187,7 +199,7 @@ const ExpenseForm = (props) => {
               name="category"
               value={expenseCategory}
               onChange={(e) => setExpenseCategory(e.target.value)}
-              required
+              // required // TODO: add this back. Issue with clicking share buttons
             >
               <option disabled="disabled" value="" className="is-hidden">
                 Select One
@@ -221,13 +233,15 @@ const ExpenseForm = (props) => {
 
       <div className="field is-grouped">
         <div className="control">
-          <button className="button is-primary">Submit</button>
+          <button
+            className="button is-primary"
+            form="expense-form"
+            onClick={() => props.closeForm()}
+          >
+            Submit
+          </button>
         </div>
-        <Link
-          onClick={() => props.closeForm()}
-          to={`/user/${userId}/trips/${tripId}`}
-          className="button mr-4"
-        >
+        <Link to={`/user/${userId}/trips/${tripId}`} className="button mr-4">
           Cancel
         </Link>
       </div>
