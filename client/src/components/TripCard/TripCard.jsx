@@ -20,8 +20,8 @@ const TripCard = ({
   const { userId } = useParams();
 
   return (
-    <div className="columns is-centered fade-in-div">
-      <div className="column is-5">
+    <div className="columns is-centered">
+      <div className="column is-6">
         <div className="card trip-card">
           <div className="card-content has-text-left">
             <div className="media">

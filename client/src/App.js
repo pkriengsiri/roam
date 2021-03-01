@@ -1,26 +1,26 @@
 import { useEffect, useState, useContext } from "react";
 import "./sass/App.scss";
+import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import Home from "./containers/Home/Home";
+import Navbar from "./components/Navbar/Navbar";
 import EditUser from "./containers/EditUser/EditUser";
 import Dashboard from "./containers/Dashboard/Dashboard";
 import CreateTrip from "./containers/CreateTrip/CreateTrip";
 import EditTrip from "./containers/EditTrip/EditTrip";
 import SingleTrip from "./containers/SingleTrip/SingleTrip";
 import CreateExpense from "./containers/CreateExpense/CreateExpense";
-import Navbar from "./components/Navbar/Navbar";
+import EditExpense from "./containers/EditExpense/EditExpense";
+import AllExpenses from "./containers/AllExpenses/AllExpenses";
 import Footer from "./components/Footer/Footer";
-import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import "./App.css";
 import UserContext from "./contexts/UserContext";
 import AlertContext from "./contexts/AlertContext";
 import ExpenseContext from "./contexts/ExpenseContext";
-
 import useFindUser from "./hooks/useFindUser";
 import PrivateRoute from "./components/PrivateRoute/PrivateRoute";
 
 function App() {
-  
-  const {userContext, setUserContext, isLoading} = useFindUser();
+  const { userContext, setUserContext, isLoading } = useFindUser();
 
   const [expenseContext, setExpenseContext] = useState({
     id: "",
@@ -32,7 +32,6 @@ function App() {
     onDisplay: (display, theme) =>
       setAlertContext({ ...alertContext, display, theme }),
   });
-
 
   // useEffect(() => {
   //   const getCsrfToken = async () => {
@@ -61,8 +60,16 @@ function App() {
                   <Home setUserContext={setUserContext} />
                 </Route>
                 {/* <Route exact path="/user/:userId" component={Dashboard} /> */}
-                <PrivateRoute exact path="/user/:userId/trips" component={Dashboard} />
-                <PrivateRoute exact path="/user/:userId/edit" component={EditUser} />
+                <PrivateRoute
+                  exact
+                  path="/user/:userId/trips"
+                  component={Dashboard}
+                />
+                <PrivateRoute
+                  exact
+                  path="/user/:userId/edit"
+                  component={EditUser}
+                />
                 <PrivateRoute
                   exact
                   path="/user/:userId/trips/new"
@@ -82,6 +89,15 @@ function App() {
                   exact
                   path="/user/:userId/trips/:tripId/expense"
                   component={CreateExpense}
+                />
+                <PrivateRoute
+                  exact
+                  path="/user/:userId/trips/:tripId/expenses"
+                  component={AllExpenses}
+                />
+                <PrivateRoute
+                  path="/user/:userId/trips/:tripId/expenses/:expenseId/edit"
+                  component={EditExpense}
                 />
               </Switch>
             </main>

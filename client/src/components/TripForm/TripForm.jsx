@@ -154,6 +154,7 @@ const TripForm = (props) => {
               <label className="label">Destination</label>
               <div className="control">
                 <input
+                  autoFocus
                   className="input"
                   type="text"
                   placeholder="Destination"

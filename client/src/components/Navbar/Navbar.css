@@ -1,5 +1,5 @@
 a.navbar-link:hover, a.navbar-link:active {
-   background-color: #F6F1E9 !important;
+   background-color: #ebebeb !important;
 }
 
 .navbar {
@@ -8,4 +8,12 @@ a.navbar-link:hover, a.navbar-link:active {
 
 .navbar-divider {
     background-color: #2e356095;
+}
+
+.navbar-profile-picture {
+    border-radius: 50%;
+    object-fit: cover;
+    min-height: 45px;
+    /* max-height: 30px !important; */
+    /* max-height: 10px !important; */
 }

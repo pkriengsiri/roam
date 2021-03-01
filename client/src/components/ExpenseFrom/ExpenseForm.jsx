@@ -1,9 +1,10 @@
-import React, { useState, useContext } from "react";
+import React, { useState, useContext, useEffect } from "react";
 import { useParams, Link, useHistory } from "react-router-dom";
 import UserContext from "../../contexts/UserContext";
 import "./ExpenseForm.css";
 import Alert from "../Alert/Alert";
 import AlertContext from "../../contexts/AlertContext";
+import API from "../../utils/API";
 
 const ExpenseForm = (props) => {
   const { onDisplay, display, theme } = useContext(AlertContext);
@@ -14,7 +15,22 @@ const ExpenseForm = (props) => {
 
   const { tripId } = useParams();
   const { userId } = useParams();
+  const { expenseId } = useParams();
 
+  useEffect(() => {
+    if (expenseId) {
+      API.getExpense(expenseId)
+        .then((response) => {
+          // console.log(response.data);
+          setTotalExpenseAmount(response.data.totalExpenseAmount);
+          setExpenseCategory(response.data.category);
+          setDescription(response.data.description);
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    }
+  }, []);
 
   return (
     <form
@@ -33,6 +49,7 @@ const ExpenseForm = (props) => {
         <label className="label">Amount</label>
         <div className="control has-icons-left has-icons-right">
           <input
+            autoFocus
             className="input"
             type="number"
             min="0"
@@ -64,7 +81,8 @@ const ExpenseForm = (props) => {
               name="category"
               value={expenseCategory}
               onChange={(e) => setExpenseCategory(e.target.value)}
-            required>
+              required
+            >
               <option disabled="disabled" value="" className="is-hidden">
                 Select One
               </option>
