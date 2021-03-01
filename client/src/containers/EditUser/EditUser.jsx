@@ -15,6 +15,7 @@ const EditUser = () => {
   const [email, setEmail] = useState("");
   const [fileUploadStatus, setFileUploadStatus] = useState(false);
   const [changedProfileImageUrl, setChangedProfileImageUrl] = useState("");
+  const [fileType, setFileType] = useState("");
 
   useEffect(() => {
     if (userId) {
@@ -49,27 +50,28 @@ const EditUser = () => {
   };
 
   const addPhoto = () => {
-    // console.log(fileInput);
-    var formdata = new FormData();
-    formdata.append("photo", fileInput, "file");
-    var requestOptions = {
-      method: "POST",
-      body: formdata,
-      // redirect: "follow",
-    };
+    console.log(fileType);
+    if (fileType !== "") {
+      var formdata = new FormData();
+      formdata.append("photo", fileInput, "file");
+      var requestOptions = {
+        method: "POST",
+        body: formdata,
+      };
 
-    fetch(`/api/users/upload/${userId}`, requestOptions)
-      .then((response) => {
-        return response.text();
-      })
-      .then((result) => {
-        // console.log(result);
-        const res = JSON.parse(result);
-        setFileUploadStatus(true);
-        // console.log(res.url);
-        setChangedProfileImageUrl(res.url);
-      })
-      .catch((error) => console.log("error", error));
+      fetch(`/api/users/upload/${userId}`, requestOptions)
+        .then((response) => {
+          return response.text();
+        })
+        .then((result) => {
+          const res = JSON.parse(result);
+          setFileUploadStatus(true);
+          setChangedProfileImageUrl(res.url);
+        })
+        .catch((error) => console.log("error", error));
+    } else {
+      // Set Alert component
+    }
   };
 
   // NEED TO UPDATE THE IMAGE WITH EDIT FUNCTIONALITY
@@ -107,6 +109,7 @@ const EditUser = () => {
                       name="resume"
                       onChange={(e) => {
                         setFileName(e.target.files[0].name);
+                        setFileType(e.target.files[0].type);
                         setFileInput(e.target.files[0]);
                       }}
                     />
@@ -151,7 +154,7 @@ const EditUser = () => {
               <label className="label">First Name</label>
               <div className="control">
                 <input
-                autoFocus
+                  autoFocus
                   name="firstName"
                   className="input"
                   type="text"
