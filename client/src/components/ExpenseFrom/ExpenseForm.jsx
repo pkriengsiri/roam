@@ -73,7 +73,6 @@ const ExpenseForm = (props) => {
       (el) => el.travelerEmail !== userContext.email
     );
     updateExpenseCreatorShare.shareOfTotalExpense = num;
-
     setExpenseShare([...updateArray, updateExpenseCreatorShare]);
   };
 
@@ -119,7 +118,7 @@ const ExpenseForm = (props) => {
 
       {/* drop down form for splitting expense */}
 
-      {trip.travelers.map((traveler) => (
+      {expenseShare.map((traveler) => (
         <div
           className="field is-horizontal ml-5 mt-2"
           key={traveler.travelerEmail}
@@ -132,8 +131,13 @@ const ExpenseForm = (props) => {
               <p className="control">
                 <input
                   className="input is-small"
-                  type="email"
-                  placeholder="Amount"
+                  type="number"
+                  min="0"
+                  step=".01"
+                  placeholder={traveler.shareOfTotalExpense}
+                  value={traveler.shareOfTotalExpense}
+                  name="shareExpenseAmount"
+                  id={traveler.travelerEmail}
                 />
               </p>
             </div>
