@@ -129,6 +129,9 @@ const ExpenseForm = (props) => {
           showDefaultInputIcon={true} // calendar icon
           showClearDate={true} // clear dates with x button
           orientation={calendarStack}
+          isOutsideRange={() => false}
+          anchorDirection="ANCHOR_RIGHT"
+
         />
         <label className="label">Amount</label>
         <div className="control has-icons-left has-icons-right">
