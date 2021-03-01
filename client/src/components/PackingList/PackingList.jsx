@@ -34,6 +34,18 @@ const PackingList = () => {
     setList(updatedList);
   };
 
+  const editItem = (id) => {
+      const updatedList = [...list].map((item) => {
+          if (item.id === id){
+              item.text = editingText;
+          }
+          return item;
+      })
+      setList(updatedList);
+      setEditingText("");
+      setItemEditing(null);
+  }
+
   return (
     <div>
       <div className="columns is-centered">
@@ -67,6 +79,7 @@ const PackingList = () => {
 
               <button onClick={() => deleteItem(item.id)}>Delete</button>
               <button onClick={() => setItemEditing(item.id)}>Edit</button>
+              <button onClick={()=> editItem(item.id)}>Save</button>
             </div>
           ))}
         </div>
