@@ -10,30 +10,30 @@ import API from "../../utils/API";
 const Navbar = ({ setUserContext }) => {
   const [loginModalState, setLoginModalState] = useState(false);
   const [signUpModalState, setSignUpModalState] = useState(false);
-  const [profileImage, setProfileImage] = useState("");
+  const [profileImage, setProfileImage] = useState();
   const history = useHistory();
   const { userContext } = useContext(UserContext);
   const defaultImage =
     "https://res.cloudinary.com/djou7v3ho/image/upload/v1614532245/Avatar-removebg-preview_1_g04ftj.png";
 
   useEffect(() => {
-    console.log(userContext);
-    if (userContext.userId) {
-      API.getUser(userContext.userId)
-        .then((response) => {
-          // console.log(response.data.profileImageUrl);
-          // if (profileImage === defaultImage) {
-          //   setProfileImage(response.data.profileImageUrl);
-          //   console.log(profileImage);
-          // } else {
-          //   setProfileImage(defaultImage);
-          // }
-          setProfileImage(defaultImage);
-        })
-        .catch((err) => {
-          console.log(err);
-        });
-    }
+    setProfileImage(defaultImage);
+    // console.log(userContext);
+    // if (userContext.userId) {
+    //   API.getUser(userContext.userId)
+    //     .then((response) => {
+    //       // console.log(response.data.profileImageUrl);
+    //       // if (profileImage === defaultImage) {
+    //       //   setProfileImage(response.data.profileImageUrl);
+    //       //   console.log(profileImage);
+    //       // } else {
+    //       //   setProfileImage(defaultImage);
+    //       // }
+    //     })
+    //     .catch((err) => {
+    //       console.log(err);
+    //     });
+    // }
   }, []);
 
   const toggleLoginModal = (e) => {
