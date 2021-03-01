@@ -2,6 +2,11 @@ const db = require("../models");
 const axios = require("axios");
 
 module.exports = {
+  findAll: function (req, res) {
+    db.PackingList.find(req.query)
+      .then((dbPackingLists) => res.json(dbPackingLists))
+      .catch((err) => res.status(422).json(err));
+  },
   findById: function (req, res) {
     db.PackingList.findById(req.params.id)
       .then((dbPackingList) => {
