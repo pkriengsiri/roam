@@ -52,17 +52,22 @@ const PackingList = () => {
         <div className="column is-5">
           <form onSubmit={handleSubmit}>
             <input
+            className="input"
               type="text"
               placeholder="Add an item"
               value={input}
               name="text"
               onChange={(e) => setInput(e.target.value)}
             />
-            <button type="submit">Add</button>
+            <div className="control">
+            <button className="button" type="submit"><i className="fas fa-plus fa-lg"></i></button></div>
           </form>
           {list.map((item) => (
             <div key={item.id}>
-              <input
+
+                <div className="columns">
+                    <div className="column is-10">
+                        <input
                 type="checkbox"
                 onChange={() => togglePacked(item.id)}
                 checked={item.packed}
@@ -83,6 +88,9 @@ const PackingList = () => {
               ) : (
                 <button onClick={() => setItemEditing(item.id)}>Edit</button>
               )}
+                    </div>
+                </div>
+              
             </div>
           ))}
         </div>
