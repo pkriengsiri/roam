@@ -67,11 +67,13 @@ function App() {
                     path="/user/:userId/trips"
                     component={Dashboard}
                   />
+
                   <PrivateRoute
                     exact
                     path="/user/:userId/edit"
                     component={EditUser}
                   />
+
                   <PrivateRoute
                     exact
                     path="/user/:userId/trips/new"
