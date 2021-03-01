@@ -141,10 +141,10 @@ const EditUser = () => {
               </div>
             </div>
             {fileUploadStatus && (
-              <Alert color={"primary"}className="has-text-danger">File Upload Succeeded</Alert>
+              <Alert color={"success"}>File Upload Succeeded</Alert>
             )}
             {!fileUploadStatus && (
-              <Alert color={"error"}className="has-text-danger">Please upload a valid file</Alert>
+              <Alert color={"error"}>Please upload a valid file</Alert>
             )}
           </div>
           <div className="column is-5">
