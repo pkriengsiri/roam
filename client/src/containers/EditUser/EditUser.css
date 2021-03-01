@@ -18,3 +18,8 @@
 .hide-icon {
   display: none;
 }
+
+.spinner {
+  padding-left: 25px;
+  padding-right: 25px;
+}

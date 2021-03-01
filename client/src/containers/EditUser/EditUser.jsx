@@ -53,7 +53,7 @@ const EditUser = () => {
   };
 
   const addPhoto = () => {
-    setLoadingState("is-loading");
+    setLoadingState("is-loading spinner");
     setDisplayIcon("hide-icon");
     if (fileType !== "") {
       var formdata = new FormData();
@@ -77,10 +77,9 @@ const EditUser = () => {
         })
         .catch((error) => console.log("error", error));
     } else {
-      // Set Alert component
-
+      setLoadingState("");
+      setDisplayIcon("");
       setFileUploadStatus(false);
-      console.log("nope");
     }
   };
 
@@ -103,7 +102,7 @@ const EditUser = () => {
               ) : (
                 <img
                   className="is-rounded profile-picture"
-                  src="https://placekitten.com/128/128"
+                  src="https://res.cloudinary.com/djou7v3ho/image/upload/v1614532245/Avatar-removebg-preview_1_g04ftj.png"
                 />
               )}
             </figure>
