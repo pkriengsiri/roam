@@ -22,6 +22,7 @@ const ExpenseForm = (props) => {
   const [expenseBalanced, setExpenseBalanced] = useState(true);
   const [remainder, setRemainder] = useState(0);
   const [shareType, setShareType] = useState("Solo");
+  // const [customPlaceholder, setCustomPlaceholder] = useState();
 
   const { tripId } = useParams();
   const { userId } = useParams();
@@ -32,7 +33,6 @@ const ExpenseForm = (props) => {
     if (expenseId) {
       API.getExpense(expenseId)
         .then((response) => {
-          // console.log(response.data);
           setTotalExpenseAmount(response.data.totalExpenseAmount);
           setExpenseCategory(response.data.category);
           setDescription(response.data.description);
@@ -67,65 +67,81 @@ const ExpenseForm = (props) => {
       (sum, traveler) => sum + traveler.shareOfTotalExpense,
       0
     );
-    setRemainder(totalExpenseAmount - sumOfShare);
+    setRemainder(parseFloat((totalExpenseAmount - sumOfShare).toFixed(2)));
   }, [expenseShare, totalExpenseAmount]);
 
+  // use effect for setting each traveler's share of the total expense
   useEffect(() => {
-    console.log(shareType);
-    console.log(totalExpenseAmount);
     let updateArray = trip.travelers.map((traveler) => ({
       travelerEmail: traveler.travelerEmail,
       shareOfTotalExpense: 0,
     }));
     const total = totalExpenseAmount !== "" ? totalExpenseAmount : 0;
-
     if (shareType === "Solo" && trip.travelers.length > 0) {
-      let updateExpenseCreatorShare = updateArray.find(
+      let updateExpenseCreator = updateArray.find(
         (el) => el.travelerEmail === userContext.email
       );
       updateArray = updateArray.filter(
         (el) => el.travelerEmail !== userContext.email
       );
-      updateExpenseCreatorShare.shareOfTotalExpense = total;
-      setExpenseShare([...updateArray, updateExpenseCreatorShare]);
+      updateExpenseCreator.shareOfTotalExpense = total;
+      updateArray.push(updateExpenseCreator);
+      updateArray.sort((a, b) =>
+        a.travelerEmail.localeCompare(b.travelerEmail)
+      );
+      setExpenseShare([...updateArray]);
     } else if (shareType === "Share Evenly" && trip.travelers.length > 0) {
       let subtotal = 0;
       let evenSplit = parseFloat((total / updateArray.length).toFixed(2));
       for (let i = 0; i < updateArray.length; i++) {
         updateArray[i].shareOfTotalExpense = evenSplit;
         if (i === updateArray.length - 1) {
-          updateArray[i].shareOfTotalExpense = total - subtotal;
+          updateArray[i].shareOfTotalExpense = parseFloat(
+            (total - subtotal).toFixed(2)
+          );
         }
+
         subtotal += updateArray[i].shareOfTotalExpense;
       }
+      updateArray.sort((a, b) =>
+        a.travelerEmail.localeCompare(b.travelerEmail)
+      );
       setExpenseShare([...updateArray]);
     }
   }, [shareType, totalExpenseAmount, trip, userContext]);
 
   // force number input to be in USD
-  const handleTotalExpenseChange = (e) => {
+  const handleNumericChange = (e) => {
     let num = e.target.value
+      .toString()
       .toString()
       .split(".")
       .map((el, i) => (i ? el.split("").slice(0, 2).join("") : el))
       .join(".");
-    setTotalExpenseAmount(num);
+    num = num === "" ? 0 : num;
+    console.log(e.target);
+    if (e.target.id === "totalExpenseAmount") {
+      // console.log(typeof parseFloat(num))
+      setTotalExpenseAmount(parseFloat(num));
+    } else if (e.target.name === "shareExpenseAmount") {
+      let updateTravelerEmail = e.target.id;
+      let updateArray = expenseShare;
 
-    // if (shareType === "Share Evenly") {
-    //   let updateArray = expenseShare;
-    //   let subtotal = 0;
-    //   let evenSplit = parseFloat((num / updateArray.length).toFixed(2));
-    //   for (let i = 0; i < updateArray.length; i++) {
-    //     console.log(evenSplit);
-    //     subtotal += evenSplit;
-    //     console.log(subtotal);
-    //     updateArray[i].shareOfTotalExpense = evenSplit;
-    //   }
-
-    //   if (num === "") {
-    //     num = 0;
-    //   }
-    // }
+      if (shareType === "Custom Split" && trip.travelers.length > 0) {
+        let updateTravelerCustomSplit = updateArray.find(
+          (el) => el.travelerEmail === updateTravelerEmail
+        );
+        updateArray = updateArray.filter(
+          (el) => el.travelerEmail !== updateTravelerEmail
+        );
+        updateTravelerCustomSplit.shareOfTotalExpense = parseFloat(num);
+        updateArray.push(updateTravelerCustomSplit);
+        updateArray.sort((a, b) =>
+          a.travelerEmail.localeCompare(b.travelerEmail)
+        );
+        setExpenseShare([...updateArray]);
+      }
+    }
   };
 
   return (
@@ -156,7 +172,8 @@ const ExpenseForm = (props) => {
             placeholder="Enter an amount"
             value={totalExpenseAmount}
             name="totalExpenseAmount"
-            onChange={handleTotalExpenseChange}
+            id="totalExpenseAmount"
+            onChange={(e) => handleNumericChange(e)}
           />
           <span className="icon is-small is-left">
             <i className="fas fa-dollar-sign"></i>
@@ -199,14 +216,45 @@ const ExpenseForm = (props) => {
       </div>
 
       {/* drop down form for splitting expense */}
-
-      {expenseShare.map((traveler) => (
-        <div
-          className="field is-horizontal ml-5 mt-2"
-          key={traveler.travelerEmail}
-        >
+      {shareType !== "" && (
+        <div className="expense-share-mini-form">
+          {expenseShare.map((traveler) => (
+            <div
+              className="field is-horizontal ml-5 mt-2"
+              key={traveler.travelerEmail}
+            >
+              <div className="field-label is-small">
+                <label className="label">{traveler.travelerEmail}</label>
+              </div>
+              <div className="field-body">
+                <div className="field">
+                  <p className="control">
+                    <input
+                      className="input is-small"
+                      disabled={shareType !== "Custom Split"}
+                      type="number"
+                      min="0"
+                      step=".01"
+                      placeholder={traveler.shareOfTotalExpense}
+                      // value={shareType!=="Custom Split"? traveler.shareOfTotalExpense:customPlaceholder.shareOfTotalExpense}
+                      value={traveler.shareOfTotalExpense}
+                      // value={placeholder}
+                      name="shareExpenseAmount"
+                      id={traveler.travelerEmail}
+                      onChange={(e) => handleNumericChange(e)}
+                    />
+                  </p>
+                </div>
+              </div>
+            </div>
+          ))}
+        </div>
+      )}
+      {/* conditinally render custom remainder check if on custom split */}
+      {shareType === "Custom Split" && (
+        <div className="field is-horizontal ml-5 mt-2">
           <div className="field-label is-small">
-            <label className="label">{traveler.travelerEmail}</label>
+            <label className="label">Remainder</label>
           </div>
           <div className="field-body">
             <div className="field">
@@ -216,39 +264,17 @@ const ExpenseForm = (props) => {
                   type="number"
                   min="0"
                   step=".01"
-                  placeholder={traveler.shareOfTotalExpense}
-                  value={traveler.shareOfTotalExpense}
-                  name="shareExpenseAmount"
-                  id={traveler.travelerEmail}
+                  placeholder={remainder}
+                  value={remainder}
+                  name="remaining"
+                  id="remaining"
+                  disabled
                 />
               </p>
             </div>
           </div>
         </div>
-      ))}
-
-      <div className="field is-horizontal ml-5 mt-2">
-        <div className="field-label is-small">
-          <label className="label">Remainder</label>
-        </div>
-        <div className="field-body">
-          <div className="field">
-            <p className="control">
-              <input
-                className="input is-small"
-                type="number"
-                min="0"
-                step=".01"
-                placeholder={remainder}
-                value={remainder}
-                name="remaining"
-                id="remaining"
-                disabled
-              />
-            </p>
-          </div>
-        </div>
-      </div>
+      )}
 
       <div className="field">
         <label className="label">Category</label>
