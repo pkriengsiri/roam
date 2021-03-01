@@ -24,7 +24,7 @@ const DoughnutChart = ({ expenses }) => {
           "#5A5388", // darker purple "purple navy"
           "#F48E3F", // darker orange "cadmium orange"
           "#33C1BF", // darker blue "maximum blue green"
-          "#03378C", // darkest purple "space cadet",
+          "#03378C", // blue "dark cornflower blue",
         ],
       },
     ],
@@ -47,7 +47,7 @@ const DoughnutChart = ({ expenses }) => {
       "Food & Dining":"#5A5388", // darker purple "purple navy"
       Entertainment:"#F48E3F", // darker orange "cadmium orange"
       Lodging:"#33C1BF", // darker blue "maximum blue green"
-      Other:"#03378C", // darkest purple "space cadet"
+      Other:"#03378C", // blue "dark cornflower blue"
   };
 
 
