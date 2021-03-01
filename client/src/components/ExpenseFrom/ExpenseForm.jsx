@@ -77,7 +77,6 @@ const ExpenseForm = (props) => {
       shareOfTotalExpense: 0,
     }));
     const total = totalExpenseAmount !== "" ? totalExpenseAmount : 0;
-
     if (shareType === "Solo" && trip.travelers.length > 0) {
       let updateExpenseCreator = updateArray.find(
         (el) => el.travelerEmail === userContext.email
@@ -86,7 +85,11 @@ const ExpenseForm = (props) => {
         (el) => el.travelerEmail !== userContext.email
       );
       updateExpenseCreator.shareOfTotalExpense = total;
-      setExpenseShare([...updateArray, updateExpenseCreator]);
+      updateArray.push(updateExpenseCreator);
+      updateArray.sort((a, b) =>
+        a.travelerEmail.localeCompare(b.travelerEmail)
+      );
+      setExpenseShare([...updateArray]);
     } else if (shareType === "Share Evenly" && trip.travelers.length > 0) {
       let subtotal = 0;
       let evenSplit = parseFloat((total / updateArray.length).toFixed(2));
@@ -97,19 +100,15 @@ const ExpenseForm = (props) => {
             (total - subtotal).toFixed(2)
           );
         }
+
         subtotal += updateArray[i].shareOfTotalExpense;
       }
+      updateArray.sort((a, b) =>
+        a.travelerEmail.localeCompare(b.travelerEmail)
+      );
       setExpenseShare([...updateArray]);
     }
   }, [shareType, totalExpenseAmount, trip, userContext]);
-
-  // use effect to set placeholder value for custom split
-  // useEffect(()=>{
-  //   if (shareType!=="Custom Split"){
-  //     setCustomPlaceholder(expenseShare)
-  //   }
-
-  // },[shareType,expenseShare])
 
   // force number input to be in USD
   const handleNumericChange = (e) => {
@@ -136,7 +135,11 @@ const ExpenseForm = (props) => {
           (el) => el.travelerEmail !== updateTravelerEmail
         );
         updateTravelerCustomSplit.shareOfTotalExpense = parseFloat(num);
-        setExpenseShare([...updateArray, updateTravelerCustomSplit]);
+        updateArray.push(updateTravelerCustomSplit);
+        updateArray.sort((a, b) =>
+          a.travelerEmail.localeCompare(b.travelerEmail)
+        );
+        setExpenseShare([...updateArray]);
       }
     }
   };
