@@ -86,6 +86,31 @@ const ExpenseForm = (props) => {
       updateExpenseCreatorShare.shareOfTotalExpense = num;
       setExpenseShare([...updateArray, updateExpenseCreatorShare]);
     }
+    // if (shareType === "Share Evenly") {
+    //   setTotalExpenseAmount(num);
+    //   let updateArray = expenseShare;
+    //   let updateExpenseCreatorShare = updateArray.find(
+    //     (el) => el.travelerEmail === userContext.email
+    //   );
+    //   updateArray = updateArray.filter(
+    //     (el) => el.travelerEmail !== userContext.email
+    //   );
+    //   updateExpenseCreatorShare.shareOfTotalExpense = num;
+    //   setExpenseShare([...updateArray, updateExpenseCreatorShare]);
+    // }
+
+    // if (shareType === "Custom") {
+    //   setTotalExpenseAmount(num);
+    //   let updateArray = expenseShare;
+    //   let updateExpenseCreatorShare = updateArray.find(
+    //     (el) => el.travelerEmail === userContext.email
+    //   );
+    //   updateArray = updateArray.filter(
+    //     (el) => el.travelerEmail !== userContext.email
+    //   );
+    //   updateExpenseCreatorShare.shareOfTotalExpense = num;
+    //   setExpenseShare([...updateArray, updateExpenseCreatorShare]);
+    // }
   };
 
   return (
@@ -123,21 +148,40 @@ const ExpenseForm = (props) => {
           </span>
         </div>
       </div>
-      <div className="">
-        <button
-          className="button is-primary"
-          onClick={(e) => setShareType(e.target.innerHTML)}
-        >
-          Share Evenly
-        </button>
 
-        <button
-          className="button mr-4 is-light"
-          onClick={(e) => setShareType(e.target.innerHTML)}
-        >
-          Custom Split
-        </button>
-      </div>
+      {/* select how to split expense */}
+      <div className="buttons is-centered has-addons ">
+              <button
+                className={
+                  shareType === "Solo"
+                    ? "button is-primary is-selected is-small"
+                    : "button is-small"
+                }
+                onClick={(e) => setShareType(e.target.innerHTML)}
+              >
+                Solo
+              </button>
+              <button
+                className={
+                  shareType === "Share Evenly"
+                    ? "button is-primary is-selected is-small"
+                    : "button is-small"
+                }
+                onClick={(e) => setShareType(e.target.innerHTML)}
+              >
+                Share Evenly
+              </button>
+              <button
+                className={
+                  shareType === "Custom Split"
+                    ? "button is-primary is-selected is-small"
+                    : "button is-small"
+                }
+                onClick={(e) => setShareType(e.target.innerHTML)}
+              >
+                Custom Split
+              </button>
+            </div>
 
       {/* drop down form for splitting expense */}
 
