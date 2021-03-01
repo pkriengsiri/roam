@@ -186,12 +186,10 @@ const EditUser = () => {
                   <div className="control">
                     <span
                       // type="submit"
+                      onClick={addPhoto}
                       className={`button ${loadingState}`}
                     >
-                      <i
-                        onClick={addPhoto}
-                        className={`fas fa-plus fa-lg ${displayIcon}`}
-                      ></i>
+                      <i className={`fas fa-plus fa-lg ${displayIcon}`}></i>
                     </span>
                   </div>
                 </div>
