@@ -155,6 +155,7 @@ const ExpenseForm = (props) => {
             className="textarea"
             placeholder="Description of the expense"
             type="text"
+            maxlength="30"
             name="description"
             value={description}
             onChange={(e) => setDescription(e.target.value)}
