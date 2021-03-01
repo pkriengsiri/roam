@@ -18,7 +18,7 @@ module.exports = {
 
   findByIdWithTrips: function (req, res) {
     db.User.findById(req.params.userId)
-      .populate({ path: "trips", options: { sort: { startDate: 1 } } })
+      .populate({ path: "trips", options: { sort: { startDate: -1 } } })
       .then((dbUser) => res.json(dbUser))
       .catch((err) => res.status(422).json(err));
   },

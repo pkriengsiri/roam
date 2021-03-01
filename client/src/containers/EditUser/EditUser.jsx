@@ -20,7 +20,7 @@ const EditUser = () => {
     if (userId) {
       API.getUser(userId)
         .then((response) => {
-          console.log(response);
+          // console.log(response);
           setFirstName(response.data.firstName);
           setLastName(response.data.lastName);
           setEmail(response.data.email);
@@ -42,7 +42,6 @@ const EditUser = () => {
     })
       .then((response) => {
         history.push(`/user/${userId}/trips`);
-        console.log("here");
       })
       .catch((err) => {
         console.log(err);
@@ -61,14 +60,13 @@ const EditUser = () => {
 
     fetch(`/api/users/upload/${userId}`, requestOptions)
       .then((response) => {
-        console.log(response);
         return response.text();
       })
       .then((result) => {
         // console.log(result);
         const res = JSON.parse(result);
         setFileUploadStatus(true);
-        console.log(res.url);
+        // console.log(res.url);
         setChangedProfileImageUrl(res.url);
       })
       .catch((error) => console.log("error", error));
@@ -153,6 +151,7 @@ const EditUser = () => {
               <label className="label">First Name</label>
               <div className="control">
                 <input
+                autoFocus
                   name="firstName"
                   className="input"
                   type="text"

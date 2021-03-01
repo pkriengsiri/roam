@@ -3,28 +3,32 @@ import "./Dashboard.css";
 import TripCard from "../../components/TripCard/TripCard";
 import API from "../../utils/API";
 import { Link, useParams } from "react-router-dom";
-import Doodle2 from "../../components/Doodle/Doodle2"
+import Doodle2 from "../../components/Doodle/Doodle2";
 import { set } from "mongoose";
 import Loader from "../../components/Loader/Loader";
+import moment from "moment";
 
 const Dashboard = () => {
   const { userId } = useParams();
   const [trips, setTrips] = useState([]);
   const [currentUser, setCurrentUser] = useState("");
   const [profileImage, setProfileImage] = useState("");
+  const [typeOfTripsToDisplay, setTypeOfTripsToDisplay] = useState("");
+  const [filteredTrips, setFilteredTrips] = useState([]);
 
   useEffect(() => {
     API.getUser(userId)
-    .then((response) => {
-      setProfileImage(response.data.profileImageUrl);
-    })
-    .catch((err) => {
-      console.log(err);
-    });
+      .then((response) => {
+        setProfileImage(response.data.profileImageUrl);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
 
     API.getUserWithTrips(userId)
       .then((response) => {
         setTrips(response.data.trips);
+        setTypeOfTripsToDisplay("Upcoming")
         if (!response.data.firstName) {
           setCurrentUser(`Welcome!`);
         } else {
@@ -35,6 +39,36 @@ const Dashboard = () => {
         console.log(err);
       });
   }, []);
+
+  // function to change array of trips passed to trip cards
+  useEffect(() => {
+    const today = moment().format().substring(0, 10);
+    if (typeOfTripsToDisplay === "Upcoming") {
+      setFilteredTrips(
+        trips
+          .filter((trip) => trip.endDate.substring(0, 10) >= today)
+          .sort((a, b) => a.endDate.localeCompare(b.endDate))
+      );
+    } else if (typeOfTripsToDisplay === "Past") {
+      setFilteredTrips(
+        trips.filter((trip) => trip.endDate.substring(0, 10) <= today)
+      );
+    } else {
+      setFilteredTrips(trips);
+    }
+  }, [typeOfTripsToDisplay, trips]);
+
+  // if no upcoming trips, default to all trips
+  useEffect(() => {
+    if (filteredTrips.length === 0 && typeOfTripsToDisplay==="Upcoming") {
+      setTypeOfTripsToDisplay("All");
+    }
+  }, [filteredTrips,typeOfTripsToDisplay]);
+
+  // function to change which trips to display
+  const changeDisplay = (e) => {
+    setTypeOfTripsToDisplay(e.target.innerHTML);
+  };
 
   return (
     <>
@@ -47,7 +81,10 @@ const Dashboard = () => {
       <div className="columns is-gapless is-centered is-vcentered mt-4">
         <div className="column is-1">
           <figure className="image">
-            <img className="is-rounded dashboard-profile-picture" src={profileImage} />
+            <img
+              className="is-rounded dashboard-profile-picture"
+              src={profileImage}
+            />
           </figure>
         </div>
         <div className="column is-3 mb-5 has-text-left">
@@ -55,7 +92,9 @@ const Dashboard = () => {
             {currentUser}
           </h1>
 
-          <h2 className="subtitle dashboard-subtitle has-text-centered">Start planning your trips today! </h2>
+          <h2 className="subtitle dashboard-subtitle has-text-centered">
+            Start planning your trips today!{" "}
+          </h2>
         </div>
       </div>
       <section className="has-text-centered">
@@ -74,7 +113,42 @@ const Dashboard = () => {
             )}
           </div>
         </div>
-        {trips.map((trip) => (
+
+        {/* toggle trips to view buttons      */}
+        <div className="buttons is-centered has-addons">
+          <button
+            className={
+              typeOfTripsToDisplay === "All"
+                ? "button is-primary is-selected "
+                : "button"
+            }
+            onClick={(e) => changeDisplay(e)}
+          >
+            All
+          </button>
+          <button
+            className={
+              typeOfTripsToDisplay === "Upcoming"
+                ? "button is-primary is-selected"
+                : "button"
+            }
+            onClick={(e) => changeDisplay(e)}
+          >
+            Upcoming
+          </button>
+          <button
+            className={
+              typeOfTripsToDisplay === "Past"
+                ? "button is-primary is-selected"
+                : "button"
+            }
+            onClick={(e) => changeDisplay(e)}
+          >
+            Past
+          </button>
+        </div>
+
+        {filteredTrips.map((trip) => (
           <TripCard
             {...trip}
             startDate={new Date(trip.startDate)}

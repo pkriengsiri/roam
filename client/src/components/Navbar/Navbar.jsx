@@ -60,7 +60,7 @@ const Navbar = ({ setUserContext }) => {
     e.preventDefault();
     API.logoutUser()
       .then((response) => {
-        console.log(response);
+        // console.log(response);
         setUserContext({ email: "", id: "" });
         history.push("/");
       })
