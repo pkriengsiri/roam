@@ -17,7 +17,7 @@ const Navbar = ({ setUserContext }) => {
 
 
   useEffect(() => {
-    console.log("navbar loading")
+    console.log("navbar loadi");
     console.log(userContext?.userId);
     console.log("here");
     if (userContext?.userId) {
@@ -33,7 +33,7 @@ const Navbar = ({ setUserContext }) => {
           console.log(err);
         });
     }
-  }, []);
+  }, [userContext]);
 
   const toggleLoginModal = (e) => {
     e.preventDefault();
