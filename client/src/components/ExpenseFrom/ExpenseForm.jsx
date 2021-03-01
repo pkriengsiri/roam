@@ -16,8 +16,11 @@ const ExpenseForm = (props) => {
   const [totalExpenseAmount, setTotalExpenseAmount] = useState("");
   const [expenseCategory, setExpenseCategory] = useState("");
   const [description, setDescription] = useState("");
-  const [expenseShare, setExpenseShare] = useState([]);
+  const [expenseShare, setExpenseShare] = useState([
+    { travelerEmail: "", shareOfTotalExpense: 0 },
+  ]);
   const [expenseBalanced, setExpenseBalanced] = useState(true);
+  const [remainder, setRemainder] = useState(0);
 
   const { tripId } = useParams();
   const { userId } = useParams();
@@ -53,6 +56,14 @@ const ExpenseForm = (props) => {
         console.log(err);
       });
   }, []);
+
+  useEffect(() => {
+    let sumOfShare = expenseShare;
+    sumOfShare = expenseShare.reduce(
+      (sum, traveler) => sum + traveler.shareOfTotalExpense,0
+    );
+    setRemainder(totalExpenseAmount-sumOfShare)
+  }, [expenseShare]);
 
   const handleTotalExpenseChange = (e) => {
     let num = e.target.value
@@ -144,6 +155,29 @@ const ExpenseForm = (props) => {
           </div>
         </div>
       ))}
+
+      <div className="field is-horizontal ml-5 mt-2">
+        <div className="field-label is-small">
+          <label className="label">Remainder</label>
+        </div>
+        <div className="field-body">
+          <div className="field">
+            <p className="control">
+              <input
+                className="input is-small"
+                type="number"
+                min="0"
+                step=".01"
+                placeholder={remainder}
+                value={remainder}
+                name="remaining"
+                id="remaining"
+                disabled
+              />
+            </p>
+          </div>
+        </div>
+      </div>
 
       <div className="field">
         <label className="label">Category</label>
