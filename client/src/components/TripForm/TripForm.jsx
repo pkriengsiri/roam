@@ -10,6 +10,7 @@ import moment from "moment";
 import Alert from "../Alert/Alert";
 import AlertContext from "../../contexts/AlertContext";
 import "./react_dates_overrides.css";
+import { v4 as uuidv4 } from 'uuid';
 
 let autoComplete;
 
@@ -85,7 +86,7 @@ const TripForm = (props) => {
 
   useEffect(() => {
     loadScript(
-      `https://maps.googleapis.com/maps/api/js?key=${process.env.REACT_APP_PLACES_API_KEY}&libraries=places`,
+      `https://maps.googleapis.com/maps/api/js?key=${process.env.REACT_APP_PLACES_API_KEY}&libraries=places&sessiontoken=${uuidv4()}`,
       () => handleScriptLoad(setDestination, autoCompleteRef)
     );
     if (tripId) {
