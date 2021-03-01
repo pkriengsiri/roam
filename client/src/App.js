@@ -87,7 +87,7 @@ function App() {
                 />
                 <PrivateRoute
                   exact
-                  path="/user/:userId/trips/:tripId/expenses"
+                  path="/user/:userId/trips/:tripId/newexpenses"
                   component={CreateExpense}
                 />
                 <PrivateRoute
