@@ -1,22 +1,29 @@
 import React, { useState, useEffect } from "react";
 import { useParams, Link } from "react-router-dom";
 import API from "../../utils/API";
-import MiniTable from "../../components/MiniTable/MiniTable"
+import MiniTable from "../../components/MiniTable/MiniTable";
 import "./AllExpenses.css";
 
 const AllExpenses = (props) => {
   const { userId, tripId } = useParams();
   const [destination, setDestination] = useState("");
   const [expenseArray, setExpenseArray] = useState([]);
-  const [buttonDisplayState, setButtonDisplayState] = useState(false);
-  const [displayContributors, setDisplayContributors] = useState(false);
-  let buttonDataId;
+  // const [buttonDisplayState, setButtonDisplayState] = useState(false);
+  const [displayContributors, setDisplayContributors] = useState([]);
+
   useEffect(() => {
     if (tripId) {
       API.getTrip(tripId)
         .then((response) => {
           setExpenseArray(response.data.expenses);
           setDestination(response.data.destination);
+
+          // Create an array to hold display state of contributor row and set value to false
+          const expArr = response.data.expenses;
+          const newArr = [];
+          expArr.forEach(expense => {newArr.push(false)});
+          // Set the state to the new array
+          setDisplayContributors(newArr);
         })
         .catch((err) => {
           console.log(err);
@@ -26,18 +33,30 @@ const AllExpenses = (props) => {
 
   const handleContributors = (e) => {
     e.preventDefault();
-    if (buttonDisplayState) {
-      var element = document.querySelectorAll(`[data-row]`);
-      element.forEach((element) => element.classList.remove("is-hidden"));
-      setButtonDisplayState(false);
-    } else {
-      buttonDataId = e.target.dataset.id;
-      console.log(buttonDataId);
-      var element = document.querySelector(`[data-row="${buttonDataId}"]`);
-      element.classList.add("is-hidden");
-      setButtonDisplayState(true);
-    }
-    setDisplayContributors();
+    // Create a copy of the displayContributors array
+    const displayContributorsArr = [...displayContributors];
+    // Det the id of the button being clicked
+    let buttonDataId;
+    buttonDataId = e.target.dataset.id;
+    // Change the value of the item in the array being clicked
+    displayContributorsArr[buttonDataId] = !displayContributorsArr[buttonDataId];
+    // Set the state
+    setDisplayContributors(displayContributorsArr);
+
+    
+    // if (buttonDisplayState) {
+    //   var element = document.querySelectorAll(`[data-row]`);
+    //   element.forEach((element) => element.classList.remove("is-hidden"));
+    //   setButtonDisplayState(false);
+    // } else {
+    //   let buttonDataId;
+    //   buttonDataId = e.target.dataset.id;
+    //   console.log(buttonDataId);
+    //   var element = document.querySelector(`[data-row="${buttonDataId}"]`);
+    //   element.classList.add("is-hidden");
+    //   setButtonDisplayState(true);
+    // }
+    // setDisplayContributors();
   };
   return (
     <div className="container mt-6 pl-6 pr-6">
@@ -74,9 +93,11 @@ const AllExpenses = (props) => {
                       ></i>
                     </td>
                   </tr>
-                  <tr className="has-text-dark" data-row={index}>
+                  {displayContributors[index] && <tr className="has-text-dark" data-row={index}>
                     <td></td>
-                    <td><MiniTable/></td>
+                    <td>
+                      <MiniTable />
+                    </td>
                     <td>
                       <ul>
                         <li>$10</li>
@@ -93,7 +114,7 @@ const AllExpenses = (props) => {
                         <li>Jeana Rose</li>
                       </ul>
                     </td>
-                  </tr>
+                  </tr>}
                 </>
               ))}
             </tbody>
