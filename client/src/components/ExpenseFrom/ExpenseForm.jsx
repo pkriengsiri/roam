@@ -182,7 +182,7 @@ const ExpenseForm = (props) => {
             min="0"
             step=".01"
             placeholder="Enter an amount"
-            value={totalExpenseAmount}
+            value={totalExpenseAmount===0?"":totalExpenseAmount}
             name="totalExpenseAmount"
             id="totalExpenseAmount"
             onChange={(e) => handleNumericChange(e)}
@@ -249,7 +249,7 @@ const ExpenseForm = (props) => {
                       step=".01"
                       placeholder={traveler.shareOfTotalExpense}
                       // value={shareType!=="Custom Split"? traveler.shareOfTotalExpense:customPlaceholder.shareOfTotalExpense}
-                      value={traveler.shareOfTotalExpense}
+                      value={traveler.shareOfTotalExpense===0?"":traveler.shareOfTotalExpense}
                       // value={placeholder}
                       name="shareExpenseAmount"
                       id={traveler.travelerEmail}
@@ -338,7 +338,7 @@ const ExpenseForm = (props) => {
             Submit
           </button>
         </div>
-        <Link to={`/user/${userId}/trips/${tripId}`} className="button mr-4">
+        <Link to={`/user/${userId}/trips/${tripId}`} className="button mr-4" >
           Cancel
         </Link>
       </div>
