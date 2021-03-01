@@ -47,6 +47,13 @@ const AllExpenses = (props) => {
     // Set the state
     setDisplayContributors(displayContributorsArr);
   };
+
+  // Method to convert dates from response
+  const convertDate = (date) => {
+    const formattedDate = new Date(date);
+    return formattedDate.toLocaleDateString();
+  };
+
   return (
     <div className="container mt-6 pl-6 pr-6">
       <h1 className="title has-text-centered">
@@ -58,6 +65,7 @@ const AllExpenses = (props) => {
             <thead className="expense-table-head has-text-centered">
               <tr>
                 <th></th>
+                <th className="has-text-light">Date</th>
                 <th className="has-text-light">Description</th>
                 <th className="has-text-light">Category</th>
                 <th className="has-text-light">Amount</th>
@@ -74,6 +82,9 @@ const AllExpenses = (props) => {
                       >
                         <i className="edit-expense-icon far fa-edit m-1 "></i>
                       </Link>
+                    </td>
+                    <td className="is-vcentered">
+                      {convertDate(expense.date)}
                     </td>
                     <td className="is-vcentered">{expense.description}</td>
                     <td className="is-vcentered">{expense.category}</td>
@@ -93,7 +104,7 @@ const AllExpenses = (props) => {
                   </tr>
                   {displayContributors[index] && (
                     <tr className="has-text-dark" data-row={index}>
-                      <td colSpan="5">
+                      <td colSpan="6">
                         <div>
                           {/* Mini-table goes here */}
                           <p>
