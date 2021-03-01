@@ -14,7 +14,7 @@ const EditUser = () => {
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
   const [email, setEmail] = useState("");
-  const [fileUploadStatus, setFileUploadStatus] = useState();
+  const [fileUploadStatus, setFileUploadStatus] = useState(null);
   const [changedProfileImageUrl, setChangedProfileImageUrl] = useState("");
   const [fileType, setFileType] = useState("");
   const { onDisplay, display, theme } = useContext(AlertContext);
@@ -70,7 +70,7 @@ const EditUser = () => {
         .then((result) => {
           setLoadingState("");
           const res = JSON.parse(result);
-          setFileUploadStatus(true);
+          setFileUploadStatus("true");
           setChangedProfileImageUrl(res.url);
           setLoadingState("");
           setDisplayIcon("");
@@ -79,7 +79,7 @@ const EditUser = () => {
     } else {
       setLoadingState("");
       setDisplayIcon("");
-      setFileUploadStatus(false);
+      setFileUploadStatus("false");
     }
   };
 
@@ -150,10 +150,10 @@ const EditUser = () => {
                 </div>
               </div>
             </div>
-            {fileUploadStatus && (
+            {fileUploadStatus === "true" && (
               <Alert color={"success"}>File Upload Succeeded</Alert>
             )}
-            {!fileUploadStatus && (
+            {fileUploadStatus === "false" && (
               <Alert color={"error"}>Please upload a valid file</Alert>
             )}
           </div>
