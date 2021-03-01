@@ -8,11 +8,11 @@
 @keyframes fadeinsun {
   from {
     transform: translateY(50px) ;
-    fill: #f48e00;
+    fill: #fff018;
   }
   to {
     transform: translateY(-25px);
-    fill: #fff018;
+    fill: #f48e00;
   }
 }
 

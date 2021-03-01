@@ -59,7 +59,6 @@ function App() {
                 <Route exact path="/">
                   <Home setUserContext={setUserContext} />
                 </Route>
-                {/* <Route exact path="/user/:userId" component={Dashboard} /> */}
                 <PrivateRoute
                   exact
                   path="/user/:userId/trips"
@@ -87,7 +86,7 @@ function App() {
                 />
                 <PrivateRoute
                   exact
-                  path="/user/:userId/trips/:tripId/expense"
+                  path="/user/:userId/trips/:tripId/expenses/new"
                   component={CreateExpense}
                 />
                 <PrivateRoute
