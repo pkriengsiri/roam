@@ -18,6 +18,7 @@ const EditUser = () => {
   const [changedProfileImageUrl, setChangedProfileImageUrl] = useState("");
   const [fileType, setFileType] = useState("");
   const { onDisplay, display, theme } = useContext(AlertContext);
+  const [loadingState, setLoadingState] = useState("");
 
   useEffect(() => {
     if (userId) {
@@ -51,6 +52,8 @@ const EditUser = () => {
   };
 
   const addPhoto = () => {
+    setLoadingState("is-loading");
+
     if (fileType !== "") {
       var formdata = new FormData();
       formdata.append("photo", fileInput, "file");
@@ -64,6 +67,7 @@ const EditUser = () => {
           return response.text();
         })
         .then((result) => {
+          setLoadingState("");
           const res = JSON.parse(result);
           setFileUploadStatus(true);
           setChangedProfileImageUrl(res.url);
@@ -71,7 +75,8 @@ const EditUser = () => {
         .catch((error) => console.log("error", error));
     } else {
       // Set Alert component
-      setFileUploadStatus(false)
+      setLoadingState("");
+      setFileUploadStatus(false);
       console.log("nope");
     }
   };
@@ -132,7 +137,7 @@ const EditUser = () => {
                   <div className="control">
                     <span
                       // type="submit"
-                      className="button"
+                      className={`button ${loadingState}`}
                     >
                       <i onClick={addPhoto} className="fas fa-plus fa-lg"></i>
                     </span>
