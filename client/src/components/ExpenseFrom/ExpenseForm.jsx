@@ -107,6 +107,7 @@ const ExpenseForm = (props) => {
       onSubmit={(e) => {
         e.preventDefault();
         props.handleFormSubmit(e, {
+          date: date,
           expenseCreator: userId,
           trip: tripId,
           totalExpenseAmount,
