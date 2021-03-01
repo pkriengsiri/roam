@@ -23,13 +23,13 @@ module.exports = {
     // if (req.body.totalExpenseAmount === checkBalance) {
     //   // ensure expenseBalanced key is set to true
     //   req.body.expenseBalanced = true;
-      db.Expense.create({ ...req.body })
-        .then((dbExpense) => {
-          addExpenseToTrip(dbExpense);
-          addExpenseToUser(dbExpense);
-          res.json(dbExpense);
-        })
-        .catch((err) => res.status(422).json(err));
+    db.Expense.create({ ...req.body })
+      .then((dbExpense) => {
+        addExpenseToTrip(dbExpense);
+        addExpenseToUser(dbExpense);
+        res.json(dbExpense);
+      })
+      .catch((err) => res.status(422).json(err));
     // } else {
     //   req.body.expenseBalanced = false;
     //   res.status(422).json({ expenseBalanced: req.body.expenseBalanced });
@@ -51,8 +51,10 @@ module.exports = {
   remove: function (req, res) {
     db.Expense.findByIdAndDelete(req.params.id)
       .then((dbExpense) => res.json(dbExpense))
-      .catch((err) => {console.log(err);
-        res.status(422).json(err)});
+      .catch((err) => {
+        console.log(err);
+        res.status(422).json(err);
+      });
   },
 };
 
