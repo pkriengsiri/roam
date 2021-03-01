@@ -21,11 +21,13 @@ const ExpenseForm = (props) => {
   ]);
   const [expenseBalanced, setExpenseBalanced] = useState(true);
   const [remainder, setRemainder] = useState(0);
+  const [shareType, setShareType] = useState("Solo");
 
   const { tripId } = useParams();
   const { userId } = useParams();
   const { expenseId } = useParams();
 
+  // at mount, populate form for edit trip
   useEffect(() => {
     if (expenseId) {
       API.getExpense(expenseId)
@@ -41,6 +43,7 @@ const ExpenseForm = (props) => {
     }
   }, []);
 
+  // at mount, get trip information and initialize expenseShare array
   useEffect(() => {
     API.getTrip(tripId)
       .then((response) => {
@@ -57,38 +60,77 @@ const ExpenseForm = (props) => {
       });
   }, []);
 
+  // calculate remainder/ variance when changes are made to total or breakdown
   useEffect(() => {
     let sumOfShare = expenseShare;
     sumOfShare = expenseShare.reduce(
-      (sum, traveler) => sum + traveler.shareOfTotalExpense,0
+      (sum, traveler) => sum + traveler.shareOfTotalExpense,
+      0
     );
-    setRemainder(totalExpenseAmount-sumOfShare)
-  }, [expenseShare]);
+    setRemainder(totalExpenseAmount - sumOfShare);
+  }, [expenseShare, totalExpenseAmount]);
 
+  useEffect(() => {
+    console.log(shareType);
+    console.log(totalExpenseAmount);
+    let updateArray = trip.travelers.map((traveler) => ({
+      travelerEmail: traveler.travelerEmail,
+      shareOfTotalExpense: 0,
+    }));
+    const total = totalExpenseAmount !== "" ? totalExpenseAmount : 0;
+
+    if (shareType === "Solo" && trip.travelers.length > 0) {
+      let updateExpenseCreatorShare = updateArray.find(
+        (el) => el.travelerEmail === userContext.email
+      );
+      updateArray = updateArray.filter(
+        (el) => el.travelerEmail !== userContext.email
+      );
+      updateExpenseCreatorShare.shareOfTotalExpense = total;
+      setExpenseShare([...updateArray, updateExpenseCreatorShare]);
+    } else if (shareType === "Share Evenly" && trip.travelers.length > 0) {
+      let subtotal = 0;
+      let evenSplit = parseFloat((total / updateArray.length).toFixed(2));
+      for (let i = 0; i < updateArray.length; i++) {
+        updateArray[i].shareOfTotalExpense = evenSplit;
+        if (i === updateArray.length - 1) {
+          updateArray[i].shareOfTotalExpense = total - subtotal;
+        }
+        subtotal += updateArray[i].shareOfTotalExpense;
+      }
+      setExpenseShare([...updateArray]);
+    }
+  }, [shareType, totalExpenseAmount, trip, userContext]);
+
+  // force number input to be in USD
   const handleTotalExpenseChange = (e) => {
     let num = e.target.value
       .toString()
       .split(".")
       .map((el, i) => (i ? el.split("").slice(0, 2).join("") : el))
       .join(".");
-
     setTotalExpenseAmount(num);
-    let updateArray = expenseShare;
-    // console.log(
-    //   updateArray.find((el) => el.travelerEmail === userContext.email)
-    // );
-    let updateExpenseCreatorShare = updateArray.find(
-      (el) => el.travelerEmail === userContext.email
-    );
-    updateArray = updateArray.filter(
-      (el) => el.travelerEmail !== userContext.email
-    );
-    updateExpenseCreatorShare.shareOfTotalExpense = num;
-    setExpenseShare([...updateArray, updateExpenseCreatorShare]);
+
+    // if (shareType === "Share Evenly") {
+    //   let updateArray = expenseShare;
+    //   let subtotal = 0;
+    //   let evenSplit = parseFloat((num / updateArray.length).toFixed(2));
+    //   for (let i = 0; i < updateArray.length; i++) {
+    //     console.log(evenSplit);
+    //     subtotal += evenSplit;
+    //     console.log(subtotal);
+    //     updateArray[i].shareOfTotalExpense = evenSplit;
+    //   }
+
+    //   if (num === "") {
+    //     num = 0;
+    //   }
+    // }
   };
 
   return (
     <form
+      id="expense-form"
       onSubmit={(e) => {
         e.preventDefault();
         props.handleFormSubmit(e, {
@@ -121,10 +163,39 @@ const ExpenseForm = (props) => {
           </span>
         </div>
       </div>
-      <div className="">
-        <button className="button is-primary">Share Evenly</button>
 
-        <button className="button mr-4 is-light">Custom Split</button>
+      {/* select how to split expense */}
+      <div className="buttons is-centered has-addons ">
+        <button
+          className={
+            shareType === "Solo"
+              ? "button is-primary is-selected is-small"
+              : "button is-small"
+          }
+          onClick={(e) => setShareType(e.target.innerHTML)}
+        >
+          Solo
+        </button>
+        <button
+          className={
+            shareType === "Share Evenly"
+              ? "button is-primary is-selected is-small"
+              : "button is-small"
+          }
+          onClick={(e) => setShareType(e.target.innerHTML)}
+        >
+          Share Evenly
+        </button>
+        <button
+          className={
+            shareType === "Custom Split"
+              ? "button is-primary is-selected is-small"
+              : "button is-small"
+          }
+          onClick={(e) => setShareType(e.target.innerHTML)}
+        >
+          Custom Split
+        </button>
       </div>
 
       {/* drop down form for splitting expense */}
@@ -187,7 +258,7 @@ const ExpenseForm = (props) => {
               name="category"
               value={expenseCategory}
               onChange={(e) => setExpenseCategory(e.target.value)}
-              required
+              // required // TODO: add this back. Issue with clicking share buttons
             >
               <option disabled="disabled" value="" className="is-hidden">
                 Select One
@@ -221,13 +292,15 @@ const ExpenseForm = (props) => {
 
       <div className="field is-grouped">
         <div className="control">
-          <button className="button is-primary">Submit</button>
+          <button
+            className="button is-primary"
+            form="expense-form"
+            onClick={() => props.closeForm()}
+          >
+            Submit
+          </button>
         </div>
-        <Link
-          onClick={() => props.closeForm()}
-          to={`/user/${userId}/trips/${tripId}`}
-          className="button mr-4"
-        >
+        <Link to={`/user/${userId}/trips/${tripId}`} className="button mr-4">
           Cancel
         </Link>
       </div>

@@ -3,20 +3,15 @@ import React from "react";
 const PackingList = () => {
   return (
     <div>
-      <ul>
-        <label class="checkbox">
-          <input type="checkbox" />
-          Sunscreeen
-        </label>
-        <label class="checkbox">
-          <input type="checkbox" />
-          Snorkels
-        </label>
-        <label class="checkbox">
-          <input type="checkbox" />
-          Life Vests
-        </label>
-      </ul>
+      <div class="columns">
+        <div class="column is-4"></div>
+        <div class="control">
+          <input class="input" type="text" placeholder="Add Item" />
+        </div>
+        <div class="control">
+          <button class="button is-primary">Submit</button>
+        </div>
+      </div>
     </div>
   );
 };
