@@ -13,7 +13,7 @@ const Dashboard = () => {
   const [trips, setTrips] = useState([]);
   const [currentUser, setCurrentUser] = useState("");
   const [profileImage, setProfileImage] = useState("");
-  const [typeOfTripsToDisplay, setTypeOfTripsToDisplay] = useState("Upcoming");
+  const [typeOfTripsToDisplay, setTypeOfTripsToDisplay] = useState("");
   const [filteredTrips, setFilteredTrips] = useState([]);
 
   useEffect(() => {
@@ -28,6 +28,7 @@ const Dashboard = () => {
     API.getUserWithTrips(userId)
       .then((response) => {
         setTrips(response.data.trips);
+        setTypeOfTripsToDisplay("Upcoming")
         if (!response.data.firstName) {
           setCurrentUser(`Welcome!`);
         } else {
@@ -44,18 +45,27 @@ const Dashboard = () => {
     const today = moment().format().substring(0, 10);
     if (typeOfTripsToDisplay === "Upcoming") {
       setFilteredTrips(
-        trips.filter((trip) => trip.startDate.substring(0, 10) >= today)
-        .sort((a, b) => a.endDate.localeCompare(b.endDate))
+        trips
+          .filter((trip) => trip.endDate.substring(0, 10) >= today)
+          .sort((a, b) => a.endDate.localeCompare(b.endDate))
       );
     } else if (typeOfTripsToDisplay === "Past") {
       setFilteredTrips(
-        trips
-          .filter((trip) => trip.endDate.substring(0, 10) <= today)
+        trips.filter((trip) => trip.endDate.substring(0, 10) <= today)
       );
     } else {
       setFilteredTrips(trips);
     }
   }, [typeOfTripsToDisplay, trips]);
+
+  // if no upcoming trips, default to all trips
+  useEffect(() => {
+    console.log(filteredTrips.length)
+    console.log(typeOfTripsToDisplay)
+    if (filteredTrips.length === 0 && typeOfTripsToDisplay==="Upcoming") {
+      setTypeOfTripsToDisplay("All");
+    }
+  }, [filteredTrips,typeOfTripsToDisplay]);
 
   // function to change which trips to display
   const changeDisplay = (e) => {
