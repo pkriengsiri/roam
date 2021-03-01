@@ -24,6 +24,7 @@ const EditUser = () => {
   const { userContext, setUserContext } = useContext(UserContext);
 
   useEffect(() => {
+    console.log(fileName);
     if (userId) {
       API.getUser(userId)
         .then((response) => {
@@ -76,7 +77,7 @@ const EditUser = () => {
           setChangedProfileImageUrl(res.url);
           setLoadingState("");
           setDisplayIcon("");
-          setUserContext({...userContext, userProfileImage: res.url});
+          setUserContext({ ...userContext, userProfileImage: res.url });
         })
         .catch((error) => console.log("error", error));
     } else {
@@ -90,11 +91,12 @@ const EditUser = () => {
   return (
     <div className="container mt-6 pl-6 pr-6">
       {/* Header */}
-      <h1 className="title has-text-centered">Edit Account</h1>
       <form onSubmit={handleFormSubmit}>
         <div className="columns is-centered is-vcentered">
           {/* Column with profile picture and photo upload input */}
-          <div className="column is-4 mb-6 mr-6">
+          <div className="column is-5 mb-6">
+            <h1 className="title has-text-centered">Edit Account</h1>
+
             {/* Profile picture */}
             <figure className="image">
               {changedProfileImageUrl ? (
@@ -109,59 +111,7 @@ const EditUser = () => {
                 />
               )}
             </figure>
-            {/* Upload input */}
-
-            <div className="field has-addons upload-field">
-              <div className="control has-icons-left">
-                <div className="profile-picture-file file has-name mt-4">
-                  <label className="file-label">
-                    <input
-                      className="file-input"
-                      type="file"
-                      name="resume"
-                      onChange={(e) => {
-                        setFileName(e.target.files[0].name);
-                        setFileType(e.target.files[0].type);
-                        setFileInput(e.target.files[0]);
-                      }}
-                    />
-                    <span className="file-cta">
-                      <span className="file-icon">
-                        <i className="fas fa-upload"></i>
-                      </span>
-                      <span className="file-label">Edit</span>
-                    </span>
-                    <span
-                      className="profile-picture-file-name file-name"
-                      id="file-type"
-                      value="image/png"
-                    >
-                      {fileName ? fileName : "No file uploaded"}
-                    </span>
-                  </label>
-                  <div className="control">
-                    <span
-                      // type="submit"
-                      className={`button ${loadingState}`}
-                    >
-                      <i
-                        onClick={addPhoto}
-                        className={`fas fa-plus fa-lg ${displayIcon}`}
-                      ></i>
-                    </span>
-                  </div>
-                </div>
-              </div>
-            </div>
-            {fileUploadStatus === "true" && (
-              <Alert color={"success"}>File Upload Succeeded</Alert>
-            )}
-            {fileUploadStatus === "false" && (
-              <Alert color={"error"}>Please upload a valid file</Alert>
-            )}
-          </div>
-          <div className="column is-5">
-            <div className="field">
+            <div className="field mt-4">
               <label className="label">First Name</label>
               <div className="control">
                 <input
@@ -203,6 +153,54 @@ const EditUser = () => {
                 />
               </div>
             </div>
+            {/* Upload input */}
+
+            <div className="field has-addons upload-field">
+              <div className="control">
+                <div className="profile-picture-file file has-name mt-4">
+                  <label className="file-label">
+                    <input
+                      className="file-input"
+                      type="file"
+                      name="resume"
+                      onChange={(e) => {
+                        setFileName(e.target.files[0].name);
+                        setFileType(e.target.files[0].type);
+                        setFileInput(e.target.files[0]);
+                      }}
+                    />
+                    <span className="file-cta">
+                      <span className="file-icon">
+                        <i className="fas fa-upload"></i>
+                      </span>
+                      <span className="file-label">Edit Profile Picture</span>
+                    </span>
+                    <span
+                      className="profile-picture-file-name file-name"
+                      id="file-type"
+                      value="image/png"
+                    >
+                      {fileName ? fileName : "No file uploaded"}
+                    </span>
+                  </label>
+                  <div className="control">
+                    <span
+                      // type="submit"
+                      onClick={addPhoto}
+                      className={`button ${loadingState}`}
+                    >
+                      <i className={`fas fa-plus fa-lg ${displayIcon}`}></i>
+                    </span>
+                  </div>
+                </div>
+              </div>
+            </div>
+            {fileUploadStatus === "true" && (
+              <Alert color={"success"}>File Upload Succeeded</Alert>
+            )}
+            {fileUploadStatus === "false" && (
+              <Alert color={"error"}>Please upload a valid file</Alert>
+            )}
             <div className="columns is-vcentered mt-2">
               <div className="column is-narrow">
                 <button
@@ -219,6 +217,9 @@ const EditUser = () => {
               </div>
             </div>
           </div>
+          {/* <div className="column is-5"> */}
+
+          {/* </div> */}
         </div>
       </form>
     </div>

@@ -26,16 +26,18 @@ const ExpenseForm = (props) => {
   const [date, setDate] = useState(null);
   const [focused, setFocused] = useState(null);
   const [calendarStack, setCalendarStack] = useState("horizontal");
+  const [shareType, setShareType] = useState("Solo");
+  // const [customPlaceholder, setCustomPlaceholder] = useState();
 
   const { tripId } = useParams();
   const { userId } = useParams();
   const { expenseId } = useParams();
 
+  // at mount, populate form for edit trip
   useEffect(() => {
     if (expenseId) {
       API.getExpense(expenseId)
         .then((response) => {
-          // console.log(response.data);
           setTotalExpenseAmount(response.data.totalExpenseAmount);
           setExpenseCategory(response.data.category);
           setDescription(response.data.description);
@@ -46,6 +48,7 @@ const ExpenseForm = (props) => {
     }
   }, []);
 
+  // at mount, get trip information and initialize expenseShare array
   useEffect(() => {
     API.getTrip(tripId)
       .then((response) => {
@@ -62,17 +65,18 @@ const ExpenseForm = (props) => {
       });
   }, []);
 
+  // calculate remainder/ variance when changes are made to total or breakdown
   useEffect(() => {
     let sumOfShare = expenseShare;
     sumOfShare = expenseShare.reduce(
       (sum, traveler) => sum + traveler.shareOfTotalExpense,
       0
     );
-    setRemainder(totalExpenseAmount - sumOfShare);
-  }, [expenseShare]);
+    setRemainder(parseFloat((totalExpenseAmount - sumOfShare).toFixed(2)));
+  }, [expenseShare, totalExpenseAmount]);
 
-  // check window viewport to set orientation of calendar so it is responsive in mobile
-  useEffect(() => {
+   // check window viewport to set orientation of calendar so it is responsive in mobile
+   useEffect(() => {
     if (window.innerWidth <= 768) {
       setCalendarStack("vertical");
     } else {
@@ -80,30 +84,83 @@ const ExpenseForm = (props) => {
     }
   }, [window.innerWidth]);
 
-  const handleTotalExpenseChange = (e) => {
+  // use effect for setting each traveler's share of the total expense
+  useEffect(() => {
+    let updateArray = trip.travelers.map((traveler) => ({
+      travelerEmail: traveler.travelerEmail,
+      shareOfTotalExpense: 0,
+    }));
+    const total = totalExpenseAmount !== "" ? totalExpenseAmount : 0;
+    if (shareType === "Solo" && trip.travelers.length > 0) {
+      let updateExpenseCreator = updateArray.find(
+        (el) => el.travelerEmail === userContext.email
+      );
+      updateArray = updateArray.filter(
+        (el) => el.travelerEmail !== userContext.email
+      );
+      updateExpenseCreator.shareOfTotalExpense = total;
+      updateArray.push(updateExpenseCreator);
+      updateArray.sort((a, b) =>
+        a.travelerEmail.localeCompare(b.travelerEmail)
+      );
+      setExpenseShare([...updateArray]);
+    } else if (shareType === "Share Evenly" && trip.travelers.length > 0) {
+      let subtotal = 0;
+      let evenSplit = parseFloat((total / updateArray.length).toFixed(2));
+      for (let i = 0; i < updateArray.length; i++) {
+        updateArray[i].shareOfTotalExpense = evenSplit;
+        if (i === updateArray.length - 1) {
+          updateArray[i].shareOfTotalExpense = parseFloat(
+            (total - subtotal).toFixed(2)
+          );
+        }
+
+        subtotal += updateArray[i].shareOfTotalExpense;
+      }
+      updateArray.sort((a, b) =>
+        a.travelerEmail.localeCompare(b.travelerEmail)
+      );
+      setExpenseShare([...updateArray]);
+    }
+  }, [shareType, totalExpenseAmount, trip, userContext]);
+
+  // force number input to be in USD
+  const handleNumericChange = (e) => {
     let num = e.target.value
+      .toString()
       .toString()
       .split(".")
       .map((el, i) => (i ? el.split("").slice(0, 2).join("") : el))
       .join(".");
+    num = num === "" ? 0 : num;
+    console.log(e.target);
+    if (e.target.id === "totalExpenseAmount") {
+      // console.log(typeof parseFloat(num))
+      setTotalExpenseAmount(parseFloat(num));
+    } else if (e.target.name === "shareExpenseAmount") {
+      let updateTravelerEmail = e.target.id;
+      let updateArray = expenseShare;
 
-    setTotalExpenseAmount(num);
-    let updateArray = expenseShare;
-    // console.log(
-    //   updateArray.find((el) => el.travelerEmail === userContext.email)
-    // );
-    let updateExpenseCreatorShare = updateArray.find(
-      (el) => el.travelerEmail === userContext.email
-    );
-    updateArray = updateArray.filter(
-      (el) => el.travelerEmail !== userContext.email
-    );
-    updateExpenseCreatorShare.shareOfTotalExpense = num;
-    setExpenseShare([...updateArray, updateExpenseCreatorShare]);
+      if (shareType === "Custom Split" && trip.travelers.length > 0) {
+        let updateTravelerCustomSplit = updateArray.find(
+          (el) => el.travelerEmail === updateTravelerEmail
+        );
+        updateArray = updateArray.filter(
+          (el) => el.travelerEmail !== updateTravelerEmail
+        );
+        updateTravelerCustomSplit.shareOfTotalExpense = parseFloat(num);
+        updateArray.push(updateTravelerCustomSplit);
+        updateArray.sort((a, b) =>
+          a.travelerEmail.localeCompare(b.travelerEmail)
+        );
+        setExpenseShare([...updateArray]);
+      }
+    }
   };
 
   return (
     <form
+      id="expense-form"
       onSubmit={(e) => {
         e.preventDefault();
         props.handleFormSubmit(e, {
@@ -145,28 +202,89 @@ const ExpenseForm = (props) => {
             placeholder="Enter an amount"
             value={totalExpenseAmount}
             name="totalExpenseAmount"
-            onChange={handleTotalExpenseChange}
+            id="totalExpenseAmount"
+            onChange={(e) => handleNumericChange(e)}
           />
           <span className="icon is-small is-left">
             <i className="fas fa-dollar-sign"></i>
           </span>
         </div>
       </div>
-      <div className="">
-        <button className="button is-primary">Share Evenly</button>
 
-        <button className="button mr-4 is-light">Custom Split</button>
+      {/* select how to split expense */}
+      <div className="buttons is-centered has-addons ">
+        <button
+          className={
+            shareType === "Solo"
+              ? "button is-primary is-selected is-small"
+              : "button is-small"
+          }
+          onClick={(e) => setShareType(e.target.innerHTML)}
+        >
+          Solo
+        </button>
+        <button
+          className={
+            shareType === "Share Evenly"
+              ? "button is-primary is-selected is-small"
+              : "button is-small"
+          }
+          onClick={(e) => setShareType(e.target.innerHTML)}
+        >
+          Share Evenly
+        </button>
+        <button
+          className={
+            shareType === "Custom Split"
+              ? "button is-primary is-selected is-small"
+              : "button is-small"
+          }
+          onClick={(e) => setShareType(e.target.innerHTML)}
+        >
+          Custom Split
+        </button>
       </div>
 
       {/* drop down form for splitting expense */}
-
-      {expenseShare.map((traveler) => (
-        <div
-          className="field is-horizontal ml-5 mt-2"
-          key={traveler.travelerEmail}
-        >
+      {shareType !== "" && (
+        <div className="expense-share-mini-form">
+          {expenseShare.map((traveler) => (
+            <div
+              className="field is-horizontal ml-5 mt-2"
+              key={traveler.travelerEmail}
+            >
+              <div className="field-label is-small">
+                <label className="label">{traveler.travelerEmail}</label>
+              </div>
+              <div className="field-body">
+                <div className="field">
+                  <p className="control">
+                    <input
+                      className="input is-small"
+                      disabled={shareType !== "Custom Split"}
+                      type="number"
+                      min="0"
+                      step=".01"
+                      placeholder={traveler.shareOfTotalExpense}
+                      // value={shareType!=="Custom Split"? traveler.shareOfTotalExpense:customPlaceholder.shareOfTotalExpense}
+                      value={traveler.shareOfTotalExpense}
+                      // value={placeholder}
+                      name="shareExpenseAmount"
+                      id={traveler.travelerEmail}
+                      onChange={(e) => handleNumericChange(e)}
+                    />
+                  </p>
+                </div>
+              </div>
+            </div>
+          ))}
+        </div>
+      )}
+      {/* conditinally render custom remainder check if on custom split */}
+      {shareType === "Custom Split" && (
+        <div className="field is-horizontal ml-5 mt-2">
           <div className="field-label is-small">
-            <label className="label">{traveler.travelerEmail}</label>
+            <label className="label">Remainder</label>
           </div>
           <div className="field-body">
             <div className="field">
@@ -176,39 +294,17 @@ const ExpenseForm = (props) => {
                   type="number"
                   min="0"
                   step=".01"
-                  placeholder={traveler.shareOfTotalExpense}
-                  value={traveler.shareOfTotalExpense}
-                  name="shareExpenseAmount"
-                  id={traveler.travelerEmail}
+                  placeholder={remainder}
+                  value={remainder}
+                  name="remaining"
+                  id="remaining"
+                  disabled
                 />
               </p>
             </div>
           </div>
         </div>
-      ))}
-
-      <div className="field is-horizontal ml-5 mt-2">
-        <div className="field-label is-small">
-          <label className="label">Remainder</label>
-        </div>
-        <div className="field-body">
-          <div className="field">
-            <p className="control">
-              <input
-                className="input is-small"
-                type="number"
-                min="0"
-                step=".01"
-                placeholder={remainder}
-                value={remainder}
-                name="remaining"
-                id="remaining"
-                disabled
-              />
-            </p>
-          </div>
-        </div>
-      </div>
+      )}
 
       <div className="field">
         <label className="label">Category</label>
@@ -218,7 +314,7 @@ const ExpenseForm = (props) => {
               name="category"
               value={expenseCategory}
               onChange={(e) => setExpenseCategory(e.target.value)}
-              required
+              // required // TODO: add this back. Issue with clicking share buttons
             >
               <option disabled="disabled" value="" className="is-hidden">
                 Select One
@@ -252,13 +348,15 @@ const ExpenseForm = (props) => {
 
       <div className="field is-grouped">
         <div className="control">
-          <button className="button is-primary">Submit</button>
+          <button
+            className="button is-primary"
+            form="expense-form"
+            onClick={() => props.closeForm()}
+          >
+            Submit
+          </button>
         </div>
-        <Link
-          onClick={() => props.closeForm()}
-          to={`/user/${userId}/trips/${tripId}`}
-          className="button mr-4"
-        >
+        <Link to={`/user/${userId}/trips/${tripId}`} className="button mr-4">
           Cancel
         </Link>
       </div>
