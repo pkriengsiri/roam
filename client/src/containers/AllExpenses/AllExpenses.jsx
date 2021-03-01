@@ -37,6 +37,7 @@ const AllExpenses = (props) => {
   const handleContributors = (e) => {
     e.preventDefault();
     // Create a copy of the displayContributors array
+    console.log(e.target.dataset);
     const displayContributorsArr = [...displayContributors];
     // Det the id of the button being clicked
     let buttonDataId;
@@ -103,8 +104,8 @@ const AllExpenses = (props) => {
                       ></i>
                     </td>
                   </tr>
-                  {/* {displayContributors[index] && (
-                    <tr className="has-text-dark" data-row={index}>
+                  {displayContributors[expense._id] && (
+                    <tr className="has-text-dark" data-row={expense._id}>
                       <td></td>
                       <td>
                         <MiniTable />
@@ -126,7 +127,7 @@ const AllExpenses = (props) => {
                         </ul>
                       </td>
                     </tr>
-                  )} */}
+                  )}
                 </>
               ))}
             </tbody>
