@@ -16,8 +16,9 @@ module.exports = {
       ...req.body,
     })
       .then((dbPackingList) => {
-        res.json(dbPackingList);
         // Add packing item to trip
+        addPackingListToTrip(dbPackingList);
+        res.json(dbPackingList);
         // Add packing list to user?
       })
       .catch((err) => {
