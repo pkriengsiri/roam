@@ -159,7 +159,7 @@ const SingleTrip = () => {
             )}
           </div>
           <div className="column is-6">
-            <h1 className="title has-text-centered">Packing List</h1>
+            <h1 className="title has-text-centered">Checklist</h1>
             <PackingList userId={userId} tripId={tripId}/>
           </div>
         </div>
