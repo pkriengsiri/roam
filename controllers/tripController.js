@@ -42,7 +42,8 @@ module.exports = {
         cloudinary.uploader.upload(placesImageUrl, function (error, result) {
           if (error) {
             console.log(error);
-            console.log(requestObject);
+            const destination = parsePlacesName(requestObject.destination);
+            requestObject.destination = destination;
             db.Trip.create(requestObject)
               .then((dbTrip) => {
                 // ad the trip id to each travel
@@ -54,9 +55,8 @@ module.exports = {
               .catch((err) => res.status(422).json(err));
           } else {
             requestObject.imageUrl = result.url;
-            console.log(requestObject);
             const destination = parsePlacesName(requestObject.destination);
-            console.log(destination);
+            requestObject.destination = destination;
             db.Trip.create(requestObject)
               .then((dbTrip) => {
                 // ad the trip id to each travel
@@ -71,7 +71,7 @@ module.exports = {
       })
       .catch((err) => {
         const destination = parsePlacesName(requestObject.destination);
-        console.log(destination);
+        requestObject.destination = destination;
         db.Trip.create(requestObject)
           .then((dbTrip) => {
             // ad the trip id to each travel
