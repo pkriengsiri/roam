@@ -10,6 +10,7 @@ const AllExpenses = (props) => {
   const [expenseArray, setExpenseArray] = useState([]);
   const [displayContributors, setDisplayContributors] = useState([]);
 
+
   useEffect(() => {
     if (tripId) {
       API.getTrip(tripId)
