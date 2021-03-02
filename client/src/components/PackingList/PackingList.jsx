@@ -129,11 +129,11 @@ const PackingList = ({ userId, tripId }) => {
             <div key={item.id}>
               {/* <div className="columns">
                 <div className="column is-8"> */}
-                <table className="table">
+              <table className="table">
                 <tbody>
-                <tr>
-                  <td className="is-vcentered">
-                        <span>
+                  <tr>
+                    <td className="is-vcentered">
+                      <span>
                         <input
                           type="checkbox"
                           data-checked={item.id}
@@ -142,60 +142,52 @@ const PackingList = ({ userId, tripId }) => {
                           checked={item.packed}
                         />
                       </span>
-                  </td>
-                  <td className="checklist-description is-vcentered">
-                  {itemEditing === item.id ? (
-                    <input
-                      className="input"
-                      type="text"
-                      onChange={(e) => setEditingText(e.target.value)}
-                      value={editingText}
-                    />
-                  ) : (
-                    <>
-                     
-                      <span>{item.item}</span>
-                    </>
-                  )}
-                  </td>
-                  <td className="checklist-buttons is-vcentered">
-                    <span>
-                  <i
-                    className="far fa-trash-alt p-1"
-                    data-id={item.id}
-                    onClick={deleteItem}
-                  ></i>
+                    </td>
+                    <td className="checklist-description is-vcentered">
+                      {itemEditing === item.id ? (
+                        <input
+                          className="input"
+                          type="text"
+                          placeholder={item.item}
+                          onChange={(e) => setEditingText(e.target.value)}
+                          value={editingText}
+                        />
+                      ) : (
+                        <>
+                          <span>{item.item}</span>
+                        </>
+                      )}
+                    </td>
+                    <td className="checklist-buttons is-vcentered">
+                      <span>
+                        <i
+                          className="packing-icon far fa-trash-alt p-1"
+                          data-id={item.id}
+                          onClick={deleteItem}
+                        ></i>
 
-                  {itemEditing === item.id ? (
-                    <i
-                      className="far fa-save p-1"
-                      data-edit={item.id}
-                      onClick={editItem}
-                    ></i>
-                  ) : (
-                    <i
-                      className="far fa-edit p-1"
-                      onClick={() => setItemEditing(item.id)}
-                    ></i>
-                  )}
-                  </span>
-                  </td>
-
-                  
-
-
-                </tr>
-
+                        {itemEditing === item.id ? (
+                          <i
+                            className="packing-icon far fa-save p-1"
+                            data-edit={item.id}
+                            onClick={editItem}
+                          ></i>
+                        ) : (
+                          <i
+                            className="packing-icon far fa-edit p-1"
+                            onClick={() => setItemEditing(item.id)}
+                          ></i>
+                        )}
+                      </span>
+                    </td>
+                  </tr>
                 </tbody>
+              </table>
 
-                </table>
-               
-               
+              {/* <div className="column is-4"> */}
 
-                {/* <div className="column is-4"> */}
-             
-                {/* </div> */} 
-                {/* </div>
+              {/* </div> */}
+              {/* </div>
               </div> */}
             </div>
           ))}

@@ -6,3 +6,11 @@
     min-width: 400px;
     max-width: 400px;
 } */
+
+.packing-icon{
+    cursor: pointer;
+}
+
+.packing-icon:hover {
+    color: #f48e3f;
+}
