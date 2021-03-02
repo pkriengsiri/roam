@@ -10,7 +10,6 @@ const AllExpenses = (props) => {
   const [expenseArray, setExpenseArray] = useState([]);
   const [displayContributors, setDisplayContributors] = useState([]);
 
-
   useEffect(() => {
     if (tripId) {
       API.getTrip(tripId)
@@ -77,7 +76,6 @@ const AllExpenses = (props) => {
               {expenseArray.map((expense, index) => (
                 <>
                   <tr key={expense._id} className="is-hoverable expense-row">
-  
                     <td className="is-vcentered">
                       {convertDate(expense.date)}
                     </td>
@@ -108,11 +106,21 @@ const AllExpenses = (props) => {
                     <tr className="has-text-dark" data-row={index}>
                       <td colSpan="6">
                         <div>
+                          <div>
+                            {expense.description && (
+                              <h1>{`Description: ${expense.description}`}</h1>
+                            )}
+                            {!expense.description && (
+                              <Link
+                                to={`/user/${userId}/trips/${tripId}/expenses/${expense._id}/edit`}
+                              >
+                                To add a description please edit the expense
+                              </Link>
+                            )}
+                          </div>
                           {/* Mini-table goes here */}
-                          <MiniTable expense={expense}/>
-                          <p>
-                           {expense.description}
-                          </p>
+
+                          <MiniTable expense={expense} />
                         </div>
                       </td>
                     </tr>
