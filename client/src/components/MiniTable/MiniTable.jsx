@@ -1,41 +1,51 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 
-const MiniTable = () => {
+const MiniTable = ({ expenses }) => {
+  const [expenseShare, setExpenseShare] = useState([]);
+  useEffect(() => {
+    // console.log(expenses)
+    // const mappedExpenses = expenses.map((expense) => expense.expenseShare);
+    // console.log(mappedExpenses)
+    // const expenseShareArray = mappedExpenses.map((contributor) => contributor);
+    // setExpenseShare(expenseShareArray[1]);
+    // console.log(expenseShare);
+  }, []);
+
   return (
-    <div>
-      <h1>Testing</h1>
-      {/* <table className="table">
-        <thead>
-          <tr>
-            <th>Name</th>
-            <th>Owed</th>
-            <th>Paid</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <th>Tony</th>
-            <td>20</td>
-            <td>20</td>
-          </tr>
-          <tr>
-            <th>Jeana Rose</th>
-            <td>20</td>
-            <td>20</td>
-          </tr>
-          <tr>
-            <th>Pete</th>
-            <td>20</td>
-            <td>20</td>
-          </tr>
-          <tr>
-            <th>Molly</th>
-            <td>20</td>
-            <td>20</td>
-          </tr>
-        </tbody>
-      </table> */}
-    </div>
+    <>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td>
+        {expenses.map((expense) => {
+          // expense.map(expenseShare=>(
+          //   expenseShare.map(share=>(console.log(share)))
+          // console.log(expense)
+          console.log(expense);
+          const expenseShare = expense.expenseShare;
+          return expenseShare.map((contributor) => (
+            <ul>
+              <li>{contributor.shareOfTotalExpense}</li>
+            </ul>
+          ));
+        })}
+      </td>
+      <td>
+        {expenses.map((expense) => {
+          // expense.map(expenseShare=>(
+          //   expenseShare.map(share=>(console.log(share)))
+          // console.log(expense)
+          console.log(expense);
+          const expenseShare = expense.expenseShare;
+          return expenseShare.map((contributor) => (
+            <ul>
+              <li>{contributor.travelerEmail}</li>
+            </ul>
+          ));
+        })}
+      </td>
+    </>
   );
 };
 

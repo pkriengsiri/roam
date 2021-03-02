@@ -10,14 +10,13 @@ const AllExpenses = (props) => {
   const [expenseArray, setExpenseArray] = useState([]);
   const [displayContributors, setDisplayContributors] = useState([]);
 
-
   useEffect(() => {
     if (tripId) {
       API.getTrip(tripId)
         .then((response) => {
+          // console.log(response.data.expenses)
           setExpenseArray(response.data.expenses);
           setDestination(response.data.destination);
-
           // Create an array to hold display state of contributor row and set value to false
           const expArr = response.data.expenses;
           const newArr = [];
@@ -104,19 +103,8 @@ const AllExpenses = (props) => {
                     </td>
                   </tr>
                   {displayContributors[index] && (
-                    <tr className="has-text-dark" data-row={index}>
-                      <td className="contributors-dropdown" colSpan="6">
-                        <div>
-                          {/* Mini-table goes here */}
-                          <p>
-                            Lorem ipsum dolor sit amet consectetur adipisicing
-                            elit. Labore natus incidunt quaerat quis culpa nisi!
-                            Impedit, cum iusto! Accusamus officia repudiandae
-                            nulla architecto officiis distinctio. Odit, libero.
-                            Tenetur, sed sit!
-                          </p>
-                        </div>
-                      </td>
+                    <tr className="has-text-dark contributors-dropdown" data-row={index}>
+                     <MiniTable expenses={expenseArray}/>
                     </tr>
                   )}
                 </>
