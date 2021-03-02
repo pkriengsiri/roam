@@ -188,8 +188,7 @@ const ExpenseForm = (props) => {
       <div className="field">
         <label className="label">Expense Date</label>
         <SingleDatePicker
-          className="single-date-picker"
-          date={date}
+             date={date}
           onDateChange={(date) => setDate(date)}
           focused={focused}
           onFocusChange={({ focused }) => setFocused(focused)}
@@ -198,8 +197,7 @@ const ExpenseForm = (props) => {
           showClearDate={true} // clear dates with x button
           orientation={calendarStack}
           isOutsideRange={() => false}
-          anchorDirection="ANCHOR_RIGHT"
-          numberOfMonths="1"
+          numberOfMonths={1}
         />
         <label className="label">Amount</label>
         <div className={focused ? "is-hidden":"control has-icons-left"}>
