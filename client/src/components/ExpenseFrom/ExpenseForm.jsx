@@ -188,7 +188,6 @@ const ExpenseForm = (props) => {
       <div className="field">
         <label className="label">Expense Date</label>
         <SingleDatePicker
-          autoFocus
           className="single-date-picker"
           date={date}
           onDateChange={(date) => setDate(date)}
@@ -203,10 +202,10 @@ const ExpenseForm = (props) => {
           numberOfMonths="1"
         />
         <label className="label">Amount</label>
-        <div className="control has-icons-left has-icons-right">
+        <div className={focused ? "is-hidden":"control has-icons-left"}>
           <input
             // autoFocus
-            className="input"
+            className="input numeric-input"
             type="number"
             min="0"
             step=".01"
@@ -223,7 +222,7 @@ const ExpenseForm = (props) => {
       </div>
 
       {/* select how to split expense */}
-      <div className="buttons is-centered has-addons ">
+      <div className={focused ? "is-hidden" : "buttons is-centered has-addons "}>
         <button
           type="button"
           className={
@@ -264,17 +263,17 @@ const ExpenseForm = (props) => {
         <div className="expense-share-mini-form">
           {expenseShare.map((traveler) => (
             <div
-              className="field is-horizontal ml-5 mt-2"
+              className="field is-horizontal ml-5"
               key={traveler.travelerEmail}
             >
-              <div className="field-label is-small">
+              <div className="field-label is-small ">
                 <label className="label">{traveler.travelerEmail}</label>
               </div>
               <div className="field-body">
                 <div className="field">
                   <p className="control">
                     <input
-                      className="input is-small"
+                      className="input is-small numeric-input"
                       disabled={shareType !== "Custom Split"}
                       type="number"
                       min="0"
@@ -298,7 +297,7 @@ const ExpenseForm = (props) => {
       )}
       {/* conditinally render custom remainder check if on custom split */}
       {shareType === "Custom Split" && (
-        <div className="field is-horizontal ml-5 mt-2">
+        <div className="field is-horizontal ml-6 mt-2">
           <div className="field-label is-small">
             {expenseBalanced ? (
               <label className="label balanced">Balanced</label>
@@ -311,7 +310,7 @@ const ExpenseForm = (props) => {
             <div className="field">
               <p className="control">
                 <input
-                  className="input is-small"
+                  className="input is-small numeric-input"
                   type="number"
                   min="0"
                   step=".01"
@@ -329,7 +328,7 @@ const ExpenseForm = (props) => {
 
       <div className="field">
         <label className="label">Category</label>
-        <div className="control">
+        <div className={focused ? "is-hidden":"control"}>
           <div className="select">
             <select
               name="category"
