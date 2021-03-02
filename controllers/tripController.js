@@ -252,18 +252,17 @@ const parsePlacesName = (placeString) => {
     return destinationArray[0];
   }
 
-  // Check the second element in the array to see if it contains numbers
+  // Check the second element in the array to see if it contains numbers, and create a new array with numbers removed
   const secondElement = destinationArray[1];
   const secondElementArray = secondElement.split(" ");
   const secondElementArrayParsed = [];
-
-  // create a new array with numbers removed
   secondElementArray.forEach((element) => {
     if (isNaN(element)) {
       secondElementArrayParsed.push(element);
     }
   });
 
+  // Return the first element and the parsed second element
   const secondElementParsed = secondElementArrayParsed.join(" ");
   return `${destinationArray[0]}, ${secondElementParsed}`;
 };
