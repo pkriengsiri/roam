@@ -117,85 +117,97 @@ const PackingList = ({ userId, tripId }) => {
                 onChange={(e) => setItem(e.target.value)}
               />
               {item !== "" && (
-              <div className="control">
-                <button className="button" type="submit">
-                  <i className="fas fa-plus fa-lg"></i>
-                </button>
-              </div>
+                <div className="control">
+                  <button className="button" type="submit">
+                    <i className="fas fa-plus fa-lg"></i>
+                  </button>
+                </div>
               )}
             </div>
           </form>
-          {list.map((item) => (
-            <div key={item.id}>
-             
-              <table className="table">
-                <tbody>
-                  <tr>
-                    <td className="is-vcentered">
-                      <span>
-                        <input
-                          type="checkbox"
-                          data-checked={item.id}
-                          data-packed={item.packed}
-                          onChange={togglePacked}
-                          checked={item.packed}
-                        />
-                        
-                      </span>
-                      
-                    </td>
-                    <td className="checklist-description is-vcentered">
-                      {itemEditing === item.id ? (
-                        <input
-                          className="input"
-                          type="text"
-                          onChange={(e) => setEditingText(e.target.value)}
-                          value={editingText}
-                        />
-                      ) : (
-                        <>
-                          <span className={item.packed ? ("packed-item"): ("unpacked-item")}>{item.item}</span>
-                         
-                        </>
-                      )}
-                    </td>
-                    <td className="checklist-buttons is-vcentered">
-                      <span>
-                        <i
-                          className="packing-icon far fa-trash-alt p-1"
-                          data-id={item.id}
-                          onClick={deleteItem}
-                        ></i>
-
+          
+            <table className="table list-container">
+              <thead>
+                <th>
+                  <td>test</td>
+                  <td>test</td>
+                  <td>test</td>
+                </th>
+              </thead>
+              <tbody>
+                {list.map((item) => (
+                  <div key={item.id}>
+                    <tr>
+                      <td className="is-vcentered">
+                        <span>
+                          <input
+                            type="checkbox"
+                            data-checked={item.id}
+                            data-packed={item.packed}
+                            onChange={togglePacked}
+                            checked={item.packed}
+                          />
+                        </span>
+                      </td>
+                      <td className="checklist-description is-vcentered">
                         {itemEditing === item.id ? (
-                          <i
-                            className="packing-icon far fa-save p-1"
-                            data-edit={item.id}
-                            onClick={editItem}
-                          ></i>
+                          <input
+                            className="input"
+                            type="text"
+                            onChange={(e) => setEditingText(e.target.value)}
+                            value={editingText}
+                          />
                         ) : (
-                          <i
-                            className="packing-icon far fa-edit p-1"
-                            onClick={() => {setItemEditing(item.id)
-                            setEditingText(item.item)}}
-                          ></i>
+                          <>
+                            <span
+                              className={
+                                item.packed ? "packed-item" : "unpacked-item"
+                              }
+                            >
+                              {item.item}
+                            </span>
+                          </>
                         )}
-                      </span>
-                    </td>
-                  </tr>
-                  
-                </tbody>
-              </table>
+                      </td>
+                      <td className="checklist-buttons is-vcentered">
+                        <span>
+                          <i
+                            className="packing-icon far fa-trash-alt p-1"
+                            data-id={item.id}
+                            onClick={deleteItem}
+                          ></i>
 
-              {/* <div className="column is-4"> */}
+                          {itemEditing === item.id ? (
+                            <i
+                              className="packing-icon far fa-save p-1"
+                              data-edit={item.id}
+                              onClick={editItem}
+                            ></i>
+                          ) : (
+                            <i
+                              className="packing-icon far fa-edit p-1"
+                              onClick={() => {
+                                setItemEditing(item.id);
+                                setEditingText(item.item);
+                              }}
+                            ></i>
+                          )}
+                        </span>
+                      </td>
+                    </tr>
 
-              {/* </div> */}
-              {/* </div>
+                    {/* <div className="column is-4"> */}
+
+                    {/* </div> */}
+                    {/* </div>
               </div> */}
-            </div>
-          ))}
+                  </div>
+                ))}
+              </tbody>
+            </table>
+          </div>
         </div>
-      </div>
+      
     </div>
   );
 };
