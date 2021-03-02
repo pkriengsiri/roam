@@ -109,6 +109,7 @@ const PackingList = ({ userId, tripId }) => {
       <div className="columns is-centered">
         <div className="column is-6">
           <form onSubmit={handleSubmit}>
+            <div className="field has-addons">
             <input
               className="input"
               type="text"
@@ -117,10 +118,12 @@ const PackingList = ({ userId, tripId }) => {
               name="text"
               onChange={(e) => setItem(e.target.value)}
             />
+            
             <div className="control">
               <button className="button" type="submit">
                 <i className="fas fa-plus fa-lg"></i>
               </button>
+            </div>
             </div>
           </form>
           {list.map((item) => (
