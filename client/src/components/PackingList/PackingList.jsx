@@ -63,7 +63,8 @@ const PackingList = ({ userId, tripId }) => {
   };
 
   const togglePacked = (e) => {
-  
+   
+
     const itemId = e.target.dataset.checked;
 
     const packed = e.target.checked;
@@ -106,7 +107,7 @@ const PackingList = ({ userId, tripId }) => {
   return (
     <div>
       <div className="columns is-centered">
-        <div className="column is-5">
+        <div className="column is-6">
           <form onSubmit={handleSubmit}>
             <input
               className="input"
@@ -125,7 +126,7 @@ const PackingList = ({ userId, tripId }) => {
           {list.map((item) => (
             <div key={item.id}>
               <div className="columns">
-                <div className="column is-10">
+                <div className="column is-12">
                   <input
                     type="checkbox"
                     data-checked={item.id}
@@ -143,17 +144,17 @@ const PackingList = ({ userId, tripId }) => {
                     <div>{item.item}</div>
                   )}
 
-                  <button data-id={item.id} onClick={deleteItem}>
-                    Delete
-                  </button>
+                 
+                  <i className="far fa-trash-alt" data-id={item.id} onClick={deleteItem}></i>
+                 
                   {itemEditing === item.id ? (
-                    <button data-edit={item.id} onClick={editItem}>
-                      Save
-                    </button>
+                    
+                      <i className="far fa-save" data-edit={item.id} onClick={editItem}></i>
+                    
                   ) : (
-                    <button onClick={() => setItemEditing(item.id)}>
-                      Edit
-                    </button>
+                    
+                      <i className="far fa-edit" onClick={() => setItemEditing(item.id)}></i>
+                    
                   )}
                 </div>
               </div>
