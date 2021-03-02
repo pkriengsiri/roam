@@ -102,15 +102,18 @@ const PackingList = ({ userId, tripId }) => {
   };
 
   return (
-    <div>
-      <div className="columns is-centered">
-        <div className="column is-10">
-          <form onSubmit={handleSubmit}>
-            <div className="field has-addons">
+
+      // <div className="columns is-centered">
+      //   <div className="column is-10">
+          
+      <div className="">
+        <div className="">
+          <form onSubmit={handleSubmit} >
+            <div className="field has-addons ">
               <input
-                className="input"
+                className="input checklist-input"
                 type="text"
-                placeholder="Add an item"
+                placeholder="Type here to add an item"
                 value={item}
                 name="text"
                 onChange={(e) => setItem(e.target.value)}
@@ -125,13 +128,14 @@ const PackingList = ({ userId, tripId }) => {
             </div>
           </form>
 
-          <table className="table list-container is-fullwidth">
+
+          <table className="table is-fullwidth ">
             <tbody>
               {list.map((item) => (
                 // <div key={item.id}>
-                <tr key={item.id}>
+                <tr key={item.id} className="checklist-line">
                   {/* radio button  */}
-                  <td className="checklist-checkbox is-vcentered has-text-center ">
+                  <td className="checklist-checkbox is-vcentered has-text-center pl-3">
                     <span className="pr-2">
                       <input
                         type="checkbox"
@@ -143,7 +147,7 @@ const PackingList = ({ userId, tripId }) => {
                     </span>
                   </td>
                   {/* text field */}
-                  <td className="checklist-description is-vcentered has-text-left ">
+                  <td className="checklist-description is-vcentered has-text-left pl-3">
                     {itemEditing === item.id ? (
                       <input
                         className="input"
@@ -200,7 +204,6 @@ const PackingList = ({ userId, tripId }) => {
           </table>
         </div>
       </div>
-    </div>
   );
 };
 

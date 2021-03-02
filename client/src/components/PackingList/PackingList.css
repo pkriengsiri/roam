@@ -19,11 +19,34 @@
   text-decoration: line-through;
 }
 
-.list-container {
+/* .list-container {
   background-color: #938db9;
+} */
+
+.checklist-checkbox {
+  align-self: auto;
 }
 
-.checklist-checkbox{
-align-self: auto;
+.checklist-line {
+  font-family: "Indie Flower", cursive;
+  font-weight:bolder;
+  font-size: 18px;
+
+  /* padding: 0 !important; */
+  /* width: 500px; */
+
+  border-bottom: 1px solid #2e3560;
+
 }
 
+.checklist-input{
+background-color: whitesmoke;
+font-family: "Indie Flower", cursive;
+font-weight:bolder;
+font-size: 18px;
+border-bottom: 1px solid #2e3560 !important;
+border-radius: 0  !important ;
+border-top: 0 !important;
+border-left: 0 !important;
+border-right: 0 !important;
+}
