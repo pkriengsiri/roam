@@ -27,7 +27,6 @@ const CreateExpense = () => {
 
       API.createExpense(formObject)
         .then((response) => {
-          console.log(response.data);
           history.push(`/user/${userId}/trips/${tripId}`);
         })
         .catch((err) => {
