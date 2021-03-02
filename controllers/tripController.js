@@ -206,6 +206,8 @@ const addTravelerIdByEmail = async (requestObject) => {
   }
   // update request object with array with user id's
   requestObject.travelers = updatedArray;
+  const destination = parsePlacesName(requestObject.destination);
+  requestObject.destination = destination;
   return requestObject;
 };
 
