@@ -48,9 +48,9 @@ const PackingList = ({ userId, tripId }) => {
   }
 
   const deleteItem = (e) => {
-    console.log(e.target.dataset.id);
     
-    API.deleteItem(item.id).then((response) =>{
+    const itemId = e.target.dataset.id
+    API.deleteItem(itemId).then((response) =>{
       console.log(response);
       console.log("deleted");
       getPackingListItems();
