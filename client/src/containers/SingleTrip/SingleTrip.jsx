@@ -165,7 +165,7 @@ const SingleTrip = () => {
           <div className="column is-3">
           <Link
               to={`/user/${userId}/trips/${tripId}/expenses/new`}
-              className="button mr-4 is-size-4 is-light"
+              className="button mr-4 is-size-4 is-primary"
             >
               Create Expense
             </Link>
@@ -176,7 +176,7 @@ const SingleTrip = () => {
 
             <Link
               to={`/user/${userId}/trips`}
-              className="button is-primary is-size-4"
+              className="button is-light is-size-4"
             >
               Dashboard
             </Link>

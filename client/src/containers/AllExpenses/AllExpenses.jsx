@@ -65,29 +65,23 @@ const AllExpenses = (props) => {
           <table className="table  is-fullwidth expenses-table is-striped">
             <thead className="expense-table-head has-text-centered">
               <tr>
-                <th></th>
                 <th className="has-text-light">Date</th>
-                <th className="has-text-light">Description</th>
+                {/* <th className="has-text-light">Description</th> */}
                 <th className="has-text-light">Category</th>
                 <th className="has-text-light">Amount</th>
-                <th className="has-text-light">Contributors</th>
+                <th className="has-text-light">Details</th>
+                <th className="has-text-light">Edit</th>
               </tr>
             </thead>
             <tbody className="has-text-centered expenses-body">
               {expenseArray.map((expense, index) => (
                 <>
                   <tr key={expense._id} className="is-hoverable expense-row">
-                    <td>
-                      <Link
-                        to={`/user/${userId}/trips/${tripId}/expenses/${expense._id}/edit`}
-                      >
-                        <i className="edit-expense-icon far fa-edit m-1 "></i>
-                      </Link>
-                    </td>
+  
                     <td className="is-vcentered">
                       {convertDate(expense.date)}
                     </td>
-                    <td className="is-vcentered">{expense.description}</td>
+                    {/* <td className="is-vcentered">{expense.description}</td> */}
                     <td className="is-vcentered">{expense.category}</td>
                     <td className="is-vcentered">
                       ${expense.totalExpenseAmount}
@@ -102,18 +96,22 @@ const AllExpenses = (props) => {
                         aria-hidden="true"
                       ></i>
                     </td>
+                    <td>
+                      <Link
+                        to={`/user/${userId}/trips/${tripId}/expenses/${expense._id}/edit`}
+                      >
+                        <i className="edit-expense-icon far fa-edit m-1 "></i>
+                      </Link>
+                    </td>
                   </tr>
                   {displayContributors[index] && (
                     <tr className="has-text-dark" data-row={index}>
                       <td colSpan="6">
                         <div>
                           {/* Mini-table goes here */}
+                          <MiniTable expense={expense}/>
                           <p>
-                            Lorem ipsum dolor sit amet consectetur adipisicing
-                            elit. Labore natus incidunt quaerat quis culpa nisi!
-                            Impedit, cum iusto! Accusamus officia repudiandae
-                            nulla architecto officiis distinctio. Odit, libero.
-                            Tenetur, sed sit!
+                           {expense.description}
                           </p>
                         </div>
                       </td>

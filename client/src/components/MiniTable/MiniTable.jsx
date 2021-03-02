@@ -4,7 +4,7 @@ const MiniTable = () => {
   return (
     <div>
       <h1>Testing</h1>
-      {/* <table className="table">
+      <table className="table">
         <thead>
           <tr>
             <th>Name</th>
@@ -34,7 +34,7 @@ const MiniTable = () => {
             <td>20</td>
           </tr>
         </tbody>
-      </table> */}
+      </table>
     </div>
   );
 };
