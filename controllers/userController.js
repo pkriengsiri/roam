@@ -38,29 +38,40 @@ module.exports = {
   },
 
   create: function (req, res) {
-    db.User.create({
-      ...req.body,
-      email: req.body.email.toLowerCase(),
-      profileImageUrl: res.url,
-    })
-      .then((dbUser) => res.json(dbUser))
-      .catch((err) => res.status(422).json(err));
+    console.log(req.body)
+    let requestEmail = req.body.email.toLowerCase();
+    console.log(requestEmail)
+    db.Trip.find({ "travelers.travelerEmail": requestEmail })
+      .then((dbTrips) => {
+        console.log(dbTrips);
+        res.json(dbTrips);
+        db.User.create({
+          ...req.body,
+          email: req.body.email.toLowerCase(),
+          profileImageUrl: res.url,
+        })
+          .then((dbUser) => res.json(dbUser))
+          .catch((err) => res.status(422).json(err));
+      })
+      .catch((err) => console.log(err));
   },
 
   uploadImage: function (req, res) {
     const file = req.files.photo;
     cloudinary.uploader.upload(file.tempFilePath, (err, result) => {
       if (err) throw err;
-      const httpsUrl = result.url.slice(0,4)+"s"+result.url.slice(4,result.url.length);
+      const httpsUrl =
+        result.url.slice(0, 4) + "s" + result.url.slice(4, result.url.length);
       db.User.findOneAndUpdate(
         { _id: req.params.id },
         { ...req.body, profileImageUrl: httpsUrl },
         { new: true }
       )
-        .then((dbUser) => res.send({url: dbUser.profileImageUrl}))
+        .then((dbUser) => res.send({ url: dbUser.profileImageUrl }))
         .catch((err) => {
           console.log(err);
-          res.status(422).json(err)});
+          res.status(422).json(err);
+        });
     });
   },
 

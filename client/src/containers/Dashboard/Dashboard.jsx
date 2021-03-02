@@ -28,11 +28,13 @@ const Dashboard = () => {
       .then((response) => {
         // // if no upcoming trips, default to all trips
         setTrips(response.data.trips);
+
         const today = moment().format().substring(0, 10);
-        const upcomingTrips = trips
+        const upcomingTrips = response.data.trips
           .filter((trip) => trip.endDate.substring(0, 10) >= today)
           .sort((a, b) => a.endDate.localeCompare(b.endDate));
 
+        console.log("in get user with trips");
         if (upcomingTrips.length > 0) {
           setTypeOfTripsToDisplay("Upcoming");
         } else {
@@ -133,11 +135,12 @@ const Dashboard = () => {
                 Past
               </button>
             </div>
-            {(filteredTrips.length === 0 && typeOfTripsToDisplay==="Upcoming") && (
-              <h1 className="subtitle">
-                You don't have any upcoming trips planned yet.
-              </h1>
-            )}
+            {filteredTrips.length === 0 &&
+              typeOfTripsToDisplay === "Upcoming" && (
+                <h1 className="subtitle">
+                  You don't have any upcoming trips planned yet.
+                </h1>
+              )}
             <div className="columns is-centered is-multiline">
               {filteredTrips.map((trip) => (
                 <TripCard
