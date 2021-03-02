@@ -74,6 +74,10 @@ const API = {
 
   deleteItem: function (itemid) {
     return axios.delete(`/api/packing-list-items/${itemid}`)
+  },
+
+  editItem: function(itemid, data) {
+    return axios.put(`/api/packing-list-items/${itemid}`, data)
   }
 };
 

@@ -39,7 +39,6 @@ const PackingList = ({ userId, tripId }) => {
       response.data.forEach((item) => {
         listArray.push({ id: item._id, item: item.item, packed: item.packed });
       });
-      console.log(listArray);
       setList(listArray);
       setItem("");
     }).catch((err) => {
@@ -71,14 +70,21 @@ const PackingList = ({ userId, tripId }) => {
     setList(updatedList);
   };
 
-  const editItem = (id) => {
-    const updatedList = [...list].map((item) => {
-      if (item.id === id) {
-        item.text = editingText;
-      }
-      return item;
-    });
-    setList(updatedList);
+  const editItem = (e) => {
+    const itemId = e.target.dataset.edit;
+    console.log(e.target.dataset);
+    const newEdit = {
+      item: editingText
+    }
+   API.editItem(itemId, newEdit).then((response) => {
+     console.log(response.data);
+     getPackingListItems();
+   }).catch((err)=> {
+     console.log(err);
+   })
+    
+
+    
     setEditingText("");
     setItemEditing(null);
   };
@@ -123,9 +129,9 @@ const PackingList = ({ userId, tripId }) => {
 
                   <button data-id={item.id} onClick={deleteItem}>Delete</button>
                   {itemEditing === item.id ? (
-                    <button onClick={() => editItem(item.id)}>Save</button>
+                    <button data-edit={item.id} onClick={editItem}>Save</button>
                   ) : (
-                    <button onClick={() => setItemEditing(item.id)}>
+                    <button  onClick={() => setItemEditing(item.id)}>
                       Edit
                     </button>
                   )}
