@@ -117,12 +117,13 @@ const PackingList = ({ userId, tripId }) => {
                 name="text"
                 onChange={(e) => setItem(e.target.value)}
               />
-
+              {item !== "" && (
               <div className="control">
                 <button className="button" type="submit">
                   <i className="fas fa-plus fa-lg"></i>
                 </button>
               </div>
+              )}
             </div>
           </form>
           {list.map((item) => (
@@ -155,6 +156,7 @@ const PackingList = ({ userId, tripId }) => {
                       ) : (
                         <>
                           <span>{item.item}</span>
+                         
                         </>
                       )}
                     </td>
