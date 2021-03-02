@@ -93,7 +93,7 @@ const AllExpenses = (props) => {
                         // className="button fas fa-angle-down"
                         aria-hidden="true"
                       >
-                        Details{" "}
+                        Details
                       </p>
 
                     </td>
