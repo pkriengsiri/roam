@@ -84,9 +84,6 @@ const ExpenseForm = (props) => {
     }
   }, [expenseShare, totalExpenseAmount]);
 
-<<<<<<< HEAD
-
-=======
    // check window viewport to set orientation of calendar so it is responsive in mobile
    useEffect(() => {
     if (window.innerWidth <= 768) {
@@ -95,7 +92,6 @@ const ExpenseForm = (props) => {
       setCalendarStack("horizontal");
     }
   }, [window.innerWidth]);
->>>>>>> 58ca3a704f69d0222032eddd382a4e7c2fe450c1
 
   // use effect for setting each traveler's share of the total expense
   useEffect(() => {
