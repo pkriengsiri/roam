@@ -49,7 +49,7 @@ async function handlePlaceSelect(updateQuery) {
   const addressObject = autoComplete.getPlace();
   const query = addressObject.formatted_address;
   updateQuery(query);
-  console.log(addressObject);
+  // console.log(addressObject);
 }
 
 const TripForm = (props) => {
@@ -183,6 +183,7 @@ const TripForm = (props) => {
   return (
     <>
       <div className="columns is-centered">
+        {/* destination section  */}
         <div className="column is-half">
           <div className="field mb-2">
             <label className="label">Destination</label>
@@ -198,6 +199,7 @@ const TripForm = (props) => {
               />
             </div>
           </div>
+
           <form
             id="trip-form"
             className="trip-form"
@@ -212,7 +214,8 @@ const TripForm = (props) => {
               });
             }}
           >
-            {/* destination section  */}
+            
+            {/* old destination section (not using places api)  */}
             {/* <div className="field mb-2"> */}
             {/* <label className="label">Destination</label> */}
             {/* <div className="control">
@@ -227,20 +230,6 @@ const TripForm = (props) => {
                 />
               </div> */}
             {/* </div> */}
-            {/* <div className="field mb-2">
-              <label className="label">Destination</label>
-              <div className="control">
-                <input
-                  ref={autoCompleteRef}
-                  onChange={(event) => setDestination(event.target.value)}
-                  placeholder="Enter a City"
-                  value={destination}
-                  onSubmit={(e) => {
-                    e.preventDefault();
-                  }}
-                />
-              </div>
-            </div> */}
             {/* date picker section  */}
             <div className="mb-5">
               <label className="label">Dates</label>
