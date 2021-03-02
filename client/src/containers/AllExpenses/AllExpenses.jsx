@@ -105,7 +105,7 @@ const AllExpenses = (props) => {
                   </tr>
                   {displayContributors[index] && (
                     <tr className="has-text-dark" data-row={index}>
-                      <td colSpan="6">
+                      <td className="contributors-dropdown" colSpan="6">
                         <div>
                           {/* Mini-table goes here */}
                           <p>
