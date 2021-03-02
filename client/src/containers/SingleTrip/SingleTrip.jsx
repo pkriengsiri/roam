@@ -21,6 +21,7 @@ const SingleTrip = () => {
   const [minutes, setMinutes] = useState();
   const [hours, setHours] = useState();
   const [seconds, setSeconds] = useState();
+  const [notificationStatus, setNotificationStatus] = useState(true);
 
   // browser params
   const { tripId } = useParams();
@@ -71,6 +72,10 @@ const SingleTrip = () => {
     }, 1000);
   }, [days, hours, minutes, seconds]);
 
+  const closeNotification = () => {
+    setNotificationStatus(false);
+  }
+
   return (
     <>
       <div className="container mt-6 pl-6 pr-6">
@@ -92,11 +97,24 @@ const SingleTrip = () => {
             {startDate?.toLocaleDateString()} - {endDate?.toLocaleDateString()}
           </span>
         </h1>
-        {seconds > 0 && (
-          <h1 className="subtitle has-text-centered">
-            {days} days, {hours} hours, {minutes} minutes, {seconds} seconds
-          </h1>
+        {seconds > 0 && notificationStatus && (
+          
+          <>
+            <div className="columns is-centered">
+              <div className="column is-4">
+                <div class="notification is-primary is-light">
+                  <button class="delete" onClick={closeNotification}></button>
+                  <h1>
+                    Hey! You have: {days} days, {hours} hours, {minutes}{" "}
+                    minutes, and {seconds} seconds until your trip to{" "}
+                    {destination}!
+                  </h1>
+                </div>
+              </div>
+            </div>
+          </>
         )}
+
         <div className="columns is-centered">
           <div className="column is-6 trip-container">
             <figure>
@@ -156,7 +174,9 @@ const SingleTrip = () => {
             )}
           </div>
           <div className="column is-6">
-            <h1 className="title has-text-centered">Packing List</h1>
+
+            <h1 className="title has-text-centered">Checklist</h1>
+
             <PackingList userId={userId} tripId={tripId} />
           </div>
         </div>
