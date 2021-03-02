@@ -30,3 +30,6 @@ $table-head-background-color: $purple; */
 .contributors-dropdown {
   background-color: white;
 }
+.details:hover{
+  cursor: pointer;
+  }

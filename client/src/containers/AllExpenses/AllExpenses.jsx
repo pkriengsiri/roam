@@ -68,8 +68,8 @@ const AllExpenses = (props) => {
                 {/* <th className="has-text-light">Description</th> */}
                 <th className="has-text-light">Category</th>
                 <th className="has-text-light">Amount</th>
-                <th className="has-text-light">Details</th>
-                <th className="has-text-light">Edit</th>
+                <th className="has-text-light"></th>
+                <th className="has-text-light"></th>
               </tr>
             </thead>
             <tbody className="has-text-centered expenses-body">
@@ -86,13 +86,16 @@ const AllExpenses = (props) => {
                     </td>
                     {/* Dropdown for MiniTable goes here */}
                     <td className="is-vcentered">
-                      <i
+                      <p className="details"
                         onClick={handleContributors}
                         data-id={expense._id}
                         data-index={index}
-                        className="button fas fa-angle-down"
+                        // className="button fas fa-angle-down"
                         aria-hidden="true"
-                      ></i>
+                      >
+                        Details{" "}
+                      </p>
+
                     </td>
                     <td>
                       <Link
@@ -104,7 +107,7 @@ const AllExpenses = (props) => {
                   </tr>
                   {displayContributors[index] && (
                     <tr className="has-text-dark" data-row={index}>
-                      <td colSpan="6">
+                      {/* <td colSpan="6"> */}
                         {/* <div>
                           <div>
                             {expense.description && (
@@ -122,7 +125,7 @@ const AllExpenses = (props) => {
 
                           <MiniTable expense={expense} />
                         {/* </div> */}
-                      </td>
+                      {/* </td> */}
                     </tr>
                   )}
                 </>
