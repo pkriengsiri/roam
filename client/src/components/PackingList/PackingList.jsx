@@ -56,8 +56,6 @@ const PackingList = ({ userId, tripId }) => {
   const deleteItem = (e) => {
     const itemId = e.target.dataset.id;
     API.deleteItem(itemId).then((response) => {
-      console.log(response);
-      console.log("deleted");
       getPackingListItems();
     });
   };
@@ -84,6 +82,7 @@ const PackingList = ({ userId, tripId }) => {
   };
 
   const editItem = (e) => {
+    console.log("clicked to edit")
     const itemId = e.target.dataset.edit;
     console.log(e.target.dataset);
     const newEdit = {
@@ -127,76 +126,75 @@ const PackingList = ({ userId, tripId }) => {
           </form>
 
           <table className="table list-container is-fullwidth">
-
             <tbody>
               {list.map((item) => (
                 // <div key={item.id}>
-                  <tr key={item.id}>
+                <tr key={item.id}>
+                  {/* radio button  */}
+                  <td className="checklist-checkbox is-vcentered has-text-center ">
+                    <span className="pr-2">
+                      <input
+                        type="checkbox"
+                        data-checked={item.id}
+                        data-packed={item.packed}
+                        onChange={togglePacked}
+                        checked={item.packed}
+                      />
+                    </span>
+                  </td>
+                  {/* text field */}
+                  <td className="checklist-description is-vcentered has-text-left ">
+                    {itemEditing === item.id ? (
+                      <input
+                        className="input"
+                        type="text"
+                        onChange={(e) => setEditingText(e.target.value)}
+                        value={editingText}
+                      />
+                    ) : (
+                      <>
+                        <span
+                          className={
+                            item.packed ? "packed-item" : "unpacked-item"
+                          }
+                          onClick={() => {
+                            setItemEditing(item.id);
+                            setEditingText(item.item);
+                          }}
+                        >
+                          {item.item}
+                        </span>
+                      </>
+                    )}
+                  </td>
 
-                    {/* radio button  */}
-                    <td className="checklist-checkbox is-vcentered has-text-center ">
-                      
-                      <span className="pr-2">
-                        <input
-                          type="checkbox"
-                          data-checked={item.id}
-                          data-packed={item.packed}
-                          onChange={togglePacked}
-                          checked={item.packed}
-                        />
-                      </span>
-                    </td>
-                    {/* text field */}
-                    <td className="checklist-description is-vcentered has-text-left ">
+                  {/* edit/ delete icons */}
+                  <td className="checklist-buttons is-vcentered has-text-right ">
+                    <span>
+                      <i
+                        className="packing-icon far fa-trash-alt p-1"
+                        data-id={item.id}
+                        onClick={deleteItem}
+                      ></i>
+
                       {itemEditing === item.id ? (
-                        <input
-                          className="input"
-                          type="text"
-                          onChange={(e) => setEditingText(e.target.value)}
-                          value={editingText}
-                        />
-                      ) : (
-                        <>
-                          <span
-                            className={
-                              item.packed ? "packed-item" : "unpacked-item"
-                            }
-                          >
-                            {item.item}
-                          </span>
-                        </>
-                      )}
-                    </td>
-
-                    {/* edit/ delete icons */}
-                    <td className="checklist-buttons is-vcentered has-text-right ">
-                      <span>
                         <i
-                          className="packing-icon far fa-trash-alt p-1"
-                          data-id={item.id}
-                          onClick={deleteItem}
+                          className="packing-icon far fa-save p-1"
+                          data-edit={item.id}
+                          onClick={editItem}
                         ></i>
-
-                        {itemEditing === item.id ? (
-                          <i
-                            className="packing-icon far fa-save p-1"
-                            data-edit={item.id}
-                            onClick={editItem}
-                          ></i>
-                        ) : (
-                          <i
-                            className="packing-icon far fa-edit p-1"
-                            onClick={() => {
-                              setItemEditing(item.id);
-                              setEditingText(item.item);
-                            }}
-                          ></i>
-                        )}
-                      </span>
-                    </td>
-                  </tr>
-
-        
+                      ) : (
+                        <i
+                          className="packing-icon far fa-edit p-1"
+                          onClick={() => {
+                            setItemEditing(item.id);
+                            setEditingText(item.item);
+                          }}
+                        ></i>
+                      )}
+                    </span>
+                  </td>
+                </tr>
               ))}
             </tbody>
           </table>
