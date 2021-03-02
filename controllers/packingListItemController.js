@@ -20,7 +20,7 @@ module.exports = {
     console.log(req.params.id);
     db.PackingListItem.find({ trip: req.params.id })
       .then((dbPackingListItems) => {
-        console.log(dbPackingListItems);
+        
         res.json(dbPackingListItems);
       })
       .catch((err) => {
@@ -28,7 +28,7 @@ module.exports = {
       });
   },
   create: function (req, res) {
-    console.log(req.body);
+   
     db.PackingListItem.create({
       ...req.body,
     })
