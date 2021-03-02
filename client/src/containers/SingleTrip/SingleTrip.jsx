@@ -95,7 +95,7 @@ const SingleTrip = () => {
             {startDate?.toLocaleDateString()} - {endDate?.toLocaleDateString()}
           </span>
         </h1>
-        {seconds && (
+        {seconds > 0 && (
           <h1 className="subtitle has-text-centered">
             {days} days, {hours} hours, {minutes} minutes, {seconds} seconds
           </h1>
