@@ -80,6 +80,43 @@ module.exports = {
 
   update: async function (req, res) {
     const tripToUpdate = req.params.id;
+    // console.log(req.body);
+
+    // Query google places to get the place image, then upload to cloudinary if we get a result back
+    axios
+      .get(
+        `https://maps.googleapis.com/maps/api/place/findplacefromtext/json?input=${req.body.destination}&inputtype=textquery&fields=name,photos&key=${process.env.PLACES_API_KEY}`
+      )
+      .then((response) => {
+        const photoReference =
+          response.data.candidates[0].photos[0].photo_reference;
+        // Store get the image URL
+        const placesImageUrl = `https://maps.googleapis.com/maps/api/place/photo?photoreference=${photoReference}&key=${process.env.PLACES_API_KEY}&maxwidth=400&maxheight=400`;
+        // Upload the image to cloudinary
+        cloudinary.uploader.upload(placesImageUrl, function (error, result) {
+          if (error) {
+            // Do nothing if there's an error
+            console.log(error);
+          } else {
+            // If the URL comes back from cloudinary, add it to the trip
+            const cloudinaryURL = result.url;
+            dbObject = { imageUrl: cloudinaryURL };
+
+            // Query the database
+            db.Trip.findOneAndUpdate({ _id: req.params.id }, dbObject, {
+              new: true,
+            })
+              .then((dbTrip) => {
+                console.log("cloudinary url for place added");
+              })
+              .catch((err) => res.status(422).json(err));
+          }
+        });
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+
     // find users who were on the trip to be deleted
     await db.User.find({ trips: tripToUpdate })
       .then((dbTripUsers) => {
