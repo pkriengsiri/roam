@@ -1,5 +1,5 @@
 .checklist-buttons {
-    min-width: 100px;
+  min-width: 100px;
 }
 /* 
 .checklist-description {
@@ -7,14 +7,16 @@
     max-width: 400px;
 } */
 
-.packing-icon{
-    cursor: pointer;
+.packing-icon {
+  cursor: pointer;
 }
 
 .packing-icon:hover {
-    color: #f48e3f;
+  color: #f48e3f;
 }
 
 .packed-item {
-    text-decoration: line-through;
+  text-decoration: line-through;
 }
+
+

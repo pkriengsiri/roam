@@ -127,13 +127,13 @@ const PackingList = ({ userId, tripId }) => {
           </form>
           {list.map((item) => (
             <div key={item.id}>
-              {/* <div className="columns">
-                <div className="column is-8"> */}
+             
               <table className="table">
                 <tbody>
                   <tr>
                     <td className="is-vcentered">
                       <span>
+                        
                         <input
                           type="checkbox"
                           data-checked={item.id}
@@ -141,7 +141,9 @@ const PackingList = ({ userId, tripId }) => {
                           onChange={togglePacked}
                           checked={item.packed}
                         />
+                        
                       </span>
+                      
                     </td>
                     <td className="checklist-description is-vcentered">
                       {itemEditing === item.id ? (
