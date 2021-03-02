@@ -63,20 +63,10 @@ const PackingList = ({ userId, tripId }) => {
   };
 
   const togglePacked = (e) => {
-    // const updatedList = [...list].map((item) => {
-    //   if (item.id === id) {
-    //     item.packed = !item.packed;
-    //   }
-    //   return item;
-    // });
-
-    // setList(updatedList);
-
+  
     const itemId = e.target.dataset.checked;
 
     const packed = e.target.checked;
-    // console.log(checked);
-    // console.log(!checked)
 
     console.log(packed);
     const newState = {
