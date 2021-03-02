@@ -17,11 +17,13 @@ module.exports = {
       });
   },
   create: function (req, res) {
+    console.log(req.body);
     db.PackingList.create({
       ...req.body,
     })
       .then((dbPackingList) => {
         // Add packing item to trip
+        console.log(dbPackingList)
         addPackingListToTrip(dbPackingList);
         res.json(dbPackingList);
         // Add packing list to user?
@@ -54,7 +56,7 @@ module.exports = {
 
 const addPackingListToTrip = async (dbPackingListObject) => {
   await db.Trip.findByIdAndUpdate(dbPackingListObject.trip, {
-    $push: { packingList: dbPackingListObject },
+    $push: { list: dbPackingListObject },
   }).catch((err) => {
     console.log(err);
   });

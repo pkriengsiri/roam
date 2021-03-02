@@ -5,21 +5,21 @@ const jwt = require("express-jwt");
 
 // middleware
 // router.use(csrfProtection);
-router.use(
-    jwt({
-      secret: process.env.SECRET,
-      getToken: (req) => req.cookies.token,
-      algorithms: ['HS256']
-    })
-  );
+// router.use(
+//     jwt({
+//       secret: process.env.SECRET,
+//       getToken: (req) => req.cookies.token,
+//       algorithms: ['HS256']
+//     })
+//   );
 
-// Route for /api/packing-list
+// Route for /api/packing-lists
 router
   .route("/")
   .get(packingListController.findAll)
   .post(packingListController.create);
 
-  // Route for /api/packing-list/:id
+  // Route for /api/packing-lists/:id
 router.route("/:id")
 .get(packingListController.findById)
 .put(packingListController.update)

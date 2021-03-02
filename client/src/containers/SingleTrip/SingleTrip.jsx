@@ -160,7 +160,7 @@ const SingleTrip = () => {
           </div>
           <div className="column is-6">
             <h1 className="title has-text-centered">Packing List</h1>
-            <PackingList/>
+            <PackingList />
           </div>
         </div>
         <div className="columns is-centered mt-6">

@@ -1,21 +1,37 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import API from "../../utils/API";
 
 const PackingList = () => {
-  const [input, setInput] = useState("");
-  const [list, setList] = useState([]);
+  const [item, setItem] = useState("");
   const [itemEditing, setItemEditing] = useState(null);
   const [editingText, setEditingText] = useState("");
+  const [list, setList] = useState([{}]);
+
+  // useEffect(()=> {
+  // setList([...list].concat({item: item, packed: false}));
+  // }, [item])
 
   const handleSubmit = (e) => {
     e.preventDefault();
 
     const newItem = {
-      id: new Date().getTime(),
-      text: input,
+      text: item,
       packed: false,
     };
+
+    console.log(newItem);
+
     setList([...list].concat(newItem));
-    setInput("");
+    setItem("");
+    // console.log(item);
+    
+    // console.log(list);
+
+    // API.createItem({list }).then((response) => {
+      
+    //   console.log(response.data);
+    // })
+    
   };
 
   const deleteItem = (id) => {
@@ -55,9 +71,9 @@ const PackingList = () => {
             className="input"
               type="text"
               placeholder="Add an item"
-              value={input}
+              value={item}
               name="text"
-              onChange={(e) => setInput(e.target.value)}
+              onChange={(e) => setItem(e.target.value)}
             />
             <div className="control">
             <button className="button" type="submit"><i className="fas fa-plus fa-lg"></i></button></div>
