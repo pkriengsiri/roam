@@ -6,12 +6,10 @@ const PackingList = ({ userId, tripId }) => {
   const [itemEditing, setItemEditing] = useState(null);
   const [editingText, setEditingText] = useState("");
   const [list, setList] = useState([{}]);
-  const [packedStatus, setPackedStatus] = useState([]);
 
   useEffect(() => {
     getPackingListItems();
-
-  }, [packedStatus]);
+  }, []);
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -38,16 +36,15 @@ const PackingList = ({ userId, tripId }) => {
       .then((response) => {
         // console.log(response.data);
         const listArray = [];
-        const packedStatusArr = [];
+
         response.data.forEach((item) => {
           listArray.push({
             id: item._id,
             item: item.item,
             packed: item.packed,
           });
-          packedStatusArr.push(item.packed);
         });
-        setPackedStatus(packedStatusArr);
+
         setList(listArray);
         setItem("");
       })
@@ -87,12 +84,14 @@ const PackingList = ({ userId, tripId }) => {
     };
     console.log(newState);
 
-    API.editItem(itemId, newState).then((response) => {
-      console.log(response.data);
-      getPackingListItems();
-    }).catch((err)=> {
-      console.log(err);
-    })
+    API.editItem(itemId, newState)
+      .then((response) => {
+        console.log(response.data);
+        getPackingListItems();
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   };
 
   const editItem = (e) => {
@@ -133,7 +132,7 @@ const PackingList = ({ userId, tripId }) => {
               </button>
             </div>
           </form>
-          {list.map((item,index) => (
+          {list.map((item) => (
             <div key={item.id}>
               <div className="columns">
                 <div className="column is-10">
@@ -142,8 +141,7 @@ const PackingList = ({ userId, tripId }) => {
                     data-checked={item.id}
                     data-packed={item.packed}
                     onChange={togglePacked}
-                    checked={packedStatus[index]}
-                    data-index={index}
+                    checked={item.packed}
                   />
                   {itemEditing === item.id ? (
                     <input
