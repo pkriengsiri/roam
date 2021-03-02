@@ -16,4 +16,4 @@ If "Custom Split", do some math behind the scenes to validate the sum of the inp
 
 
 # Technologies used
-bcrypt, jwt, cookies, airbnb date range picker, chartjs, google places api, cloudinary, figma, canva
+bcrypt, jwt, cookies, airbnb date range picker, chartjs, google places api, cloudinary, figma, canva 
