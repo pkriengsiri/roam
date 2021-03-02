@@ -1,15 +1,8 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
+import { useParams, Link } from "react-router-dom";
 
-const MiniTable = ({ expenses }) => {
-  const [expenseShare, setExpenseShare] = useState([]);
-  useEffect(() => {
-    // console.log(expenses)
-    // const mappedExpenses = expenses.map((expense) => expense.expenseShare);
-    // console.log(mappedExpenses)
-    // const expenseShareArray = mappedExpenses.map((contributor) => contributor);
-    // setExpenseShare(expenseShareArray[1]);
-    // console.log(expenseShare);
-  }, []);
+const MiniTable = ({ expense }) => {
+  const { userId, tripId } = useParams();
 
   return (
     <>
@@ -18,32 +11,22 @@ const MiniTable = ({ expenses }) => {
       <td></td>
       <td></td>
       <td>
-        {expenses.map((expense) => {
-          // expense.map(expenseShare=>(
-          //   expenseShare.map(share=>(console.log(share)))
-          // console.log(expense)
-          console.log(expense);
-          const expenseShare = expense.expenseShare;
-          return expenseShare.map((contributor) => (
-            <ul>
-              <li>{contributor.shareOfTotalExpense}</li>
-            </ul>
-          ));
-        })}
+        {expense.expenseShare.map((traveler) => (
+          <ul>
+            <li>{traveler.shareOfTotalExpense}</li>
+          </ul>
+          // <td></td>
+          // <th>{traveler.travelerEmail}</th>
+        ))}
       </td>
       <td>
-        {expenses.map((expense) => {
-          // expense.map(expenseShare=>(
-          //   expenseShare.map(share=>(console.log(share)))
-          // console.log(expense)
-          console.log(expense);
-          const expenseShare = expense.expenseShare;
-          return expenseShare.map((contributor) => (
-            <ul>
-              <li>{contributor.travelerEmail}</li>
-            </ul>
-          ));
-        })}
+        {expense.expenseShare.map((traveler) => (
+          <ul>
+            <li>{traveler.travelerEmail}</li>
+          </ul>
+          // <td></td>
+          // <th>{traveler.travelerEmail}</th>
+        ))}
       </td>
     </>
   );
