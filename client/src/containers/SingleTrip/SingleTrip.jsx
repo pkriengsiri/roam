@@ -109,8 +109,8 @@ const SingleTrip = () => {
           <>
             <div className="columns is-centered">
               <div className="column is-4">
-                <div class="notification is-primary is-light">
-                  <button class="delete" onClick={closeNotification}></button>
+                <div className="notification is-primary is-light">
+                  <button className="delete" onClick={closeNotification}></button>
                   <h1>
                     Hey! You have: {days} days, {hours} hours, {minutes}{" "}
                     minutes, and {seconds} seconds until your trip to{" "}
