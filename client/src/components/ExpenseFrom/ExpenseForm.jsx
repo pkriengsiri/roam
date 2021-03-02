@@ -28,7 +28,6 @@ const ExpenseForm = (props) => {
   const [focused, setFocused] = useState(null);
   const [calendarStack, setCalendarStack] = useState("horizontal");
   const [shareType, setShareType] = useState("Solo");
-  // const [customPlaceholder, setCustomPlaceholder] = useState();
 
   const { tripId } = useParams();
   const { userId } = useParams();
@@ -39,7 +38,7 @@ const ExpenseForm = (props) => {
     if (expenseId) {
       API.getExpense(expenseId)
         .then((response) => {
-          const date= moment(response.data.date);
+          const date = moment(response.data.date);
           setTotalExpenseAmount(response.data.totalExpenseAmount);
           setExpenseCategory(response.data.category);
           setDescription(response.data.description);
@@ -75,11 +74,17 @@ const ExpenseForm = (props) => {
       (sum, traveler) => sum + traveler.shareOfTotalExpense,
       0
     );
-    setRemainder(parseFloat((totalExpenseAmount - sumOfShare).toFixed(2)));
+    const remainder = parseFloat((totalExpenseAmount - sumOfShare).toFixed(2));
+    setRemainder(remainder);
+    if (remainder === 0) {
+      setExpenseBalanced(true);
+    } else if (remainder !== 0) {
+      setExpenseBalanced(false);
+    }
   }, [expenseShare, totalExpenseAmount]);
 
-   // check window viewport to set orientation of calendar so it is responsive in mobile
-   useEffect(() => {
+  // check window viewport to set orientation of calendar so it is responsive in mobile
+  useEffect(() => {
     if (window.innerWidth <= 768) {
       setCalendarStack("vertical");
     } else {
@@ -136,10 +141,12 @@ const ExpenseForm = (props) => {
       .map((el, i) => (i ? el.split("").slice(0, 2).join("") : el))
       .join(".");
     num = num === "" ? 0 : num;
-    console.log(e.target);
+
+    // if numeric change is for the total expense, set state for total expense
     if (e.target.id === "totalExpenseAmount") {
-      // console.log(typeof parseFloat(num))
       setTotalExpenseAmount(parseFloat(num));
+
+      // if numeric change is for custom split shared expense, set state of expenseShare
     } else if (e.target.name === "shareExpenseAmount") {
       let updateTravelerEmail = e.target.id;
       let updateArray = expenseShare;
@@ -181,8 +188,7 @@ const ExpenseForm = (props) => {
       <div className="field">
         <label className="label">Expense Date</label>
         <SingleDatePicker
-          className="single-date-picker"
-          date={date}
+             date={date}
           onDateChange={(date) => setDate(date)}
           focused={focused}
           onFocusChange={({ focused }) => setFocused(focused)}
@@ -191,20 +197,18 @@ const ExpenseForm = (props) => {
           showClearDate={true} // clear dates with x button
           orientation={calendarStack}
           isOutsideRange={() => false}
-          anchorDirection="ANCHOR_RIGHT"
-          numberOfMonths="1"
-
+          numberOfMonths={1}
         />
         <label className="label">Amount</label>
-        <div className="control has-icons-left has-icons-right">
+        <div className={focused ? "is-hidden":"control has-icons-left"}>
           <input
-            autoFocus
-            className="input"
+            // autoFocus
+            className="input numeric-input"
             type="number"
             min="0"
             step=".01"
             placeholder="Enter an amount"
-            value={totalExpenseAmount}
+            value={totalExpenseAmount === 0 ? "" : totalExpenseAmount}
             name="totalExpenseAmount"
             id="totalExpenseAmount"
             onChange={(e) => handleNumericChange(e)}
@@ -216,8 +220,9 @@ const ExpenseForm = (props) => {
       </div>
 
       {/* select how to split expense */}
-      <div className="buttons is-centered has-addons ">
+      <div className={focused ? "is-hidden" : "buttons is-centered has-addons "}>
         <button
+          type="button"
           className={
             shareType === "Solo"
               ? "button is-primary is-selected is-small"
@@ -228,6 +233,7 @@ const ExpenseForm = (props) => {
           Solo
         </button>
         <button
+          type="button"
           className={
             shareType === "Share Evenly"
               ? "button is-primary is-selected is-small"
@@ -238,6 +244,7 @@ const ExpenseForm = (props) => {
           Share Evenly
         </button>
         <button
+          type="button"
           className={
             shareType === "Custom Split"
               ? "button is-primary is-selected is-small"
@@ -250,29 +257,31 @@ const ExpenseForm = (props) => {
       </div>
 
       {/* drop down form for splitting expense */}
-      {shareType !== "" && (
+      {shareType !== "Solo" && (
         <div className="expense-share-mini-form">
           {expenseShare.map((traveler) => (
             <div
-              className="field is-horizontal ml-5 mt-2"
+              className="field is-horizontal ml-5"
               key={traveler.travelerEmail}
             >
-              <div className="field-label is-small">
+              <div className="field-label is-small ">
                 <label className="label">{traveler.travelerEmail}</label>
               </div>
               <div className="field-body">
                 <div className="field">
                   <p className="control">
                     <input
-                      className="input is-small"
+                      className="input is-small numeric-input"
                       disabled={shareType !== "Custom Split"}
                       type="number"
                       min="0"
                       step=".01"
                       placeholder={traveler.shareOfTotalExpense}
-                      // value={shareType!=="Custom Split"? traveler.shareOfTotalExpense:customPlaceholder.shareOfTotalExpense}
-                      value={traveler.shareOfTotalExpense}
-                      // value={placeholder}
+                      value={
+                        traveler.shareOfTotalExpense === 0
+                          ? ""
+                          : traveler.shareOfTotalExpense
+                      }
                       name="shareExpenseAmount"
                       id={traveler.travelerEmail}
                       onChange={(e) => handleNumericChange(e)}
@@ -286,15 +295,20 @@ const ExpenseForm = (props) => {
       )}
       {/* conditinally render custom remainder check if on custom split */}
       {shareType === "Custom Split" && (
-        <div className="field is-horizontal ml-5 mt-2">
+        <div className="field is-horizontal ml-6 mt-2">
           <div className="field-label is-small">
-            <label className="label">Remainder</label>
+            {expenseBalanced ? (
+              <label className="label balanced">Balanced</label>
+            ) : (
+              <label className="label unbalanced">Unbalanced</label>
+            )}
+ 
           </div>
           <div className="field-body">
             <div className="field">
               <p className="control">
                 <input
-                  className="input is-small"
+                  className="input is-small numeric-input"
                   type="number"
                   min="0"
                   step=".01"
@@ -312,13 +326,13 @@ const ExpenseForm = (props) => {
 
       <div className="field">
         <label className="label">Category</label>
-        <div className="control">
+        <div className={focused ? "is-hidden":"control"}>
           <div className="select">
             <select
               name="category"
               value={expenseCategory}
               onChange={(e) => setExpenseCategory(e.target.value)}
-              // required // TODO: add this back. Issue with clicking share buttons
+              required // TODO: add this back. Issue with clicking share buttons
             >
               <option disabled="disabled" value="" className="is-hidden">
                 Select One
@@ -354,13 +368,18 @@ const ExpenseForm = (props) => {
         <div className="control">
           <button
             className="button is-primary"
+            type="submit"
             form="expense-form"
-            onClick={() => props.closeForm()}
           >
             Submit
           </button>
         </div>
-        <Link to={`/user/${userId}/trips/${tripId}`} className="button mr-4">
+
+        <Link
+          onClick={() => props.closeForm()}
+          to={`/user/${userId}/trips/${tripId}`}
+          className="button mr-4"
+        >
           Cancel
         </Link>
       </div>
