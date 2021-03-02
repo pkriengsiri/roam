@@ -33,7 +33,6 @@ module.exports = {
         `https://maps.googleapis.com/maps/api/place/findplacefromtext/json?input=${requestObject.destination}&inputtype=textquery&fields=name,photos&key=${process.env.PLACES_API_KEY}`
       )
       .then((response) => {
-        console.log(response.data);
         const photoReference =
           response.data.candidates[0].photos[0].photo_reference;
         // Store get the image URL
