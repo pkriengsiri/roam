@@ -35,7 +35,6 @@ const PackingList = ({ userId, tripId }) => {
   const getPackingListItems = () => {
     API.getPackingListItems(tripId)
       .then((response) => {
-        // console.log(response.data);
         const listArray = [];
 
         response.data.forEach((item) => {
@@ -149,13 +148,12 @@ const PackingList = ({ userId, tripId }) => {
                         <input
                           className="input"
                           type="text"
-                          placeholder={item.item}
                           onChange={(e) => setEditingText(e.target.value)}
                           value={editingText}
                         />
                       ) : (
                         <>
-                          <span>{item.item}</span>
+                          <span className={item.packed ? ("packed-item"): ("unpacked-item")}>{item.item}</span>
                          
                         </>
                       )}
@@ -177,12 +175,14 @@ const PackingList = ({ userId, tripId }) => {
                         ) : (
                           <i
                             className="packing-icon far fa-edit p-1"
-                            onClick={() => setItemEditing(item.id)}
+                            onClick={() => {setItemEditing(item.id)
+                            setEditingText(item.item)}}
                           ></i>
                         )}
                       </span>
                     </td>
                   </tr>
+                  
                 </tbody>
               </table>
 

@@ -14,3 +14,7 @@
 .packing-icon:hover {
     color: #f48e3f;
 }
+
+.packed-item {
+    text-decoration: line-through;
+}
