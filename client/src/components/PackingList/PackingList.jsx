@@ -133,7 +133,6 @@ const PackingList = ({ userId, tripId }) => {
                   <tr>
                     <td className="is-vcentered">
                       <span>
-                        
                         <input
                           type="checkbox"
                           data-checked={item.id}
