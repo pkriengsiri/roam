@@ -1,17 +1,23 @@
 import React, { useState, useEffect } from "react";
 import API from "../../utils/API";
 
-const PackingList = ({ userId, tripId}) => {
+const PackingList = ({ userId, tripId }) => {
   const [item, setItem] = useState("");
   const [itemEditing, setItemEditing] = useState(null);
   const [editingText, setEditingText] = useState("");
   const [list, setList] = useState([{}]);
 
-  
-
-  // useEffect(()=> {
-  // setList([...list].concat({item: item, packed: false}));
-  // }, [item])
+  useEffect(() => {
+    API.getPackingListItems(tripId).then((response) => {
+      console.log(response.data);
+      const listArray = [];
+      response.data.forEach((item) => {
+        listArray.push({ id: item._id, item: item.item, packed: item.packed });
+      });
+      console.log(listArray);
+      setList(listArray);
+    });
+  }, []);
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -28,27 +34,29 @@ const PackingList = ({ userId, tripId}) => {
     // setList([...list].concat(newItem));
     // setItem("");
     // console.log(item);
-    
+
     // console.log(list);
 
-    API.createItem(newItem).then((response) => {
-      
-      console.log(response.data);
-      API.getPackingListItems(tripId).then((response)=> {
+    API.createItem(newItem)
+      .then((response) => {
         console.log(response.data);
-        const listArray = [];
-        response.data.forEach(item => {
-          listArray.push({id: item._id, item: item.item, packed: item.packed})
-        })
-        console.log(listArray);
-        setList(listArray);
-
+        API.getPackingListItems(tripId).then((response) => {
+          console.log(response.data);
+          const listArray = [];
+          response.data.forEach((item) => {
+            listArray.push({
+              id: item._id,
+              item: item.item,
+              packed: item.packed,
+            });
+          });
+          console.log(listArray);
+          setList(listArray);
+        });
       })
-
-    }).catch((err)=> {
-      console.log(err);
-    })
-    
+      .catch((err) => {
+        console.log(err);
+      });
   };
 
   const deleteItem = (id) => {
@@ -85,7 +93,7 @@ const PackingList = ({ userId, tripId}) => {
         <div className="column is-5">
           <form onSubmit={handleSubmit}>
             <input
-            className="input"
+              className="input"
               type="text"
               placeholder="Add an item"
               value={item}
@@ -93,37 +101,40 @@ const PackingList = ({ userId, tripId}) => {
               onChange={(e) => setItem(e.target.value)}
             />
             <div className="control">
-            <button className="button" type="submit"><i className="fas fa-plus fa-lg"></i></button></div>
+              <button className="button" type="submit">
+                <i className="fas fa-plus fa-lg"></i>
+              </button>
+            </div>
           </form>
           {list.map((item) => (
             <div key={item.id}>
+              <div className="columns">
+                <div className="column is-10">
+                  <input
+                    type="checkbox"
+                    onChange={() => togglePacked(item.id)}
+                    checked={item.packed}
+                  />
+                  {itemEditing === item.id ? (
+                    <input
+                      type="text"
+                      onChange={(e) => setEditingText(e.target.value)}
+                      value={editingText}
+                    />
+                  ) : (
+                    <div>{item.item}</div>
+                  )}
 
-                <div className="columns">
-                    <div className="column is-10">
-                        <input
-                type="checkbox"
-                onChange={() => togglePacked(item.id)}
-                checked={item.packed}
-              />
-              {itemEditing === item.id ? (
-                <input
-                  type="text"
-                  onChange={(e) => setEditingText(e.target.value)}
-                  value={editingText}
-                />
-              ) : (
-                <div>{item.text}</div>
-              )}
-
-              <button onClick={() => deleteItem(item.id)}>Delete</button>
-              {itemEditing === item.id ? (
-                <button onClick={() => editItem(item.id)}>Save</button>
-              ) : (
-                <button onClick={() => setItemEditing(item.id)}>Edit</button>
-              )}
-                    </div>
+                  <button onClick={() => deleteItem(item.id)}>Delete</button>
+                  {itemEditing === item.id ? (
+                    <button onClick={() => editItem(item.id)}>Save</button>
+                  ) : (
+                    <button onClick={() => setItemEditing(item.id)}>
+                      Edit
+                    </button>
+                  )}
                 </div>
-              
+              </div>
             </div>
           ))}
         </div>
