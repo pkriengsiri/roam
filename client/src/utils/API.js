@@ -61,6 +61,23 @@ const API = {
 
   deleteExpense: function (id) {
     return axios.delete(`/api/expenses/${id}`);
+  },
+
+  // API methods for packing list
+  getPackingListItems: function (id) {
+    return axios.get(`/api/packing-list-items/${id}`)
+  },
+
+  createItem: function (itemData) {
+    return axios.post(`/api/packing-list-items`, itemData)
+  },
+
+  deleteItem: function (itemid) {
+    return axios.delete(`/api/packing-list-items/${itemid}`)
+  },
+
+  editItem: function(itemid, data) {
+    return axios.put(`/api/packing-list-items/${itemid}`, data)
   }
 };
 
