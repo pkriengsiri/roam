@@ -1,12 +1,12 @@
 import React, { useEffect } from "react";
 import { useParams, Link } from "react-router-dom";
 import foodAndDining from "../../Assets/Images/food-and-dining.png";
-import airfare from "../../Assets/Images/airfare.png"
-import lodging from "../../Assets/Images/lodging.png"
+import airfare from "../../Assets/Images/airfare.png";
+import lodging from "../../Assets/Images/lodging.png";
 import "./Dropdown.css";
 import API from "../../utils/API";
 
-const MiniTable = ({ expense }) => {
+const Dropdown = ({ expense }) => {
   const { userId, tripId } = useParams();
 
   useEffect(() => {
@@ -27,34 +27,29 @@ const MiniTable = ({ expense }) => {
         <div className="column is-12">
           {expense.category === "Food & Dining" && (
             <>
-              <img
-                className="category-icon"
-                src={foodAndDining}
-                alt=""
-              />
-              <h1 className="subtitle">Food & Dining</h1>
+              <span>
+                <img className="category-icon" src={foodAndDining} alt="" />
+                <h1 className="subtitle">Food & Dining</h1>
+              </span>
             </>
           )}
           {expense.category === "Airfare" && (
             <>
-              <img
-                className="category-icon"
-                src={airfare}
-                alt=""
-              />
+              <img className="category-icon" src={airfare} alt="" />
               <h1 className="subtitle">Airfare</h1>
             </>
           )}
-            {expense.category === "Lodging" && (
+          {expense.category === "Lodging" && (
             <>
-              <img
-                className="category-icon"
-                src={lodging}
-                alt=""
-              />
+              <img className="category-icon" src={lodging} alt="" />
               <h1 className="subtitle">Lodging</h1>
             </>
           )}
+          <Link
+            to={`/user/${userId}/trips/${tripId}/expenses/${expense._id}/edit`} className="has-text-dark"
+          >
+            Edit<i className="edit-expense-icon far fa-edit pl-2 has-text-dark"></i>
+          </Link>
         </div>
       </div>
       <div className="columns is-centered">
@@ -83,4 +78,4 @@ const MiniTable = ({ expense }) => {
   );
 };
 
-export default MiniTable;
+export default Dropdown;

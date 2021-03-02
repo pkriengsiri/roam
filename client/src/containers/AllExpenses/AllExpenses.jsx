@@ -14,7 +14,6 @@ const AllExpenses = (props) => {
     if (tripId) {
       API.getTrip(tripId)
         .then((response) => {
-          // console.log(response.data.expenses)
           setExpenseArray(response.data.expenses);
           setDestination(response.data.destination);
           // Create an array to hold display state of contributor row and set value to false
@@ -64,7 +63,7 @@ const AllExpenses = (props) => {
           <table className="table  is-fullwidth expenses-table is-striped">
             <thead className="expense-table-head ">
               <tr>
-                <th className="has-text-light"></th>
+                {/* <th className="has-text-light"></th> */}
                 <th className="has-text-light">Date</th>
                 <th className="has-text-light">Description</th>
                 {/* <th className="has-text-light">Category</th> */}
@@ -76,13 +75,13 @@ const AllExpenses = (props) => {
               {expenseArray.map((expense, index) => (
                 <>
                   <tr key={expense._id} className="is-hoverable expense-row">
-                    <td>
+                    {/* <td>
                       <Link
                         to={`/user/${userId}/trips/${tripId}/expenses/${expense._id}/edit`}
                       >
                         <i className="edit-expense-icon far fa-edit m-1 "></i>
                       </Link>
-                    </td>
+                    </td> */}
                     <td className="is-vcentered">
                       {convertDate(expense.date)}
                     </td>
@@ -93,18 +92,22 @@ const AllExpenses = (props) => {
                     </td>
                     {/* Dropdown for Dropdown goes here */}
                     <td className="is-vcentered">
-                      <span
-                        onClick={handleContributors}
-                        data-id={expense._id}
-                        data-index={index}
-                        className="details-link"
-                      >
+                      <span className="details-link">
                         Details
+                        <i
+                          onClick={handleContributors}
+                          data-id={expense._id}
+                          data-index={index}
+                          className="fas fa-caret-square-down pl-2"
+                        ></i>
                       </span>
                     </td>
                   </tr>
                   {displayContributors[index] && (
-                    <tr className="has-text-dark details-dropdown" data-row={index}>
+                    <tr
+                      className="has-text-dark details-dropdown"
+                      data-row={index}
+                    >
                       <td colSpan="6">
                         <div>
                           {/* Mini-table goes here */}

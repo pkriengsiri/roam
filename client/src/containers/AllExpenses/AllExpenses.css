@@ -30,14 +30,16 @@ $table-head-background-color: $purple; */
   background-color: white;
 }
 
-.details:hover {
+.fa-caret-square-down:hover {
   cursor: pointer;
 }
 
-.fa-angle-down {
+
+.fa-caret-square-down {
   color: white !important;
+  font-size: 18px;
 }
 
-.details-link:hover {
-  color: black;
+.fa-caret-square-down:hover {
+  color: black !important;
 }

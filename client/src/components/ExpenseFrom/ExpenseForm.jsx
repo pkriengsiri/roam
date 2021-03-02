@@ -377,7 +377,7 @@ const ExpenseForm = (props) => {
 
         <Link
           onClick={() => props.closeForm()}
-          to={`/user/${userId}/trips/${tripId}`}
+          to={`/user/${userId}/trips/${tripId}/expenses`}
           className="button mr-4"
         >
           Cancel
