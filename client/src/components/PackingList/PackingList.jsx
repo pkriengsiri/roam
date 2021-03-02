@@ -6,10 +6,12 @@ const PackingList = ({ userId, tripId }) => {
   const [itemEditing, setItemEditing] = useState(null);
   const [editingText, setEditingText] = useState("");
   const [list, setList] = useState([{}]);
+  const [packedStatus, setPackedStatus] = useState([]);
 
   useEffect(() => {
     getPackingListItems();
-  }, []);
+
+  }, [packedStatus]);
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -20,7 +22,6 @@ const PackingList = ({ userId, tripId }) => {
       item: item,
       packed: false,
     };
-
 
     API.createItem(newItem)
       .then((response) => {
@@ -33,30 +34,35 @@ const PackingList = ({ userId, tripId }) => {
   };
 
   const getPackingListItems = () => {
-    API.getPackingListItems(tripId).then((response) => {
-      console.log(response.data);
-      const listArray = [];
-      response.data.forEach((item) => {
-        listArray.push({ id: item._id, item: item.item, packed: item.packed });
+    API.getPackingListItems(tripId)
+      .then((response) => {
+        // console.log(response.data);
+        const listArray = [];
+        const packedStatusArr = [];
+        response.data.forEach((item) => {
+          listArray.push({
+            id: item._id,
+            item: item.item,
+            packed: item.packed,
+          });
+          packedStatusArr.push(item.packed);
+        });
+        setPackedStatus(packedStatusArr);
+        setList(listArray);
+        setItem("");
+      })
+      .catch((err) => {
+        console.log(err);
       });
-      setList(listArray);
-      setItem("");
-    }).catch((err) => {
-      console.log(err);
-    });
-
-  }
+  };
 
   const deleteItem = (e) => {
-    
-    const itemId = e.target.dataset.id
-    API.deleteItem(itemId).then((response) =>{
+    const itemId = e.target.dataset.id;
+    API.deleteItem(itemId).then((response) => {
       console.log(response);
       console.log("deleted");
       getPackingListItems();
-    })
-
-    
+    });
   };
 
   const togglePacked = (e) => {
@@ -70,22 +76,16 @@ const PackingList = ({ userId, tripId }) => {
     // setList(updatedList);
 
     const itemId = e.target.dataset.checked;
-    let itemState = e.target.dataset.state;
-    console.log(itemState);
-    console.log(!itemState);
 
-    if (itemState == true) {
-      itemState = false;
-    } else if (itemState == false){
-      itemState = true;
-    }
+    const packed = e.target.checked;
+    // console.log(checked);
+    // console.log(!checked)
 
-    
-    
-
+    console.log(packed);
     const newState = {
-      packed: !itemState
-    }
+      packed: packed,
+    };
+    console.log(newState);
 
     API.editItem(itemId, newState).then((response) => {
       console.log(response.data);
@@ -93,24 +93,23 @@ const PackingList = ({ userId, tripId }) => {
     }).catch((err)=> {
       console.log(err);
     })
-
   };
 
   const editItem = (e) => {
     const itemId = e.target.dataset.edit;
     console.log(e.target.dataset);
     const newEdit = {
-      item: editingText
-    }
-   API.editItem(itemId, newEdit).then((response) => {
-     console.log(response.data);
-     getPackingListItems();
-   }).catch((err)=> {
-     console.log(err);
-   })
-    
+      item: editingText,
+    };
+    API.editItem(itemId, newEdit)
+      .then((response) => {
+        console.log(response.data);
+        getPackingListItems();
+      })
+      .catch((err) => {
+        console.log(err);
+      });
 
-    
     setEditingText("");
     setItemEditing(null);
   };
@@ -134,16 +133,17 @@ const PackingList = ({ userId, tripId }) => {
               </button>
             </div>
           </form>
-          {list.map((item) => (
+          {list.map((item,index) => (
             <div key={item.id}>
               <div className="columns">
                 <div className="column is-10">
                   <input
                     type="checkbox"
                     data-checked={item.id}
-                    data-state={item.packed}
+                    data-packed={item.packed}
                     onChange={togglePacked}
-                    checked={item.packed}
+                    checked={packedStatus[index]}
+                    data-index={index}
                   />
                   {itemEditing === item.id ? (
                     <input
@@ -155,11 +155,15 @@ const PackingList = ({ userId, tripId }) => {
                     <div>{item.item}</div>
                   )}
 
-                  <button data-id={item.id} onClick={deleteItem}>Delete</button>
+                  <button data-id={item.id} onClick={deleteItem}>
+                    Delete
+                  </button>
                   {itemEditing === item.id ? (
-                    <button data-edit={item.id} onClick={editItem}>Save</button>
+                    <button data-edit={item.id} onClick={editItem}>
+                      Save
+                    </button>
                   ) : (
-                    <button  onClick={() => setItemEditing(item.id)}>
+                    <button onClick={() => setItemEditing(item.id)}>
                       Edit
                     </button>
                   )}
