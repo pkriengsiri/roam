@@ -47,11 +47,16 @@ const PackingList = ({ userId, tripId }) => {
 
   }
 
-  const deleteItem = (id) => {
+  const deleteItem = (e) => {
+    console.log(e.target.dataset.id);
+    
+    API.deleteItem(item.id).then((response) =>{
+      console.log(response);
+      console.log("deleted");
+      getPackingListItems();
+    })
 
     
-    const updatedList = [...list].filter((item) => item.id !== id);
-    setList(updatedList);
   };
 
   const togglePacked = (id) => {
@@ -115,7 +120,7 @@ const PackingList = ({ userId, tripId }) => {
                     <div>{item.item}</div>
                   )}
 
-                  <button onClick={() => deleteItem(item.id)}>Delete</button>
+                  <button data-id={item.id} onClick={deleteItem}>Delete</button>
                   {itemEditing === item.id ? (
                     <button onClick={() => editItem(item.id)}>Save</button>
                   ) : (
