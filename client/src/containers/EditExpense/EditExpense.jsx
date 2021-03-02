@@ -17,10 +17,12 @@ const EditExpense = () => {
   const handleFormSubmit = (e, formObject) => {
     e.preventDefault();
     if (
+      !formObject.date ||
       !formObject.expenseCreator ||
       !formObject.totalExpenseAmount ||
       formObject.category === "Select One" ||
-      !formObject.category
+      !formObject.category ||
+      !formObject.expenseBalanced
     ) {
       onDisplay(true, "error");
     } else {
@@ -28,7 +30,6 @@ const EditExpense = () => {
 
       API.editExpense(expenseId, formObject)
         .then((response) => {
-          console.log(response.data);
           history.push(`/user/${userId}/trips/${tripId}/expenses`);
         })
         .catch((err) => {
@@ -55,7 +56,6 @@ const EditExpense = () => {
   const handleDeleteClick = () => {
     API.deleteExpense(expenseId)
       .then((response) => {
-        console.log(response);
         history.push(`/user/${userId}/trips/${tripId}`);
       })
       .catch((err) => {

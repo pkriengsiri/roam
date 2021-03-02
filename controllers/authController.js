@@ -11,19 +11,28 @@ module.exports = {
       if (err) throw new Error(err);
 
       userToCreate.password = hashedPassword;
-      db.User.create(userToCreate)
-        .then((newUser) => {
-          const token = jwt.sign(
-            { _id: newUser._id, email: newUser.email },
-            process.env.SECRET
-          );
-          res.cookie("token", token, { httpOnly: true });
-          res.json({ token: token });
+      userToCreate.trips = [];
+
+      // find trips with this user email listed as a traveler
+      db.Trip.find({ "travelers.travelerEmail": userToCreate.email })
+        .then((dbTrips) => {
+          userToCreate.trips = dbTrips.map((trip) => trip._id);
+
+          db.User.create(userToCreate)
+            .then((newUser) => {
+              const token = jwt.sign(
+                { _id: newUser._id, email: newUser.email },
+                process.env.SECRET
+              );
+              res.cookie("token", token, { httpOnly: true });
+              res.json({ token: token });
+            })
+            .catch((err) => {
+              console.log(err);
+              res.status(500).end();
+            });
         })
-        .catch((err) => {
-          console.log(err);
-          res.status(500).end();
-        });
+        .catch((err) => console.log(err));
     });
   },
 

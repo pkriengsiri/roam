@@ -13,3 +13,28 @@
 option {
   color: #363636;
 }
+
+.balanced {
+  color: green;
+}
+.unbalanced {
+  color: red;
+}
+
+.numeric-input{
+  text-align: right;
+
+}
+
+
+/* Firefox */
+.numeric-input[type=number] {
+  -moz-appearance: textfield;
+}
+
+/* Chrome, Safari, Edge, Opera */
+.numeric-input::-webkit-outer-spin-button,
+.numeric-input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}

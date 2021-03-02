@@ -1,25 +1,23 @@
 .trip-image {
  border-radius: 10px;
- /* position: absolute; */
- top: 0;
- left: 0;
- /* width: 800px;
- height: 400px; */
+
+
+
 
 }
-
+/* 
 .single-trip-card {
   background-color: white;
   color: black;
   position: absolute;
   top: 20%;
  left: 60%;
-}
+} */
 
-
+/* 
 .trip-container {
   position: relative;
-}
+} */
 
 .edit-trip-icon {
   font-size: small;

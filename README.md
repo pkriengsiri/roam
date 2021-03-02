@@ -14,3 +14,6 @@ Value for each of these fields stored as an array of objects in state {_id,amoun
 If "I paid for everything", populate the fields with the amount assigned to the person creating the expense and zero for everyone else
 If "Custom Split", do some math behind the scenes to validate the sum of the inputs matches the expense amount
 
+
+# Technologies used
+bcrypt, jwt, cookies, airbnb date range picker, chartjs, google places api, cloudinary, figma, canva
