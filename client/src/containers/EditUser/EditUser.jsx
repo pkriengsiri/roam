@@ -24,13 +24,24 @@ const EditUser = () => {
   const { userContext, setUserContext } = useContext(UserContext);
 
   useEffect(() => {
-    console.log(fileName);
     if (userId) {
       API.getUser(userId)
         .then((response) => {
           setFirstName(response.data.firstName);
           setLastName(response.data.lastName);
           setEmail(response.data.email);
+          setChangedProfileImageUrl(response.data.profileImageUrl);
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    }
+  }, []);
+
+  useEffect(() => {
+    if (userId) {
+      API.getUser(userId)
+        .then((response) => {
           setChangedProfileImageUrl(response.data.profileImageUrl);
         })
         .catch((err) => {
