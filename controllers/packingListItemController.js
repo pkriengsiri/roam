@@ -16,6 +16,17 @@ module.exports = {
         res.status(422).json(err);
       });
   },
+  findByTripId: function (req, res) {
+    console.log(req.params.id);
+    db.PackingListItem.find({ trip: req.params.id })
+      .then((dbPackingListItems) => {
+        console.log(dbPackingListItems);
+        res.json(dbPackingListItems);
+      })
+      .catch((err) => {
+        res.status(422).json(err);
+      });
+  },
   create: function (req, res) {
     console.log(req.body);
     db.PackingListItem.create({
@@ -23,7 +34,7 @@ module.exports = {
     })
       .then((dbPackingListItem) => {
         // Add packing item to trip
-        console.log(dbPackingListItem)
+        console.log(dbPackingListItem);
         addPackingListItemToTrip(dbPackingListItem);
         res.json(dbPackingListItem);
         // Add packing list to user?

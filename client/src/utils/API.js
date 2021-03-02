@@ -64,7 +64,7 @@ const API = {
   },
 
   // API methods for packing list
-  getList: function (id) {
+  getPackingListItems: function (id) {
     return axios.get(`/api/packing-list-items/${id}`)
   },
 

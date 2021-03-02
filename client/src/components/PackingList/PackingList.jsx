@@ -34,6 +34,19 @@ const PackingList = ({ userId, tripId}) => {
     API.createItem(newItem).then((response) => {
       
       console.log(response.data);
+      API.getPackingListItems(tripId).then((response)=> {
+        console.log(response.data);
+        const listArray = [];
+        response.data.forEach(item => {
+          listArray.push({id: item._id, item: item.item, packed: item.packed})
+        })
+        console.log(listArray);
+        setList(listArray);
+
+      })
+
+    }).catch((err)=> {
+      console.log(err);
     })
     
   };
