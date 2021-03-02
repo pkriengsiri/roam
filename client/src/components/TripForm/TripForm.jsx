@@ -10,7 +10,7 @@ import moment from "moment";
 import Alert from "../Alert/Alert";
 import AlertContext from "../../contexts/AlertContext";
 import "./react_dates_overrides.css";
-import { v4 as uuidv4 } from 'uuid';
+import { v4 as uuidv4 } from "uuid";
 
 let autoComplete;
 
@@ -37,7 +37,7 @@ function handleScriptLoad(updateQuery, autoCompleteRef) {
   var sessionToken = new window.google.maps.places.AutocompleteSessionToken();
   autoComplete = new window.google.maps.places.Autocomplete(
     autoCompleteRef.current,
-    { types: ["(regions)"], sessionToken: sessionToken}
+    { types: ["(regions)"], sessionToken: sessionToken }
   );
   autoComplete.setFields(["address_components", "formatted_address"]);
   autoComplete.addListener("place_changed", () =>
@@ -86,7 +86,9 @@ const TripForm = (props) => {
 
   useEffect(() => {
     loadScript(
-      `https://maps.googleapis.com/maps/api/js?key=${process.env.REACT_APP_PLACES_API_KEY}&libraries=places&sessiontoken=${uuidv4()}`,
+      `https://maps.googleapis.com/maps/api/js?key=${
+        process.env.REACT_APP_PLACES_API_KEY
+      }&libraries=places&sessiontoken=${uuidv4()}`,
       () => handleScriptLoad(setDestination, autoCompleteRef)
     );
     if (tripId) {
@@ -182,6 +184,20 @@ const TripForm = (props) => {
     <>
       <div className="columns is-centered">
         <div className="column is-half">
+          <div className="field mb-2">
+            <label className="label">Destination</label>
+            <div className="control">
+              <input
+                ref={autoCompleteRef}
+                onChange={(event) => setDestination(event.target.value)}
+                placeholder="Enter a City"
+                value={destination}
+                onSubmit={(e) => {
+                  e.preventDefault();
+                }}
+              />
+            </div>
+          </div>
           <form
             id="trip-form"
             className="trip-form"
@@ -198,8 +214,8 @@ const TripForm = (props) => {
           >
             {/* destination section  */}
             {/* <div className="field mb-2"> */}
-              {/* <label className="label">Destination</label> */}
-              {/* <div className="control">
+            {/* <label className="label">Destination</label> */}
+            {/* <div className="control">
                 <input
                   autoFocus
                   className="input"
@@ -211,16 +227,20 @@ const TripForm = (props) => {
                 />
               </div> */}
             {/* </div> */}
-            <div className="field mb-2">
-            <label className="label">Destination</label>
-            <div className="control">
-              <input
-                ref={autoCompleteRef}
-                onChange={(event) => setDestination(event.target.value)}
-                placeholder="Enter a City"
-                value={destination}
-              /></div>
-            </div>
+            {/* <div className="field mb-2">
+              <label className="label">Destination</label>
+              <div className="control">
+                <input
+                  ref={autoCompleteRef}
+                  onChange={(event) => setDestination(event.target.value)}
+                  placeholder="Enter a City"
+                  value={destination}
+                  onSubmit={(e) => {
+                    e.preventDefault();
+                  }}
+                />
+              </div>
+            </div> */}
             {/* date picker section  */}
             <div className="mb-5">
               <label className="label">Dates</label>
