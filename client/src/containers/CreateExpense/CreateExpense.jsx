@@ -18,7 +18,8 @@ const CreateExpense = () => {
       !formObject.expenseCreator ||
       !formObject.totalExpenseAmount ||
       !formObject.category ||
-      formObject.category === "Select One" 
+      formObject.category === "Select One" ||
+      !formObject.expenseBalanced
     ) {
       onDisplay(true, "error");
     } else {
@@ -26,7 +27,6 @@ const CreateExpense = () => {
 
       API.createExpense(formObject)
         .then((response) => {
-          console.log(response.data);
           history.push(`/user/${userId}/trips/${tripId}`);
         })
         .catch((err) => {
