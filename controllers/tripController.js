@@ -259,7 +259,6 @@ const parsePlacesName = (placeString) => {
 
   // create a new array with numbers removed
   secondElementArray.forEach((element) => {
-    console.log(element);
     if (isNaN(element)) {
       secondElementArrayParsed.push(element);
     }
