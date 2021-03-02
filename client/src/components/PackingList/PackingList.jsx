@@ -8,15 +8,7 @@ const PackingList = ({ userId, tripId }) => {
   const [list, setList] = useState([{}]);
 
   useEffect(() => {
-    API.getPackingListItems(tripId).then((response) => {
-      console.log(response.data);
-      const listArray = [];
-      response.data.forEach((item) => {
-        listArray.push({ id: item._id, item: item.item, packed: item.packed });
-      });
-      console.log(listArray);
-      setList(listArray);
-    });
+    getPackingListItems();
   }, []);
 
   const handleSubmit = (e) => {
@@ -29,30 +21,11 @@ const PackingList = ({ userId, tripId }) => {
       packed: false,
     };
 
-    console.log(newItem);
-
-    // setList([...list].concat(newItem));
-    // setItem("");
-    // console.log(item);
-
-    // console.log(list);
 
     API.createItem(newItem)
       .then((response) => {
         console.log(response.data);
-        API.getPackingListItems(tripId).then((response) => {
-          console.log(response.data);
-          const listArray = [];
-          response.data.forEach((item) => {
-            listArray.push({
-              id: item._id,
-              item: item.item,
-              packed: item.packed,
-            });
-          });
-          console.log(listArray);
-          setList(listArray);
-        });
+        getPackingListItems();
       })
       .catch((err) => {
         console.log(err);
@@ -71,7 +44,6 @@ const PackingList = ({ userId, tripId }) => {
     }).catch((err) => {
       console.log(err);
     });
-
 
   }
 
