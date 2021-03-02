@@ -33,6 +33,7 @@ module.exports = {
         `https://maps.googleapis.com/maps/api/place/findplacefromtext/json?input=${requestObject.destination}&inputtype=textquery&fields=name,photos&key=${process.env.PLACES_API_KEY}`
       )
       .then((response) => {
+        console.log(response.data);
         const photoReference =
           response.data.candidates[0].photos[0].photo_reference;
         // Store get the image URL
@@ -41,6 +42,7 @@ module.exports = {
         cloudinary.uploader.upload(placesImageUrl, function (error, result) {
           if (error) {
             console.log(error);
+            console.log(requestObject);
             db.Trip.create(requestObject)
               .then((dbTrip) => {
                 // ad the trip id to each travel
@@ -52,6 +54,9 @@ module.exports = {
               .catch((err) => res.status(422).json(err));
           } else {
             requestObject.imageUrl = result.url;
+            console.log(requestObject);
+            const destination = parsePlacesName(requestObject.destination);
+            console.log(destination);
             db.Trip.create(requestObject)
               .then((dbTrip) => {
                 // ad the trip id to each travel
@@ -65,7 +70,8 @@ module.exports = {
         });
       })
       .catch((err) => {
-        console.log(err);
+        const destination = parsePlacesName(requestObject.destination);
+        console.log(destination);
         db.Trip.create(requestObject)
           .then((dbTrip) => {
             // ad the trip id to each travel
@@ -234,21 +240,31 @@ const removeTripFromUser = async (tripToDelete, user) => {
     { $set: { trips: filteredTrips } },
     { new: true }
   );
+};
 
-  const parsePlacesName = (placeString) => {
-    // Split the string to an array by commas
-    const destinationArray = placeString.split(",");
-    // create a new array with numbers removed
-    const destinationArrayWithoutNumbers = [];
-    destinationArray.forEach((element) => {
-      if (isNaN()) {
-        destinationArrayWithoutNumbers.push(element);
-      }
-    });
-    if (destinationArrayWithoutNumbers.length === 1) {
-      return destinationArrayWithoutNumber[0];
-    } else {
-      return `${destinationArrayWithoutNumbers[0]}, ${destinationArrayWithoutNumbers[1]}`;
+// Parse the place name provided by google places autocomplete
+const parsePlacesName = (placeString) => {
+  // Split the string to an array by commas
+  const destinationArray = placeString.split(",");
+
+  // If the array contains one element, return it
+  if (destinationArray.length === 1) {
+    return destinationArray[0];
+  }
+
+  // Check the second element in the array to see if it contains numbers
+  const secondElement = destinationArray[1];
+  const secondElementArray = secondElement.split(" ");
+  const secondElementArrayParsed = [];
+
+  // create a new array with numbers removed
+  secondElementArray.forEach((element) => {
+    console.log(element);
+    if (isNaN(element)) {
+      secondElementArrayParsed.push(element);
     }
-  };
+  });
+
+  const secondElementParsed = secondElementArrayParsed.join(" ");
+  return `${destinationArray[0]}, ${secondElementParsed}`;
 };

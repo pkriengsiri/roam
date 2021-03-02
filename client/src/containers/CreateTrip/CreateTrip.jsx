@@ -34,7 +34,7 @@ const CreateTrip = () => {
     } else {
       onDisplay(false);
       setLoadingState("is-loading");
-      formObject.destination = destinationParsed;
+      // formObject.destination = destinationParsed;
       API.createTrip(formObject)
         //TODO: // use context to set signed in user as tripCreator
 
