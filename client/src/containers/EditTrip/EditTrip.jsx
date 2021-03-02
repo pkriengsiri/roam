@@ -14,6 +14,7 @@ const EditTrip = () => {
   const { userId } = useParams();
   const { tripId } = useParams();
   const [deleteModalState, setDeleteModalState] = useState(false);
+  const [loadingState, setLoadingState] = useState("");
 
   const handleFormSubmit = (e, formObject) => {
     if (
@@ -30,7 +31,10 @@ const EditTrip = () => {
       axios
         .put(`/api/trips/${tripId}`, formObject)
         .then((response) => {
-          history.push(`/user/${userId}/trips`);
+          setLoadingState("is-loading");
+          setTimeout(() => {
+            history.push(`/user/${userId}/trips`);
+          }, 1000);
         })
         .catch((err) => {
           console.log(err);
@@ -91,6 +95,7 @@ const EditTrip = () => {
           handleFormSubmit={handleFormSubmit}
           buttonText="Save"
           closeTripForm={closeTripForm}
+          loadingState={loadingState}
         />
       </div>
     </>
