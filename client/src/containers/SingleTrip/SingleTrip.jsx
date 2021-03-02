@@ -127,7 +127,7 @@ const SingleTrip = () => {
               <img className="trip-image" src={imageUrl} alt={destination} />
             </figure>
           </div>
-          <div className="column is-4">
+          <div className="column is-6">
             <div className="card single-trip-card">
               <div className="card-content">
                 <div className="content">
