@@ -14,14 +14,19 @@ const Navbar = ({ setUserContext }) => {
   const [profileImage, setProfileImage] = useState(
     "https://res.cloudinary.com/djou7v3ho/image/upload/v1614532245/Avatar-removebg-preview_1_g04ftj.png"
   );
+  const [firstName, setFirstName] =useState("");
   const history = useHistory();
 
   useEffect(() => {
     if (userContext?.userId) {
       API.getUser(userContext.userId)
         .then((response) => {
+          
           if (response.data.profileImageUrl) {
             setProfileImage(response.data.profileImageUrl);
+          }
+          if(response.data.firstName){
+            setFirstName(response.data.firstName);
           }
         })
         .catch((err) => {
@@ -82,6 +87,7 @@ const Navbar = ({ setUserContext }) => {
         aria-label="main navigation"
       >
         <div className="navbar-brand mt-1">
+          
           <Link to="/">
             <img src={Logo} width="112" className="ml-4 mt-1" />
           </Link>
@@ -107,16 +113,20 @@ const Navbar = ({ setUserContext }) => {
         <div id="navbarBasicExample" className="navbar-menu">
           {/* Logged in navbar */}
           {userContext.userId && (
+            
             <div className="navbar-end ">
               <div className="navbar-item has-dropdown is-hoverable">
                 <a className="navbar-link">
                   {/* <i className="nav-icon fas fa-user-circle fa-2x"></i> */}
+                  
                   <img
                     className="navbar-profile-picture"
                     src={profileImage}
                     alt=""
                   />
+                  <p className="ml-2"><strong>{firstName}</strong></p>
                 </a>
+                
                 <div className="navbar-dropdown is-right">
                   <Link
                     to={`/user/${userContext.userId}/trips`}
