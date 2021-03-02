@@ -83,7 +83,7 @@ module.exports = {
     // console.log(req.body);
 
     // Query google places to get the place image, then upload to cloudinary if we get a result back
-    axios
+    await axios
       .get(
         `https://maps.googleapis.com/maps/api/place/findplacefromtext/json?input=${req.body.destination}&inputtype=textquery&fields=name,photos&key=${process.env.PLACES_API_KEY}`
       )
