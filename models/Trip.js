@@ -34,7 +34,7 @@ const tripSchema = new Schema({
     },
   ], //array of userIds
   expenses: [{ type: Schema.Types.ObjectId, ref: "Expense" }],
-  packingList: [{ type: Schema.Types.ObjectId, ref: "PackingList" }],
+  
 });
 
 const Trip = mongoose.model("Trip", tripSchema);

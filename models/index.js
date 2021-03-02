@@ -2,5 +2,5 @@ module.exports = {
   User: require("./User"),
   Trip: require("./Trip"),
   Expense: require("./Expense"),
-  PackingList: require("./PackingList")
+  PackingListItem: require("./PackingListItem")
 };

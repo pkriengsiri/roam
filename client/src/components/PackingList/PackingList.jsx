@@ -1,11 +1,13 @@
 import React, { useState, useEffect } from "react";
 import API from "../../utils/API";
 
-const PackingList = () => {
+const PackingList = ({ userId, tripId}) => {
   const [item, setItem] = useState("");
   const [itemEditing, setItemEditing] = useState(null);
   const [editingText, setEditingText] = useState("");
   const [list, setList] = useState([{}]);
+
+  
 
   // useEffect(()=> {
   // setList([...list].concat({item: item, packed: false}));
@@ -15,22 +17,24 @@ const PackingList = () => {
     e.preventDefault();
 
     const newItem = {
-      text: item,
+      packingListCreator: userId,
+      trip: tripId,
+      item: item,
       packed: false,
     };
 
     console.log(newItem);
 
-    setList([...list].concat(newItem));
-    setItem("");
+    // setList([...list].concat(newItem));
+    // setItem("");
     // console.log(item);
     
     // console.log(list);
 
-    // API.createItem({list }).then((response) => {
+    API.createItem(newItem).then((response) => {
       
-    //   console.log(response.data);
-    // })
+      console.log(response.data);
+    })
     
   };
 

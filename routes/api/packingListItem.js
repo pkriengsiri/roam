@@ -1,6 +1,6 @@
 // Dependencies
 const router = require("express").Router();
-const packingListController = require("../../controllers/packingListController");
+const packingListItemController = require("../../controllers/packingListItemController");
 const jwt = require("express-jwt");
 
 // middleware
@@ -16,13 +16,13 @@ const jwt = require("express-jwt");
 // Route for /api/packing-lists
 router
   .route("/")
-  .get(packingListController.findAll)
-  .post(packingListController.create);
+  .get(packingListItemController.findAll)
+  .post(packingListItemController.create);
 
   // Route for /api/packing-lists/:id
 router.route("/:id")
-.get(packingListController.findById)
-.put(packingListController.update)
-.delete(packingListController.remove);
+.get(packingListItemController.findById)
+.put(packingListItemController.update)
+.delete(packingListItemController.remove);
 
 module.exports = router;

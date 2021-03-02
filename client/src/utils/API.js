@@ -65,11 +65,11 @@ const API = {
 
   // API methods for packing list
   getList: function (id) {
-    return axios.get(`/api/packing-lists/${id}`)
+    return axios.get(`/api/packing-list-items/${id}`)
   },
 
-  createItem: function npm(listData) {
-    return axios.post(`/api/packing-lists`, listData)
+  createItem: function npm(itemData) {
+    return axios.post(`/api/packing-list-items`, itemData)
   }
 };
 

@@ -3,14 +3,14 @@ const axios = require("axios");
 
 module.exports = {
   findAll: function (req, res) {
-    db.PackingList.find(req.query)
-      .then((dbPackingLists) => res.json(dbPackingLists))
+    db.PackingListItem.find(req.query)
+      .then((dbPackingListItems) => res.json(dbPackingListItems))
       .catch((err) => res.status(422).json(err));
   },
   findById: function (req, res) {
-    db.PackingList.findById(req.params.id)
-      .then((dbPackingList) => {
-        res.json(dbPackingList);
+    db.PackingListItem.findById(req.params.id)
+      .then((dbPackingListItem) => {
+        res.json(dbPackingListItem);
       })
       .catch((err) => {
         res.status(422).json(err);
@@ -18,14 +18,14 @@ module.exports = {
   },
   create: function (req, res) {
     console.log(req.body);
-    db.PackingList.create({
+    db.PackingListItem.create({
       ...req.body,
     })
-      .then((dbPackingList) => {
+      .then((dbPackingListItem) => {
         // Add packing item to trip
-        console.log(dbPackingList)
-        addPackingListToTrip(dbPackingList);
-        res.json(dbPackingList);
+        console.log(dbPackingListItem)
+        addPackingListItemToTrip(dbPackingListItem);
+        res.json(dbPackingListItem);
         // Add packing list to user?
       })
       .catch((err) => {
@@ -33,20 +33,20 @@ module.exports = {
       });
   },
   update: function (req, res) {
-    db.PackingList.findByIdAndUpdate(
+    db.PackingListItem.findByIdAndUpdate(
       req.params.id,
       { ...req.body },
       { new: true }
     )
-      .then((dbPackingList) => res.json(dbPackingList))
+      .then((dbPackingListItem) => res.json(dbPackingListItem))
       .catch((err) => {
         console.log(err);
         res.status(422).json(err);
       });
   },
   remove: function (req, res) {
-    db.PackingList.findByIdAndDelete(req.params.id)
-      .then((dbPackingList) => res.json(dbPackingList))
+    db.PackingListItem.findByIdAndDelete(req.params.id)
+      .then((dbPackingListItem) => res.json(dbPackingListItem))
       .catch((err) => {
         console.log(err);
         res.status(422).json(err);
@@ -54,9 +54,9 @@ module.exports = {
   },
 };
 
-const addPackingListToTrip = async (dbPackingListObject) => {
-  await db.Trip.findByIdAndUpdate(dbPackingListObject.trip, {
-    $push: { list: dbPackingListObject },
+const addPackingListItemToTrip = async (dbPackingListItemObject) => {
+  await db.Trip.findByIdAndUpdate(dbPackingListItemObject.trip, {
+    $push: { list: dbPackingListItemObject },
   }).catch((err) => {
     console.log(err);
   });
