@@ -59,15 +59,41 @@ const PackingList = ({ userId, tripId }) => {
     
   };
 
-  const togglePacked = (id) => {
-    const updatedList = [...list].map((item) => {
-      if (item.id === id) {
-        item.packed = !item.packed;
-      }
-      return item;
-    });
+  const togglePacked = (e) => {
+    // const updatedList = [...list].map((item) => {
+    //   if (item.id === id) {
+    //     item.packed = !item.packed;
+    //   }
+    //   return item;
+    // });
 
-    setList(updatedList);
+    // setList(updatedList);
+
+    const itemId = e.target.dataset.checked;
+    let itemState = e.target.dataset.state;
+    console.log(itemState);
+    console.log(!itemState);
+
+    if (itemState == true) {
+      itemState = false;
+    } else if (itemState == false){
+      itemState = true;
+    }
+
+    
+    
+
+    const newState = {
+      packed: !itemState
+    }
+
+    API.editItem(itemId, newState).then((response) => {
+      console.log(response.data);
+      getPackingListItems();
+    }).catch((err)=> {
+      console.log(err);
+    })
+
   };
 
   const editItem = (e) => {
@@ -114,7 +140,9 @@ const PackingList = ({ userId, tripId }) => {
                 <div className="column is-10">
                   <input
                     type="checkbox"
-                    onChange={() => togglePacked(item.id)}
+                    data-checked={item.id}
+                    data-state={item.packed}
+                    onChange={togglePacked}
                     checked={item.packed}
                   />
                   {itemEditing === item.id ? (
