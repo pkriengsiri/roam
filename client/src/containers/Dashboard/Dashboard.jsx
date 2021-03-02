@@ -34,7 +34,6 @@ const Dashboard = () => {
           .filter((trip) => trip.endDate.substring(0, 10) >= today)
           .sort((a, b) => a.endDate.localeCompare(b.endDate));
 
-        console.log("in get user with trips");
         if (upcomingTrips.length > 0) {
           setTypeOfTripsToDisplay("Upcoming");
         } else {

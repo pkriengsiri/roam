@@ -26,17 +26,14 @@ const SingleTrip = () => {
   const { tripId } = useParams();
   const { userId } = useParams();
 
-
-
   useEffect(() => {
     if (tripId) {
       API.getTrip(tripId)
         .then((response) => {
-          console.log(response.data);
           setDestination(response.data.destination);
           const responseStartDate = new Date(response.data.startDate);
           const responseEndDate = new Date(response.data.endDate);
-          console.log(responseStartDate);
+
           setStartDate(responseStartDate);
           setEndDate(responseEndDate);
           setTravelers(response.data.travelers);
@@ -160,25 +157,28 @@ const SingleTrip = () => {
           </div>
           <div className="column is-6">
             <h1 className="title has-text-centered">Packing List</h1>
-            <PackingList userId={userId} tripId={tripId}/>
+            <PackingList userId={userId} tripId={tripId} />
           </div>
         </div>
+
         <div className="columns is-centered mt-6">
           <div className="column is-3">
-            <Link
-              to={`/user/${userId}/trips`}
-              className="button is-primary is-size-4"
-            >
-              Dashboard
-            </Link>
-          </div>
-          <div className="column is-2">
-            <Link
+          <Link
               to={`/user/${userId}/trips/${tripId}/expenses/new`}
-              className="button mr-4 is-size-4 is-light"
-              type="submit"
+              className="button mr-4 is-size-4 is-primary"
             >
               Create Expense
+            </Link>
+          </div>
+
+          <div className="column is-3">
+   
+
+            <Link
+              to={`/user/${userId}/trips`}
+              className="button is-light is-size-4"
+            >
+              Dashboard
             </Link>
           </div>
         </div>

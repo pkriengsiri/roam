@@ -1,40 +1,30 @@
-import React from "react";
+import React,{useEffect} from "react";
+import { useParams, Link } from "react-router-dom";
 
-const MiniTable = () => {
+const MiniTable = ({ expense}) => {
+  const { userId, tripId } = useParams();
+
+
   return (
     <div>
-      <h1>Testing</h1>
-      {/* <table className="table">
+
+
+      <table className="table">
         <thead>
           <tr>
-            <th>Name</th>
-            <th>Owed</th>
-            <th>Paid</th>
+            <th>Traveler</th>
+            <th>Amount</th>
           </tr>
         </thead>
         <tbody>
-          <tr>
-            <th>Tony</th>
-            <td>20</td>
-            <td>20</td>
-          </tr>
-          <tr>
-            <th>Jeana Rose</th>
-            <td>20</td>
-            <td>20</td>
-          </tr>
-          <tr>
-            <th>Pete</th>
-            <td>20</td>
-            <td>20</td>
-          </tr>
-          <tr>
-            <th>Molly</th>
-            <td>20</td>
-            <td>20</td>
-          </tr>
+          {expense.expenseShare.map((traveler) => (
+            <tr>
+              <th>{traveler.travelerEmail}</th>
+              <td>{traveler.shareOfTotalExpense}</td>
+            </tr>
+          ))}
         </tbody>
-      </table> */}
+      </table>
     </div>
   );
 };
