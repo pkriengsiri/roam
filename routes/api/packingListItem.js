@@ -17,14 +17,14 @@ const jwt = require("express-jwt");
 router
   .route("/")
   .get(packingListItemController.findAll)
-  .post(packingListItemController.create);
+  .post(packingListItemController.create)
 
   // Route for /api/packing-lists/:id
 router.route("/:id")
 .get(packingListItemController.findByTripId)
-.delete(packingListItemController.remove);
+.delete(packingListItemController.remove)
 
-// .put(packingListItemController.update)
+.put(packingListItemController.update)
 
 
 

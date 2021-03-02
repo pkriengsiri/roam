@@ -41,6 +41,7 @@ const PackingList = ({ userId, tripId }) => {
       });
       console.log(listArray);
       setList(listArray);
+      setItem("");
     }).catch((err) => {
       console.log(err);
     });
