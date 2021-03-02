@@ -68,8 +68,12 @@ const API = {
     return axios.get(`/api/packing-list-items/${id}`)
   },
 
-  createItem: function npm(itemData) {
+  createItem: function (itemData) {
     return axios.post(`/api/packing-list-items`, itemData)
+  },
+
+  deleteItem: function (itemid) {
+    return axios.delete(`/api/packing-list-items/${itemid}`)
   }
 };
 

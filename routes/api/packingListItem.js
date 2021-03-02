@@ -22,9 +22,10 @@ router
   // Route for /api/packing-lists/:id
 router.route("/:id")
 .get(packingListItemController.findByTripId)
-
+.delete(packingListItemController.remove);
 
 // .put(packingListItemController.update)
-// .delete(packingListItemController.remove);
+
+
 
 module.exports = router;

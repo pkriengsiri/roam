@@ -48,6 +48,8 @@ const PackingList = ({ userId, tripId }) => {
   }
 
   const deleteItem = (id) => {
+
+    
     const updatedList = [...list].filter((item) => item.id !== id);
     setList(updatedList);
   };
