@@ -234,4 +234,21 @@ const removeTripFromUser = async (tripToDelete, user) => {
     { $set: { trips: filteredTrips } },
     { new: true }
   );
+
+  const parsePlacesName = (placeString) => {
+    // Split the string to an array by commas
+    const destinationArray = placeString.split(",");
+    // create a new array with numbers removed
+    const destinationArrayWithoutNumbers = [];
+    destinationArray.forEach((element) => {
+      if (isNaN()) {
+        destinationArrayWithoutNumbers.push(element);
+      }
+    });
+    if (destinationArrayWithoutNumbers.length === 1) {
+      return destinationArrayWithoutNumber[0];
+    } else {
+      return `${destinationArrayWithoutNumbers[0]}, ${destinationArrayWithoutNumbers[1]}`;
+    }
+  };
 };
