@@ -151,7 +151,7 @@ const SingleTrip = () => {
         </h1>
         {seconds >= 0 && notificationStatus && (
           <>
-            <div className="columns is-centered">
+            <div className="columns is-centered fade-in-div">
               <div className="column is-4">
                 <div class="notification is-primary is-light">
                   <button class="delete" onClick={closeNotification}></button>
