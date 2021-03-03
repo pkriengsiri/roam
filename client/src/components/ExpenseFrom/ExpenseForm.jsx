@@ -264,7 +264,7 @@ const ExpenseForm = (props) => {
 
       {/* drop down form for splitting expense */}
       {shareType !== "Solo" && (
-        <div className="expense-share-mini-form pl-3">
+        <div className="expense-share-mini-form">
           {expenseShare.map((traveler) => (
             <div
               className="field is-horizontal"
@@ -273,7 +273,7 @@ const ExpenseForm = (props) => {
               <div className="field-label is-small ">
                 <label className="label">{traveler.travelerEmail}</label>
               </div>
-              <div className="field-body is-pulled-right">
+              <div className="field-body">
                 <div className="field">
                   <p className="control">
                     <input
@@ -301,9 +301,9 @@ const ExpenseForm = (props) => {
       )}
       {/* conditinally render custom remainder check if on custom split */}
       {shareType === "Custom Split" && (
-        <div className="field is-horizontal mt-2">
+        <div className="field is-horizontal mt-2 ">
           
-          <div className="field-label is-small">
+          <div className="field-label is-small ">
             {expenseBalanced ? (
               <label className="label balanced">Balanced</label>
             ) : (
