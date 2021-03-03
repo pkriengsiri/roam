@@ -5,7 +5,8 @@ import airfare from "../../Assets/Images/airfare.png";
 import lodging from "../../Assets/Images/lodging.png";
 import activities from "../../Assets/Images/activities.png";
 import carAndGas from "../../Assets/Images/car-and-gas.png";
-import entertainment from "../../Assets/Images/entertainment.png"
+import entertainment from "../../Assets/Images/entertainment.png";
+import other from "../../Assets/Images/other.png";
 import "./Dropdown.css";
 import API from "../../utils/API";
 
@@ -52,16 +53,22 @@ const Dropdown = ({ expense }) => {
               <h1 className="subtitle">Activities</h1>
             </span>
           )}
-           {expense.category === "Car & Gas" && (
+          {expense.category === "Car & Gas" && (
             <span>
               <img className="category-icon" src={carAndGas} alt="" />
               <h1 className="subtitle">Car & Gas</h1>
             </span>
           )}
-           {expense.category === "Entertainment" && (
+          {expense.category === "Entertainment" && (
             <span>
               <img className="category-icon" src={entertainment} alt="" />
               <h1 className="subtitle">Entertainment</h1>
+            </span>
+          )}
+          {expense.category === "Other" && (
+            <span>
+              <img className="category-icon" src={other} alt="" />
+              <h1 className="subtitle">Other</h1>
             </span>
           )}
           <Link
