@@ -116,7 +116,7 @@ const SingleTrip = () => {
             {startDate?.toLocaleDateString()} - {endDate?.toLocaleDateString()}
           </span>
         </h1>
-        {seconds >= 0 && notificationStatus && (
+        {seconds >= 0 && minutes >=0 && hours >=0 && days>=0 &&  notificationStatus && (
           <>
             <div className="columns is-centered fade-in-div">
               <div className="column is-4">
