@@ -186,8 +186,8 @@ const PackingList = ({ userId, tripId }) => {
                 </td>
 
                 {/* edit/ delete icons */}
-                <td className=" is-vcentered has-text-right p-2">
-                  <span className="checklist-buttons">
+                <td className=" is-vcentered has-text-right p-2 checklist-buttons">
+                  <span className="">
                     <i
                       className="checklist-icon far fa-trash-alt p-1"
                       data-id={item.id}

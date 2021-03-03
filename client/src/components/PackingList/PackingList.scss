@@ -1,14 +1,10 @@
 @import "../../sass/GlobalVariables.scss";
 
+
+
 .checklist-buttons {
-  min-width: 100px;
+  min-width: 70px !important;
 }
-
-/* .checklist-description {
-    min-width: 400px;
-    max-width: 400px;
-}  */
-
 .checklist-icon {
   cursor: pointer;
 }
@@ -27,13 +23,21 @@
   text-decoration: line-through 2px;
   color:$purple-lighter
 }
+//  .checklist-description {
+  //     min-width: 400px;
+  //     max-width: 400px;
+  //     text-overflow: ellipsis;
+  // }  
 
 /* .list-container {
   background-color: #938db9;
 } */
 
 .checklist-table{
-  width:100%
+  width:100%;
+  // max-width:100%;
+  // table-layout:fixed;
+
 }
 
 .checklist-checkbox {
@@ -48,7 +52,9 @@
   font-weight: bolder;
   font-size: 18px;
   border-bottom: 1px solid #2e3560;
-  width: 100%;
+  // text-overflow: ellipsis;
+  // max-width: 100%;
+  
 
 }
 
