@@ -159,6 +159,7 @@ const EditUser = () => {
                   name="email"
                   className="input"
                   type="email"
+                  disabled
                   placeholder="e.g. alexsmith@gmail.com"
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
