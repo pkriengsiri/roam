@@ -136,31 +136,37 @@ const SingleTrip = () => {
         )}
 
         <div className="columns is-centered">
-          <div className="column is-6 trip-container">
-            <figure>
-              <img className="trip-image" src={imageUrl} alt={destination} />
-            </figure>
-          </div>
-          <div className="column is-4">
-            <div className="card single-trip-card">
+          <div className="column is-6">
+            <div className="card">
+              <div className="card-image">
+                <figure className="image is-4by3">
+                  <img
+                    className="places-iamge"
+                    src={imageUrl}
+                    alt={destination}
+                  />
+                </figure>
+              </div>
               <div className="card-content">
-                <div className="content">
-                  <h2 className="subtitle">Travelers:</h2>
-                  <ul>
-                    {travelers.map((traveler, index) => {
-                      return (
-                        <li key={index}>
-                          {traveler.travelerEmail === userContext.email && (
-                            <span>YOU - </span>
-                          )}
-                          {`${traveler.travelerEmail} - `}
-                          <span>
-                            <em>{traveler.status}</em>
-                          </span>
-                        </li>
-                      );
-                    })}
-                  </ul>
+                <div className="media">
+                  <div className="media-content">
+                    <h2 className="subtitle">Travelers:</h2>
+                    <ul>
+                      {travelers.map((traveler, index) => {
+                        return (
+                          <li key={index}>
+                            {traveler.travelerEmail === userContext.email && (
+                              <span>YOU - </span>
+                            )}
+                            {`${traveler.travelerEmail} - `}
+                            <span>
+                              <em>{traveler.status}</em>
+                            </span>
+                          </li>
+                        );
+                      })}
+                    </ul>
+                  </div>
                 </div>
               </div>
             </div>
@@ -195,14 +201,12 @@ const SingleTrip = () => {
             )}
           </div>
           <div className="column is-4 checklist-container">
+            <h1 className="title has-text-centered checklist-title">
+              Checklist
+            </h1>
 
-                <h1 className="title has-text-centered checklist-title">
-                  Checklist
-                </h1>
-
-                <PackingList userId={userId} tripId={tripId} />
-              </div>
- 
+            <PackingList userId={userId} tripId={tripId} />
+          </div>
         </div>
 
         <div className="columns is-centered mt-6">
