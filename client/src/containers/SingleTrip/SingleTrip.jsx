@@ -32,7 +32,6 @@ const SingleTrip = () => {
     if (tripId) {
       API.getTrip(tripId)
         .then((response) => {
-     
           setDestination(response.data.destination);
           const responseStartDate = new Date(response.data.startDate);
           const responseEndDate = new Date(response.data.endDate);
@@ -97,6 +96,31 @@ const SingleTrip = () => {
 
   return (
     <>
+      <div class="container">
+        <div class="section">
+          <div class="card is-horizontal columns">
+            <div class="card-image column is-three-fifths">
+              <figure class="image is-4by3">
+                <img
+                  src="https://upload.wikimedia.org/wikipedia/commons/0/0d/Great_Wave_off_Kanagawa2.jpg"
+                  alt="this used to be photo"
+                />
+              </figure>
+            </div>
+            <div class="card-content column is-two-fifths">
+              <div class="media-content">
+                <p class="title is-4">Once upon a time there was a sailor</p>
+              </div>
+
+              <div class="content">
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                Phasellus nec iaculis mauris. <a>@bulmaio</a>.
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
       <div className="container mt-6 pl-6 pr-6">
         <h1 className="title has-text-centered">
           Your trip to {destination}!{" "}
