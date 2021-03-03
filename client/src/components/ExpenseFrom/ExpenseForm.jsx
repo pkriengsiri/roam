@@ -169,8 +169,12 @@ const ExpenseForm = (props) => {
   };
 
   return (
+ 
+
+      
     <form
       id="expense-form"
+      className="ml-6 mr-6"
       onSubmit={(e) => {
         e.preventDefault();
         props.handleFormSubmit(e, {
@@ -387,6 +391,7 @@ const ExpenseForm = (props) => {
       </div>
       {display && <Alert color={theme}>Please complete all fields.</Alert>}
     </form>
+   
   );
 };
 

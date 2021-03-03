@@ -14,6 +14,7 @@
   object-fit: cover;
   margin-left: auto;
   margin-right: auto;
+  border: 2px solid rgb(177, 177, 177);
 }
 
 
@@ -24,6 +25,13 @@
 .spinner {
   padding-left: 25px;
   padding-right: 25px;
+}
+
+.file-name {
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
+  width: 150px;
 }
 
 /* .upload-field {
