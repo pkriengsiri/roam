@@ -17,7 +17,7 @@ const Dropdown = ({ expense }) => {
     console.log(expense);
     // getExpenseCreator()
   }, []);
-
+// 
   // const getExpenseCreator = () => {
   //   console.log(expense)
   //   API.getUser(expense.expenseCreator).then(response=>{
@@ -78,6 +78,7 @@ const Dropdown = ({ expense }) => {
             Edit
             <i className="edit-expense-icon far fa-edit pl-2 has-text-dark"></i>
           </Link>
+          <h1>Expense Creator: {expense.expenseCreator.email}</h1>
         </div>
       </div>
       <div className="columns is-centered">

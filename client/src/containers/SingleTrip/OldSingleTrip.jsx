@@ -7,7 +7,6 @@ import DoughnutChart from "../../components/DoughnutChart/DoughnutChart";
 import PackingList from "../../components/PackingList/PackingList";
 import TripContext from "../../contexts/TripContext";
 
-
 const SingleTrip = () => {
   const { userContext } = useContext(UserContext);
   const { setTripContext } = useContext(TripContext);
@@ -57,28 +56,39 @@ const SingleTrip = () => {
   }, []);
 
   useEffect(() => {
-    const countdown = setInterval(function () {
-      let countDownDate = startDate;
-      const now = new Date().getTime();
+    function getTimeRemaining(endtime) {
+      const total = Date.parse(endtime) - Date.parse(new Date());
+      const seconds = Math.floor((total / 1000) % 60);
+      const minutes = Math.floor((total / 1000 / 60) % 60);
+      const hours = Math.floor((total / (1000 * 60 * 60)) % 24);
+      const days = Math.floor(total / (1000 * 60 * 60 * 24));
 
-      const distance = countDownDate - now;
-      const days = Math.floor(distance / (1000 * 60 * 60 * 24));
-      const hours = Math.floor(
-        (distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)
-      );
-      const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-      const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+      return {
+        total,
+        days,
+        hours,
+        minutes,
+        seconds,
+      };
+    }
+    function initializeClock(endtime) {
+      function updateClock() {
+        const t = getTimeRemaining(endtime);
 
-      setDays(days);
-      setMinutes(minutes);
-      setSeconds(seconds);
-      setHours(hours);
+        setDays(t.days);
+        setHours(("0" + t.hours).slice(-2));
+        setMinutes(("0" + t.minutes).slice(-2));
+        setSeconds(("0" + t.seconds).slice(-2));
 
-      if (distance < 0) {
-        clearInterval(countdown);
+        if (t.total <= 0) {
+          clearInterval(timeinterval);
+        }
       }
-    }, 1000);
-  }, [days, hours, minutes, seconds]);
+      const timeinterval = setInterval(updateClock, 1000);
+    }
+
+    initializeClock(startDate);
+  }, [seconds]);
 
   const closeNotification = () => {
     setNotificationStatus(false);
@@ -105,12 +115,15 @@ const SingleTrip = () => {
             {startDate?.toLocaleDateString()} - {endDate?.toLocaleDateString()}
           </span>
         </h1>
-        {seconds > 0 && notificationStatus && (
+        {seconds >= 0 && notificationStatus && (
           <>
-            <div className="columns is-centered">
+            <div className="columns is-centered fade-in-div">
               <div className="column is-4">
-                <div class="notification is-primary is-light">
-                  <button class="delete" onClick={closeNotification}></button>
+                <div className="notification is-primary is-light">
+                  <button
+                    className="delete"
+                    onClick={closeNotification}
+                  ></button>
                   <h1>
                     Hey! You have: {days} days, {hours} hours, {minutes}{" "}
                     minutes, and {seconds} seconds until your trip to{" "}
@@ -158,7 +171,7 @@ const SingleTrip = () => {
 
         <div className="columns is-centered ">
           <div className="column is-6 has-text-centered expenses-div">
-            <h1 className="title has-text-centered" >Expenses</h1>
+            <h1 className="title has-text-centered">Expenses</h1>
             {expenses.length === 0 && <h1>No Expenses Yet</h1>}
             <Link
               to={`/user/${userId}/trips/${tripId}/expenses/new`}
@@ -169,19 +182,22 @@ const SingleTrip = () => {
             </Link>
             {expenses.length !== 0 && (
               <div className="mt-5 ">
-                  <DoughnutChart expenses={expenses} />
+                <DoughnutChart expenses={expenses} />
                 <h2 className="has-text-centered mt-3">
                   Trip Total: $ {tripExpensesTotal}
                 </h2>
                 <Link to={`/user/${userId}/trips/${tripId}/expenses`}>
-                <h2 className="has-text-centered mt-3 all-expenses">View All Expenses</h2>
+                  <h2 className="has-text-centered mt-3 all-expenses">
+                    View All Expenses
+                  </h2>
                 </Link>
-
               </div>
             )}
           </div>
-          <div className="column is-6">
-            <h1 className="title has-text-centered">Checklist</h1>
+          <div className="column is-4 checklist-container">
+            <h1 className="title has-text-centered checklist-title">
+              Checklist
+            </h1>
 
             <PackingList userId={userId} tripId={tripId} />
           </div>
