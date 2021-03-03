@@ -16,45 +16,74 @@
 .checklist-icon:hover {
   color: $orange;
 }
-.fa-check-square{
-  color:$purple
+.fa-check-square {
+  color: $purple-lighter;
 }
-.fa-square{
-  color:$purple
+.fa-square {
+  color: $purple;
 }
 
 .packed-item {
-  text-decoration: line-through;
+  text-decoration: line-through 2px;
+  color:$purple-lighter
 }
 
 /* .list-container {
   background-color: #938db9;
 } */
 
+.checklist-table{
+  width:100%
+}
+
 .checklist-checkbox {
-  align-self: auto;
+ text-align: center;
+  width: 20px;
+  // margin-left: 100px;
+  
 }
 
 .checklist-line {
   font-family: "Indie Flower", cursive;
-  font-weight:bolder;
+  font-weight: bolder;
   font-size: 18px;
-
-  /* padding: 0 !important; */
-  /* width: 500px; */
-
   border-bottom: 1px solid #2e3560;
+  width: 100%;
 
 }
 
-.checklist-input{
-background-color: whitesmoke;
-font-family: "Indie Flower", cursive;
-font-weight:bolder;
-font-size: 18px;
-border-bottom: 1px solid #2e3560 !important;
-border-radius: 0  !important ;
-border-top: 0 !important;
-border-left: 0 !important;
-border-right: 0 !important;
+.checklist-input {
+  background-color: whitesmoke;
+  font-family: "Indie Flower", cursive;
+  font-weight: bolder;
+  font-size: 18px;
+  border: 0 !important;
+  border-radius: 0 !important ;
+  // width: 10px;
+}
+
+.checklist-input:focus {
+  // background-color: yellow;
+  font-family: "Indie Flower", cursive;
+  font-weight: bolder;
+  font-size: 18px;
+  border-bottom: 1px solid #2e3560 !important;
+  border-radius: 3px !important ;
+  border-top: 0 !important;
+  border-left: 0 !important;
+  border-right: 0 !important;
+  // width: 10px;
+}
+
+.checklist-input::after {
+  // background-color: yellow;
+  font-family: "Indie Flower", cursive;
+  font-weight: bolder;
+  font-size: 18px;
+  border-bottom: 1px solid #2e3560 !important;
+  border-radius: 3px !important ;
+  border-top: 0 !important;
+  border-left: 0 !important;
+  border-right: 0 !important;
+  // width: 10px;
 }

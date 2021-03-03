@@ -113,7 +113,7 @@ const PackingList = ({ userId, tripId }) => {
 
     <div className="">
       <div className="">
-        <form onSubmit={handleSubmit}>
+        <form onSubmit={handleSubmit} className="checklist-line">
           <div className="field has-addons ">
             <input
               className="input checklist-input"
@@ -133,14 +133,14 @@ const PackingList = ({ userId, tripId }) => {
           </div>
         </form>
 
-        <table className=" is-fullwidth mb-4">
+        <table className=" is-fullwidth mb-4 checklist-table">
           <tbody>
             {list.map((item) => (
               // <div key={item.id}>
               <tr key={item.id} className="checklist-line">
                 {/* radio button  */}
-                <td className="checklist-checkbox is-vcentered has-text-center pl-3">
-                  <span className="pr-2">
+                <td className="checklist-checkbox is-vcentered has-text-center p-2">
+                  <span className="pr-2 pl-2">
                     {/* <input
                       type="checkbox"
                       data-checked={item.id}
@@ -160,10 +160,10 @@ const PackingList = ({ userId, tripId }) => {
                   </span>
                 </td>
                 {/* text field */}
-                <td className="checklist-description is-vcentered has-text-left pl-3">
+                <td className="checklist-description is-vcentered has-text-left p-2">
                   {itemEditing === item.id ? (
                     <input
-                      className="input"
+                      className="input checklist-input"
                       type="text"
                       onChange={(e) => setEditingText(e.target.value)}
                       value={editingText}
@@ -186,8 +186,8 @@ const PackingList = ({ userId, tripId }) => {
                 </td>
 
                 {/* edit/ delete icons */}
-                <td className="checklist-buttons is-vcentered has-text-right ">
-                  <span>
+                <td className=" is-vcentered has-text-right p-2">
+                  <span className="checklist-buttons">
                     <i
                       className="checklist-icon far fa-trash-alt p-1"
                       data-id={item.id}
