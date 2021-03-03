@@ -21,20 +21,21 @@ option {
   color: red;
 }
 
-.numeric-input{
+/* .numeric-input{
   text-align: right;
-
-}
-
+} */
 
 /* Firefox */
-.numeric-input[type=number] {
+.numeric-input[type="number"] {
   -moz-appearance: textfield;
   max-width: 150px;
 }
 
+.balance {
+  max-width: 75px !important;
+}
+
 .amount-input {
-  max-width: 150px;
   text-align: left;
 }
 
@@ -46,5 +47,13 @@ option {
 }
 
 /* spacing for user add extensions like last pass, etc */
-.numeric-input::-webkit-outer-spin-button, 
-.numeric-input::-webkit-inner-spin-button { margin-left: 20px; } 
+.numeric-input::-webkit-outer-spin-button,
+.numeric-input::-webkit-inner-spin-button {
+  margin-left: 20px;
+}
+
+@media screen and (min-width: 769px), print {
+  .field-label {
+    text-align: left;
+  }
+}
