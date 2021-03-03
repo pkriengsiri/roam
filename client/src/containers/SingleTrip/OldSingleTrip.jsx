@@ -7,6 +7,7 @@ import DoughnutChart from "../../components/DoughnutChart/DoughnutChart";
 import PackingList from "../../components/PackingList/PackingList";
 import TripContext from "../../contexts/TripContext";
 
+
 const SingleTrip = () => {
   const { userContext } = useContext(UserContext);
   const { setTripContext } = useContext(TripContext);
@@ -157,7 +158,7 @@ const SingleTrip = () => {
 
         <div className="columns is-centered ">
           <div className="column is-6 has-text-centered expenses-div">
-            <h1 className="title has-text-centered">Expenses</h1>
+            <h1 className="title has-text-centered" >Expenses</h1>
             {expenses.length === 0 && <h1>No Expenses Yet</h1>}
             <Link
               to={`/user/${userId}/trips/${tripId}/expenses/new`}
@@ -168,15 +169,14 @@ const SingleTrip = () => {
             </Link>
             {expenses.length !== 0 && (
               <div className="mt-5 ">
-                <DoughnutChart expenses={expenses} />
+                  <DoughnutChart expenses={expenses} />
                 <h2 className="has-text-centered mt-3">
                   Trip Total: $ {tripExpensesTotal}
                 </h2>
                 <Link to={`/user/${userId}/trips/${tripId}/expenses`}>
-                  <h2 className="has-text-centered mt-3 all-expenses">
-                    View All Expenses
-                  </h2>
+                <h2 className="has-text-centered mt-3 all-expenses">View All Expenses</h2>
                 </Link>
+
               </div>
             )}
           </div>

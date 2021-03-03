@@ -188,7 +188,7 @@ const ExpenseForm = (props) => {
       <div className="field">
         <label className="label">Expense Date</label>
         <SingleDatePicker
-             date={date}
+          date={date}
           onDateChange={(date) => setDate(date)}
           focused={focused}
           onFocusChange={({ focused }) => setFocused(focused)}
@@ -200,7 +200,7 @@ const ExpenseForm = (props) => {
           numberOfMonths={1}
         />
         <label className="label">Amount</label>
-        <div className={focused ? "is-hidden":"control has-icons-left"}>
+        <div className={focused ? "is-hidden" : "control has-icons-left"}>
           <input
             // autoFocus
             className="input numeric-input"
@@ -220,7 +220,9 @@ const ExpenseForm = (props) => {
       </div>
 
       {/* select how to split expense */}
-      <div className={focused ? "is-hidden" : "buttons is-centered has-addons "}>
+      <div
+        className={focused ? "is-hidden" : "buttons is-centered has-addons "}
+      >
         <button
           type="button"
           className={
@@ -302,7 +304,6 @@ const ExpenseForm = (props) => {
             ) : (
               <label className="label unbalanced">Unbalanced</label>
             )}
- 
           </div>
           <div className="field-body">
             <div className="field">
@@ -326,7 +327,7 @@ const ExpenseForm = (props) => {
 
       <div className="field">
         <label className="label">Category</label>
-        <div className={focused ? "is-hidden":"control"}>
+        <div className={focused ? "is-hidden" : "control"}>
           <div className="select">
             <select
               name="category"
