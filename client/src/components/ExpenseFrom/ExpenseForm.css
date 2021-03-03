@@ -30,6 +30,12 @@ option {
 /* Firefox */
 .numeric-input[type=number] {
   -moz-appearance: textfield;
+  max-width: 150px;
+}
+
+.amount-input {
+  max-width: 150px;
+  text-align: left;
 }
 
 /* Chrome, Safari, Edge, Opera */

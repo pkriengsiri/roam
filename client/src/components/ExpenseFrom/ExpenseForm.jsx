@@ -203,11 +203,11 @@ const ExpenseForm = (props) => {
         <div className={focused ? "is-hidden" : "control has-icons-left"}>
           <input
             // autoFocus
-            className="input numeric-input"
+            className="input numeric-input amount-input"
             type="number"
             min="0"
             step=".01"
-            placeholder="Enter an amount"
+            placeholder="100"
             value={totalExpenseAmount === 0 ? "" : totalExpenseAmount}
             name="totalExpenseAmount"
             id="totalExpenseAmount"
@@ -221,7 +221,7 @@ const ExpenseForm = (props) => {
 
       {/* select how to split expense */}
       <div
-        className={focused ? "is-hidden" : "buttons is-centered has-addons "}
+        className={focused ? "is-hidden" : "buttons has-addons"}
       >
         <button
           type="button"
