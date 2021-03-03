@@ -1,11 +1,7 @@
 @import "../../sass/GlobalVariables.scss";
 
 .trip-image {
- border-radius: 10px;
-
-
-
-
+  border-radius: 10px;
 }
 /* 
 .single-trip-card {
@@ -26,8 +22,7 @@
 }
 
 .edit-trip-icon:hover {
-  color: #F48E3F;
-
+  color: #f48e3f;
 }
 
 .edit-trip {
@@ -35,8 +30,8 @@
 }
 
 .expense-button {
-  background-color: #F48E3F;
-  color: white
+  background-color: #f48e3f;
+  color: white;
 }
 
 /* .expense-button:hover {
@@ -44,33 +39,52 @@
   color: white
 } */
 
-.all-expenses{
+.all-expenses {
   color: $purple;
   text-decoration: underline;
 }
 
-.all-expenses:hover{
-  color:$orange;
+.all-expenses:hover {
+  color: $orange;
   text-decoration: underline;
 }
 
+.checklist-title {
+  font-family: "Indie Flower", cursive;
+  font-weight: bolder;
+  font-size: 2.25rem;
+  text-decoration: underline;
+}
 
+.checklist-container {
+
+    font-family: "Indie Flower", cursive;
+    font-weight: bolder;
+    border: $purple solid 1px;
+    border-radius: 10%;
+    background-color: whitesmoke;
+    box-shadow: 0 0.5rem 1rem -0.125rem #0a0a0a49
+
+}
 
 element.style {
 }
-.card-header:last-child, .card-content:last-child, .card-footer:last-child {
-    border-bottom-left-radius: 0.25rem;
-    border-bottom-right-radius: 0.25rem;
+.card-header:last-child,
+.card-content:last-child,
+.card-footer:last-child {
+  border-bottom-left-radius: 0.25rem;
+  border-bottom-right-radius: 0.25rem;
 }
-.card-header:first-child, .card-content:first-child, .card-footer:first-child {
-    border-top-left-radius: 0.25rem;
-    border-top-right-radius: 0.25rem;
+.card-header:first-child,
+.card-content:first-child,
+.card-footer:first-child {
+  border-top-left-radius: 0.25rem;
+  border-top-right-radius: 0.25rem;
 }
 .card-content {
-    background-color: transparent;
-    padding: 1.5rem;
+  background-color: transparent;
+  padding: 1.5rem;
 }
-
 
 // .expenses-div {
 //     background-color: whitesmoke;
