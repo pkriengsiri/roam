@@ -109,10 +109,10 @@ const EditUser = () => {
             <h1 className="title has-text-centered">Edit Account</h1>
 
             {/* Profile picture */}
-            <figure className="image">
+            <figure className="image profile-image-div">
               {changedProfileImageUrl ? (
                 <img
-                  className="is-rounded profile-picture"
+                  className=" is-rounded profile-picture"
                   src={changedProfileImageUrl}
                 />
               ) : (

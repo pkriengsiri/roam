@@ -1,11 +1,12 @@
 import React, { useState, useEffect, useContext } from "react";
 import { useParams, Link } from "react-router-dom";
 import API from "../../utils/API";
-import "./SingleTrip.css";
+import "./SingleTrip.scss";
 import UserContext from "../../contexts/UserContext";
 import DoughnutChart from "../../components/DoughnutChart/DoughnutChart";
 import PackingList from "../../components/PackingList/PackingList";
 import TripContext from "../../contexts/TripContext";
+
 
 const SingleTrip = () => {
   const { userContext } = useContext(UserContext);
@@ -21,6 +22,8 @@ const SingleTrip = () => {
   const [minutes, setMinutes] = useState();
   const [hours, setHours] = useState();
   const [seconds, setSeconds] = useState();
+  const [notificationStatus, setNotificationStatus] = useState(true);
+  const [tripExpensesTotal, setTripExpensesTotal] = useState();
 
   // browser params
   const { tripId } = useParams();
@@ -40,6 +43,12 @@ const SingleTrip = () => {
           setImageUrl(response.data.imageUrl);
           setExpenses(response.data.expenses);
           setTripContext({ trip: response.data });
+          setTripExpensesTotal(
+            response.data.expenses.reduce(
+              (sum, expense) => sum + expense.totalExpenseAmount,
+              0
+            )
+          );
         })
         .catch((err) => {
           console.log(err);
@@ -71,6 +80,10 @@ const SingleTrip = () => {
     }, 1000);
   }, [days, hours, minutes, seconds]);
 
+  const closeNotification = () => {
+    setNotificationStatus(false);
+  };
+
   return (
     <>
       <div className="container mt-6 pl-6 pr-6">
@@ -92,11 +105,23 @@ const SingleTrip = () => {
             {startDate?.toLocaleDateString()} - {endDate?.toLocaleDateString()}
           </span>
         </h1>
-        {seconds > 0 && (
-          <h1 className="subtitle has-text-centered">
-            {days} days, {hours} hours, {minutes} minutes, {seconds} seconds
-          </h1>
+        {seconds > 0 && notificationStatus && (
+          <>
+            <div className="columns is-centered">
+              <div className="column is-4">
+                <div class="notification is-primary is-light">
+                  <button class="delete" onClick={closeNotification}></button>
+                  <h1>
+                    Hey! You have: {days} days, {hours} hours, {minutes}{" "}
+                    minutes, and {seconds} seconds until your trip to{" "}
+                    {destination}!
+                  </h1>
+                </div>
+              </div>
+            </div>
+          </>
         )}
+
         <div className="columns is-centered">
           <div className="column is-6 trip-container">
             <figure>
@@ -131,52 +156,42 @@ const SingleTrip = () => {
 
         {/* EXPENSES  */}
 
-        <div className="columns is-centered">
-          <div className="column is-6 has-text-centered">
-            <h1 className="title has-text-centered">Expenses</h1>
-            {expenses.length === 0 && (
-              <>
-                <h1>No Expenses Yet</h1>
-                <Link
-                  to={`/user/${userId}/trips/${tripId}/expenses/new`}
-                  className="button is-primary is-size-6"
-                  type="submit"
-                >
-                  Create Expense
-                </Link>
-              </>
-            )}
+        <div className="columns is-centered ">
+          <div className="column is-6 has-text-centered expenses-div">
+            <h1 className="title has-text-centered" >Expenses</h1>
+            {expenses.length === 0 && <h1>No Expenses Yet</h1>}
+            <Link
+              to={`/user/${userId}/trips/${tripId}/expenses/new`}
+              className="button is-light is-size-6"
+              type="submit"
+            >
+              Create Expense
+            </Link>
             {expenses.length !== 0 && (
-              <>
-                <h2 className="has-text-centered">Total Expenses</h2>
-                <Link to={`/user/${userId}/trips/${tripId}/expenses`}>
+              <div className="mt-5 ">
                   <DoughnutChart expenses={expenses} />
+                <h2 className="has-text-centered mt-3">
+                  Trip Total: $ {tripExpensesTotal}
+                </h2>
+                <Link to={`/user/${userId}/trips/${tripId}/expenses`}>
+                <h2 className="has-text-centered mt-3 all-expenses">View All Expenses</h2>
                 </Link>
-              </>
+
+              </div>
             )}
           </div>
           <div className="column is-6">
-            <h1 className="title has-text-centered">Packing List</h1>
+            <h1 className="title has-text-centered">Checklist</h1>
+
             <PackingList userId={userId} tripId={tripId} />
           </div>
         </div>
 
         <div className="columns is-centered mt-6">
           <div className="column is-3">
-          <Link
-              to={`/user/${userId}/trips/${tripId}/expenses/new`}
-              className="button mr-4 is-size-4 is-primary"
-            >
-              Create Expense
-            </Link>
-          </div>
-
-          <div className="column is-3">
-   
-
             <Link
               to={`/user/${userId}/trips`}
-              className="button is-light is-size-4"
+              className="button is-primary is-size-4"
             >
               Dashboard
             </Link>

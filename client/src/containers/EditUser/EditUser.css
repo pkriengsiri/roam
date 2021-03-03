@@ -7,13 +7,15 @@
 }
 
 .profile-picture {
-  border-radius: 50;
-  max-height: 175px !important;
-  max-width: 175px !important;
+  border-radius: 50%;
+  height: 175px !important;
+  width: 175px !important;
+  display:flex;
   object-fit: cover;
   margin-left: auto;
   margin-right: auto;
 }
+
 
 .hide-icon {
   display: none;
