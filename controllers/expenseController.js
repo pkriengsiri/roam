@@ -9,6 +9,7 @@ module.exports = {
   },
   findById: function (req, res) {
     db.Expense.findById(req.params.id)
+    // .populate({path: "users"})
       .then((dbExpense) => res.json(dbExpense))
       .catch((err) => res.status(422).json(err));
   },

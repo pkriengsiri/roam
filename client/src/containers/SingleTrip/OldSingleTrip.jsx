@@ -32,7 +32,6 @@ const SingleTrip = () => {
     if (tripId) {
       API.getTrip(tripId)
         .then((response) => {
-     
           setDestination(response.data.destination);
           const responseStartDate = new Date(response.data.startDate);
           const responseEndDate = new Date(response.data.endDate);
@@ -137,37 +136,31 @@ const SingleTrip = () => {
         )}
 
         <div className="columns is-centered">
-          <div className="column is-6">
-            <div className="card">
-              <div className="card-image">
-                <figure className="image is-4by3">
-                  <img
-                    className="places-iamge"
-                    src={imageUrl}
-                    alt={destination}
-                  />
-                </figure>
-              </div>
+          <div className="column is-6 trip-container">
+            <figure>
+              <img className="trip-image" src={imageUrl} alt={destination} />
+            </figure>
+          </div>
+          <div className="column is-4">
+            <div className="card single-trip-card">
               <div className="card-content">
-                <div className="media">
-                  <div className="media-content">
-                    <h2 className="subtitle">Travelers:</h2>
-                    <ul>
-                      {travelers.map((traveler, index) => {
-                        return (
-                          <li key={index}>
-                            {traveler.travelerEmail === userContext.email && (
-                              <span>YOU - </span>
-                            )}
-                            {`${traveler.travelerEmail} - `}
-                            <span>
-                              <em>{traveler.status}</em>
-                            </span>
-                          </li>
-                        );
-                      })}
-                    </ul>
-                  </div>
+                <div className="content">
+                  <h2 className="subtitle">Travelers:</h2>
+                  <ul>
+                    {travelers.map((traveler, index) => {
+                      return (
+                        <li key={index}>
+                          {traveler.travelerEmail === userContext.email && (
+                            <span>YOU - </span>
+                          )}
+                          {`${traveler.travelerEmail} - `}
+                          <span>
+                            <em>{traveler.status}</em>
+                          </span>
+                        </li>
+                      );
+                    })}
+                  </ul>
                 </div>
               </div>
             </div>
@@ -176,39 +169,27 @@ const SingleTrip = () => {
 
         {/* EXPENSES  */}
 
-        <div className="columns is-centered mt-6 ">
+        <div className="columns is-centered ">
           <div className="column is-6 has-text-centered expenses-div">
             <h1 className="title has-text-centered">Expenses</h1>
-            {expenses.length === 0 && (
-              <>
-                <h1>No Expenses Yet</h1>
-                <Link
-                  to={`/user/${userId}/trips/${tripId}/expenses/new`}
-                  className="button is-light is-size-6"
-                  type="submit"
-                >
-                  Create Expense
-                </Link>{" "}
-              </>
-            )}
+            {expenses.length === 0 && <h1>No Expenses Yet</h1>}
+            <Link
+              to={`/user/${userId}/trips/${tripId}/expenses/new`}
+              className="button is-light is-size-6"
+              type="submit"
+            >
+              Create Expense
+            </Link>
             {expenses.length !== 0 && (
               <div className="mt-5 ">
-                <Link to={`/user/${userId}/trips/${tripId}/expenses`}>
-                  <h2 className="has-text-centered mt-3 all-expenses">
-                    View All Expenses
-                  </h2>
-                </Link>
-
                 <DoughnutChart expenses={expenses} />
                 <h2 className="has-text-centered mt-3">
                   Trip Total: $ {tripExpensesTotal}
                 </h2>
-                <Link
-                  to={`/user/${userId}/trips/${tripId}/expenses/new`}
-                  className="button is-light is-size-6"
-                  type="submit"
-                >
-                  Create Expense
+                <Link to={`/user/${userId}/trips/${tripId}/expenses`}>
+                  <h2 className="has-text-centered mt-3 all-expenses">
+                    View All Expenses
+                  </h2>
                 </Link>
               </div>
             )}

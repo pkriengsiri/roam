@@ -66,6 +66,7 @@ const Dropdown = ({ expense }) => {
             Edit
             <i className="edit-expense-icon far fa-edit pl-2 has-text-dark"></i>
           </Link>
+          <h1>Expense Creator: {expense.expenseCreator.email}</h1>
         </div>
       </div>
       <h1 className="pb-5">Expense Creator: {expense.expenseCreator.email}</h1>

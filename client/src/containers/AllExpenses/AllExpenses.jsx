@@ -120,12 +120,23 @@ const AllExpenses = (props) => {
               ))}
             </tbody>
           </table>
-          <Link
-            to={`/user/${userId}/trips/${tripId}`}
-            className="button is-primary is-size-5"
-          >
-            Back
-          </Link>
+          <div className="columns is-centered">
+            <div className="column is-12 has-text-centered">
+              <Link
+                to={`/user/${userId}/trips/${tripId}/expenses/new`}
+                className="button is-light is-size-5 mr-2"
+                type="submit"
+              >
+                Create Expense
+              </Link>
+              <Link
+                to={`/user/${userId}/trips/${tripId}`}
+                className="button is-primary is-size-5 ml-2"
+              >
+                Back
+              </Link>
+            </div>
+          </div>
         </div>
       </div>
     </div>
