@@ -119,8 +119,11 @@ const SingleTrip = () => {
           <>
             <div className="columns is-centered fade-in-div">
               <div className="column is-4">
-                <div class="notification is-primary is-light">
-                  <button class="delete" onClick={closeNotification}></button>
+                <div className="notification is-primary is-light">
+                  <button
+                    className="delete"
+                    onClick={closeNotification}
+                  ></button>
                   <h1>
                     Hey! You have: {days} days, {hours} hours, {minutes}{" "}
                     minutes, and {seconds} seconds until your trip to{" "}
@@ -191,11 +194,15 @@ const SingleTrip = () => {
               </div>
             )}
           </div>
-          <div className="column is-6">
-            <h1 className="title has-text-centered">Checklist</h1>
+          <div className="column is-4 checklist-container">
 
-            <PackingList userId={userId} tripId={tripId} />
-          </div>
+                <h1 className="title has-text-centered checklist-title">
+                  Checklist
+                </h1>
+
+                <PackingList userId={userId} tripId={tripId} />
+              </div>
+ 
         </div>
 
         <div className="columns is-centered mt-6">

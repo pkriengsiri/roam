@@ -1,0 +1,95 @@
+@import "../../sass/GlobalVariables.scss";
+
+
+
+.checklist-buttons {
+  min-width: 70px !important;
+}
+.checklist-icon {
+  cursor: pointer;
+}
+
+.checklist-icon:hover {
+  color: $orange;
+}
+.fa-check-square {
+  color: $purple-lighter;
+}
+.fa-square {
+  color: $purple;
+}
+
+.packed-item {
+  text-decoration: line-through 2px;
+  color:$purple-lighter
+}
+//  .checklist-description {
+  //     min-width: 400px;
+  //     max-width: 400px;
+  //     text-overflow: ellipsis;
+  // }  
+
+/* .list-container {
+  background-color: #938db9;
+} */
+
+.checklist-table{
+  width:100%;
+  // max-width:100%;
+  // table-layout:fixed;
+
+}
+
+.checklist-checkbox {
+ text-align: center;
+  width: 20px;
+  // margin-left: 100px;
+  
+}
+
+.checklist-line {
+  font-family: "Indie Flower", cursive;
+  font-weight: bolder;
+  font-size: 18px;
+  border-bottom: 1px solid #2e3560;
+  // text-overflow: ellipsis;
+  // max-width: 100%;
+  
+
+}
+
+.checklist-input {
+  background-color: whitesmoke;
+  font-family: "Indie Flower", cursive;
+  font-weight: bolder;
+  font-size: 18px;
+  border: 0 !important;
+  border-radius: 0 !important ;
+  // width: 10px;
+}
+
+.checklist-input:focus {
+  // background-color: yellow;
+  font-family: "Indie Flower", cursive;
+  font-weight: bolder;
+  font-size: 18px;
+  border-bottom: 1px solid #2e3560 !important;
+  border-radius: 3px !important ;
+  border-top: 0 !important;
+  border-left: 0 !important;
+  border-right: 0 !important;
+  // width: 10px;
+}
+
+.checklist-input::after {
+  // background-color: yellow;
+  font-family: "Indie Flower", cursive;
+  font-weight: bolder;
+  font-size: 18px;
+  border-bottom: 1px solid #2e3560 !important;
+  border-radius: 3px !important ;
+  border-top: 0 !important;
+  border-left: 0 !important;
+  border-right: 0 !important;
+  // width: 10px;
+}
