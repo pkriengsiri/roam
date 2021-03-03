@@ -99,13 +99,13 @@ const Home = ({ setUserContext }) => {
               className="button home-signup-button is-primary mr-4 is-size-4"
               onClick={toggleSignUpModal}
             >
-              Sign Up
+              Sign up
             </button>
             <button
               className="button home-login-button is-light ml-4 is-size-4"
               onClick={toggleLoginModal}
             >
-              Login
+              Log in
             </button>
           </>
         )}

@@ -27,6 +27,13 @@
   padding-right: 25px;
 }
 
+.file-name {
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
+  width: 150px;
+}
+
 /* .upload-field {
   margin-left: 110px !important;
 } */
