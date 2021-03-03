@@ -11,6 +11,7 @@ const AllExpenses = (props) => {
   const [displayContributors, setDisplayContributors] = useState([]);
 
   useEffect(() => {
+    console.log(expenseArray)
     if (tripId) {
       API.getTrip(tripId)
         .then((response) => {
@@ -55,11 +56,14 @@ const AllExpenses = (props) => {
 
   return (
     <div className="container mt-6 pl-6 pr-6">
-      <h1 className="title has-text-centered">
-        Expenses for {destination} Trip
-      </h1>
+    
       <div className="columns ">
         <div className="column is-full ">
+          {expenseArray.length === 0 ? (<h1 className="title has-text-centered">There are no expenses for your trip to {destination}.</h1>) : (
+            <>
+              <h1 className="title has-text-centered">
+              Expenses for {destination} Trip
+            </h1>
           <table className="table  is-fullwidth expenses-table is-striped">
             <thead className="expense-table-head ">
               <tr>
@@ -120,6 +124,8 @@ const AllExpenses = (props) => {
               ))}
             </tbody>
           </table>
+          </>
+  )}
           <div className="columns is-centered">
             <div className="column is-12 has-text-centered">
               <Link
