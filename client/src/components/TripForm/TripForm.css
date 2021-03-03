@@ -32,6 +32,10 @@
 cursor: pointer;
 }
 
+.fa-user-minus{
+  color: white;
+}
+
 @media screen and (max-width: 375px) {
   .travelers-tag {
     line-height: 25px;

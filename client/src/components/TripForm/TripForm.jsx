@@ -144,7 +144,7 @@ const TripForm = (props) => {
           const newInvite = {
             travelerEmail: traveler?.toLowerCase(),
             travelerId: "",
-            status: "pending",
+            status: "Pending",
           };
           setTravelers([...travelers, newInvite]);
           setTraveler("");
@@ -214,7 +214,6 @@ const TripForm = (props) => {
               });
             }}
           >
-            
             {/* old destination section (not using places api)  */}
             {/* <div className="field mb-2"> */}
             {/* <label className="label">Destination</label> */}
@@ -315,6 +314,16 @@ const TripForm = (props) => {
               {travelers.map((traveler, index) => (
                 <p className="travelers" key={index}>
                   <span className="travelers-tag p-2 mr-2">
+                    {traveler.status !== "Trip Creator" && (
+                      <span
+                        className="remove-travler-x"
+                        // data-email={traveler.email}
+                        onClick={() => removeTraveler(traveler.travelerEmail)}
+                        // onClick={(e) => removeTraveler(e)}
+                      >
+                        <i class="fas fa-user-minus pr-2 pl-1"></i>
+                      </span>
+                    )}
                     {traveler.travelerEmail === userContext.email && (
                       <span>YOU - </span>
                     )}
@@ -326,7 +335,7 @@ const TripForm = (props) => {
                       <em>{traveler.status}</em>
                     </span>
 
-                    {traveler.status !== "Trip Creator" && (
+                    {/* {traveler.status !== "Trip Creator" && (
                       <span
                         className="remove-travler-x"
                         // data-email={traveler.email}
@@ -336,7 +345,7 @@ const TripForm = (props) => {
                         {" "}
                         x{" "}
                       </span>
-                    )}
+                    )} */}
                   </span>
                 </p>
               ))}
