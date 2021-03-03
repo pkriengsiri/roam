@@ -264,7 +264,7 @@ const ExpenseForm = (props) => {
 
       {/* drop down form for splitting expense */}
       {shareType !== "Solo" && (
-        <div className="expense-share-mini-form">
+        <div className="expense-share-mini-form pl-3">
           {expenseShare.map((traveler) => (
             <div
               className="field is-horizontal"
@@ -273,7 +273,7 @@ const ExpenseForm = (props) => {
               <div className="field-label is-small ">
                 <label className="label">{traveler.travelerEmail}</label>
               </div>
-              <div className="field-body">
+              <div className="field-body is-pulled-right">
                 <div className="field">
                   <p className="control">
                     <input

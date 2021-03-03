@@ -209,7 +209,7 @@ const addTravelerIdByEmail = async (requestObject) => {
           updatedArray.push({
             travelerEmail: dbTraveler.email.toLowerCase(),
             travelerId: dbTraveler._id,
-            status: "Going",
+            status: (i===0?"Trip Creator":"Going"),
           });
         } else {
           updatedArray.push(requestObject.travelers[i]);
