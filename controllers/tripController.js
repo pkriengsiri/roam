@@ -18,7 +18,7 @@ module.exports = {
 
   findByIdWithExpenses: function (req, res) {
     db.Trip.findById(req.params.id)
-      .populate("expenses")
+      .populate({ path: "expenses", populate: { path: "expenseCreator" } })
       .then((dbTrip) => res.json(dbTrip))
       .catch((err) => res.status(422).json(err));
   },
@@ -119,7 +119,8 @@ module.exports = {
             }
           });
         } else {
-          const defaultUrl = "https://res.cloudinary.com/djou7v3ho/image/upload/v1614465147/default-trip-image_mldlfd.jpg";
+          const defaultUrl =
+            "https://res.cloudinary.com/djou7v3ho/image/upload/v1614465147/default-trip-image_mldlfd.jpg";
           dbObject = { imageUrl: defaultUrl };
           // Query the database
           db.Trip.findOneAndUpdate({ _id: req.params.id }, dbObject, {

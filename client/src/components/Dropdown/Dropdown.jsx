@@ -13,18 +13,6 @@ import API from "../../utils/API";
 const Dropdown = ({ expense }) => {
   const { userId, tripId } = useParams();
 
-  useEffect(() => {
-    console.log(expense);
-    // getExpenseCreator()
-  }, []);
-
-  // const getExpenseCreator = () => {
-  //   console.log(expense)
-  //   API.getUser(expense.expenseCreator).then(response=>{
-  //     console.log(response.data.email)
-  //   })
-  // }
-
   return (
     <div className="has-text-centered mb-3 mt-3">
       <div className="columns is-centered">
@@ -80,27 +68,29 @@ const Dropdown = ({ expense }) => {
           </Link>
         </div>
       </div>
+      <h1 className="pb-5">Expense Creator: {expense.expenseCreator.email}</h1>
       <div className="columns is-centered">
-        <div className="column is-2">
-          <h1>
-            <strong>Expense Share</strong>
-          </h1>
-          {expense.expenseShare.map((traveler) => (
-            <ul>
-              <li>${traveler.shareOfTotalExpense}</li>
-            </ul>
-          ))}
-        </div>
-        <div className="column is-2">
-          <h1>
-            <strong>Person</strong>
-          </h1>
-          {expense.expenseShare.map((traveler) => (
-            <ul>
-              <li>{traveler.travelerEmail}</li>
-            </ul>
-          ))}
-        </div>
+        <table>
+          <thead>
+            <tr>
+              <th>Expense Share</th>
+              <th>Person</th>
+            </tr>
+          </thead>
+          <tbody>
+            {expense.expenseShare.map((traveler, index) => (
+              <tr key={traveler.travelerEmail}>
+                {/* <td>$</td> */}
+                <td>
+                  {"$"}
+                  {traveler.shareOfTotalExpense}
+                </td>
+                {/* <td className="has-text-right">{traveler.shareOfTotalExpense}</td> */}
+                <td>{traveler.travelerEmail}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
       </div>
     </div>
   );
