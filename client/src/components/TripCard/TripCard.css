@@ -20,17 +20,23 @@
   }
   
   .trip-card {
-    min-height: 450px;
+    min-height: 500px;
   }
   
-  @media screen and (max-width: 1407px) {
+  /* @media screen and (max-width: 1407px) {
     .trip-card {
-      min-height: 600px;
+      min-height: 650px;
     }
   }
 
   @media screen and (max-width: 1215px) {
     .trip-card {
-      min-height: 450px;
+      min-height: 510px;
     }
   }
+
+  @media screen and (max-width: 1023px) {
+    .trip-card {
+      min-height: 410px;
+    }
+  } */
