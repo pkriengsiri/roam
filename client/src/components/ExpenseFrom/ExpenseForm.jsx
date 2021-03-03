@@ -301,9 +301,9 @@ const ExpenseForm = (props) => {
       )}
       {/* conditinally render custom remainder check if on custom split */}
       {shareType === "Custom Split" && (
-        <div className="field is-horizontal mt-2">
+        <div className="field is-horizontal mt-2 ">
           
-          <div className="field-label is-small">
+          <div className="field-label is-small ">
             {expenseBalanced ? (
               <label className="label balanced">Balanced</label>
             ) : (

@@ -79,13 +79,7 @@ const AllExpenses = (props) => {
               {expenseArray.map((expense, index) => (
                 <>
                   <tr key={expense.id} className="is-hoverable expense-row">
-                    {/* <td>
-                      <Link
-                        to={`/user/${userId}/trips/${tripId}/expenses/${expense._id}/edit`}
-                      >
-                        <i className="edit-expense-icon far fa-edit m-1 "></i>
-                      </Link>
-                    </td> */}
+                  
                     <td className="is-vcentered">
                       {convertDate(expense.date)}
                     </td>

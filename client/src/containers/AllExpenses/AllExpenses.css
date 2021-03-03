@@ -16,11 +16,7 @@
   .expense-row:not(.is-selected):nth-child(even) {
   background-color: #7c74ab;
 }
-/* $table-background-color: #a29dc2;
-$table-striped-row-even-background-color: #7c74ab;
-$table-color: white;
-$table-head-cell-color: white;
-$table-head-background-color: $purple; */
+
 
 .edit-expense-icon {
   color: white;
