@@ -1,4 +1,12 @@
-# roam
+# Roam 
+
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT) [![GitHub stars](https://img.shields.io/github/stars/pkriengsiri/roam)](https://github.com/pkriengsiri/roam/stargazers) ![GitHub commit activity](https://img.shields.io/github/commit-activity/y/pkriengsiri/roam) ![GitHub top language](https://img.shields.io/github/languages/top/pkriengsiri/roam) ![GitHub forks](https://img.shields.io/github/forks/pkriengsiri/roam?style=social)
+
+
+## Description
+
+[Roam](https://www.roam-together.com/) is a group vacation planning application built using the MERN stack. The application allows users to create a trip and invite their travel companions to plan the trip with them. Roam features an 
+
 
 ### References:
 CSS animations: https://www.w3schools.com/css/css3_animations.asp
