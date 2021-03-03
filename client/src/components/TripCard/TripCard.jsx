@@ -70,7 +70,13 @@ const TripCard = ({
                 <p>
                   <i className="fas fa-users fa-xs mr-2"></i>
                   {travelers.length}
+                  <Link to={`/user/${userId}/trips/${tripId}/expenses`}>
+                  <p className="is-size-6 expenses-link">
+                    View All Expenses
+                  </p>
+                </Link>
                 </p>
+               
               </div>
             </div>
           </div>

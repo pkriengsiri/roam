@@ -111,7 +111,7 @@ const AllExpenses = (props) => {
                       <td colSpan="6">
                         <div>
                           {/* Mini-table goes here */}
-                          <Dropdown  expense={expense} />
+                          <Dropdown expense={expense} />
                         </div>
                       </td>
                     </tr>
@@ -123,17 +123,17 @@ const AllExpenses = (props) => {
           <div className="columns is-centered">
             <div className="column is-12 has-text-centered">
               <Link
+                to={`/user/${userId}/trips/${tripId}`}
+                className="button is-primary is-size-5 mr-2"
+              >
+                Trip Details
+              </Link>
+              <Link
                 to={`/user/${userId}/trips/${tripId}/expenses/new`}
-                className="button is-light is-size-5 mr-2"
+                className="button is-light is-size-5 ml-2"
                 type="submit"
               >
                 Create Expense
-              </Link>
-              <Link
-                to={`/user/${userId}/trips/${tripId}`}
-                className="button is-primary is-size-5 ml-2"
-              >
-                Back
               </Link>
             </div>
           </div>
