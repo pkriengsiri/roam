@@ -33,7 +33,11 @@ cursor: pointer;
 }
 
 .fa-user-minus{
-  color: white;
+  color: #2a7e7a;
+}
+
+.fa-user-minus:hover{
+  color: #0c2726;
 }
 
 @media screen and (max-width: 375px) {
