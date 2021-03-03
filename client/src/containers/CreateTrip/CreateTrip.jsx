@@ -29,17 +29,11 @@ const CreateTrip = () => {
       console.log(formObject);
       const destinationArray = formObject.destination.split(",");
       const destinationParsed = `${destinationArray[0]}, ${destinationArray[1]}`;
-      console.log(destinationArray);
-      console.log(destinationParsed);
       formObject.destination = destinationParsed;
-      console.log(formObject);
       onDisplay(true, "error");
     } else {
       onDisplay(false);
       setLoadingState("is-loading");
-      const destinationArray = formObject.destination.split(",");
-      const destinationParsed = `${destinationArray[0]}, ${destinationArray[1]}`;
-      formObject.destination = destinationParsed;
       API.createTrip(formObject)
         //TODO: // use context to set signed in user as tripCreator
 

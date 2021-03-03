@@ -114,6 +114,7 @@ const PackingList = ({ userId, tripId }) => {
                 placeholder="Add an item"
                 value={item}
                 name="text"
+                maxLength="75"
                 onChange={(e) => setItem(e.target.value)}
               />
               {item !== "" && (
@@ -154,6 +155,7 @@ const PackingList = ({ userId, tripId }) => {
                           <input
                             className="input"
                             type="text"
+                            maxLength="75"
                             onChange={(e) => setEditingText(e.target.value)}
                             value={editingText}
                           />

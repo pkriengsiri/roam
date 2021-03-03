@@ -41,6 +41,8 @@ module.exports = {
         cloudinary.uploader.upload(placesImageUrl, function (error, result) {
           if (error) {
             console.log(error);
+            const destination = parsePlacesName(requestObject.destination);
+            requestObject.destination = destination;
             db.Trip.create(requestObject)
               .then((dbTrip) => {
                 // ad the trip id to each travel
@@ -52,6 +54,8 @@ module.exports = {
               .catch((err) => res.status(422).json(err));
           } else {
             requestObject.imageUrl = result.url;
+            const destination = parsePlacesName(requestObject.destination);
+            requestObject.destination = destination;
             db.Trip.create(requestObject)
               .then((dbTrip) => {
                 // ad the trip id to each travel
@@ -65,7 +69,8 @@ module.exports = {
         });
       })
       .catch((err) => {
-        console.log(err);
+        const destination = parsePlacesName(requestObject.destination);
+        requestObject.destination = destination;
         db.Trip.create(requestObject)
           .then((dbTrip) => {
             // ad the trip id to each travel
@@ -88,30 +93,43 @@ module.exports = {
         `https://maps.googleapis.com/maps/api/place/findplacefromtext/json?input=${req.body.destination}&inputtype=textquery&fields=name,photos&key=${process.env.PLACES_API_KEY}`
       )
       .then((response) => {
-        const photoReference =
-          response.data.candidates[0].photos[0].photo_reference;
-        // Store get the image URL
-        const placesImageUrl = `https://maps.googleapis.com/maps/api/place/photo?photoreference=${photoReference}&key=${process.env.PLACES_API_KEY}&maxwidth=400&maxheight=400`;
-        // Upload the image to cloudinary
-        cloudinary.uploader.upload(placesImageUrl, function (error, result) {
-          if (error) {
-            // Do nothing if there's an error
-            console.log(error);
-          } else {
-            // If the URL comes back from cloudinary, add it to the trip
-            const cloudinaryURL = result.url;
-            dbObject = { imageUrl: cloudinaryURL };
+        if (response?.data?.candidates?.[0]?.photos?.[0]?.photo_reference) {
+          const photoReference =
+            response.data.candidates[0].photos[0].photo_reference;
+          // Store get the image URL
+          const placesImageUrl = `https://maps.googleapis.com/maps/api/place/photo?photoreference=${photoReference}&key=${process.env.PLACES_API_KEY}&maxwidth=400&maxheight=400`;
+          // Upload the image to cloudinary
+          cloudinary.uploader.upload(placesImageUrl, function (error, result) {
+            if (error) {
+              // Do nothing if there's an error
+              console.log(error);
+            } else {
+              // If the URL comes back from cloudinary, add it to the trip
+              const cloudinaryURL = result.url;
+              dbObject = { imageUrl: cloudinaryURL };
 
-            // Query the database
-            db.Trip.findOneAndUpdate({ _id: req.params.id }, dbObject, {
-              new: true,
-            })
-              .then((dbTrip) => {
-                console.log("cloudinary url for place added");
+              // Query the database
+              db.Trip.findOneAndUpdate({ _id: req.params.id }, dbObject, {
+                new: true,
               })
-              .catch((err) => res.status(422).json(err));
-          }
-        });
+                .then((dbTrip) => {
+                  console.log("cloudinary url for place added");
+                })
+                .catch((err) => res.status(422).json(err));
+            }
+          });
+        } else {
+          const defaultUrl = "https://res.cloudinary.com/djou7v3ho/image/upload/v1614465147/default-trip-image_mldlfd.jpg";
+          dbObject = { imageUrl: defaultUrl };
+          // Query the database
+          db.Trip.findOneAndUpdate({ _id: req.params.id }, dbObject, {
+            new: true,
+          })
+            .then((dbTrip) => {
+              console.log("default url for place added");
+            })
+            .catch((err) => res.status(422).json(err));
+        }
       })
       .catch((err) => {
         console.log(err);
@@ -200,6 +218,8 @@ const addTravelerIdByEmail = async (requestObject) => {
   }
   // update request object with array with user id's
   requestObject.travelers = updatedArray;
+  const destination = parsePlacesName(requestObject.destination);
+  requestObject.destination = destination;
   return requestObject;
 };
 
@@ -234,4 +254,29 @@ const removeTripFromUser = async (tripToDelete, user) => {
     { $set: { trips: filteredTrips } },
     { new: true }
   );
+};
+
+// Parse the place name provided by google places autocomplete
+const parsePlacesName = (placeString) => {
+  // Split the string to an array by commas
+  const destinationArray = placeString.split(",");
+
+  // If the array contains one element, return it
+  if (destinationArray.length === 1) {
+    return destinationArray[0];
+  }
+
+  // Check the second element in the array to see if it contains numbers, and create a new array with numbers removed
+  const secondElement = destinationArray[1];
+  const secondElementArray = secondElement.split(" ");
+  const secondElementArrayParsed = [];
+  secondElementArray.forEach((element) => {
+    if (isNaN(element)) {
+      secondElementArrayParsed.push(element);
+    }
+  });
+
+  // Return the first element and the parsed second element
+  const secondElementParsed = secondElementArrayParsed.join(" ");
+  return `${destinationArray[0]}, ${secondElementParsed}`;
 };
