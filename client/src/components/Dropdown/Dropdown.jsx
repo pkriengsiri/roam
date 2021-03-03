@@ -120,7 +120,7 @@ const Dropdown = ({ expense }) => {
             <i className="edit-expense-icon far fa-edit pl-2 has-text-dark"></i>
           </Link>
         </div>
-        <div className="column is-4 has-text-centered">
+        <div className="column is-4">
           <h1 className="pb-5">
             Expense Creator: {expense.expenseCreator.email}
           </h1>

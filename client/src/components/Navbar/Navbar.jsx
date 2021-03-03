@@ -107,7 +107,13 @@ const Navbar = ({ setUserContext }) => {
           </a>
         </div>
 
-        <div id="navbarBasicExample" className="navbar-menu">
+        <div
+          id="navbarBasicExample"
+          className="navbar-menu"
+          onClick={() =>
+            document.querySelector(".navbar-menu").classList.toggle("is-active")
+          }
+        >
           {/* Logged in navbar */}
           {userContext.userId && (
             <div className="navbar-end ">
