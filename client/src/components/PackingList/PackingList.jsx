@@ -64,8 +64,7 @@ const PackingList = ({ userId, tripId }) => {
     const itemId = e.target.dataset.checked;
 
     let packed = e.target.dataset.packed;
-    // console.log(e.target.dataset.packed);
-    // console.log(packed);
+   
     if (packed === "true") {
       packed = true;
     } else if ((packed = "false")) {
@@ -75,7 +74,7 @@ const PackingList = ({ userId, tripId }) => {
     const newState = {
       packed: !packed,
     };
-    // console.log(newState);
+   
 
     API.editItem(itemId, newState)
       .then((response) => {
@@ -88,9 +87,9 @@ const PackingList = ({ userId, tripId }) => {
   };
 
   const editItem = (e) => {
-    // console.log("clicked to edit");
+    
     const itemId = e.target.dataset.edit;
-    // console.log(e.target.dataset);
+    
     const newEdit = {
       item: editingText,
     };
@@ -108,8 +107,7 @@ const PackingList = ({ userId, tripId }) => {
   };
 
   return (
-    // <div className="columns is-centered">
-    //   <div className="column is-10">
+ 
 
     <div className="">
       <div className="">
@@ -142,13 +140,7 @@ const PackingList = ({ userId, tripId }) => {
                 {/* radio button  */}
                 <td className="checklist-checkbox is-vcentered has-text-center p-2">
                   <span className="pr-2 pl-2">
-                    {/* <input
-                      type="checkbox"
-                      data-checked={item.id}
-                      data-packed={item.packed}
-                      onChange={togglePacked}
-                      checked={item.packed}
-                    /> */}
+                    
                     <i
                       className={
                         item.packed

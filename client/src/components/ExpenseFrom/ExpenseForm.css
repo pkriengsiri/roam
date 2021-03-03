@@ -21,9 +21,7 @@ option {
   color: red;
 }
 
-/* .numeric-input{
-  text-align: right;
-} */
+
 
 /* Firefox */
 .numeric-input[type="number"] {
