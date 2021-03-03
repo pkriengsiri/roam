@@ -122,7 +122,7 @@ const Navbar = ({ setUserContext }) => {
                   <img
                     className="navbar-profile-picture"
                     src={profileImage}
-                    alt=""
+                    alt="Profile Picture"
                   />
                   <p className="ml-2"><strong>{firstName}</strong></p>
                 </a>
