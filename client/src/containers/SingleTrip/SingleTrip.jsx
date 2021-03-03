@@ -96,6 +96,7 @@ const SingleTrip = () => {
 
   return (
     <>
+
       <div className="container mt-6 pl-6 pr-6">
         <h1 className="title has-text-centered">
           Your trip to {destination}!{" "}
@@ -135,23 +136,25 @@ const SingleTrip = () => {
           </>
         )}
 
-        <div className="columns is-centered">
-          <div className="column is-6">
-            <div className="card">
-              <div className="card-image">
-                <figure className="image is-4by3">
-                  <img
-                    className="places-iamge"
+        <div class="container">
+        <div class="section">
+          <div class="card is-horizontal columns">
+            <div class="card-image column is-half">
+              <figure class="image is-4by3">
+              <img
+                    className="places-image"
                     src={imageUrl}
                     alt={destination}
                   />
-                </figure>
+              </figure>
+            </div>
+            <div class="card-content column is-half">
+              <div class="media-content">
+                <p class="title is-4">Travelers:</p>
               </div>
-              <div className="card-content">
-                <div className="media">
-                  <div className="media-content">
-                    <h2 className="subtitle">Travelers:</h2>
-                    <ul>
+
+              <div class="content">
+              <ul>
                       {travelers.map((traveler, index) => {
                         return (
                           <li key={index}>
@@ -166,18 +169,17 @@ const SingleTrip = () => {
                         );
                       })}
                     </ul>
-                  </div>
-                </div>
               </div>
             </div>
           </div>
         </div>
+      </div>
 
         {/* EXPENSES  */}
 
-        <div className="columns is-centered mt-6 ">
+        <div className="columns is-centered ">
           <div className="column is-6 has-text-centered expenses-div">
-            <h1 className="title has-text-centered">Expenses</h1>
+            <h1 className="title has-text-centered mt-6">Expenses</h1>
             {expenses.length === 0 && (
               <>
                 <h1>No Expenses Yet</h1>
@@ -212,13 +214,15 @@ const SingleTrip = () => {
               </div>
             )}
           </div>
-          <div className="column is-4 checklist-container">
+          <div className="column is-1"></div>
+          <div className="column is-4 checklist-container mt-6">
             <h1 className="title has-text-centered checklist-title">
               Checklist
             </h1>
 
             <PackingList userId={userId} tripId={tripId} />
           </div>
+          <div className="column is-1"></div>
         </div>
 
         <div className="columns is-centered mt-6">

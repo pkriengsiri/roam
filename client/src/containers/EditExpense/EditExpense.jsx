@@ -17,6 +17,7 @@ const EditExpense = () => {
   const handleFormSubmit = (e, formObject) => {
     e.preventDefault();
     if (
+      !formObject.description ||
       !formObject.date ||
       !formObject.expenseCreator ||
       !formObject.totalExpenseAmount ||

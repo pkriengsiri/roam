@@ -18,7 +18,7 @@ module.exports = {
 
   findByIdWithExpenses: function (req, res) {
     db.Trip.findById(req.params.id)
-      .populate({ path: "expenses", populate: { path: "expenseCreator" } })
+      .populate({ path: "expenses", populate: { path: "expenseCreator",select:["email","firstName","lastName","profileImageUrl" ]} })
       .then((dbTrip) => res.json(dbTrip))
       .catch((err) => res.status(422).json(err));
   },

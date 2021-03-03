@@ -185,15 +185,16 @@ const EditUser = () => {
                       <span className="file-icon">
                         <i className="fas fa-upload"></i>
                       </span>
-                      <span className="file-label">Edit Profile Picture</span>
+                      <span className="file-label">Upload</span>
                     </span>
+                    {fileName && (
                     <span
                       className="profile-picture-file-name file-name"
                       id="file-type"
                       value="image/png"
                     >
                       {fileName ? fileName : "No file uploaded"}
-                    </span>
+                    </span>)}
                   </label>
                   <div className="control">
                     <span
@@ -224,14 +225,12 @@ const EditUser = () => {
               </div>
               <div className="column is-5">
                 <Link to={`/user/${userId}/trips`} className="skip-link">
-                  Skip this Step
+                  Skip this step
                 </Link>
               </div>
             </div>
           </div>
-          {/* <div className="column is-5"> */}
-
-          {/* </div> */}
+          
         </div>
       </form>
     </div>
