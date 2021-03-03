@@ -267,14 +267,14 @@ const ExpenseForm = (props) => {
         <div className="expense-share-mini-form">
           {expenseShare.map((traveler) => (
             <div
-              className="field is-horizontal"
+              className="columns ml-1 is-vcentered"
               key={traveler.travelerEmail}
             >
-              <div className="field-label is-small ">
-                <label className="label">{traveler.travelerEmail}</label>
+              <div className="column ">
+                <label className="label is-small">{traveler.travelerEmail}</label>
               </div>
-              <div className="field-body">
-                <div className="field">
+              <div className="column">
+                <div className="">
                   <p className="control">
                     <input
                       className="input is-small numeric-input balance"
@@ -301,18 +301,18 @@ const ExpenseForm = (props) => {
       )}
       {/* conditinally render custom remainder check if on custom split */}
       {shareType === "Custom Split" && (
-        <div className="field is-horizontal mt-2 ">
+        <div className="columns ml-1 is-vcentered ">
           
-          <div className="field-label is-small ">
+          <div className="column">
             {expenseBalanced ? (
-              <label className="label balanced">Balanced</label>
+              <label className="label is-small balanced">Balanced</label>
             ) : (
-              <label className="label unbalanced">Unbalanced</label>
+              <label className="label is-small unbalanced">Unbalanced</label>
             )}
           </div>
-          <div className="field-body">
-            <div className="field">
-              <p className="control">
+          <div className="column">
+            <div className="">
+              <p className="control ">
                 <input
                   className="input is-small numeric-input balance"
                   type="number"
