@@ -59,6 +59,7 @@ const EditUser = () => {
       email: preStoreEmail.toLowerCase(),
     })
       .then((response) => {
+        setUserContext({email: response.data.email, userId: response.data._id});
         history.push(`/user/${userId}/trips`);
       })
       .catch((err) => {
