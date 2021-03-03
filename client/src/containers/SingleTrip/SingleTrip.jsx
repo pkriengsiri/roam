@@ -176,9 +176,9 @@ const SingleTrip = () => {
 
         {/* EXPENSES  */}
 
-        <div className="columns is-centered mt-6 ">
+        <div className="columns is-centered ">
           <div className="column is-6 has-text-centered expenses-div">
-            <h1 className="title has-text-centered">Expenses</h1>
+            <h1 className="title has-text-centered mt-6">Expenses</h1>
             {expenses.length === 0 && (
               <>
                 <h1>No Expenses Yet</h1>
@@ -213,7 +213,7 @@ const SingleTrip = () => {
               </div>
             )}
           </div>
-          <div className="column is-4 checklist-container">
+          <div className="column is-4 checklist-container mt-6">
             <h1 className="title has-text-centered checklist-title">
               Checklist
             </h1>
