@@ -32,7 +32,7 @@ const Dashboard = () => {
         const today = moment().format().substring(0, 10);
         const upcomingTrips = response.data.trips
           .filter((trip) => trip.endDate.substring(0, 10) >= today)
-          .sort((a, b) => a.endDate.localeCompare(b.endDate));
+          // .sort((a, b) => a.endDate.localeCompare(b.endDate));
 
         if (upcomingTrips.length > 0) {
           setTypeOfTripsToDisplay("Upcoming");
@@ -57,14 +57,15 @@ const Dashboard = () => {
       setFilteredTrips(
         trips
           .filter((trip) => trip.endDate.substring(0, 10) >= today)
-          .sort((a, b) => a.endDate.localeCompare(b.endDate))
+          .sort((a, b) => a.startDate.localeCompare(b.startDate))
       );
     } else if (typeOfTripsToDisplay === "Past") {
       setFilteredTrips(
         trips.filter((trip) => trip.endDate.substring(0, 10) <= today)
+        .sort((a, b) => b.endDate.localeCompare(a.endDate))
       );
     } else {
-      setFilteredTrips(trips);
+      setFilteredTrips(trips.sort((a, b) => b.endDate.localeCompare(a.endDate)));
     }
   }, [typeOfTripsToDisplay, trips]);
 

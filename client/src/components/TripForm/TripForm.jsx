@@ -130,7 +130,7 @@ const TripForm = (props) => {
   const addTraveler = () => {
     // console.log(e.target.id);
     // if there is a traveler in the input field check if that traveler is already in the travelers list and if valid email address
-    if (traveler !== "") {
+    // if (traveler !== "") {
       const existingTraveler = travelers.find(
         (el) => el.travelerEmail === traveler?.toLowerCase()
       );
@@ -152,7 +152,7 @@ const TripForm = (props) => {
           setValidEmailPromptState(false);
         }
       }
-    }
+    // }
   };
 
   // remove traveler
