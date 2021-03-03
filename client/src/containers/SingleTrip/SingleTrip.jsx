@@ -71,10 +71,7 @@ const SingleTrip = () => {
         seconds,
       };
     }
-
     function initializeClock(endtime) {
-
-
       function updateClock() {
         const t = getTimeRemaining(endtime);
 
@@ -87,42 +84,11 @@ const SingleTrip = () => {
           clearInterval(timeinterval);
         }
       }
-
-      function setInitialTime(endTime) {
-        const t = getTimeRemaining(endtime);
-
-        setDays(t.days);
-        setHours(("0" + t.hours).slice(-2));
-        setMinutes(("0" + t.minutes).slice(-2));
-        setSeconds(("0" + t.seconds).slice(-2));
-      }
       const timeinterval = setInterval(updateClock, 1000);
     }
 
     initializeClock(startDate);
-
-    // const countdown = setInterval(function () {
-    //   let countDownDate = startDate;
-    //   const now = new Date().getTime();
-
-    //   const distance = countDownDate - now;
-    //   const days = Math.floor(distance / (1000 * 60 * 60 * 24));
-    //   const hours = Math.floor(
-    //     (distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)
-    //   );
-    //   const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-    //   const seconds = Math.floor((distance % (1000 * 60)) / 1000);
-
-    //   setDays(days);
-    //   setMinutes(minutes);
-    //   setSeconds(seconds);
-    //   setHours(hours);
-
-    //   if (distance < 0) {
-    //     clearInterval(countdown);
-    //   }
-    // }, 1000);
-  }, [days, hours, minutes, seconds]);
+  }, [seconds]);
 
   const closeNotification = () => {
     setNotificationStatus(false);
