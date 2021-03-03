@@ -66,7 +66,6 @@ const Dropdown = ({ expense }) => {
             Edit
             <i className="edit-expense-icon far fa-edit pl-2 has-text-dark"></i>
           </Link>
-          <h1>Expense Creator: {expense.expenseCreator.email}</h1>
         </div>
       </div>
       <h1 className="pb-5">Expense Creator: {expense.expenseCreator.email}</h1>
@@ -81,12 +80,10 @@ const Dropdown = ({ expense }) => {
           <tbody>
             {expense.expenseShare.map((traveler, index) => (
               <tr key={traveler.travelerEmail}>
-                {/* <td>$</td> */}
                 <td>
                   {"$"}
                   {traveler.shareOfTotalExpense}
                 </td>
-                {/* <td className="has-text-right">{traveler.shareOfTotalExpense}</td> */}
                 <td>{traveler.travelerEmail}</td>
               </tr>
             ))}
