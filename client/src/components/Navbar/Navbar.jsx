@@ -57,7 +57,7 @@ const Navbar = ({ setUserContext }) => {
     e.preventDefault();
     API.logoutUser()
       .then((response) => {
-        // console.log(response);
+        
         setUserContext({ email: "", id: "" });
         history.push("/");
       })
@@ -119,7 +119,7 @@ const Navbar = ({ setUserContext }) => {
             <div className="navbar-end ">
               <div className="navbar-item has-dropdown is-hoverable">
                 <a className="navbar-link small-screen-display">
-                  {/* <i className="nav-icon fas fa-user-circle fa-2x"></i> */}
+                  
 
                   <img
                     className="navbar-profile-picture"

@@ -118,8 +118,9 @@ const Home = ({ setUserContext }) => {
               <div className="card-content">
                 <div className="content">
                   "This is the best site to plan vacations! My friends and I
-                  used Roam for a trip to Cancun. My friends tend to go over our
-                  decided budget on a trip and Roam helps keep them on track!"
+                  used Roam for a a week-long Bachelorette party to Cancun. My
+                  friends tend to go over our decided budget on a trip and Roam
+                  helps keep them on track!"
                   <br></br>- Becky, <em>Roam user since 2020</em>
                 </div>
               </div>
@@ -142,11 +143,11 @@ const Home = ({ setUserContext }) => {
             <div className="card testimonial-card">
               <div className="card-content">
                 <div className="content">
-                  "With COVID-19, I haven't been able to travel or see my friends. We're using Roam to plan the vacations we're
-                  going to take together when it's safe. The checklist is
-                  clutch for remembering the small things."
-                  <br></br>- Todd,{" "}
-                  <em>Roam user since 2021</em>
+                  "With COVID-19, I haven't been able to travel or see my
+                  friends. We're using Roam to plan the vacations we're going to
+                  take together when it's safe. The checklist is clutch for
+                  remembering the small things."
+                  <br></br>- Todd, <em>Roam user since 2021</em>
                 </div>
               </div>
             </div>

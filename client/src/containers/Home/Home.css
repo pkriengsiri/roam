@@ -1,18 +1,4 @@
-/* .hero {
-    background-image: url("../../Assets/Images/hero.jpg");
-    background-size: cover;
-} */
 
-/* video { */
-/* position: absolute; */
-/* width: 100%; */
-/* left: 50%;
-     height: 100%; */
-/* object-fit: cover;
-     transform: translate(-50%, -50%);
-     z-index: -1; */
-/* height: 100%; */
-/* } */
 
 video {
   display: block;
@@ -79,13 +65,6 @@ video {
   margin: 90px;
 }
 
-/* .homepage-container {
-  display: inline-block;
-  box-sizing: border-box;
-  padding: 0;
-  margin: 0;
-  width: 50%;
-} */
 
 /* These rules take effect when the browser's width is 1770px or less */
 
