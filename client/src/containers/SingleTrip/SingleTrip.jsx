@@ -7,7 +7,6 @@ import DoughnutChart from "../../components/DoughnutChart/DoughnutChart";
 import PackingList from "../../components/PackingList/PackingList";
 import TripContext from "../../contexts/TripContext";
 
-
 const SingleTrip = () => {
   const { userContext } = useContext(UserContext);
   const { setTripContext } = useContext(TripContext);
@@ -122,13 +121,13 @@ const SingleTrip = () => {
           </>
         )}
 
-        <div className="columns is-centered">
+        <div className="columns is-centered is-vcentered mb-6">
           <div className="column is-6 trip-container">
             <figure>
               <img className="trip-image" src={imageUrl} alt={destination} />
             </figure>
           </div>
-          <div className="column is-4">
+          <div className="column is-6">
             <div className="card single-trip-card">
               <div className="card-content">
                 <div className="content">
@@ -158,25 +157,39 @@ const SingleTrip = () => {
 
         <div className="columns is-centered ">
           <div className="column is-6 has-text-centered expenses-div">
-            <h1 className="title has-text-centered" >Expenses</h1>
-            {expenses.length === 0 && <h1>No Expenses Yet</h1>}
-            <Link
-              to={`/user/${userId}/trips/${tripId}/expenses/new`}
-              className="button is-light is-size-6"
-              type="submit"
-            >
-              Create Expense
-            </Link>
+            <h1 className="title has-text-centered">Expenses</h1>
+            {expenses.length === 0 && (
+              <>
+                <h1 className="mb-6 mt-6">No expenses yet!</h1>
+                <Link
+                  to={`/user/${userId}/trips/${tripId}/expenses/new`}
+                  className="button is-light is-size-6"
+                  type="submit"
+                >
+                  Create Expense
+                </Link>
+              </>
+            )}
             {expenses.length !== 0 && (
               <div className="mt-5 ">
-                  <DoughnutChart expenses={expenses} />
+                <Link to={`/user/${userId}/trips/${tripId}/expenses`}>
+                  <h2 className="has-text-centered all-expenses">
+                    View All Expenses
+                  </h2>
+                </Link>
+                
+                <DoughnutChart expenses={expenses} />
                 <h2 className="has-text-centered mt-3">
                   Trip Total: $ {tripExpensesTotal}
                 </h2>
-                <Link to={`/user/${userId}/trips/${tripId}/expenses`}>
-                <h2 className="has-text-centered mt-3 all-expenses">View All Expenses</h2>
+                
+                <Link
+                  to={`/user/${userId}/trips/${tripId}/expenses/new`}
+                  className="button is-light is-size-6 mt-2"
+                  type="submit"
+                >
+                  Create Expense
                 </Link>
-
               </div>
             )}
           </div>
