@@ -1,3 +1,5 @@
+@import "../../sass/GlobalVariables.scss";
+
 .checklist-buttons {
   min-width: 100px;
 }
@@ -7,12 +9,18 @@
     max-width: 400px;
 }  */
 
-.packing-icon {
+.checklist-icon {
   cursor: pointer;
 }
 
-.packing-icon:hover {
-  color: #f48e3f;
+.checklist-icon:hover {
+  color: $orange;
+}
+.fa-check-square{
+  color:$purple
+}
+.fa-square{
+  color:$purple
 }
 
 .packed-item {

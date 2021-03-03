@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import API from "../../utils/API";
-import "./PackingList.css";
+import "./PackingList.scss";
 
 const PackingList = ({ userId, tripId }) => {
   const [item, setItem] = useState("");
@@ -150,7 +150,7 @@ const PackingList = ({ userId, tripId }) => {
                     /> */}
                     <i
                       class={
-                        item.packed ? "fas fa-check-square" : "far fa-square"
+                        item.packed ? "fas fa-check-square checklist-icon" : "far fa-square checklist-icon"
                       }
                       data-checked={item.id}
                       data-packed={item.packed}
@@ -189,20 +189,20 @@ const PackingList = ({ userId, tripId }) => {
                 <td className="checklist-buttons is-vcentered has-text-right ">
                   <span>
                     <i
-                      className="packing-icon far fa-trash-alt p-1"
+                      className="checklist-icon far fa-trash-alt p-1"
                       data-id={item.id}
                       onClick={deleteItem}
                     ></i>
 
                     {itemEditing === item.id ? (
                       <i
-                        className="packing-icon far fa-save p-1"
+                        className="checklist-icon far fa-save p-1"
                         data-edit={item.id}
                         onClick={editItem}
                       ></i>
                     ) : (
                       <i
-                        className="packing-icon far fa-edit p-1"
+                        className="checklist-icon far fa-edit p-1"
                         onClick={() => {
                           setItemEditing(item.id);
                           setEditingText(item.item);
