@@ -56,28 +56,39 @@ const SingleTrip = () => {
   }, []);
 
   useEffect(() => {
-    const countdown = setInterval(function () {
-      let countDownDate = startDate;
-      const now = new Date().getTime();
+    function getTimeRemaining(endtime) {
+      const total = Date.parse(endtime) - Date.parse(new Date());
+      const seconds = Math.floor((total / 1000) % 60);
+      const minutes = Math.floor((total / 1000 / 60) % 60);
+      const hours = Math.floor((total / (1000 * 60 * 60)) % 24);
+      const days = Math.floor(total / (1000 * 60 * 60 * 24));
 
-      const distance = countDownDate - now;
-      const days = Math.floor(distance / (1000 * 60 * 60 * 24));
-      const hours = Math.floor(
-        (distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)
-      );
-      const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-      const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+      return {
+        total,
+        days,
+        hours,
+        minutes,
+        seconds,
+      };
+    }
+    function initializeClock(endtime) {
+      function updateClock() {
+        const t = getTimeRemaining(endtime);
 
-      setDays(days);
-      setMinutes(minutes);
-      setSeconds(seconds);
-      setHours(hours);
+        setDays(t.days);
+        setHours(("0" + t.hours).slice(-2));
+        setMinutes(("0" + t.minutes).slice(-2));
+        setSeconds(("0" + t.seconds).slice(-2));
 
-      if (distance < 0) {
-        clearInterval(countdown);
+        if (t.total <= 0) {
+          clearInterval(timeinterval);
+        }
       }
-    }, 1000);
-  }, [days, hours, minutes, seconds]);
+      const timeinterval = setInterval(updateClock, 1000);
+    }
+
+    initializeClock(startDate);
+  }, [seconds]);
 
   const closeNotification = () => {
     setNotificationStatus(false);
@@ -104,9 +115,9 @@ const SingleTrip = () => {
             {startDate?.toLocaleDateString()} - {endDate?.toLocaleDateString()}
           </span>
         </h1>
-        {seconds > 0 && notificationStatus && (
+        {seconds >= 0 && notificationStatus && (
           <>
-            <div className="columns is-centered">
+            <div className="columns is-centered fade-in-div">
               <div className="column is-4">
                 <div class="notification is-primary is-light">
                   <button class="delete" onClick={closeNotification}></button>
@@ -121,13 +132,13 @@ const SingleTrip = () => {
           </>
         )}
 
-        <div className="columns is-centered is-vcentered mb-6">
+        <div className="columns is-centered">
           <div className="column is-6 trip-container">
             <figure>
               <img className="trip-image" src={imageUrl} alt={destination} />
             </figure>
           </div>
-          <div className="column is-6">
+          <div className="column is-4">
             <div className="card single-trip-card">
               <div className="card-content">
                 <div className="content">
@@ -158,37 +169,24 @@ const SingleTrip = () => {
         <div className="columns is-centered ">
           <div className="column is-6 has-text-centered expenses-div">
             <h1 className="title has-text-centered">Expenses</h1>
-            {expenses.length === 0 && (
-              <>
-                <h1 className="mb-6 mt-6">No expenses yet!</h1>
-                <Link
-                  to={`/user/${userId}/trips/${tripId}/expenses/new`}
-                  className="button is-light is-size-6"
-                  type="submit"
-                >
-                  Create Expense
-                </Link>
-              </>
-            )}
+            {expenses.length === 0 && <h1>No Expenses Yet</h1>}
+            <Link
+              to={`/user/${userId}/trips/${tripId}/expenses/new`}
+              className="button is-light is-size-6"
+              type="submit"
+            >
+              Create Expense
+            </Link>
             {expenses.length !== 0 && (
               <div className="mt-5 ">
-                <Link to={`/user/${userId}/trips/${tripId}/expenses`}>
-                  <h2 className="has-text-centered all-expenses">
-                    View All Expenses
-                  </h2>
-                </Link>
-                
                 <DoughnutChart expenses={expenses} />
                 <h2 className="has-text-centered mt-3">
                   Trip Total: $ {tripExpensesTotal}
                 </h2>
-                
-                <Link
-                  to={`/user/${userId}/trips/${tripId}/expenses/new`}
-                  className="button is-light is-size-6 mt-2"
-                  type="submit"
-                >
-                  Create Expense
+                <Link to={`/user/${userId}/trips/${tripId}/expenses`}>
+                  <h2 className="has-text-centered mt-3 all-expenses">
+                    View All Expenses
+                  </h2>
                 </Link>
               </div>
             )}

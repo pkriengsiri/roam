@@ -14,9 +14,9 @@
 }
 
 .fade-in-div {
-  animation: fadein 2s;
+  animation: fadein 1s;
 }
-@keyframes {
+@keyframes fadein {
   from {
     opacity: 0;
   }
