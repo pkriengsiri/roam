@@ -23,9 +23,14 @@
     min-height: 450px;
   }
   
-  /* @media screen and (max-width: 1024px) {
+  @media screen and (max-width: 1407px) {
     .trip-card {
-      max-height: 471px;
-      min-width: 420px;
+      min-height: 600px;
     }
-  } */
+  }
+
+  @media screen and (max-width: 1215px) {
+    .trip-card {
+      min-height: 450px;
+    }
+  }

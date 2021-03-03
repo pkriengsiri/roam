@@ -16,6 +16,7 @@ const Navbar = ({ setUserContext }) => {
   );
   const [firstName, setFirstName] =useState("");
   const history = useHistory();
+  
 
   useEffect(() => {
     if (userContext?.userId) {
@@ -116,7 +117,7 @@ const Navbar = ({ setUserContext }) => {
             
             <div className="navbar-end ">
               <div className="navbar-item has-dropdown is-hoverable">
-                <a className="navbar-link">
+                <a className="navbar-link small-screen-display">
                   {/* <i className="nav-icon fas fa-user-circle fa-2x"></i> */}
                   
                   <img
@@ -131,6 +132,7 @@ const Navbar = ({ setUserContext }) => {
                   <Link
                     to={`/user/${userContext.userId}/trips`}
                     className="navbar-item"
+                    
                   >
                     Dashboard
                   </Link>

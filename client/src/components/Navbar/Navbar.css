@@ -16,7 +16,15 @@ a.navbar-link:hover, a.navbar-link:active {
     min-height: 45px;
     width:45px;
     height:45px;
-    border: 2px solid #2E3560;
+    border: 3px solid #2E3560;
     /* max-height: 30px !important; */
     /* max-height: 10px !important; */
 }
+
+@media screen and (max-width: 1023px) {
+   .small-screen-display {
+        display: none !important;
+   }
+    }
+    
+  

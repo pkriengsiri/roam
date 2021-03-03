@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useParams, Link } from "react-router-dom";
 import API from "../../utils/API";
-import MiniTable from "../../components/MiniTable/MiniTable";
+import Dropdown from "../../components/Dropdown/Dropdown";
 import "./AllExpenses.css";
 
 const AllExpenses = (props) => {
@@ -16,7 +16,6 @@ const AllExpenses = (props) => {
         .then((response) => {
           setExpenseArray(response.data.expenses);
           setDestination(response.data.destination);
-
           // Create an array to hold display state of contributor row and set value to false
           const expArr = response.data.expenses;
           const newArr = [];
@@ -59,71 +58,60 @@ const AllExpenses = (props) => {
       <h1 className="title has-text-centered">
         Expenses for {destination} Trip
       </h1>
-      <div className="columns is-centered">
-        <div className="column is-full has-text-centered">
+      <div className="columns ">
+        <div className="column is-full ">
           <table className="table  is-fullwidth expenses-table is-striped">
-            <thead className="expense-table-head has-text-centered">
+            <thead className="expense-table-head ">
               <tr>
+                {/* <th className="has-text-light"></th> */}
                 <th className="has-text-light">Date</th>
-                {/* <th className="has-text-light">Description</th> */}
-                <th className="has-text-light">Category</th>
+                <th className="has-text-light">Description</th>
+                {/* <th className="has-text-light">Category</th> */}
                 <th className="has-text-light">Amount</th>
-                <th className="has-text-light"></th>
                 <th className="has-text-light"></th>
               </tr>
             </thead>
-            <tbody className="has-text-centered expenses-body">
+            <tbody className="expenses-body">
               {expenseArray.map((expense, index) => (
                 <>
                   <tr key={expense._id} className="is-hoverable expense-row">
-                    <td className="is-vcentered">
-                      {convertDate(expense.date)}
-                    </td>
-                    {/* <td className="is-vcentered">{expense.description}</td> */}
-                    <td className="is-vcentered">{expense.category}</td>
-                    <td className="is-vcentered">
-                      ${expense.totalExpenseAmount}
-                    </td>
-                    {/* Dropdown for MiniTable goes here */}
-                    <td className="is-vcentered">
-                      <p className="details"
-                        onClick={handleContributors}
-                        data-id={expense._id}
-                        data-index={index}
-                        // className="button fas fa-angle-down"
-                        aria-hidden="true"
-                      >
-                        Details{" "}
-                      </p>
-
-                    </td>
-                    <td>
+                    {/* <td>
                       <Link
                         to={`/user/${userId}/trips/${tripId}/expenses/${expense._id}/edit`}
                       >
                         <i className="edit-expense-icon far fa-edit m-1 "></i>
                       </Link>
+                    </td> */}
+                    <td className="is-vcentered">
+                      {convertDate(expense.date)}
+                    </td>
+                    <td className="is-vcentered">{expense.description}</td>
+                    {/* <td className="is-vcentered">{expense.category}</td> */}
+                    <td className="is-vcentered">
+                      ${expense.totalExpenseAmount}
+                    </td>
+                    {/* Dropdown for Dropdown goes here */}
+                    <td className="is-vcentered">
+                      <span className="details-link">
+                        Details
+                        <i
+                          onClick={handleContributors}
+                          data-id={expense._id}
+                          data-index={index}
+                          className="fas fa-caret-square-down pl-2"
+                        ></i>
+                      </span>
                     </td>
                   </tr>
                   {displayContributors[index] && (
-                    <tr className="has-text-dark" data-row={index}>
+                    <tr
+                      className="has-text-dark details-dropdown"
+                      data-row={index}
+                    >
                       <td colSpan="6">
                         <div>
-                          <div>
-                            {expense.description && (
-                              <h1>{`Description: ${expense.description}`}</h1>
-                            )}
-                            {!expense.description && (
-                              <Link
-                                to={`/user/${userId}/trips/${tripId}/expenses/${expense._id}/edit`}
-                              >
-                                To add a description please edit the expense
-                              </Link>
-                            )}
-                          </div>
                           {/* Mini-table goes here */}
-
-                          <MiniTable expense={expense} />
+                          <Dropdown expense={expense} />
                         </div>
                       </td>
                     </tr>

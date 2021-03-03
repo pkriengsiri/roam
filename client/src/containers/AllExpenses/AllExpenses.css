@@ -7,13 +7,13 @@
   color: white;
 }
 
-.expense-table-head{
+.expense-table-head {
   background-color: #2e3560 !important;
 }
 
-
-
-.expenses-table.is-striped .expenses-body .expense-row:not(.is-selected):nth-child(even) {
+.expenses-table.is-striped
+  .expenses-body
+  .expense-row:not(.is-selected):nth-child(even) {
   background-color: #7c74ab;
 }
 /* $table-background-color: #a29dc2;
@@ -26,7 +26,20 @@ $table-head-background-color: $purple; */
   color: white;
 }
 
+.details-dropdown {
+  background-color: white;
+}
 
-.details:hover{
+.fa-caret-square-down:hover {
   cursor: pointer;
-  }
+}
+
+
+.fa-caret-square-down {
+  color: white !important;
+  font-size: 18px;
+}
+
+.fa-caret-square-down:hover {
+  color: black !important;
+}
