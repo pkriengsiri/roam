@@ -85,15 +85,15 @@ const Dropdown = ({ expense }) => {
         <table>
           <thead>
            
-            <th colspan="2">Expense Share</th>
+            <th >Expense Share</th>
             <th>Person</th>
           </thead>
           <tbody>
             {expense.expenseShare.map((traveler) => (
               <tr>
-                <td>$</td>
-                {/* <td className="pl-5">${traveler.shareOfTotalExpense}</td> */}
-                <td className="has-text-right">{traveler.shareOfTotalExpense}</td>
+                {/* <td>$</td> */}
+                <td>{"$"}{traveler.shareOfTotalExpense}</td>
+                {/* <td className="has-text-right">{traveler.shareOfTotalExpense}</td> */}
                 <td>{traveler.travelerEmail}</td>
               </tr>
             ))}
