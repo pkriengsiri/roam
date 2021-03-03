@@ -1,3 +1,11 @@
+.trip-image {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+
+}
+
+
 .trip-card {
   background-color: white;
   color: black;

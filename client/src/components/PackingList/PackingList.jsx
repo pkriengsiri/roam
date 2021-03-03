@@ -118,6 +118,7 @@ const PackingList = ({ userId, tripId }) => {
             <input
               className="input checklist-input"
               type="text"
+              maxLength="75"
               placeholder="Type here to add an item"
               value={item}
               name="text"
@@ -165,6 +166,7 @@ const PackingList = ({ userId, tripId }) => {
                     <input
                       className="input checklist-input"
                       type="text"
+                      maxLength="75"
                       onChange={(e) => setEditingText(e.target.value)}
                       value={editingText}
                     />

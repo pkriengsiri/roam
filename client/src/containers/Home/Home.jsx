@@ -3,7 +3,6 @@ import "./Home.css";
 import { Link } from "react-router-dom";
 import LoginModal from "../../components/LoginModal/LoginModal";
 import SignUpModal from "../../components/SignUpModal/SignUpModal";
-import TestimonialCard from "../../components/TestimonialCard/TestimonialCard";
 import BeachVideo from "./Beach1.mp4";
 import AlertContext from "../../contexts/AlertContext";
 import UserContext from "../../contexts/UserContext";
@@ -114,9 +113,44 @@ const Home = ({ setUserContext }) => {
 
       <div className="container">
         <div className="columns mt-4">
-          <TestimonialCard />
-          <TestimonialCard />
-          <TestimonialCard />
+          <div className="column is-4">
+            <div className="card testimonial-card">
+              <div className="card-content">
+                <div className="content">
+                  "This is the best site to plan vacations! My friends and I
+                  used Roam for a trip to Cancun. My friends tend to go over our
+                  decided budget on a trip and Roam helps keep them on track!"
+                  <br></br>- Becky, <em>Roam user since 2020</em>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div className="column is-4">
+            <div className="card testimonial-card">
+              <div className="card-content">
+                <div className="content">
+                  "I was done with planning group vacations until I found Roam.
+                  We would never invite our friend Becky because she never paid
+                  for her part. With Roam, everyone can see every expense and
+                  how much they owe!"
+                  <br></br>- Naomi, <em>Roam user since 2020</em>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div className="column is-4">
+            <div className="card testimonial-card">
+              <div className="card-content">
+                <div className="content">
+                  "With COVID-19, I haven't been able to travel or see my friends. We're using Roam to plan the vacations we're
+                  going to take together when it's safe. The checklist is
+                  clutch for remembering the small things."
+                  <br></br>- Todd,{" "}
+                  <em>Roam user since 2021</em>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </>
