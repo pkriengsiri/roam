@@ -1,4 +1,9 @@
 .category-icon {
-    max-height: 125px;
+    max-height: 200px;
     border-radius: 50%;
+}
+
+.dropdown-table {
+    margin-right: auto !important;
+    margin-left: auto !important;
 }

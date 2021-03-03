@@ -11,6 +11,7 @@ const AllExpenses = (props) => {
   const [displayContributors, setDisplayContributors] = useState([]);
 
   useEffect(() => {
+    console.log(expenseArray)
     if (tripId) {
       API.getTrip(tripId)
         .then((response) => {
@@ -55,11 +56,14 @@ const AllExpenses = (props) => {
 
   return (
     <div className="container mt-6 pl-6 pr-6">
-      <h1 className="title has-text-centered">
-        Expenses for {destination} Trip
-      </h1>
+    
       <div className="columns ">
         <div className="column is-full ">
+          {expenseArray.length === 0 ? (<h1 className="title has-text-centered">There are no expenses for your trip to {destination}.</h1>) : (
+            <>
+              <h1 className="title has-text-centered">
+              Expenses for {destination} Trip
+            </h1>
           <table className="table  is-fullwidth expenses-table is-striped">
             <thead className="expense-table-head ">
               <tr>
@@ -111,7 +115,7 @@ const AllExpenses = (props) => {
                       <td colSpan="6">
                         <div>
                           {/* Mini-table goes here */}
-                          <Dropdown  expense={expense} />
+                          <Dropdown expense={expense} />
                         </div>
                       </td>
                     </tr>
@@ -120,20 +124,22 @@ const AllExpenses = (props) => {
               ))}
             </tbody>
           </table>
+          </>
+  )}
           <div className="columns is-centered">
             <div className="column is-12 has-text-centered">
               <Link
+                to={`/user/${userId}/trips/${tripId}`}
+                className="button is-primary is-size-5 mr-2"
+              >
+                Trip Details
+              </Link>
+              <Link
                 to={`/user/${userId}/trips/${tripId}/expenses/new`}
-                className="button is-light is-size-5 mr-2"
+                className="button is-light is-size-5 ml-2"
                 type="submit"
               >
                 Create Expense
-              </Link>
-              <Link
-                to={`/user/${userId}/trips/${tripId}`}
-                className="button is-primary is-size-5 ml-2"
-              >
-                Back
               </Link>
             </div>
           </div>

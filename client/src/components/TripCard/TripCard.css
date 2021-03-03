@@ -8,7 +8,7 @@
     padding-bottom: 7px;
   }
   
-  .icon:hover {
+  .icon:hover, .expenses-link:hover {
     color: #f48e3f;
     font-size: 18px;
   }
@@ -23,7 +23,11 @@
     min-height: 500px;
   }
   
-  /* @media screen and (max-width: 1407px) {
+  .expenses-link {
+    color: black;
+  }
+
+  @media screen and (max-width: 1407px) {
     .trip-card {
       min-height: 650px;
     }
@@ -39,4 +43,4 @@
     .trip-card {
       min-height: 410px;
     }
-  } */
+  }

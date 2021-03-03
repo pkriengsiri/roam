@@ -40,9 +40,9 @@ const TripCard = ({
                   </Link>
                 </div>
                 <div className="column is-3">
-                  <Link to={`/user/${userId}/trips/${tripId}`}>
+                  {/* <Link to={`/user/${userId}/trips/${tripId}`}>
                     <i className="icon fas fa-eye"></i>
-                  </Link>
+                  </Link> */}
                   {userId === tripCreator && (
                     <Link to={`/user/${userId}/trips/${tripId}/edit`}>
                       <i className="icon far fa-edit m-1"></i>
@@ -70,7 +70,13 @@ const TripCard = ({
                 <p>
                   <i className="fas fa-users fa-xs mr-2"></i>
                   {travelers.length}
+                  <Link to={`/user/${userId}/trips/${tripId}/expenses`}>
+                  <p className="is-size-6 expenses-link">
+                    View All Expenses
+                  </p>
+                </Link>
                 </p>
+               
               </div>
             </div>
           </div>

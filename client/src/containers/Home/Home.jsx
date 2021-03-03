@@ -111,7 +111,7 @@ const Home = ({ setUserContext }) => {
         )}
       </section>
 
-      <div className="container">
+      <div className="container pl-6 pr-6">
         <div className="columns mt-4">
           <div className="column is-4">
             <div className="card testimonial-card">
