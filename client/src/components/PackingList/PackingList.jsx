@@ -136,9 +136,9 @@ const PackingList = ({ userId, tripId }) => {
 
         <table className=" is-fullwidth mb-4 checklist-table">
           <tbody>
-            {list.map((item) => (
-              // <div key={item.id}>
-              <tr key={item.id} className="checklist-line">
+            {list.map((item,index) => (
+                // use index as key since id is throwing an error in the console
+              <tr key={index} className="checklist-line">
                 {/* radio button  */}
                 <td className="checklist-checkbox is-vcentered has-text-center p-2">
                   <span className="pr-2 pl-2">
@@ -150,8 +150,10 @@ const PackingList = ({ userId, tripId }) => {
                       checked={item.packed}
                     /> */}
                     <i
-                      class={
-                        item.packed ? "fas fa-check-square checklist-icon" : "far fa-square checklist-icon"
+                      className={
+                        item.packed
+                          ? "fas fa-check-square checklist-icon"
+                          : "far fa-square checklist-icon"
                       }
                       data-checked={item.id}
                       data-packed={item.packed}

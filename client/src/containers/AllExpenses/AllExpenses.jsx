@@ -74,7 +74,7 @@ const AllExpenses = (props) => {
             <tbody className="expenses-body">
               {expenseArray.map((expense, index) => (
                 <>
-                  <tr key={expense._id} className="is-hoverable expense-row">
+                  <tr key={expense.id} className="is-hoverable expense-row">
                     {/* <td>
                       <Link
                         to={`/user/${userId}/trips/${tripId}/expenses/${expense._id}/edit`}
@@ -111,7 +111,7 @@ const AllExpenses = (props) => {
                       <td colSpan="6">
                         <div>
                           {/* Mini-table goes here */}
-                          <Dropdown expense={expense} />
+                          <Dropdown  expense={expense} />
                         </div>
                       </td>
                     </tr>
