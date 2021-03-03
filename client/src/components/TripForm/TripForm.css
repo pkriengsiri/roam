@@ -31,3 +31,14 @@
 .remove-travler-x:hover{
 cursor: pointer;
 }
+
+@media screen and (max-width: 375px) {
+  .travelers-tag {
+    line-height: 25px;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    display: block;
+    width: 300px;
+  }
+}
