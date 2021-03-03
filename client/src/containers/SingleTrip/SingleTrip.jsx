@@ -182,10 +182,10 @@ const SingleTrip = () => {
             <h1 className="title has-text-centered mt-6">Expenses</h1>
             {expenses.length === 0 && (
               <>
-                <h1>No Expenses Yet</h1>
+                {/* <h1>No Expenses Yet</h1> */}
                 <Link
                   to={`/user/${userId}/trips/${tripId}/expenses/new`}
-                  className="button is-light is-size-6"
+                  className="button is-primary is-size-6"
                   type="submit"
                 >
                   Create Expense
@@ -225,15 +225,15 @@ const SingleTrip = () => {
           <div className="column is-1"></div>
         </div>
 
-        <div className="columns is-centered mt-6">
-          <div className="column is-3">
+        <div className="columns is-centered mt-6 mb-5">
+          {/* <div className="column is-3">
             <Link
               to={`/user/${userId}/trips`}
               className="button is-primary is-size-4"
             >
               Dashboard
             </Link>
-          </div>
+          </div> */}
         </div>
       </div>
     </>
