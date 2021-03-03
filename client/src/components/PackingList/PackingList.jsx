@@ -136,8 +136,8 @@ const PackingList = ({ userId, tripId }) => {
 
         <table className=" is-fullwidth mb-4 checklist-table">
           <tbody>
-            {list.map((item,index) => (
-                // use index as key since id is throwing an error in the console
+            {list.map((item, index) => (
+              // use index as key since id is throwing an error in the console
               <tr key={index} className="checklist-line">
                 {/* radio button  */}
                 <td className="checklist-checkbox is-vcentered has-text-center p-2">
@@ -165,13 +165,17 @@ const PackingList = ({ userId, tripId }) => {
                 {/* text field */}
                 <td className="checklist-description is-vcentered has-text-left p-2">
                   {itemEditing === item.id ? (
-                    <input
-                      className="input checklist-input"
-                      type="text"
-                      maxLength="75"
-                      onChange={(e) => setEditingText(e.target.value)}
-                      value={editingText}
-                    />
+                    <form onSubmit={editItem} data-edit={item.id}>
+                      <input
+                        className="input checklist-input"
+                        type="text"
+                        maxLength="75"
+                        onChange={(e) => setEditingText(e.target.value)}
+                        value={editingText}
+                        data-edit={item.id}
+                        // onSubmit={editItem}
+                      />
+                    </form>
                   ) : (
                     <>
                       <span
