@@ -96,30 +96,6 @@ const SingleTrip = () => {
 
   return (
     <>
-      <div class="container">
-        <div class="section">
-          <div class="card is-horizontal columns">
-            <div class="card-image column is-three-fifths">
-              <figure class="image is-4by3">
-                <img
-                  src="https://upload.wikimedia.org/wikipedia/commons/0/0d/Great_Wave_off_Kanagawa2.jpg"
-                  alt="this used to be photo"
-                />
-              </figure>
-            </div>
-            <div class="card-content column is-two-fifths">
-              <div class="media-content">
-                <p class="title is-4">Once upon a time there was a sailor</p>
-              </div>
-
-              <div class="content">
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                Phasellus nec iaculis mauris. <a>@bulmaio</a>.
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
 
       <div className="container mt-6 pl-6 pr-6">
         <h1 className="title has-text-centered">
@@ -160,23 +136,25 @@ const SingleTrip = () => {
           </>
         )}
 
-        <div className="columns is-centered">
-          <div className="column is-6">
-            <div className="card">
-              <div className="card-image">
-                <figure className="image is-4by3">
-                  <img
-                    className="places-iamge"
+        <div class="container">
+        <div class="section">
+          <div class="card is-horizontal columns">
+            <div class="card-image column is-half">
+              <figure class="image is-4by3">
+              <img
+                    className="places-image"
                     src={imageUrl}
                     alt={destination}
                   />
-                </figure>
+              </figure>
+            </div>
+            <div class="card-content column is-half">
+              <div class="media-content">
+                <p class="title is-4">Travelers:</p>
               </div>
-              <div className="card-content">
-                <div className="media">
-                  <div className="media-content">
-                    <h2 className="subtitle">Travelers:</h2>
-                    <ul>
+
+              <div class="content">
+              <ul>
                       {travelers.map((traveler, index) => {
                         return (
                           <li key={index}>
@@ -191,12 +169,11 @@ const SingleTrip = () => {
                         );
                       })}
                     </ul>
-                  </div>
-                </div>
               </div>
             </div>
           </div>
         </div>
+      </div>
 
         {/* EXPENSES  */}
 
@@ -237,6 +214,7 @@ const SingleTrip = () => {
               </div>
             )}
           </div>
+          <div className="column is-1"></div>
           <div className="column is-4 checklist-container mt-6">
             <h1 className="title has-text-centered checklist-title">
               Checklist
@@ -244,6 +222,7 @@ const SingleTrip = () => {
 
             <PackingList userId={userId} tripId={tripId} />
           </div>
+          <div className="column is-1"></div>
         </div>
 
         <div className="columns is-centered mt-6">
