@@ -136,7 +136,7 @@ const SingleTrip = () => {
           </>
         )}
 
-        <div className="columns is-centered">
+        <div className="columns is-centered mb-6">
           <div className="column is-6 trip-container">
             <figure>
               <img className="trip-image" src={imageUrl} alt={destination} />
@@ -170,40 +170,50 @@ const SingleTrip = () => {
 
         {/* EXPENSES  */}
 
-        <div className="columns is-centered ">
+        <div className="columns is-centered mt-6 ">
           <div className="column is-6 has-text-centered expenses-div">
             <h1 className="title has-text-centered">Expenses</h1>
-            {expenses.length === 0 && <h1>No Expenses Yet</h1>}
-            <Link
-              to={`/user/${userId}/trips/${tripId}/expenses/new`}
-              className="button is-light is-size-6"
-              type="submit"
-            >
-              Create Expense
-            </Link>
+            {expenses.length === 0 && (
+              <>
+                <h1>No Expenses Yet</h1>
+                <Link
+                  to={`/user/${userId}/trips/${tripId}/expenses/new`}
+                  className="button is-light is-size-6"
+                  type="submit"
+                >
+                  Create Expense
+                </Link>{" "}
+              </>
+            )}
             {expenses.length !== 0 && (
               <div className="mt-5 ">
-                <DoughnutChart expenses={expenses} />
-                <h2 className="has-text-centered mt-3">
-                  Trip Total: $ {tripExpensesTotal}
-                </h2>
                 <Link to={`/user/${userId}/trips/${tripId}/expenses`}>
                   <h2 className="has-text-centered mt-3 all-expenses">
                     View All Expenses
                   </h2>
                 </Link>
+
+                <DoughnutChart expenses={expenses} />
+                <h2 className="has-text-centered mt-3">
+                  Trip Total: $ {tripExpensesTotal}
+                </h2>
+                <Link
+                  to={`/user/${userId}/trips/${tripId}/expenses/new`}
+                  className="button is-light is-size-6"
+                  type="submit"
+                >
+                  Create Expense
+                </Link>
               </div>
             )}
           </div>
           <div className="column is-4 checklist-container">
+            <h1 className="title has-text-centered checklist-title">
+              Checklist
+            </h1>
 
-                <h1 className="title has-text-centered checklist-title">
-                  Checklist
-                </h1>
-
-                <PackingList userId={userId} tripId={tripId} />
-              </div>
- 
+            <PackingList userId={userId} tripId={tripId} />
+          </div>
         </div>
 
         <div className="columns is-centered mt-6">
