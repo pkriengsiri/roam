@@ -121,28 +121,30 @@ const Dropdown = ({ expense }) => {
           </Link>
         </div>
         <div className="column is-4">
-          <h1 className="pb-5">
+          {/* <h1 className="pb-5">
             Expense Creator: {expense.expenseCreator.email}
-          </h1>
-          <table>
-            <thead>
-              <tr>
-                <th>Expense Share</th>
-                <th>Person</th>
-              </tr>
-            </thead>
-            <tbody>
-              {expense.expenseShare.map((traveler, index) => (
-                <tr key={traveler.travelerEmail}>
-                  <td>
-                    {"$"}
-                    {traveler.shareOfTotalExpense}
-                  </td>
-                  <td>{traveler.travelerEmail}</td>
+          </h1> */}
+          <div className="dropdown-table">
+            <table>
+              <thead>
+                <tr>
+                  <th>Expense Share</th>
+                  <th>Person</th>
                 </tr>
-              ))}
-            </tbody>
-          </table>
+              </thead>
+              <tbody>
+                {expense.expenseShare.map((traveler, index) => (
+                  <tr key={traveler.travelerEmail}>
+                    <td>
+                      {"$"}
+                      {traveler.shareOfTotalExpense}
+                    </td>
+                    <td>{traveler.travelerEmail}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
         </div>
       </div>
     </div>
