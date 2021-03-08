@@ -80,7 +80,7 @@ const Navbar = ({ setUserContext }) => {
         />
       )}
       <nav
-        className="navbar pl-6 pr-6"
+        className="navbar pl-4 pr-4"
         role="navigation"
         aria-label="main navigation"
       >
