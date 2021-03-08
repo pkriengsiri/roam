@@ -150,12 +150,20 @@ video {
     font-size: 40px;
     margin: 40px;
   }
+
+  
 }
 /* for most mobile devices */
-@media screen and (max-width: 375px) {
+/* @media screen and (max-width: 375px) { */
+@media screen and (max-width: 500px) {
   .hero-title {
     top: 30%;
   }
+  .animated-logo{
+    /* visibility: hidden; */
+    display:none !important;
+  }
+
   .home-signup-button {
     position: absolute;
     left: 20%;
@@ -173,7 +181,7 @@ video {
     margin: 2px;
   }
   .slogan {
-    font-size: 40px;
-    margin: 10px;
+    font-size: 35px;
+    margin: -10px;
   }
 }
