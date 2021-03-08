@@ -39,3 +39,9 @@
 .fa-caret-square-down:hover {
   color: black !important;
 }
+
+@media screen and (max-width: 415px) {
+  .expenses-container {
+    padding: 0 !important;
+  }
+}

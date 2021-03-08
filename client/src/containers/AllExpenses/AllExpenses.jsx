@@ -55,10 +55,10 @@ const AllExpenses = (props) => {
   };
 
   return (
-    <div className="container mt-6 pl-6 pr-6">
+    <div className="container mt-6 pl-6 pr-6 expenses-container">
     
       <div className="columns ">
-        <div className="column is-full ">
+        <div className="column is-full">
           {expenseArray.length === 0 ? (<h1 className="title has-text-centered">There are no expenses for your trip to {destination}.</h1>) : (
             <>
               <h1 className="title has-text-centered">
