@@ -6,4 +6,16 @@
 .dropdown-table {
     margin-right: auto !important;
     margin-left: auto !important;
+    background-color: white !important;
+}
+
+
+.dropdown-table
+  .dropdown-body
+  .dropdown-row:not(.is-selected):nth-child(even) {
+  background-color: white;
+}
+
+.dropdown-head {
+    background-color: #938db9;
 }
