@@ -5,8 +5,6 @@ const mongoose = require("mongoose");
 const app = express();
 const routes = require("./routes");
 const cookieParser = require("cookie-parser");
-const jwt = require('express-jwt');
-const jsonwebtoken = require('jsonwebtoken');
 const fileupload = require("express-fileupload");
 
 

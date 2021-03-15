@@ -2,16 +2,20 @@
 const router = require("express").Router();
 const packingListItemController = require("../../controllers/packingListItemController");
 const jwt = require("express-jwt");
+// const csrf = require("csurf");
+// const csrfProtection = csrf({
+//   cookie: true
+// });
 
 // middleware
 // router.use(csrfProtection);
-// router.use(
-//     jwt({
-//       secret: process.env.SECRET,
-//       getToken: (req) => req.cookies.token,
-//       algorithms: ['HS256']
-//     })
-//   );
+router.use(
+    jwt({
+      secret: process.env.SECRET,
+      getToken: (req) => req.cookies.token,
+      algorithms: ['HS256']
+    })
+  );
 
 // Route for /api/packing-lists
 router
@@ -23,7 +27,6 @@ router
 router.route("/:id")
 .get(packingListItemController.findByTripId)
 .delete(packingListItemController.remove)
-
 .put(packingListItemController.update)
 
 
